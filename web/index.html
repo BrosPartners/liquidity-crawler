@@ -1039,11 +1039,14 @@
   }
 
   function renderGoldCharts() {
-    drawGoldSeries("goldPriceChart", "goldPriceLegend", ["sjc_sell", "world_gold_vnd"]);
-    drawGoldSeries("goldGapChart", "goldGapLegend", ["pct_gap"]);
+    const trFmt = v => (v / 1e6).toFixed(1) + " tr";   // VND -> triệu
+    drawGoldSeries("goldPriceChart", "goldPriceLegend", ["sjc_sell", "world_gold_vnd"], { fmt: trFmt });
+    drawGoldSeries("goldGapChart", "goldGapLegend", ["pct_gap"], { scale: 100 });   // fraction -> %, default % formatting
   }
 
-  function drawGoldSeries(canvasId, legendId, keys) {
+  function drawGoldSeries(canvasId, legendId, keys, opts) {
+    opts = opts || {};
+    const scale = opts.scale || 1;
     if (!GOLD_HIST.length) return;
     const canvas = document.getElementById(canvasId);
     if (!canvas || !canvas.parentElement.clientWidth) return;  // tab ẩn -> bỏ
@@ -1053,10 +1056,10 @@
     const series = keys.map(k => {
       const pts = GOLD_HIST.filter(r => r.key === k).sort((a, b) => a.date < b.date ? -1 : 1);
       let pi = 0, last = null;
-      const vals = dates.map(d => { while (pi < pts.length && pts[pi].date <= d) { last = pts[pi].value; pi++; } return last; });
+      const vals = dates.map(d => { while (pi < pts.length && pts[pi].date <= d) { last = pts[pi].value; pi++; } return last === null ? null : last * scale; });
       return { color: GOLD_COLORS[k], name: GOLD_LABELS[k] || k, vals };
     });
-    interactiveLineChart(canvasId, dates, series, (c, d, s) => drawLineChart(c, d, s, 220));
+    interactiveLineChart(canvasId, dates, series, (c, d, s) => drawLineChart(c, d, s, 220, opts.fmt), opts.fmt);
   }
 
   function parseMktCSV(text) {
@@ -1168,7 +1171,7 @@
   }
 
   // Vẽ line chart tổng quát (dùng lại cho market) — step-after forward-fill
-  function drawLineChart(canvas, dates, series, height) {
+  function drawLineChart(canvas, dates, series, height, fmt) {
     const ctx = canvas.getContext("2d");
     const dpr = window.devicePixelRatio || 1;
     const w = canvas.parentElement.clientWidth, h = height;
@@ -1188,7 +1191,8 @@
     for (let i=0;i<=4;i++){ const gy=PAD.t+ch-(ch*i)/4;
       ctx.beginPath();ctx.moveTo(PAD.l,gy);ctx.lineTo(w-PAD.r,gy);ctx.stroke();
       ctx.fillStyle="#5A7A9A";ctx.font="10px system-ui";ctx.textAlign="left";
-      ctx.fillText((lo+(hi-lo)*i/4).toFixed(1)+"%", w-PAD.r+6, gy+3); }
+      const _av = lo+(hi-lo)*i/4;
+      ctx.fillText(fmt ? fmt(_av) : _av.toFixed(1)+"%", w-PAD.r+6, gy+3); }
     const step = Math.max(1, Math.ceil(dates.length/8));
     ctx.fillStyle="#5A7A9A";ctx.font="10px system-ui";ctx.textAlign="center";
     for(let i=0;i<dates.length;i+=step) ctx.fillText(dates[i].slice(2), x(i), h-PAD.b+16);
@@ -1212,12 +1216,12 @@
   function seriesLabel(s) { return s.bank || s.name || ""; }
   function seriesColor(s) { return s.color || BANK_COLORS[s.bank] || "#8899AA"; }
 
-  function interactiveLineChart(id, dates, series, drawFn) {
+  function interactiveLineChart(id, dates, series, drawFn, fmt) {
     const canvas = document.getElementById(id);
     if (!canvas || !canvas.parentElement.clientWidth) return;
     let st = CHART_STATE[id];
     if (!st) { st = CHART_STATE[id] = { hover: null }; attachChartEvents(id); }
-    st.dates = dates; st.series = series; st.drawFn = drawFn;
+    st.dates = dates; st.series = series; st.drawFn = drawFn; st.fmt = fmt;
     // Reset zoom khi bộ dữ liệu đổi (đổi kỳ hạn/kênh) hoặc chưa có view
     if (!st.view || st.view.full !== dates.length) {
       st.view = { i0: 0, i1: Math.max(0, dates.length - 1), full: dates.length };
@@ -1340,7 +1344,7 @@
     const head = `<div class="tip-date">${st.sliced.dates[i]}</div>`;
     const body = rows.map(r =>
       `<div class="tip-row"><span class="tip-sw" style="background:${r.color}"></span>` +
-      `<span class="tip-lb">${r.label}</span><span class="tip-vv">${r.v.toFixed(2)}%</span></div>`).join("");
+      `<span class="tip-lb">${r.label}</span><span class="tip-vv">${st.fmt ? st.fmt(r.v) : r.v.toFixed(2)+"%"}</span></div>`).join("");
     tip.innerHTML = head + body;
     tip.style.display = "block";
     // định vị tránh tràn mép phải
