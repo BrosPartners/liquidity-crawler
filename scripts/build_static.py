@@ -48,6 +48,17 @@ def main() -> int:
         with open(mkt_hist_path, encoding="utf-8") as f:
             mkt_history = f.read()
 
+    def _read(name, default):
+        p = os.path.join(_ROOT, "data", name)
+        if os.path.exists(p):
+            with open(p, encoding="utf-8") as fh:
+                return fh.read().strip()
+        return default
+
+    gold_latest = _read("gold_latest.json", "null")
+    gold_history = _read("gold_history.csv", "")
+    gold_brands = _read("gold_brands.csv", "")
+
     # ── Ưu tiên NGUỒN GỐC là Google Sheet (nếu cấu hình sheet_id) ──────────
     if not args.no_sheet:
         try:
@@ -96,6 +107,19 @@ def main() -> int:
         r'\.then\(r => \{ if \(!r\.ok\) throw new Error\("x"\); return r\.text\(\); \}\)',
         "Promise.resolve(__EMBED_MKT_HISTORY__)", html, count=1)
 
+    # 3b. Thay các fetch gold bằng data nhúng (count=0 nếu index.html chưa có — OK)
+    html = re.sub(
+        r'fetch\("\.\./data/gold_latest\.json"\)\s*\.then\(r => r\.json\(\)\)',
+        "Promise.resolve(__EMBED_GOLD_LATEST__)", html, count=1)
+    html = re.sub(
+        r'fetch\("\.\./data/gold_history\.csv"\)\s*'
+        r'\.then\(r => \{ if \(!r\.ok\) throw new Error\("x"\); return r\.text\(\); \}\)',
+        "Promise.resolve(__EMBED_GOLD_HISTORY__)", html, count=1)
+    html = re.sub(
+        r'fetch\("\.\./data/gold_brands\.csv"\)\s*'
+        r'\.then\(r => \{ if \(!r\.ok\) throw new Error\("x"\); return r\.text\(\); \}\)',
+        "Promise.resolve(__EMBED_GOLD_BRANDS__)", html, count=1)
+
     # 4. Chèn data ngay đầu <script>
     embed = (
         "<script>\n"
@@ -103,6 +127,9 @@ def main() -> int:
         f"const __EMBED_HISTORY__ = {json.dumps(history, ensure_ascii=False)};\n"
         f"const __EMBED_MKT_LATEST__ = {mkt_latest};\n"
         f"const __EMBED_MKT_HISTORY__ = {json.dumps(mkt_history, ensure_ascii=False)};\n"
+        f"const __EMBED_GOLD_LATEST__ = {gold_latest};\n"
+        f"const __EMBED_GOLD_HISTORY__ = {json.dumps(gold_history, ensure_ascii=False)};\n"
+        f"const __EMBED_GOLD_BRANDS__ = {json.dumps(gold_brands, ensure_ascii=False)};\n"
     )
     html = html.replace("<script>", embed, 1)
 
