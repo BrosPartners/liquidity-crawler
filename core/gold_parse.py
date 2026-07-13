@@ -44,7 +44,10 @@ def _date_str(v):
 def _sheet_map(ws, val_cols):
     """Trả {date_str: {col: number}} đọc theo tên cột, header ở hàng 2."""
     it = ws.iter_rows(min_row=2, values_only=True)
-    header = list(next(it))
+    try:
+        header = list(next(it))
+    except StopIteration:
+        return {}
     if "date" not in header:
         return {}
     di = header.index("date")
@@ -60,6 +63,11 @@ def _sheet_map(ws, val_cols):
 
 def parse_gold_xlsx(path):
     wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
+
+    required = ["Gia TG (USD_oz)", "Gia TG (VND-luong)", "Ty gia USD-VND", "SJC", "Gia VN (tat ca)"]
+    missing = [s for s in required if s not in wb.sheetnames]
+    if missing:
+        raise ValueError(f"gold xlsx thiếu sheet: {missing}. Sheet hiện có: {wb.sheetnames}")
 
     usd = _sheet_map(wb["Gia TG (USD_oz)"], ["close_usd"])
     vnd = _sheet_map(wb["Gia TG (VND-luong)"], ["close_vnd"])
@@ -120,6 +128,7 @@ def _build_latest(history, brands):
             bmax[b["company"]] = b
     brand_list = [{"company": c, "buy": bmax[c]["buy"], "sell": bmax[c]["sell"]}
                   for c in BRAND_ORDER if c in bmax]
+    brands_as_of = max((bmax[c]["date"] for c in bmax), default=None)
     return {
         "as_of": row.get("date"),
         "world_gold_usd": row.get("world_gold_usd"),
@@ -129,4 +138,5 @@ def _build_latest(history, brands):
         "pct_gap": row.get("pct_gap"),
         "usd_vnd": row.get("usd_vnd"),
         "brands": brand_list,
+        "brands_as_of": brands_as_of,
     }

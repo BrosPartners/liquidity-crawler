@@ -988,7 +988,7 @@
     .catch(() => {});
 
   // ── Giá vàng ─────────────────────────────────────────────────────────
-  let GOLD = null, GOLD_HIST = [], GOLD_BRANDS = [];
+  let GOLD = null, GOLD_HIST = [];
 
   fetch("../data/gold_latest.json").then(r => r.json())
     .then(d => { GOLD = d; renderGold(); })
@@ -1000,11 +1000,6 @@
   fetch("../data/gold_history.csv")
     .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
     .then(text => { GOLD_HIST = parseMktCSV(text); renderGoldCharts(); })
-    .catch(() => {});
-
-  fetch("../data/gold_brands.csv")
-    .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
-    .then(text => { GOLD_BRANDS = text; })
     .catch(() => {});
 
   const GOLD_LABELS = {
@@ -1035,7 +1030,9 @@
        <div class="mkt-asof">mua ${fmtVnd(b.buy)}</div></div>`).join("");
 
     document.getElementById("goldNote").innerHTML =
-      `Nguồn: bot giá vàng (SJC/DOJI/PNJ/BTMC/BTMH/PhuQuy, vàng TG Yahoo GC=F). Cập nhật ${GOLD.as_of || ""}.`;
+      `Chênh lệch & tỷ giá tính đến ${GOLD.as_of || "—"} (ngày mới nhất có đủ giá vàng thế giới). ` +
+      `Giá bán các hãng cập nhật ${GOLD.brands_as_of || "—"}. ` +
+      `Nguồn: bot giá vàng (SJC/DOJI/PNJ/BTMC/BTMH/PhuQuy, vàng TG Yahoo GC=F).`;
   }
 
   function renderGoldCharts() {

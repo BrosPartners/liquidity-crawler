@@ -28,6 +28,7 @@ def test_latest():
     # gap tự tính = 148900000 - 128000000
     assert lt["gap"] == 20900000
     assert abs(lt["pct_gap"] - (20900000 / 128000000)) < 1e-9
+    assert d["latest"]["brands_as_of"] == "2026-07-13"
 
 
 def test_brands():
