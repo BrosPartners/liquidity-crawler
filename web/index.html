@@ -446,6 +446,7 @@
   <button class="tab-btn" data-tab="liennh">Liên ngân hàng</button>
   <button class="tab-btn" data-tab="sbv">Điều hành SBV</button>
   <button class="tab-btn" data-tab="tygia">Tỷ giá &amp; vĩ mô</button>
+  <button class="tab-btn" data-tab="vang">Giá vàng</button>
 </div>
 
 <!-- Controls dùng chung cho tab Huy động + Diễn biến -->
@@ -553,6 +554,30 @@
     <div class="mkt-grid" id="mktGridFX"></div>
     <div class="mkt-section-title">Tăng trưởng &amp; vĩ mô · Huy động NHTM lớn (tham chiếu)</div>
     <div class="mkt-grid" id="mktGridMacro"></div>
+  </div>
+</section>
+
+<!-- ══ Tab: Giá vàng ══ -->
+<section class="tabpane" data-pane="vang">
+  <div class="summary" id="goldKpi"></div>
+  <div class="mkt-wrap">
+    <div class="ts-panel" style="margin:0">
+      <div class="ts-head">
+        <div class="panel-title">SJC bán vs vàng thế giới quy đổi (VND/lượng)</div>
+        <div class="ts-legend" id="goldPriceLegend"></div>
+      </div>
+      <canvas id="goldPriceChart"></canvas>
+    </div>
+    <div class="ts-panel" style="margin:0">
+      <div class="ts-head">
+        <div class="panel-title">Chênh lệch với thế giới (%)</div>
+        <div class="ts-legend" id="goldGapLegend"></div>
+      </div>
+      <canvas id="goldGapChart"></canvas>
+    </div>
+    <div class="mkt-section-title">Giá bán các hãng (mới nhất)</div>
+    <div class="mkt-grid" id="goldBrandGrid"></div>
+    <div class="mkt-note" id="goldNote"></div>
   </div>
 </section>
 
@@ -962,6 +987,78 @@
     .then(text => { MKT_HIST = parseMktCSV(text); renderMktChart(); })
     .catch(() => {});
 
+  // ── Giá vàng ─────────────────────────────────────────────────────────
+  let GOLD = null, GOLD_HIST = [], GOLD_BRANDS = [];
+
+  fetch("../data/gold_latest.json").then(r => r.json())
+    .then(d => { GOLD = d; renderGold(); })
+    .catch(() => {
+      const b = document.querySelector('.tab-btn[data-tab="vang"]');
+      if (b) b.style.display = "none";
+    });
+
+  fetch("../data/gold_history.csv")
+    .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
+    .then(text => { GOLD_HIST = parseMktCSV(text); renderGoldCharts(); })
+    .catch(() => {});
+
+  fetch("../data/gold_brands.csv")
+    .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
+    .then(text => { GOLD_BRANDS = text; })
+    .catch(() => {});
+
+  const GOLD_LABELS = {
+    sjc_sell: "SJC bán", world_gold_vnd: "Vàng TG quy đổi",
+    pct_gap: "% chênh lệch", world_gold_usd: "Vàng TG (USD/oz)", usd_vnd: "USD/VND",
+  };
+  const GOLD_COLORS = { sjc_sell: "#E8A030", world_gold_vnd: "#3B82F6", pct_gap: "#EF4444" };
+
+  function fmtVnd(v) { return v == null ? "—" : Math.round(v).toLocaleString("vi-VN"); }
+
+  function renderGold() {
+    if (!GOLD) return;
+    const kpi = [
+      ["SJC bán", fmtVnd(GOLD.sjc_sell), "VND/lượng"],
+      ["Vàng TG (USD)", GOLD.world_gold_usd == null ? "—" : GOLD.world_gold_usd.toLocaleString("vi-VN"), "USD/oz"],
+      ["Vàng TG quy đổi", fmtVnd(GOLD.world_gold_vnd), "VND/lượng"],
+      ["Chênh lệch", fmtVnd(GOLD.gap), "VND"],
+      ["% chênh lệch", GOLD.pct_gap == null ? "—" : (GOLD.pct_gap * 100).toFixed(2) + "%", ""],
+      ["USD/VND", fmtVnd(GOLD.usd_vnd), ""],
+    ];
+    document.getElementById("goldKpi").innerHTML = kpi.map(([l, v, s]) =>
+      `<div class="stat"><div class="stat-label">${l}</div><div class="stat-value">${v}</div><div class="stat-sub">${s}</div></div>`).join("");
+
+    const brands = (GOLD.brands || []);
+    document.getElementById("goldBrandGrid").innerHTML = brands.map(b =>
+      `<div class="mkt-card"><div class="mkt-label">${b.company}</div>
+       <div class="mkt-val">${fmtVnd(b.sell)}<span class="mkt-unit">bán</span></div>
+       <div class="mkt-asof">mua ${fmtVnd(b.buy)}</div></div>`).join("");
+
+    document.getElementById("goldNote").innerHTML =
+      `Nguồn: bot giá vàng (SJC/DOJI/PNJ/BTMC/BTMH/PhuQuy, vàng TG Yahoo GC=F). Cập nhật ${GOLD.as_of || ""}.`;
+  }
+
+  function renderGoldCharts() {
+    drawGoldSeries("goldPriceChart", "goldPriceLegend", ["sjc_sell", "world_gold_vnd"]);
+    drawGoldSeries("goldGapChart", "goldGapLegend", ["pct_gap"]);
+  }
+
+  function drawGoldSeries(canvasId, legendId, keys) {
+    if (!GOLD_HIST.length) return;
+    const canvas = document.getElementById(canvasId);
+    if (!canvas || !canvas.parentElement.clientWidth) return;  // tab ẩn -> bỏ
+    const dates = [...new Set(GOLD_HIST.filter(r => keys.includes(r.key)).map(r => r.date))].sort();
+    document.getElementById(legendId).innerHTML = keys.map(k =>
+      `<span class="lg"><span class="sw" style="background:${GOLD_COLORS[k]}"></span>${GOLD_LABELS[k]}</span>`).join("");
+    const series = keys.map(k => {
+      const pts = GOLD_HIST.filter(r => r.key === k).sort((a, b) => a.date < b.date ? -1 : 1);
+      let pi = 0, last = null;
+      const vals = dates.map(d => { while (pi < pts.length && pts[pi].date <= d) { last = pts[pi].value; pi++; } return last; });
+      return { color: GOLD_COLORS[k], name: GOLD_LABELS[k] || k, vals };
+    });
+    interactiveLineChart(canvasId, dates, series, (c, d, s) => drawLineChart(c, d, s, 220));
+  }
+
   function parseMktCSV(text) {
     const lines = text.trim().split(/\r?\n/);
     if (lines.length < 2) return [];
@@ -1275,13 +1372,14 @@
     requestAnimationFrame(() => {
       if (name === "huydong" || name === "dienbien") render();
       if (name === "liennh" || name === "sbv") renderMktChart();
+      if (name === "vang") renderGoldCharts();
     });
   }
   document.querySelectorAll(".tab-btn").forEach(b =>
     b.addEventListener("click", () => setTab(b.dataset.tab)));
 
   // Re-render charts on resize
-  window.addEventListener("resize", () => { render(); renderMktChart(); });
+  window.addEventListener("resize", () => { render(); renderMktChart(); renderGoldCharts(); });
 </script>
 </body>
 </html>
