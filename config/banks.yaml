@@ -1,0 +1,142 @@
+# Registry các bank. enabled: true mới được crawl.
+# mode: html   = HTML tĩnh (httpx, nhanh)
+#       render = JS-render (Playwright)
+#       json   = JSON API endpoint (httpx)
+#       pdf    = PDF parsing (pdfplumber)
+
+banks:
+  # ── Quốc doanh ─────────────────────────────────────────────────────────────
+  - code: VCB
+    module: vietcombank
+    name: Vietcombank
+    url: https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal
+    mode: json
+    enabled: true
+
+  - code: BID
+    module: bidv
+    name: BIDV
+    url: https://bidv.com.vn/vn/tra-cuu-lai-suat/
+    mode: render
+    enabled: true
+
+  - code: CTG
+    module: vietinbank
+    name: VietinBank
+    url: https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn
+    mode: html
+    enabled: true
+
+  - code: AGR
+    module: agribank
+    name: Agribank
+    url: https://www.agribank.com.vn/en/lai-suat
+    mode: html
+    enabled: true
+
+  # ── TMCP ───────────────────────────────────────────────────────────────────
+  - code: ACB
+    module: acb
+    name: ACB
+    url: https://acb.com.vn/lai-suat-tien-gui
+    mode: html
+    enabled: true
+
+  - code: VPB
+    module: vpbank
+    name: VPBank
+    url: https://www.vpbank.com.vn/uiux-api/api/interest-rate
+    mode: json
+    enabled: true
+
+  - code: MBB
+    module: mbbank
+    name: MB Bank
+    url: https://www.mbbank.com.vn/Tools/tien-gui
+    mode: render
+    enabled: false   # WAF blocks all headless browsers
+
+  - code: STB
+    module: sacombank
+    name: Sacombank
+    url: https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf
+    mode: pdf
+    enabled: true
+
+  - code: HDB
+    module: hdbank
+    name: HDBank
+    url: https://hdbank.com.vn/vi/personal/cong-cu/interest-rate
+    mode: pdf
+    enabled: true
+
+  - code: TCB
+    module: techcombank
+    name: Techcombank
+    url: https://techcombank.com/cong-cu-tien-ich/bieu-phi-lai-suat
+    mode: pdf   # link PDF động lấy qua GraphQL API (httpx), fallback Playwright
+    enabled: true
+
+  # ── Bổ sung 2026-07-05 (đủ 18 bank như sheet 'Dep rates - Group') ──────────
+  - code: SHB
+    module: shb
+    name: SHB
+    url: https://24hmoney.vn/lai-suat-gui-ngan-hang/shb
+    mode: html   # web SHB chặn WAF (403) -> dùng 24hmoney (nguồn trung gian)
+    enabled: true
+
+  - code: TPB
+    module: tpbank
+    name: TPBank
+    url: https://tpb.vn/cong-cu-tinh-toan/lai-suat
+    mode: html   # fragment CMS WebSphere qua httpx
+    enabled: true
+
+  - code: VIB
+    module: vib
+    name: VIB
+    url: https://www.vib.com.vn/vn/tiet-kiem
+    mode: render  # WAF challenge -> bắt buộc Playwright
+    enabled: true
+
+  - code: LPB
+    module: lpbank
+    name: LPBank
+    url: https://lpbank.com.vn/ca-nhan/lai-suat
+    mode: json   # POST /api/content-service/public/interest-rate/findAll
+    enabled: true
+
+  - code: EIB
+    module: eximbank
+    name: Eximbank
+    url: https://media.eximbank.com.vn/exim/files/KHCN-LaisuathuydongVND.pdf
+    mode: pdf
+    enabled: true
+
+  - code: SSB
+    module: seabank
+    name: SeABank
+    url: https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat
+    mode: render  # Next.js Server Action -> bắt buộc Playwright
+    enabled: true
+
+  - code: NAB
+    module: namabank
+    name: Nam A Bank
+    url: https://www.namabank.com.vn/lai-suat-tien-gui-vnd-2
+    mode: html
+    enabled: true
+
+  - code: MSB
+    module: msb
+    name: MSB
+    url: https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/
+    mode: html   # JSON nhúng trong data-config
+    enabled: true
+
+  - code: OCB
+    module: ocb
+    name: OCB
+    url: https://www.ocb.com.vn/vi/cong-cu/lai-suat
+    mode: html   # Angular SSR
+    enabled: true

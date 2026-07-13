@@ -1,0 +1,98 @@
+name: crawl-lai-suat
+
+on:
+  schedule:
+    - cron: "0 10 * * *"   # 10:00 UTC = 17:00 giờ VN, mỗi ngày
+  workflow_dispatch:
+    inputs:
+      banks:
+        description: "Lọc bank codes (vd: VCB,ACB) — để trống = tất cả"
+        required: false
+        default: ""
+
+jobs:
+  # ── Daily crawl ─────────────────────────────────────────────────────────
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Crawl lãi suất huy động
+        run: |
+          if [ -n "${{ github.event.inputs.banks }}" ]; then
+            python run.py --banks "${{ github.event.inputs.banks }}"
+          else
+            python run.py
+          fi
+        env:
+          PYTHONUTF8: "1"
+          GSHEET_ID: ${{ secrets.GSHEET_ID }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_PATH }}
+
+      - name: Crawl data thị trường (liên NH, điều hành SBV, tỷ giá)
+        run: python crawl_market.py
+        env:
+          PYTHONUTF8: "1"
+
+      - name: Đẩy lên Google Sheet (chỉ Thứ Sáu = weekly)
+        run: |
+          if [ "$(date -u +%u)" = "5" ] || [ -n "${{ github.event.inputs.banks }}" ]; then
+            python push_to_sheet.py
+          else
+            echo "Không phải Thứ Sáu — bỏ qua push weekly."
+          fi
+        env:
+          PYTHONUTF8: "1"
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          SHEET_WEB_APP_URL: ${{ secrets.SHEET_WEB_APP_URL }}
+          SHEET_TOKEN: ${{ secrets.SHEET_TOKEN }}
+
+      - name: Build dashboard tĩnh (đọc nguồn từ Sheet)
+        run: python scripts/build_static.py
+        env:
+          PYTHONUTF8: "1"
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+
+      - name: Commit data
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          git add data/ dist/
+          git diff --cached --quiet || git commit -m "data: cập nhật lãi suất $(date -u +%F)"
+          git push
+
+  # ── One-time historical backfill (trigger thủ công) ─────────────────────
+  backfill:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Backfill history từ Wayback Machine
+        run: python scripts/backfill_history.py --from 2021-01 --delay 1.5
+        env:
+          PYTHONUTF8: "1"
+
+      - name: Commit history
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          git add data/history.csv
+          git diff --cached --quiet || git commit -m "data: backfill history 2021-$(date -u +%Y-%m)"
+          git push

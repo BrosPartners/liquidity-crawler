@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lãi suất huy động — NH Việt Nam</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0B1629;
+      --panel:    #112040;
+      --surface:  #162A50;
+      --border:   #1E3560;
+      --text:     #B8CDE0;
+      --muted:    #5A7A9A;
+      --accent:   #E8A030;
+      --hi:       #3EE0A0;
+      --lo:       #E05060;
+
+      --c-vcb: #22C55E;
+      --c-bid: #EF4444;
+      --c-ctg: #3B82F6;
+      --c-agr: #10B981;
+      --c-acb: #A855F7;
+      --c-vpb: #F97316;
+      --c-stb: #06B6D4;
+      --c-hdb: #F59E0B;
+
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 0 40px;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .header h1 {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .header .meta {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .02em;
+    }
+    .header .dot {
+      color: var(--border);
+      margin: 0 4px;
+    }
+    .header .badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: .04em;
+    }
+
+    /* ── Tabs ── */
+    .tabs {
+      display: flex;
+      gap: 2px;
+      padding: 0 24px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--muted);
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color .15s, border-color .15s;
+      letter-spacing: .01em;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .tabpane { display: none; }
+    .tabpane.active { display: block; }
+
+    /* ── Controls ── */
+    .controls {
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .control-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* Term chips */
+    .term-chips {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .chip {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background .15s, color .15s, border-color .15s;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .chip:hover  { border-color: var(--muted); color: var(--text); }
+    .chip.active { background: var(--accent); border-color: var(--accent); color: #0B1629; font-weight: 700; }
+
+    /* Product toggle */
+    .toggle {
+      display: flex;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .toggle button {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      padding: 4px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .toggle button + button { border-left: 1px solid var(--border); }
+    .toggle button.active { background: var(--surface); color: var(--text); font-weight: 600; }
+
+    /* ── Main content ── */
+    .main {
+      display: grid;
+      grid-template-columns: minmax(320px, 1fr) minmax(280px, 400px);
+      gap: 1px;
+      background: var(--border);
+      margin: 20px 24px 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    /* ── Rate table ── */
+    .table-panel {
+      background: var(--panel);
+      overflow: hidden;
+    }
+    .panel-title {
+      padding: 10px 16px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--panel);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+    thead th {
+      padding: 8px 16px;
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--panel);
+      font-weight: 600;
+    }
+    thead th:not(:first-child) { text-align: right; }
+    tbody tr {
+      transition: background .1s;
+    }
+    tbody tr:hover { background: var(--surface); }
+    tbody tr + tr { border-top: 1px solid rgba(30,53,96,.6); }
+    td {
+      padding: 9px 16px;
+      font-size: 13px;
+    }
+    td:not(:first-child) { text-align: right; }
+
+    .bank-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bank-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .bank-code {
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .04em;
+    }
+    .bank-name {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .src-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 1px 7px;
+      margin-left: 8px;
+      transition: color .15s, border-color .15s, background .15s;
+      white-space: nowrap;
+    }
+    .src-link:hover { color: var(--accent); border-color: var(--accent); background: rgba(232,160,48,.08); }
+
+    .rate-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+    .rate-value {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .rate-bar-wrap {
+      width: 80px;
+      height: 3px;
+      background: rgba(255,255,255,.06);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .rate-bar {
+      height: 100%;
+      border-radius: 2px;
+      transition: width .4s cubic-bezier(.4,0,.2,1);
+    }
+
+    .rank-1 .rate-value { color: var(--hi); }
+    .rank-2 .rate-value { color: #7DD8B8; }
+    .rank-3 .rate-value { color: var(--text); }
+    .rank-lo .rate-value { color: var(--muted); }
+
+    .empty-msg {
+      padding: 40px 16px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ── Chart panel ── */
+    .chart-panel {
+      background: var(--panel);
+      display: flex;
+      flex-direction: column;
+    }
+    #rateChart {
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* ── Time series panel ── */
+    .ts-panel {
+      background: var(--panel);
+      margin: 12px 24px 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .ts-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      padding-right: 16px;
+    }
+    .ts-legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .ts-legend .lg {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      opacity: 1;
+      transition: opacity .15s;
+      user-select: none;
+    }
+    .ts-legend .lg.off { opacity: .3; }
+    .ts-legend .lg .sw { width: 14px; height: 3px; border-radius: 2px; }
+    #tsChart { width: 100%; height: 260px; display: block; }
+    .ts-empty { padding: 30px 16px; text-align: center; color: var(--muted); font-size: 13px; }
+
+    /* ── Market (thị trường tiền tệ) ── */
+    .mkt-wrap { margin: 12px 24px 0; }
+    .mkt-section-title {
+      font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
+      color: var(--muted); margin: 18px 0 8px;
+    }
+    .mkt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+    }
+    .mkt-card { background: var(--panel); padding: 12px 14px; }
+    .mkt-label { font-size: 11px; color: var(--muted); margin-bottom: 5px; line-height: 1.3; min-height: 28px; }
+    .mkt-val {
+      font-size: 19px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text);
+      display: flex; align-items: baseline; gap: 6px;
+    }
+    .mkt-unit { font-size: 11px; font-weight: 400; color: var(--muted); }
+    .mkt-delta { font-size: 11px; font-weight: 600; margin-top: 3px; font-variant-numeric: tabular-nums; }
+    .mkt-delta.up { color: var(--lo); }     /* lãi suất tăng = đỏ (thắt chặt) */
+    .mkt-delta.down { color: var(--hi); }
+    .mkt-delta.flat { color: var(--muted); }
+    .mkt-asof { font-size: 10px; color: var(--muted); margin-top: 4px; opacity: .7; }
+    .mkt-hero { grid-column: span 2; }
+    .mkt-hero .mkt-val { font-size: 26px; }
+    .mkt-note { font-size: 11px; color: var(--muted); margin: 8px 2px 0; line-height: 1.5; }
+    #mktChart { width: 100%; height: 220px; display: block; }
+
+    /* ── Summary strip ── */
+    .summary {
+      display: flex;
+      gap: 1px;
+      background: var(--border);
+      margin: 12px 24px 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .stat {
+      background: var(--panel);
+      flex: 1;
+      padding: 12px 16px;
+    }
+    .stat-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .stat-value {
+      font-size: 18px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--accent);
+    }
+    .stat-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 700px) {
+      .main { grid-template-columns: 1fr; }
+      .summary { flex-direction: column; gap: 1px; }
+      .controls { padding: 10px 16px; gap: 12px; }
+      .header { padding: 12px 16px; }
+      .main, .summary { margin: 12px 16px 0; }
+    }
+    /* Tooltip hover cho chart */
+    #chartTip {
+      position: fixed; z-index: 9999; display: none; pointer-events: none;
+      background: rgba(10,22,40,.96); border: 1px solid #294a78; border-radius: 8px;
+      padding: 8px 10px; font-size: 12px; color: #dbe7f5; min-width: 120px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.45);
+    }
+    #chartTip .tip-date { font-weight: 600; color: #9fb6d4; margin-bottom: 5px; font-size: 11px; }
+    #chartTip .tip-row { display: flex; align-items: center; gap: 6px; line-height: 1.55; }
+    #chartTip .tip-sw { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+    #chartTip .tip-lb { flex: 1; white-space: nowrap; }
+    #chartTip .tip-vv { font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 10px; }
+    .chart-hint {
+      font-size: 11px; color: #5A7A9A; margin-top: 4px; text-align: right; user-select: none;
+    }
+    canvas.zoomable { cursor: crosshair; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Thanh khoản ngân hàng VN</h1>
+  <span class="meta" id="metaText">Đang tải…</span>
+  <span class="badge" id="metaBadge">–– bank</span>
+</div>
+
+<div class="tabs" id="tabNav">
+  <button class="tab-btn active" data-tab="huydong">Lãi suất huy động</button>
+  <button class="tab-btn" data-tab="dienbien">Diễn biến lãi suất</button>
+  <button class="tab-btn" data-tab="liennh">Liên ngân hàng</button>
+  <button class="tab-btn" data-tab="sbv">Điều hành SBV</button>
+  <button class="tab-btn" data-tab="tygia">Tỷ giá &amp; vĩ mô</button>
+</div>
+
+<!-- Controls dùng chung cho tab Huy động + Diễn biến -->
+<div class="controls" id="rateControls">
+  <div class="control-group">
+    <span class="control-label">Kỳ hạn</span>
+    <div class="term-chips" id="termChips"></div>
+  </div>
+  <div class="control-group">
+    <span class="control-label">Kênh</span>
+    <div class="toggle">
+      <button id="btnQuay" class="active" onclick="setProduct('quay')">Tại quầy</button>
+      <button id="btnOnline" onclick="setProduct('online')">Online</button>
+    </div>
+  </div>
+  <div class="control-group" id="groupControl" style="display:none">
+    <span class="control-label">Nhóm</span>
+    <div class="toggle">
+      <button id="btnGrpAll" class="active" onclick="setGroup('all')">Tất cả</button>
+      <button id="btnGrpSocb" onclick="setGroup('socb')">NHTM NN</button>
+      <button id="btnGrpPriv" onclick="setGroup('private')">Tư nhân</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ Tab: Lãi suất huy động ══ -->
+<section class="tabpane active" data-pane="huydong">
+  <div class="summary" id="summaryRow">
+    <div class="stat"><div class="stat-label">Cao nhất</div><div class="stat-value" id="s1">—</div><div class="stat-sub" id="s1b"></div></div>
+    <div class="stat"><div class="stat-label">Trung bình</div><div class="stat-value" id="s2">—</div><div class="stat-sub" id="s2b"></div></div>
+    <div class="stat"><div class="stat-label">Thấp nhất</div><div class="stat-value" id="s3">—</div><div class="stat-sub" id="s3b"></div></div>
+    <div class="stat"><div class="stat-label">Phủ sóng</div><div class="stat-value" id="s4">—</div><div class="stat-sub" id="s4b"></div></div>
+  </div>
+  <div class="main">
+    <div class="table-panel">
+      <div class="panel-title">Bảng xếp hạng</div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:40px">#</th>
+              <th>Ngân hàng</th>
+              <th>Lãi suất</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="chart-panel">
+      <div class="panel-title">Biểu đồ so sánh</div>
+      <canvas id="rateChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Tab: Diễn biến lãi suất huy động ══ -->
+<section class="tabpane" data-pane="dienbien">
+  <div class="ts-panel">
+    <div class="ts-head">
+      <div class="panel-title" id="tsTitle">Diễn biến lãi suất</div>
+      <div class="ts-legend" id="tsLegend"></div>
+    </div>
+    <canvas id="tsChart"></canvas>
+    <div class="ts-empty" id="tsEmpty" style="display:none"></div>
+  </div>
+</section>
+
+<!-- ══ Tab: Liên ngân hàng ══ -->
+<section class="tabpane" data-pane="liennh">
+  <div class="mkt-wrap">
+    <div class="ts-panel" style="margin:0">
+      <div class="ts-head">
+        <div class="panel-title" id="mktTitle">Lãi suất liên ngân hàng theo thời gian</div>
+        <div class="ts-legend" id="mktChartLegend"></div>
+      </div>
+      <canvas id="mktChart"></canvas>
+    </div>
+    <div class="mkt-section-title">Lãi suất liên ngân hàng theo kỳ hạn (mới nhất)</div>
+    <div class="mkt-grid" id="mktGridInterbank"></div>
+    <div class="mkt-note" id="mktNoteIB"></div>
+  </div>
+</section>
+
+<!-- ══ Tab: Điều hành SBV ══ -->
+<section class="tabpane" data-pane="sbv">
+  <div class="mkt-wrap">
+    <div class="ts-panel" style="margin:0">
+      <div class="ts-head">
+        <div class="panel-title">Liên NH qua đêm vs lãi suất điều hành</div>
+        <div class="ts-legend" id="sbvChartLegend"></div>
+      </div>
+      <canvas id="sbvChart"></canvas>
+    </div>
+    <div class="mkt-section-title">Lãi suất điều hành SBV (mới nhất)</div>
+    <div class="mkt-grid" id="mktGridSBV"></div>
+    <div class="mkt-note" id="mktNote"></div>
+  </div>
+</section>
+
+<!-- ══ Tab: Tỷ giá & vĩ mô ══ -->
+<section class="tabpane" data-pane="tygia">
+  <div class="mkt-wrap">
+    <div class="mkt-section-title">Tỷ giá USD/VND</div>
+    <div class="mkt-grid" id="mktGridFX"></div>
+    <div class="mkt-section-title">Tăng trưởng &amp; vĩ mô · Huy động NHTM lớn (tham chiếu)</div>
+    <div class="mkt-grid" id="mktGridMacro"></div>
+  </div>
+</section>
+
+<script>
+  const DATA_URL = "../data/latest.json";
+
+  const BANK_COLORS = {
+    VCB: "#22C55E", BID: "#EF4444", CTG: "#3B82F6",
+    AGR: "#10B981", ACB: "#A855F7", VPB: "#F97316",
+    STB: "#06B6D4", HDB: "#F59E0B",
+    MBB: "#EC4899", TCB: "#84CC16",
+    SHB: "#EAB308", TPB: "#8B5CF6", VIB: "#0EA5E9",
+    LPB: "#F43F5E", EIB: "#14B8A6", SSB: "#D946EF",
+    NAB: "#65A30D", MSB: "#FB7185", OCB: "#38BDF8",
+  };
+
+  // Đã verify HTTP 200 (không redirect 404) ngày 2026-07-02
+  const BANK_URLS = {
+    VCB: "https://www.vietcombank.com.vn/vi-VN/Personal/Cong-cu-Tien-ich/KHCN---Lai-suat",
+    BID: "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
+    CTG: "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
+    AGR: "https://www.agribank.com.vn/vi/lai-suat",
+    ACB: "https://acb.com.vn/lai-suat-tien-gui",
+    VPB: "https://www.vpbank.com.vn/ca-nhan/tiet-kiem",
+    STB: "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
+    HDB: "https://hdbank.com.vn/vi/personal/cong-cu/interest-rate",
+    MBB: "https://www.mbbank.com.vn/Tools/tien-gui",
+    TCB: "https://techcombank.com/cong-cu-tien-ich/bieu-phi-lai-suat",
+    SHB: "https://24hmoney.vn/lai-suat-gui-ngan-hang/shb",
+    TPB: "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
+    VIB: "https://www.vib.com.vn/vn/tiet-kiem",
+    LPB: "https://lpbank.com.vn/ca-nhan/lai-suat",
+    EIB: "https://media.eximbank.com.vn/exim/files/KHCN-LaisuathuydongVND.pdf",
+    SSB: "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
+    NAB: "https://www.namabank.com.vn/lai-suat-tien-gui-vnd-2",
+    MSB: "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
+    OCB: "https://www.ocb.com.vn/vi/cong-cu/lai-suat",
+  };
+
+  const TERM_ORDER = [
+    "KKH","1D","1W","2W","3W",
+    "1M","2M","3M","4M","5M","6M","7M","8M","9M","10M","11M",
+    "12M","13M","15M","18M","24M","36M","48M","60M"
+  ];
+
+  let RATES = [], currentTerm = "12M", currentProduct = "quay";
+  const SOCBS = new Set(["VCB", "CTG", "BID", "AGR"]);  // NHTM nhà nước
+  let currentGroup = "all";  // all | socb | private (lọc chart Diễn biến)
+  function setGroup(g) {
+    currentGroup = g;
+    document.getElementById("btnGrpAll").classList.toggle("active", g === "all");
+    document.getElementById("btnGrpSocb").classList.toggle("active", g === "socb");
+    document.getElementById("btnGrpPriv").classList.toggle("active", g === "private");
+    if (typeof HISTORY !== "undefined" && HISTORY.length) renderTS();
+  }
+
+  // ── Init ──────────────────────────────────────────────────────────────
+  fetch(DATA_URL)
+    .then(r => r.json())
+    .then(d => {
+      RATES = d.rates || [];
+      const dt = (d.generated_at || "").replace("T"," ").slice(0,16);
+      document.getElementById("metaText").textContent =
+        `Cập nhật ${dt} · ${d.count} mức lãi suất`;
+      document.getElementById("metaBadge").textContent = `${d.banks.length} bank`;
+
+      // Build term chips from data
+      const terms = TERM_ORDER.filter(t => RATES.some(r => r.term === t));
+      const chips = document.getElementById("termChips");
+      terms.forEach(t => {
+        const btn = document.createElement("button");
+        btn.className = "chip" + (t === currentTerm ? " active" : "");
+        btn.textContent = t;
+        btn.onclick = () => setTerm(t);
+        chips.appendChild(btn);
+      });
+      if (!terms.includes(currentTerm)) currentTerm = terms.find(t => t === "12M") || terms[4] || terms[0];
+      render();
+    })
+    .catch(e => {
+      document.getElementById("metaText").textContent = "Lỗi: " + e.message;
+    });
+
+  // ── State setters ─────────────────────────────────────────────────────
+  function setTerm(t) {
+    currentTerm = t;
+    document.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c.textContent === t));
+    render();
+  }
+  function setProduct(p) {
+    currentProduct = p;
+    document.getElementById("btnQuay").classList.toggle("active", p === "quay");
+    document.getElementById("btnOnline").classList.toggle("active", p === "online");
+    render();
+  }
+
+  // ── Render ────────────────────────────────────────────────────────────
+  function render() {
+    const rows = RATES
+      .filter(r => r.term === currentTerm && r.product === currentProduct && r.rate != null)
+      .sort((a, b) => b.rate - a.rate);
+
+    renderSummary(rows);
+    renderTable(rows);
+    renderChart(rows);
+    if (typeof HISTORY !== "undefined" && HISTORY.length) renderTS();
+  }
+
+  function renderSummary(rows) {
+    if (!rows.length) {
+      ["s1","s2","s3","s4"].forEach(id => document.getElementById(id).textContent = "—");
+      return;
+    }
+    const rates = rows.map(r => r.rate);
+    const max = rates[0], min = rates[rates.length - 1];
+    const avg = rates.reduce((a,b) => a+b, 0) / rates.length;
+
+    document.getElementById("s1").textContent = max.toFixed(2) + "%";
+    document.getElementById("s1b").textContent = rows[0].bank_code;
+    document.getElementById("s2").textContent = avg.toFixed(2) + "%";
+    document.getElementById("s2b").textContent = `${rows.length} bank có dữ liệu`;
+    document.getElementById("s3").textContent = min.toFixed(2) + "%";
+    document.getElementById("s3b").textContent = rows[rows.length-1].bank_code;
+    document.getElementById("s4").textContent = rows.length + "/" + new Set(RATES.map(r => r.bank_code)).size;
+    document.getElementById("s4b").textContent = "bank có kỳ hạn này";
+  }
+
+  function renderTable(rows) {
+    const tbody = document.getElementById("tableBody");
+    if (!rows.length) {
+      tbody.innerHTML = `<tr><td colspan="3" class="empty-msg">Không có dữ liệu — thử chọn kênh hoặc kỳ hạn khác</td></tr>`;
+      return;
+    }
+    const maxRate = rows[0].rate;
+    tbody.innerHTML = rows.map((r, i) => {
+      const color = BANK_COLORS[r.bank_code] || "#8899AA";
+      const barW = maxRate > 0 ? Math.round((r.rate / maxRate) * 100) : 0;
+      const rankCls = i === 0 ? "rank-1" : i === 1 ? "rank-2" : i === 2 ? "rank-3" : r.rate < maxRate * 0.7 ? "rank-lo" : "";
+      const url = BANK_URLS[r.bank_code] || "";
+      return `<tr class="${rankCls}">
+        <td style="color:var(--muted);font-size:12px">${i+1}</td>
+        <td>
+          <div class="bank-cell">
+            <span class="bank-dot" style="background:${color}"></span>
+            <span class="bank-code">${r.bank_code}</span>
+            <span class="bank-name">${r.bank_name}</span>
+            ${url ? `<a class="src-link" href="${url}" target="_blank" rel="noopener noreferrer">↗ nguồn</a>` : ""}
+          </div>
+        </td>
+        <td>
+          <div class="rate-cell">
+            <span class="rate-value">${r.rate.toFixed(2)}<span style="font-size:11px;font-weight:400;color:var(--muted)">%</span></span>
+            <div class="rate-bar-wrap">
+              <div class="rate-bar" style="width:${barW}%;background:${color}"></div>
+            </div>
+          </div>
+        </td>
+      </tr>`;
+    }).join("");
+  }
+
+  function renderChart(rows) {
+    const canvas = document.getElementById("rateChart");
+    const ctx = canvas.getContext("2d");
+    const dpr = window.devicePixelRatio || 1;
+
+    // Size canvas to parent
+    const parent = canvas.parentElement;
+    const w = parent.clientWidth;
+    const h = Math.max(parent.clientHeight - 32, 200); // subtract panel-title height
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = w + "px";
+    canvas.style.height = h + "px";
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, w, h);
+
+    if (!rows.length) {
+      ctx.fillStyle = "#5A7A9A";
+      ctx.font = "13px system-ui";
+      ctx.textAlign = "center";
+      ctx.fillText("Không có dữ liệu", w / 2, h / 2);
+      return;
+    }
+
+    const PAD = { t: 20, r: 20, b: 50, l: 20 };
+    const chartW = w - PAD.l - PAD.r;
+    const chartH = h - PAD.t - PAD.b;
+    const maxRate = Math.max(...rows.map(r => r.rate)) * 1.1;
+
+    const n = rows.length;
+    const barW = Math.max(8, Math.min(40, (chartW / n) * 0.6));
+    const gap = (chartW - barW * n) / (n + 1);
+
+    // Grid lines
+    const gridCount = 4;
+    ctx.strokeStyle = "rgba(30,53,96,.6)";
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= gridCount; i++) {
+      const y = PAD.t + chartH - (chartH * i / gridCount);
+      ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(w - PAD.r, y); ctx.stroke();
+      const val = (maxRate * i / gridCount).toFixed(1);
+      ctx.fillStyle = "#5A7A9A";
+      ctx.font = `10px system-ui`;
+      ctx.textAlign = "right";
+      ctx.fillText(val + "%", w - PAD.r, y - 3);
+    }
+
+    // Bars
+    rows.forEach((r, i) => {
+      const x = PAD.l + gap + i * (barW + gap);
+      const barH = (r.rate / maxRate) * chartH;
+      const y = PAD.t + chartH - barH;
+      const color = BANK_COLORS[r.bank_code] || "#8899AA";
+
+      // Bar fill with slight glow
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 6;
+      ctx.fillStyle = color + "CC";
+      ctx.fillRect(x, y, barW, barH);
+      ctx.shadowBlur = 0;
+
+      // Top highlight
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, barW, 2);
+
+      // Bank label
+      ctx.fillStyle = "#5A7A9A";
+      ctx.font = `bold 10px system-ui`;
+      ctx.textAlign = "center";
+      ctx.fillText(r.bank_code, x + barW / 2, h - PAD.b + 14);
+
+      // Rate label
+      ctx.fillStyle = color;
+      ctx.font = `bold 11px system-ui`;
+      ctx.fillText(r.rate.toFixed(1), x + barW / 2, y - 5);
+    });
+  }
+
+  // ── Time series (history.csv) ────────────────────────────────────────
+  let HISTORY = [];               // [{date, bank_code, term, rate, product}]
+  const tsHidden = new Set();     // bank codes toggled off in legend
+
+  fetch("../data/history.csv")
+    .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+    .then(text => {
+      HISTORY = parseCSV(text);
+      renderTS();
+    })
+    .catch(() => {
+      document.getElementById("tsChart").style.display = "none";
+      const em = document.getElementById("tsEmpty");
+      em.style.display = "";
+      em.textContent = "Chưa có dữ liệu lịch sử — history.csv sẽ được tạo sau các lần crawl hàng ngày";
+    });
+
+  function parseCSV(text) {
+    const lines = text.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+    const head = lines[0].split(",");
+    const idx = {
+      date: head.indexOf("date"), bank: head.indexOf("bank_code"),
+      term: head.indexOf("term"), rate: head.indexOf("rate"),
+      product: head.indexOf("product"),
+    };
+    const out = [];
+    for (let i = 1; i < lines.length; i++) {
+      const c = lines[i].split(",");
+      const rate = parseFloat(c[idx.rate]);
+      if (!isFinite(rate)) continue;
+      out.push({ date: c[idx.date], bank_code: c[idx.bank], term: c[idx.term], rate, product: c[idx.product] });
+    }
+    return out;
+  }
+
+  function renderTS() {
+    const canvas = document.getElementById("tsChart");
+    const empty = document.getElementById("tsEmpty");
+    document.getElementById("tsTitle").textContent =
+      `Diễn biến lãi suất · ${currentTerm} · ${currentProduct === "quay" ? "Tại quầy" : "Online"}`;
+
+    const recs = HISTORY.filter(r => r.term === currentTerm && r.product === currentProduct);
+    if (!recs.length) {
+      canvas.style.display = "none";
+      empty.style.display = "";
+      empty.textContent = "Chưa có lịch sử cho kỳ hạn/kênh này";
+      document.getElementById("tsLegend").innerHTML = "";
+      return;
+    }
+    canvas.style.display = "";
+    empty.style.display = "none";
+
+    // Group: bank -> sorted [date, rate] change-points
+    const byBank = {};
+    recs.forEach(r => (byBank[r.bank_code] = byBank[r.bank_code] || []).push([r.date, r.rate]));
+    Object.values(byBank).forEach(a => a.sort((x, y) => x[0] < y[0] ? -1 : 1));
+
+    // Date axis: all distinct dates (history only stores changes -> forward-fill)
+    const dates = [...new Set(recs.map(r => r.date))].sort();
+    let banks = Object.keys(byBank).sort();
+    if (currentGroup === "socb") banks = banks.filter(b => SOCBS.has(b));
+    else if (currentGroup === "private") banks = banks.filter(b => !SOCBS.has(b));
+
+    // Legend
+    const lg = document.getElementById("tsLegend");
+    lg.innerHTML = banks.map(b => {
+      const color = BANK_COLORS[b] || "#8899AA";
+      return `<span class="lg ${tsHidden.has(b) ? "off" : ""}" data-bank="${b}">
+        <span class="sw" style="background:${color}"></span>${b}</span>`;
+    }).join("");
+    lg.querySelectorAll(".lg").forEach(el => el.addEventListener("click", () => {
+      const b = el.dataset.bank;
+      tsHidden.has(b) ? tsHidden.delete(b) : tsHidden.add(b);
+      renderTS();
+    }));
+
+    // Series with forward-fill over the date axis
+    const series = banks.filter(b => !tsHidden.has(b)).map(b => {
+      const pts = byBank[b];
+      let pi = 0, last = null;
+      const vals = dates.map(d => {
+        while (pi < pts.length && pts[pi][0] <= d) { last = pts[pi][1]; pi++; }
+        return last;
+      });
+      return { bank: b, vals };
+    });
+
+    interactiveLineChart("tsChart", dates, series, (c, d, s) => drawTS(c, d, s));
+  }
+
+  function drawTS(canvas, dates, series) {
+    const ctx = canvas.getContext("2d");
+    const dpr = window.devicePixelRatio || 1;
+    const w = canvas.parentElement.clientWidth;
+    const h = 260;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + "px"; canvas.style.height = h + "px";
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, w, h);
+
+    const PAD = { t: 16, r: 44, b: 32, l: 12 };
+    const cw = w - PAD.l - PAD.r, ch = h - PAD.t - PAD.b;
+
+    const all = series.flatMap(s => s.vals).filter(v => v != null);
+    if (!all.length) return;
+    let lo = Math.min(...all), hi = Math.max(...all);
+    if (hi - lo < 0.5) { hi += 0.3; lo = Math.max(0, lo - 0.3); }
+    const pad = (hi - lo) * 0.1; hi += pad; lo = Math.max(0, lo - pad);
+
+    const x = i => dates.length === 1 ? PAD.l + cw / 2 : PAD.l + (cw * i) / (dates.length - 1);
+    const y = v => PAD.t + ch - ((v - lo) / (hi - lo)) * ch;
+
+    // Grid + Y labels
+    ctx.strokeStyle = "rgba(30,53,96,.6)"; ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+      const gy = PAD.t + ch - (ch * i) / 4;
+      ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
+      ctx.fillStyle = "#5A7A9A"; ctx.font = "10px system-ui"; ctx.textAlign = "left";
+      ctx.fillText((lo + (hi - lo) * i / 4).toFixed(1) + "%", w - PAD.r + 6, gy + 3);
+    }
+
+    // X labels (max ~8)
+    const step = Math.max(1, Math.ceil(dates.length / 8));
+    ctx.fillStyle = "#5A7A9A"; ctx.font = "10px system-ui"; ctx.textAlign = "center";
+    for (let i = 0; i < dates.length; i += step) {
+      ctx.fillText(dates[i].slice(2), x(i), h - PAD.b + 16);
+    }
+
+    // Lines (step-after: rate holds until next change)
+    series.forEach(s => {
+      const color = BANK_COLORS[s.bank] || "#8899AA";
+      ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.lineJoin = "round";
+      ctx.beginPath();
+      let started = false;
+      s.vals.forEach((v, i) => {
+        if (v == null) return;
+        const px = x(i), py = y(v);
+        if (!started) { ctx.moveTo(px, py); started = true; }
+        else { ctx.lineTo(px, y(s.vals[i - 1] != null ? s.vals[i - 1] : v)); ctx.lineTo(px, py); }
+      });
+      ctx.stroke();
+      // endpoint dot + label
+      for (let i = s.vals.length - 1; i >= 0; i--) {
+        if (s.vals[i] != null) {
+          ctx.fillStyle = color;
+          ctx.beginPath(); ctx.arc(x(i), y(s.vals[i]), 3, 0, Math.PI * 2); ctx.fill();
+          break;
+        }
+      }
+    });
+    return { PAD, w, h, cw, ch, lo, hi, x, y, n: dates.length };
+  }
+
+  // ── Market data (thị trường tiền tệ) ─────────────────────────────────
+  let MKT = null, MKT_HIST = [];
+
+  Promise.resolve(fetch("../data/market_latest.json").then(r => r.json()))
+    .then(d => { MKT = d; renderMarket(); })
+    .catch(() => {
+      ["liennh","sbv","tygia"].forEach(t => {
+        const b = document.querySelector(`.tab-btn[data-tab="${t}"]`);
+        if (b) b.style.display = "none";
+      });
+    });
+
+  Promise.resolve(fetch("../data/market_history.csv").then(r => { if (!r.ok) throw new Error("x"); return r.text(); }))
+    .then(text => { MKT_HIST = parseMktCSV(text); renderMktChart(); })
+    .catch(() => {});
+
+  function parseMktCSV(text) {
+    const lines = text.trim().split(/\r?\n/);
+    if (lines.length < 2) return [];
+    const h = lines[0].split(",");
+    const ix = { date: h.indexOf("date"), key: h.indexOf("series_key"), val: h.indexOf("value") };
+    const out = [];
+    for (let i = 1; i < lines.length; i++) {
+      const c = lines[i].split(",");
+      const v = parseFloat(c[ix.val]);
+      if (!isFinite(v)) continue;
+      out.push({ date: c[ix.date], key: c[ix.key], value: v });
+    }
+    return out;
+  }
+
+  const MKT_LABELS = {
+    interbank_on: "Liên NH qua đêm", interbank_1w: "Liên NH 1 tuần",
+    interbank_2w: "Liên NH 2 tuần", interbank_1m: "Liên NH 1 tháng",
+    interbank_3m: "Liên NH 3 tháng", omo_rate: "Lãi suất OMO",
+    tin_phieu_rate: "Lãi suất tín phiếu", discount_rate: "LS chiết khấu",
+    refi_rate: "LS tái cấp vốn", dep_1_3m: "Huy động 1-3 tháng (NHTM lớn)",
+    dep_6_9m: "Huy động 6-9 tháng (NHTM lớn)", dep_12m: "Huy động 12 tháng (NHTM lớn)",
+    fx_central: "Tỷ giá trung tâm", fx_bank_sell: "USD NHTM bán ra",
+    fx_free_sell: "USD tự do bán ra", credit_yoy: "Tăng trưởng tín dụng (YoY)",
+    deposit_yoy: "Tăng trưởng huy động (YoY)", m2_yoy: "Cung tiền M2 (YoY)",
+    fx_reserves: "Dự trữ ngoại hối",
+  };
+  const INTERBANK_KEYS = ["interbank_on","interbank_1w","interbank_2w","interbank_1m","interbank_3m"];
+  const SBV_KEYS = ["omo_rate","tin_phieu_rate","discount_rate","refi_rate"];
+  const FX_KEYS = ["fx_central","fx_bank_sell","fx_free_sell"];
+  const MACRO_KEYS = ["credit_yoy","deposit_yoy","m2_yoy","fx_reserves","dep_1_3m","dep_6_9m","dep_12m"];
+  const MKT_COLORS = {
+    interbank_on:"#E8A030", interbank_1w:"#3EE0A0", interbank_2w:"#3B82F6",
+    interbank_1m:"#A855F7", interbank_3m:"#EC4899",
+    omo_rate:"#3EE0A0", tin_phieu_rate:"#EC4899",
+  };
+
+  function fmtNum(v, key) {
+    if (v == null) return "—";
+    if (key && key.startsWith("fx_") && key !== "fx_reserves") return Math.round(v).toLocaleString("vi-VN");
+    if (key === "fx_reserves") return Math.round(v).toLocaleString("vi-VN");
+    return v.toFixed(2);
+  }
+
+  function renderMarket() {
+    if (!MKT || !MKT.series) return;
+    const byKey = {};
+    MKT.series.forEach(s => byKey[s.series_key] = s);
+
+    const card = (key) => {
+      const s = byKey[key];
+      if (!s) return "";
+      const unit = s.unit || "";
+      const dot = MKT_COLORS[key] ? `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${MKT_COLORS[key]};margin-right:6px;vertical-align:middle"></span>` : "";
+      return `<div class="mkt-card">
+        <div class="mkt-label">${dot}${MKT_LABELS[key] || s.label}</div>
+        <div class="mkt-val">${fmtNum(s.value, key)}<span class="mkt-unit">${unit}</span></div>
+        <div class="mkt-asof">${s.as_of || ""}</div>
+      </div>`;
+    };
+    document.getElementById("mktGridInterbank").innerHTML = INTERBANK_KEYS.map(card).join("");
+    document.getElementById("mktGridSBV").innerHTML = SBV_KEYS.map(card).join("");
+    document.getElementById("mktGridFX").innerHTML = FX_KEYS.map(card).join("");
+    document.getElementById("mktGridMacro").innerHTML = MACRO_KEYS.map(card).join("");
+
+    // Spread ON - OMO: tín hiệu căng thanh khoản (tab SBV)
+    const on = byKey.interbank_on?.value, omo = byKey.omo_rate?.value;
+    let note = "Nguồn: VietnamBiz (tổng hợp từ SBV). ";
+    if (on != null && omo != null) {
+      const sp = (on - omo).toFixed(2);
+      note += `Chênh lệch liên NH qua đêm vs OMO = <b style="color:${on>omo?'var(--lo)':'var(--hi)'}">${sp>0?'+':''}${sp}%</b> — ${on>omo+0.5 ? "thanh khoản có dấu hiệu căng (LS qua đêm vượt trần OMO)" : "thanh khoản ổn định"}. `;
+    }
+    note += "Khối lượng bơm/rút OMO cụ thể không có nguồn miễn phí — cần API WiFeed (trả phí).";
+    document.getElementById("mktNote").innerHTML = note;
+
+    // Ghi chú tab liên NH: hình dạng đường cong
+    const onv = byKey.interbank_on?.value, m3 = byKey.interbank_3m?.value;
+    let noteIB = "Nguồn: Vietstock VNIBOR. ";
+    if (onv != null && m3 != null) {
+      noteIB += m3 > onv
+        ? `Đường cong dốc lên (3 tháng ${m3}% > qua đêm ${onv}%) — thị trường kỳ vọng lãi suất ổn định/tăng.`
+        : `Đường cong đảo ngược (3 tháng ${m3}% < qua đêm ${onv}%) — căng thanh khoản ngắn hạn.`;
+    }
+    document.getElementById("mktNoteIB").innerHTML = noteIB;
+  }
+
+  function drawMktSeries(canvasId, legendId, keys) {
+    if (!MKT_HIST.length) return;
+    const canvas = document.getElementById(canvasId);
+    if (!canvas || !canvas.parentElement.clientWidth) return;  // tab ẩn -> bỏ qua
+    const byKey = {};
+    keys.forEach(k => byKey[k] = MKT_HIST.filter(r => r.key === k).sort((a,b)=>a.date<b.date?-1:1));
+    const dates = [...new Set(MKT_HIST.filter(r=>keys.includes(r.key)).map(r=>r.date))].sort();
+    document.getElementById(legendId).innerHTML = keys.map(k =>
+      `<span class="lg"><span class="sw" style="background:${MKT_COLORS[k]}"></span>${MKT_LABELS[k]}</span>`).join("");
+    const series = keys.map(k => {
+      const pts = byKey[k]; let pi=0, last=null;
+      const vals = dates.map(d => { while(pi<pts.length && pts[pi].date<=d){last=pts[pi].value;pi++;} return last; });
+      return { color: MKT_COLORS[k], name: MKT_LABELS[k] || k, vals };
+    });
+    interactiveLineChart(canvasId, dates, series, (c, d, s) => drawLineChart(c, d, s, 220));
+  }
+
+  function renderMktChart() {
+    drawMktSeries("mktChart", "mktChartLegend", INTERBANK_KEYS);
+    drawMktSeries("sbvChart", "sbvChartLegend", ["interbank_on","omo_rate","tin_phieu_rate"]);
+  }
+
+  // Vẽ line chart tổng quát (dùng lại cho market) — step-after forward-fill
+  function drawLineChart(canvas, dates, series, height) {
+    const ctx = canvas.getContext("2d");
+    const dpr = window.devicePixelRatio || 1;
+    const w = canvas.parentElement.clientWidth, h = height;
+    canvas.width = w*dpr; canvas.height = h*dpr;
+    canvas.style.width = w+"px"; canvas.style.height = h+"px";
+    ctx.scale(dpr, dpr); ctx.clearRect(0,0,w,h);
+    const PAD = { t:16, r:44, b:32, l:12 };
+    const cw = w-PAD.l-PAD.r, ch = h-PAD.t-PAD.b;
+    const all = series.flatMap(s => s.vals).filter(v => v != null);
+    if (!all.length) return;
+    let lo = Math.min(...all), hi = Math.max(...all);
+    if (hi-lo < 0.5) { hi += 0.3; lo = Math.max(0, lo-0.3); }
+    const pad = (hi-lo)*0.1; hi += pad; lo = Math.max(0, lo-pad);
+    const x = i => dates.length===1 ? PAD.l+cw/2 : PAD.l+(cw*i)/(dates.length-1);
+    const y = v => PAD.t+ch-((v-lo)/(hi-lo))*ch;
+    ctx.strokeStyle="rgba(30,53,96,.6)"; ctx.lineWidth=1;
+    for (let i=0;i<=4;i++){ const gy=PAD.t+ch-(ch*i)/4;
+      ctx.beginPath();ctx.moveTo(PAD.l,gy);ctx.lineTo(w-PAD.r,gy);ctx.stroke();
+      ctx.fillStyle="#5A7A9A";ctx.font="10px system-ui";ctx.textAlign="left";
+      ctx.fillText((lo+(hi-lo)*i/4).toFixed(1)+"%", w-PAD.r+6, gy+3); }
+    const step = Math.max(1, Math.ceil(dates.length/8));
+    ctx.fillStyle="#5A7A9A";ctx.font="10px system-ui";ctx.textAlign="center";
+    for(let i=0;i<dates.length;i+=step) ctx.fillText(dates[i].slice(2), x(i), h-PAD.b+16);
+    series.forEach(s => {
+      ctx.strokeStyle=s.color; ctx.lineWidth=2; ctx.lineJoin="round"; ctx.beginPath();
+      let started=false;
+      s.vals.forEach((v,i)=>{ if(v==null)return; const px=x(i),py=y(v);
+        if(!started){ctx.moveTo(px,py);started=true;}
+        else{ctx.lineTo(px,y(s.vals[i-1]!=null?s.vals[i-1]:v));ctx.lineTo(px,py);} });
+      ctx.stroke();
+      for(let i=s.vals.length-1;i>=0;i--){ if(s.vals[i]!=null){ ctx.fillStyle=s.color;
+        ctx.beginPath();ctx.arc(x(i),y(s.vals[i]),3,0,Math.PI*2);ctx.fill(); break; } }
+    });
+    return { PAD, w, h, cw, ch, lo, hi, x, y, n: dates.length };
+  }
+
+  // ── Tương tác chart: zoom (cuộn), pan (kéo), reset (nháy đúp), tooltip hover ──
+  const CHART_STATE = {};
+  const clampN = (v, a, b) => Math.max(a, Math.min(b, v));
+
+  function seriesLabel(s) { return s.bank || s.name || ""; }
+  function seriesColor(s) { return s.color || BANK_COLORS[s.bank] || "#8899AA"; }
+
+  function interactiveLineChart(id, dates, series, drawFn) {
+    const canvas = document.getElementById(id);
+    if (!canvas || !canvas.parentElement.clientWidth) return;
+    let st = CHART_STATE[id];
+    if (!st) { st = CHART_STATE[id] = { hover: null }; attachChartEvents(id); }
+    st.dates = dates; st.series = series; st.drawFn = drawFn;
+    // Reset zoom khi bộ dữ liệu đổi (đổi kỳ hạn/kênh) hoặc chưa có view
+    if (!st.view || st.view.full !== dates.length) {
+      st.view = { i0: 0, i1: Math.max(0, dates.length - 1), full: dates.length };
+      st.hover = null;
+    }
+    redrawChart(id);
+  }
+
+  function redrawChart(id) {
+    const st = CHART_STATE[id]; if (!st || !st.dates) return;
+    const { i0, i1 } = st.view;
+    const d = st.dates.slice(i0, i1 + 1);
+    const s = st.series.map(se => ({ ...se, vals: se.vals.slice(i0, i1 + 1) }));
+    st.sliced = { dates: d, series: s };
+    st.map = st.drawFn(document.getElementById(id), d, s);
+    if (st.hover != null && st.map) drawChartOverlay(id);
+  }
+
+  function attachChartEvents(id) {
+    const canvas = document.getElementById(id);
+    canvas.classList.add("zoomable");
+    // gợi ý thao tác (thêm 1 lần dưới chart)
+    if (!canvas.parentElement.querySelector(".chart-hint")) {
+      const hint = document.createElement("div");
+      hint.className = "chart-hint";
+      hint.textContent = "Cuộn để phóng to/thu nhỏ · kéo để di chuyển · nháy đúp để reset";
+      canvas.parentElement.appendChild(hint);
+    }
+
+    canvas.addEventListener("wheel", e => {
+      const st = CHART_STATE[id]; if (!st || !st.map) return;
+      e.preventDefault();
+      const N = st.view.i1 - st.view.i0 + 1;
+      const rect = canvas.getBoundingClientRect();
+      const frac = clampN((e.clientX - rect.left - st.map.PAD.l) / st.map.cw, 0, 1);
+      const center = st.view.i0 + frac * (N - 1);
+      let newN = Math.round(N * (e.deltaY < 0 ? 0.78 : 1.28));
+      newN = clampN(newN, 3, st.dates.length);
+      let i0 = Math.round(center - frac * (newN - 1));
+      let i1 = i0 + newN - 1;
+      if (i0 < 0) { i0 = 0; i1 = newN - 1; }
+      if (i1 > st.dates.length - 1) { i1 = st.dates.length - 1; i0 = i1 - newN + 1; }
+      st.view.i0 = i0; st.view.i1 = i1;
+      redrawChart(id);
+    }, { passive: false });
+
+    canvas.addEventListener("mousedown", e => {
+      const st = CHART_STATE[id]; if (!st || !st.map) return;
+      st.drag = { x: e.clientX, i0: st.view.i0, i1: st.view.i1 };
+      canvas.style.cursor = "grabbing";
+    });
+
+    window.addEventListener("mouseup", () => {
+      const st = CHART_STATE[id]; if (st) { st.drag = null; canvas.style.cursor = ""; }
+    });
+
+    canvas.addEventListener("mousemove", e => {
+      const st = CHART_STATE[id]; if (!st || !st.map) return;
+      const rect = canvas.getBoundingClientRect();
+      if (st.drag) {                               // PAN
+        const N = st.drag.i1 - st.drag.i0 + 1;
+        const dxIdx = Math.round(-(e.clientX - st.drag.x) / st.map.cw * (N - 1));
+        let i0 = st.drag.i0 + dxIdx, i1 = st.drag.i1 + dxIdx;
+        if (i0 < 0) { i0 = 0; i1 = N - 1; }
+        if (i1 > st.dates.length - 1) { i1 = st.dates.length - 1; i0 = i1 - N + 1; }
+        st.view.i0 = i0; st.view.i1 = i1;
+        redrawChart(id);
+        return;
+      }
+      // TOOLTIP: tìm điểm gần nhất trong khung đang xem
+      const Np = st.sliced.dates.length;
+      const frac = clampN((e.clientX - rect.left - st.map.PAD.l) / st.map.cw, 0, 1);
+      const idx = Math.round(frac * (Np - 1));
+      st.hover = idx;
+      redrawChart(id);
+      showChartTip(id, e.clientX, e.clientY);
+    });
+
+    canvas.addEventListener("mouseleave", () => {
+      const st = CHART_STATE[id]; if (!st) return;
+      st.hover = null; hideChartTip(); redrawChart(id);
+    });
+
+    canvas.addEventListener("dblclick", () => {           // RESET zoom
+      const st = CHART_STATE[id]; if (!st) return;
+      st.view = { i0: 0, i1: st.dates.length - 1, full: st.dates.length };
+      redrawChart(id);
+    });
+  }
+
+  function drawChartOverlay(id) {
+    const st = CHART_STATE[id]; const m = st.map; if (!m) return;
+    const canvas = document.getElementById(id);
+    const ctx = canvas.getContext("2d");
+    const i = st.hover; if (i == null || i < 0 || i >= st.sliced.dates.length) return;
+    const px = m.x(i);
+    // đường dọc
+    ctx.save();
+    ctx.strokeStyle = "rgba(180,200,230,.35)"; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(px, m.PAD.t); ctx.lineTo(px, m.PAD.t + m.ch); ctx.stroke();
+    // chấm trên từng đường
+    st.sliced.series.forEach(s => {
+      const v = s.vals[i]; if (v == null) return;
+      ctx.fillStyle = seriesColor(s);
+      ctx.beginPath(); ctx.arc(px, m.y(v), 3.5, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "#0b1a30"; ctx.lineWidth = 1.5; ctx.stroke();
+    });
+    ctx.restore();
+  }
+
+  function showChartTip(id, cx, cy) {
+    const st = CHART_STATE[id]; const i = st.hover;
+    if (i == null || i < 0 || i >= st.sliced.dates.length) { hideChartTip(); return; }
+    const rows = st.sliced.series
+      .map(s => ({ label: seriesLabel(s), color: seriesColor(s), v: s.vals[i] }))
+      .filter(r => r.v != null)
+      .sort((a, b) => b.v - a.v);
+    if (!rows.length) { hideChartTip(); return; }
+    const tip = getChartTip();
+    const head = `<div class="tip-date">${st.sliced.dates[i]}</div>`;
+    const body = rows.map(r =>
+      `<div class="tip-row"><span class="tip-sw" style="background:${r.color}"></span>` +
+      `<span class="tip-lb">${r.label}</span><span class="tip-vv">${r.v.toFixed(2)}%</span></div>`).join("");
+    tip.innerHTML = head + body;
+    tip.style.display = "block";
+    // định vị tránh tràn mép phải
+    const off = 14, tw = tip.offsetWidth, th = tip.offsetHeight;
+    let left = cx + off, top = cy + off;
+    if (left + tw > window.innerWidth - 8) left = cx - tw - off;
+    if (top + th > window.innerHeight - 8) top = cy - th - off;
+    tip.style.left = left + "px"; tip.style.top = top + "px";
+  }
+
+  function getChartTip() {
+    let t = document.getElementById("chartTip");
+    if (!t) { t = document.createElement("div"); t.id = "chartTip"; document.body.appendChild(t); }
+    return t;
+  }
+  function hideChartTip() { const t = document.getElementById("chartTip"); if (t) t.style.display = "none"; }
+
+  // ── Tabs ──────────────────────────────────────────────────────────────
+  function setTab(name) {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === name));
+    document.querySelectorAll(".tabpane").forEach(p => p.classList.toggle("active", p.dataset.pane === name));
+    // Controls (kỳ hạn/kênh) chỉ liên quan tab huy động + diễn biến
+    document.getElementById("rateControls").style.display =
+      (name === "huydong" || name === "dienbien") ? "" : "none";
+    // Bộ lọc Nhóm (SOCBs/tư nhân) chỉ dùng cho chart Diễn biến
+    document.getElementById("groupControl").style.display =
+      (name === "dienbien") ? "" : "none";
+    // Vẽ lại chart của tab vừa hiện (canvas cần width > 0 mới vẽ đúng)
+    requestAnimationFrame(() => {
+      if (name === "huydong" || name === "dienbien") render();
+      if (name === "liennh" || name === "sbv") renderMktChart();
+    });
+  }
+  document.querySelectorAll(".tab-btn").forEach(b =>
+    b.addEventListener("click", () => setTab(b.dataset.tab)));
+
+  // Re-render charts on resize
+  window.addEventListener("resize", () => { render(); renderMktChart(); });
+</script>
+</body>
+</html>
