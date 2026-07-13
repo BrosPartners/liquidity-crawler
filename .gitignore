@@ -4,3 +4,4 @@ __pycache__/
 data/crawl.log
 .playwright/
 tests/_*.xlsx
+.superpowers/
