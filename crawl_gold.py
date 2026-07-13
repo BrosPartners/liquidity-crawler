@@ -30,11 +30,23 @@ def fetch_from_telegram(dest):
     session = os.environ["TG_SESSION"]
     chat = os.environ["TG_CHAT"]
     try:
-        chat = int(chat)
+        chat_id = int(chat)
     except ValueError:
-        pass
+        chat_id = None
     with TelegramClient(StringSession(session), api_id, api_hash) as client:
-        for msg in client.iter_messages(chat, limit=60):
+        # StringSession không cache entity giữa các process (vd GitHub Actions),
+        # nên resolve nhóm qua danh sách hội thoại trước (theo id, fallback theo tên).
+        target = None
+        for d in client.iter_dialogs():
+            if chat_id is not None and d.id == chat_id:
+                target = d.entity
+                break
+            if chat_id is None and (d.name or "") == chat:
+                target = d.entity
+                break
+        if target is None:
+            target = chat_id if chat_id is not None else chat
+        for msg in client.iter_messages(target, limit=60):
             if not msg.document:
                 continue
             name = next((a.file_name for a in msg.document.attributes
