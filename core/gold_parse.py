@@ -103,14 +103,16 @@ def parse_gold_xlsx(path):
 
 
 def _build_latest(history, brands):
-    def last_non_null(field):
-        for row in reversed(history):
-            if row.get(field) is not None:
-                return row
-        return {}
-
-    sjc_row = last_non_null("sjc_sell")
-    gap_row = last_non_null("gap")
+    # Snapshot lấy từ ngày mới nhất có ĐỦ dữ liệu so sánh (gap != None) để các
+    # KPI nhất quán (gap == sjc_sell - world_gold_vnd). world_gold_vnd thường
+    # trễ hơn sjc_sell vài ngày nên KHÔNG back-fill từng field độc lập.
+    row = {}
+    for r in reversed(history):
+        if r.get("gap") is not None:
+            row = r
+            break
+    if not row and history:
+        row = history[-1]
     bmax = {}
     for b in brands:
         cur = bmax.get(b["company"])
@@ -119,12 +121,12 @@ def _build_latest(history, brands):
     brand_list = [{"company": c, "buy": bmax[c]["buy"], "sell": bmax[c]["sell"]}
                   for c in BRAND_ORDER if c in bmax]
     return {
-        "as_of": (history[-1]["date"] if history else None),
-        "world_gold_usd": last_non_null("world_gold_usd").get("world_gold_usd"),
-        "world_gold_vnd": last_non_null("world_gold_vnd").get("world_gold_vnd"),
-        "sjc_sell": sjc_row.get("sjc_sell"),
-        "gap": gap_row.get("gap"),
-        "pct_gap": gap_row.get("pct_gap"),
-        "usd_vnd": last_non_null("usd_vnd").get("usd_vnd"),
+        "as_of": row.get("date"),
+        "world_gold_usd": row.get("world_gold_usd"),
+        "world_gold_vnd": row.get("world_gold_vnd"),
+        "sjc_sell": row.get("sjc_sell"),
+        "gap": row.get("gap"),
+        "pct_gap": row.get("pct_gap"),
+        "usd_vnd": row.get("usd_vnd"),
         "brands": brand_list,
     }
