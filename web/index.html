@@ -563,6 +563,13 @@
   <div class="mkt-wrap">
     <div class="mkt-section-title">Tỷ giá USD/VND</div>
     <div class="mkt-grid" id="mktGridFX"></div>
+    <div class="ts-panel" style="margin:16px 0">
+      <div class="ts-head">
+        <div class="panel-title">Tỷ giá USD/VND (VCB · chợ tự do · SBV)</div>
+        <div class="ts-legend" id="goldFxLegend"></div>
+      </div>
+      <canvas id="goldFxChart"></canvas>
+    </div>
     <div class="mkt-section-title">Tăng trưởng &amp; vĩ mô · Huy động NHTM lớn (tham chiếu)</div>
     <div class="mkt-grid" id="mktGridMacro"></div>
   </div>
@@ -608,13 +615,6 @@
         <div class="ts-legend" id="goldGapLegend"></div>
       </div>
       <canvas id="goldGapChart"></canvas>
-    </div>
-    <div class="ts-panel" style="margin:0">
-      <div class="ts-head">
-        <div class="panel-title">Tỷ giá USD/VND (VCB · chợ tự do · SBV)</div>
-        <div class="ts-legend" id="goldFxLegend"></div>
-      </div>
-      <canvas id="goldFxChart"></canvas>
     </div>
     <div class="mkt-section-title">Giá bán các hãng (mới nhất)</div>
     <div class="mkt-grid" id="goldBrandGrid"></div>
@@ -1077,7 +1077,7 @@
 
   fetch("../data/gold_history.csv")
     .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
-    .then(text => { GOLD_HIST = parseMktCSV(text); renderGoldCharts(); })
+    .then(text => { GOLD_HIST = parseMktCSV(text); renderGoldCharts(); renderFxChart(); })
     .catch(() => {});
 
   // ── Trái phiếu 10Y (VN vs US) ────────────────────────────────────────
@@ -1218,12 +1218,17 @@
     drawGoldSeries("goldWorldChart", "goldWorldLegend", ["world_gold_usd"], { fmt: usdFmt });
     drawGoldSeries("goldPriceChart", "goldPriceLegend", ["sjc_sell", "world_gold_vnd"], { fmt: trFmt });
     drawGoldSeries("goldGapChart", "goldGapLegend", ["pct_gap"], { scale: 100 });   // fraction -> %, default % formatting
+  }
+
+  // Chart tỷ giá USD/VND (VCB/chợ tự do/SBV) — hiện ở tab "Tỷ giá & vĩ mô",
+  // nhưng dữ liệu vẫn lấy từ GOLD_HIST (file gold_history.csv chứa fx_*).
+  function renderFxChart() {
     const fxFmt = v => Math.round(v).toLocaleString("en-US");
     drawGoldSeries("goldFxChart", "goldFxLegend", ["fx_vcb", "fx_tudo", "fx_sbv"], { fmt: fxFmt });
   }
 
   // ── Lọc nhanh khoảng thời gian cho các chart vàng (đặt lại view zoom) ──
-  const GOLD_CHART_IDS = ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart", "goldFxChart"];
+  const GOLD_CHART_IDS = ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart"];
   function applyGoldRange(months) {
     GOLD_CHART_IDS.forEach(id => {
       const st = CHART_STATE[id];
@@ -1583,6 +1588,7 @@
       if (name === "huydong" || name === "dienbien") render();
       if (name === "liennh" || name === "sbv") renderMktChart();
       if (name === "vang") renderGoldCharts();
+      if (name === "tygia") renderFxChart();
       if (name === "bond") renderBondChart();
     });
   }
@@ -1590,7 +1596,7 @@
     b.addEventListener("click", () => setTab(b.dataset.tab)));
 
   // Re-render charts on resize
-  window.addEventListener("resize", () => { render(); renderMktChart(); renderGoldCharts(); renderBondChart(); });
+  window.addEventListener("resize", () => { render(); renderMktChart(); renderGoldCharts(); renderFxChart(); renderBondChart(); });
 </script>
 </body>
 </html>
