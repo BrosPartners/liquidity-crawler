@@ -1,4 +1,7 @@
 {
+  "framework": null,
+  "buildCommand": "echo no-build-static-dist",
+  "installCommand": "echo no-install",
   "outputDirectory": "dist",
   "rewrites": [{ "source": "/(.*)", "destination": "/dashboard.html" }]
 }
