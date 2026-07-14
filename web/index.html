@@ -430,6 +430,14 @@
       font-size: 11px; color: #5A7A9A; margin-top: 4px; text-align: right; user-select: none;
     }
     canvas.zoomable { cursor: crosshair; }
+    .rng-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 14px 0 2px; }
+    .rng-btn {
+      background: rgba(255,255,255,.05); color: #9db4d0;
+      border: 1px solid rgba(120,150,190,.25); border-radius: 6px;
+      padding: 5px 12px; font-size: 12px; cursor: pointer; transition: .15s;
+    }
+    .rng-btn:hover { background: rgba(255,255,255,.1); color: #e8f0fa; }
+    .rng-btn.active { background: #E8A030; color: #1a2a44; border-color: #E8A030; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -560,6 +568,15 @@
 <!-- ══ Tab: Giá vàng ══ -->
 <section class="tabpane" data-pane="vang">
   <div class="summary" id="goldKpi"></div>
+  <div class="rng-bar" id="goldRangeBar">
+    <button class="rng-btn" data-m="1">1 tháng</button>
+    <button class="rng-btn" data-m="3">3 tháng</button>
+    <button class="rng-btn" data-m="6">6 tháng</button>
+    <button class="rng-btn" data-m="12">1 năm</button>
+    <button class="rng-btn" data-m="24">2 năm</button>
+    <button class="rng-btn" data-m="60">5 năm</button>
+    <button class="rng-btn active" data-m="0">Tất cả</button>
+  </div>
   <div class="mkt-wrap">
     <div class="ts-panel" style="margin:0">
       <div class="ts-head">
@@ -1057,6 +1074,33 @@
     drawGoldSeries("goldPriceChart", "goldPriceLegend", ["sjc_sell", "world_gold_vnd"], { fmt: trFmt });
     drawGoldSeries("goldGapChart", "goldGapLegend", ["pct_gap"], { scale: 100 });   // fraction -> %, default % formatting
   }
+
+  // ── Lọc nhanh khoảng thời gian cho các chart vàng (đặt lại view zoom) ──
+  const GOLD_CHART_IDS = ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart"];
+  function applyGoldRange(months) {
+    GOLD_CHART_IDS.forEach(id => {
+      const st = CHART_STATE[id];
+      if (!st || !st.dates || !st.dates.length) return;
+      let i0 = 0;
+      if (months > 0) {
+        const last = st.dates[st.dates.length - 1];
+        const d = new Date(last + "T00:00:00Z");
+        d.setUTCMonth(d.getUTCMonth() - months);
+        const cutoff = d.toISOString().slice(0, 10);
+        const idx = st.dates.findIndex(x => x >= cutoff);
+        i0 = idx < 0 ? 0 : idx;
+      }
+      st.view = { i0, i1: st.dates.length - 1, full: st.dates.length };
+      st.hover = null;
+      redrawChart(id);
+    });
+    document.querySelectorAll("#goldRangeBar .rng-btn").forEach(b =>
+      b.classList.toggle("active", Number(b.dataset.m) === months));
+  }
+  document.getElementById("goldRangeBar").addEventListener("click", e => {
+    const btn = e.target.closest(".rng-btn");
+    if (btn) applyGoldRange(Number(btn.dataset.m));
+  });
 
   function drawGoldSeries(canvasId, legendId, keys, opts) {
     opts = opts || {};
