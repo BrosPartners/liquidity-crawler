@@ -712,9 +712,12 @@
 
   // ── Render ────────────────────────────────────────────────────────────
   function render() {
-    const rows = RATES
-      .filter(r => r.term === currentTerm && r.product === currentProduct && r.rate != null)
-      .sort((a, b) => b.rate - a.rate);
+    // Mỗi ngân hàng lấy mức CAO NHẤT giữa 2 kênh (online/tại quầy) cho kỳ hạn hiện tại.
+    const _byBank = {};
+    RATES.filter(r => r.term === currentTerm && r.rate != null).forEach(r => {
+      if (!_byBank[r.bank_code] || r.rate > _byBank[r.bank_code].rate) _byBank[r.bank_code] = r;
+    });
+    const rows = Object.values(_byBank).sort((a, b) => b.rate - a.rate);
 
     renderSummary(rows);
     renderTable(rows);
@@ -744,7 +747,7 @@
   function renderTable(rows) {
     const tbody = document.getElementById("tableBody");
     if (!rows.length) {
-      tbody.innerHTML = `<tr><td colspan="3" class="empty-msg">Không có dữ liệu — thử chọn kênh hoặc kỳ hạn khác</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="3" class="empty-msg">Không có dữ liệu — thử chọn kỳ hạn khác</td></tr>`;
       return;
     }
     const maxRate = rows[0].rate;
@@ -766,6 +769,7 @@
         <td>
           <div class="rate-cell">
             <span class="rate-value">${r.rate.toFixed(2)}<span style="font-size:11px;font-weight:400;color:var(--muted)">%</span></span>
+            <span style="font-size:10px;color:var(--muted);margin-left:8px">${r.product === "online" ? "Online" : "Tại quầy"}</span>
             <div class="rate-bar-wrap">
               <div class="rate-bar" style="width:${barW}%;background:${color}"></div>
             </div>
@@ -893,23 +897,29 @@
     const canvas = document.getElementById("tsChart");
     const empty = document.getElementById("tsEmpty");
     document.getElementById("tsTitle").textContent =
-      `Diễn biến lãi suất · ${currentTerm} · ${currentProduct === "quay" ? "Tại quầy" : "Online"}`;
+      `Diễn biến lãi suất · ${currentTerm}`;
 
-    const recs = HISTORY.filter(r => r.term === currentTerm && r.product === currentProduct);
+    const recs = HISTORY.filter(r => r.term === currentTerm);
     if (!recs.length) {
       canvas.style.display = "none";
       empty.style.display = "";
-      empty.textContent = "Chưa có lịch sử cho kỳ hạn/kênh này";
+      empty.textContent = "Chưa có lịch sử cho kỳ hạn này";
       document.getElementById("tsLegend").innerHTML = "";
       return;
     }
     canvas.style.display = "";
     empty.style.display = "none";
 
-    // Group: bank -> sorted [date, rate] change-points
+    // Group: bank -> sorted [date, rate], mỗi (bank, ngày) lấy mức CAO NHẤT giữa 2 kênh.
+    const byBankMax = {};
+    recs.forEach(r => {
+      const m = (byBankMax[r.bank_code] = byBankMax[r.bank_code] || {});
+      if (m[r.date] == null || r.rate > m[r.date]) m[r.date] = r.rate;
+    });
     const byBank = {};
-    recs.forEach(r => (byBank[r.bank_code] = byBank[r.bank_code] || []).push([r.date, r.rate]));
-    Object.values(byBank).forEach(a => a.sort((x, y) => x[0] < y[0] ? -1 : 1));
+    Object.keys(byBankMax).forEach(b => {
+      byBank[b] = Object.entries(byBankMax[b]).sort((x, y) => x[0] < y[0] ? -1 : 1);
+    });
 
     // Date axis: all distinct dates (history only stores changes -> forward-fill)
     const dates = [...new Set(recs.map(r => r.date))].sort();
@@ -946,7 +956,7 @@
     // Chart lãi suất TRUNG BÌNH: bình quân tất cả NH trong nhóm tại mỗi ngày
     // (dùng toàn bộ 'banks' của nhóm, không đổi theo việc ẩn/hiện từng đường).
     document.getElementById("tsAvgTitle").textContent =
-      `Lãi suất trung bình · ${currentTerm} · ${currentProduct === "quay" ? "Tại quầy" : "Online"}`;
+      `Lãi suất trung bình · ${currentTerm}`;
     const allBankVals = banks.map(b => {
       const pts = byBank[b];
       let pi = 0, last = null;
