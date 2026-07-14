@@ -30,20 +30,6 @@ jobs:
           TG_SESSION: ${{ secrets.TG_SESSION }}
           TG_CHAT: ${{ secrets.TG_CHAT }}
         run: python crawl_gold.py
-      - name: DEBUG cấu trúc file Telegram (tạm)
-        run: |
-          python - <<'PY'
-          import openpyxl, os, tempfile
-          p = os.path.join(tempfile.gettempdir(), "gold_prices_all.xlsx")
-          wb = openpyxl.load_workbook(p, read_only=True, data_only=True)
-          print("DBG_SHEETS:", wb.sheetnames)
-          name = "Ty gia USD-VND"
-          if name in wb.sheetnames:
-              for i, r in enumerate(wb[name].iter_rows(min_row=1, max_row=6, values_only=True), 1):
-                  print("DBG_FX_ROW", i, list(r)[:6])
-          else:
-              print("DBG_FX: KHONG THAY SHEET", name)
-          PY
       - name: Build dashboard (đọc bank/market từ Google Sheet nếu có SHEET_ID)
         env:
           SHEET_ID: ${{ secrets.SHEET_ID }}

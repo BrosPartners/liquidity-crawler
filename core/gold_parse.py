@@ -71,7 +71,11 @@ def parse_gold_xlsx(path):
 
     usd = _sheet_map(wb["Gia TG (USD_oz)"], ["close_usd"])
     vnd = _sheet_map(wb["Gia TG (VND-luong)"], ["close_vnd"])
-    fx = _sheet_map(wb["Ty gia USD-VND"], ["usd_vnd"])
+    # File có thể dùng cột 'usd_vnd' (cũ) hoặc 4 cột nguồn mới (VCB/tự do/SBV/yfinance).
+    fx = _sheet_map(wb["Ty gia USD-VND"], [
+        "usd_vnd", "usd_vnd_VCB_fiinpro", "usd_vnd_tudo_fiinpro",
+        "usd_vnd_SBV_fiinpro", "usd_vnd_yfinance",
+    ])
     sjc = _sheet_map(wb["SJC"], ["sjc_mieng_sell_price"])
 
     all_dates = sorted(set(usd) | set(vnd) | set(fx) | set(sjc))
@@ -80,7 +84,11 @@ def parse_gold_xlsx(path):
         wg_usd = usd.get(d, {}).get("close_usd")
         wg_vnd = vnd.get(d, {}).get("close_vnd")
         sjc_sell = sjc.get(d, {}).get("sjc_mieng_sell_price")
-        rate = fx.get(d, {}).get("usd_vnd")
+        fxrow = fx.get(d, {})
+        # Ưu tiên: usd_vnd (cũ) -> VCB -> tự do -> SBV -> yfinance.
+        rate = (fxrow.get("usd_vnd") or fxrow.get("usd_vnd_VCB_fiinpro")
+                or fxrow.get("usd_vnd_tudo_fiinpro") or fxrow.get("usd_vnd_SBV_fiinpro")
+                or fxrow.get("usd_vnd_yfinance"))
         gap = pct = None
         if wg_vnd and sjc_sell:
             gap = sjc_sell - wg_vnd
