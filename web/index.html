@@ -1052,13 +1052,13 @@
     fx_vcb: "#22C55E", fx_tudo: "#F59E0B", fx_sbv: "#A855F7",
   };
 
-  function fmtVnd(v) { return v == null ? "—" : Math.round(v).toLocaleString("vi-VN"); }
+  function fmtVnd(v) { return v == null ? "—" : Math.round(v).toLocaleString("en-US"); }
 
   function renderGold() {
     if (!GOLD) return;
     const kpi = [
       ["SJC bán", fmtVnd(GOLD.sjc_sell), "VND/lượng"],
-      ["Vàng TG (USD)", GOLD.world_gold_usd == null ? "—" : GOLD.world_gold_usd.toLocaleString("vi-VN"), "USD/oz"],
+      ["Vàng TG (USD)", GOLD.world_gold_usd == null ? "—" : GOLD.world_gold_usd.toLocaleString("en-US"), "USD/oz"],
       ["Vàng TG quy đổi", fmtVnd(GOLD.world_gold_vnd), "VND/lượng"],
       ["Chênh lệch", fmtVnd(GOLD.gap), "VND"],
       ["% chênh lệch", GOLD.pct_gap == null ? "—" : (GOLD.pct_gap * 100).toFixed(2) + "%", ""],
@@ -1088,7 +1088,7 @@
     drawGoldSeries("goldWorldChart", "goldWorldLegend", ["world_gold_usd"], { fmt: usdFmt });
     drawGoldSeries("goldPriceChart", "goldPriceLegend", ["sjc_sell", "world_gold_vnd"], { fmt: trFmt });
     drawGoldSeries("goldGapChart", "goldGapLegend", ["pct_gap"], { scale: 100 });   // fraction -> %, default % formatting
-    const fxFmt = v => Math.round(v).toLocaleString("vi-VN");
+    const fxFmt = v => Math.round(v).toLocaleString("en-US");
     drawGoldSeries("goldFxChart", "goldFxLegend", ["fx_vcb", "fx_tudo", "fx_sbv"], { fmt: fxFmt });
   }
 
@@ -1176,8 +1176,8 @@
 
   function fmtNum(v, key) {
     if (v == null) return "—";
-    if (key && key.startsWith("fx_") && key !== "fx_reserves") return Math.round(v).toLocaleString("vi-VN");
-    if (key === "fx_reserves") return Math.round(v).toLocaleString("vi-VN");
+    if (key && key.startsWith("fx_") && key !== "fx_reserves") return Math.round(v).toLocaleString("en-US");
+    if (key === "fx_reserves") return Math.round(v).toLocaleString("en-US");
     return v.toFixed(2);
   }
 
