@@ -445,7 +445,7 @@
 <body>
 
 <div class="header">
-  <h1>Thanh khoản ngân hàng VN</h1>
+  <h1>Tổng hợp Macro</h1>
   <span class="meta" id="metaText">Đang tải…</span>
   <span class="badge" id="metaBadge">–– bank</span>
 </div>
@@ -522,6 +522,13 @@
     </div>
     <canvas id="tsChart"></canvas>
     <div class="ts-empty" id="tsEmpty" style="display:none"></div>
+  </div>
+  <div class="ts-panel">
+    <div class="ts-head">
+      <div class="panel-title" id="tsAvgTitle">Lãi suất trung bình</div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#E8A030"></span>Trung bình các NH</span></div>
+    </div>
+    <canvas id="tsAvgChart"></canvas>
   </div>
 </section>
 
@@ -946,6 +953,22 @@
     });
 
     interactiveLineChart("tsChart", dates, series, (c, d, s) => drawTS(c, d, s));
+
+    // Chart lãi suất TRUNG BÌNH: bình quân tất cả NH trong nhóm tại mỗi ngày
+    // (dùng toàn bộ 'banks' của nhóm, không đổi theo việc ẩn/hiện từng đường).
+    document.getElementById("tsAvgTitle").textContent =
+      `Lãi suất trung bình · ${currentTerm} · ${currentProduct === "quay" ? "Tại quầy" : "Online"}`;
+    const allBankVals = banks.map(b => {
+      const pts = byBank[b];
+      let pi = 0, last = null;
+      return dates.map(d => { while (pi < pts.length && pts[pi][0] <= d) { last = pts[pi][1]; pi++; } return last; });
+    });
+    const avgVals = dates.map((_, i) => {
+      const vs = allBankVals.map(s => s[i]).filter(v => v != null);
+      return vs.length ? vs.reduce((a, b) => a + b, 0) / vs.length : null;
+    });
+    interactiveLineChart("tsAvgChart", dates,
+      [{ name: "Trung bình", color: "#E8A030", vals: avgVals }], (c, d, s) => drawTS(c, d, s));
   }
 
   function drawTS(canvas, dates, series) {
