@@ -5,7 +5,8 @@ import csv
 import json
 import os
 
-HIST_KEYS = ["world_gold_usd", "world_gold_vnd", "sjc_sell", "gap", "pct_gap", "usd_vnd"]
+HIST_KEYS = ["world_gold_usd", "world_gold_vnd", "sjc_sell", "gap", "pct_gap",
+             "usd_vnd", "fx_vcb", "fx_tudo", "fx_sbv"]
 
 
 def write_gold_outputs(data, data_dir):

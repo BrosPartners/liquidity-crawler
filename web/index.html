@@ -606,6 +606,13 @@
       </div>
       <canvas id="goldGapChart"></canvas>
     </div>
+    <div class="ts-panel" style="margin:0">
+      <div class="ts-head">
+        <div class="panel-title">Tỷ giá USD/VND (VCB · chợ tự do · SBV)</div>
+        <div class="ts-legend" id="goldFxLegend"></div>
+      </div>
+      <canvas id="goldFxChart"></canvas>
+    </div>
     <div class="mkt-section-title">Giá bán các hãng (mới nhất)</div>
     <div class="mkt-grid" id="goldBrandGrid"></div>
     <div class="mkt-note" id="goldNote"></div>
@@ -1036,8 +1043,12 @@
   const GOLD_LABELS = {
     sjc_sell: "SJC bán", world_gold_vnd: "Vàng TG quy đổi",
     pct_gap: "% chênh lệch", world_gold_usd: "Vàng TG (USD/oz)", usd_vnd: "USD/VND",
+    fx_vcb: "VCB", fx_tudo: "Chợ tự do", fx_sbv: "SBV",
   };
-  const GOLD_COLORS = { sjc_sell: "#E8A030", world_gold_vnd: "#3B82F6", world_gold_usd: "#3B82F6", pct_gap: "#EF4444" };
+  const GOLD_COLORS = {
+    sjc_sell: "#E8A030", world_gold_vnd: "#3B82F6", world_gold_usd: "#3B82F6", pct_gap: "#EF4444",
+    fx_vcb: "#22C55E", fx_tudo: "#F59E0B", fx_sbv: "#A855F7",
+  };
 
   function fmtVnd(v) { return v == null ? "—" : Math.round(v).toLocaleString("vi-VN"); }
 
@@ -1049,7 +1060,9 @@
       ["Vàng TG quy đổi", fmtVnd(GOLD.world_gold_vnd), "VND/lượng"],
       ["Chênh lệch", fmtVnd(GOLD.gap), "VND"],
       ["% chênh lệch", GOLD.pct_gap == null ? "—" : (GOLD.pct_gap * 100).toFixed(2) + "%", ""],
-      ["USD/VND", fmtVnd(GOLD.usd_vnd), ""],
+      ["USD/VND (VCB)", fmtVnd(GOLD.fx_vcb), "VND"],
+      ["USD/VND (tự do)", fmtVnd(GOLD.fx_tudo), "VND"],
+      ["USD/VND (SBV)", fmtVnd(GOLD.fx_sbv), "VND"],
     ];
     document.getElementById("goldKpi").innerHTML = kpi.map(([l, v, s]) =>
       `<div class="stat"><div class="stat-label">${l}</div><div class="stat-value">${v}</div><div class="stat-sub">${s}</div></div>`).join("");
@@ -1073,10 +1086,12 @@
     drawGoldSeries("goldWorldChart", "goldWorldLegend", ["world_gold_usd"], { fmt: usdFmt });
     drawGoldSeries("goldPriceChart", "goldPriceLegend", ["sjc_sell", "world_gold_vnd"], { fmt: trFmt });
     drawGoldSeries("goldGapChart", "goldGapLegend", ["pct_gap"], { scale: 100 });   // fraction -> %, default % formatting
+    const fxFmt = v => Math.round(v).toLocaleString("vi-VN");
+    drawGoldSeries("goldFxChart", "goldFxLegend", ["fx_vcb", "fx_tudo", "fx_sbv"], { fmt: fxFmt });
   }
 
   // ── Lọc nhanh khoảng thời gian cho các chart vàng (đặt lại view zoom) ──
-  const GOLD_CHART_IDS = ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart"];
+  const GOLD_CHART_IDS = ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart", "goldFxChart"];
   function applyGoldRange(months) {
     GOLD_CHART_IDS.forEach(id => {
       const st = CHART_STATE[id];

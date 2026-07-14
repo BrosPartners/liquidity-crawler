@@ -85,17 +85,21 @@ def parse_gold_xlsx(path):
         wg_vnd = vnd.get(d, {}).get("close_vnd")
         sjc_sell = sjc.get(d, {}).get("sjc_mieng_sell_price")
         fxrow = fx.get(d, {})
-        # Ưu tiên: usd_vnd (cũ) -> VCB -> tự do -> SBV -> yfinance.
-        rate = (fxrow.get("usd_vnd") or fxrow.get("usd_vnd_VCB_fiinpro")
-                or fxrow.get("usd_vnd_tudo_fiinpro") or fxrow.get("usd_vnd_SBV_fiinpro")
-                or fxrow.get("usd_vnd_yfinance"))
+        # 3 nguồn tỷ giá FiinProX; file cũ chỉ có 'usd_vnd' -> coi như VCB.
+        fx_vcb = fxrow.get("usd_vnd_VCB_fiinpro") or fxrow.get("usd_vnd")
+        fx_tudo = fxrow.get("usd_vnd_tudo_fiinpro")
+        fx_sbv = fxrow.get("usd_vnd_SBV_fiinpro")
+        # usd_vnd chung: ưu tiên VCB -> tự do -> SBV -> yfinance.
+        rate = fx_vcb or fx_tudo or fx_sbv or fxrow.get("usd_vnd_yfinance")
         gap = pct = None
         if wg_vnd and sjc_sell:
             gap = sjc_sell - wg_vnd
             pct = gap / wg_vnd
         history.append({
             "date": d, "world_gold_usd": wg_usd, "world_gold_vnd": wg_vnd,
-            "sjc_sell": sjc_sell, "usd_vnd": rate, "gap": gap, "pct_gap": pct,
+            "sjc_sell": sjc_sell, "usd_vnd": rate,
+            "fx_vcb": fx_vcb, "fx_tudo": fx_tudo, "fx_sbv": fx_sbv,
+            "gap": gap, "pct_gap": pct,
         })
 
     ws = wb["Gia VN (tat ca)"]
@@ -137,6 +141,17 @@ def _build_latest(history, brands):
     brand_list = [{"company": c, "buy": bmax[c]["buy"], "sell": bmax[c]["sell"]}
                   for c in BRAND_ORDER if c in bmax]
     brands_as_of = max((bmax[c]["date"] for c in bmax), default=None)
+
+    def _latest(key):
+        for r in reversed(history):
+            if r.get(key) is not None:
+                return r["date"], r[key]
+        return None, None
+    fx_vcb_d, fx_vcb = _latest("fx_vcb")
+    fx_tudo_d, fx_tudo = _latest("fx_tudo")
+    fx_sbv_d, fx_sbv = _latest("fx_sbv")
+    fx_as_of = max([x for x in (fx_vcb_d, fx_tudo_d, fx_sbv_d) if x], default=None)
+
     return {
         "as_of": row.get("date"),
         "world_gold_usd": row.get("world_gold_usd"),
@@ -145,6 +160,7 @@ def _build_latest(history, brands):
         "gap": row.get("gap"),
         "pct_gap": row.get("pct_gap"),
         "usd_vnd": row.get("usd_vnd"),
+        "fx_vcb": fx_vcb, "fx_tudo": fx_tudo, "fx_sbv": fx_sbv, "fx_as_of": fx_as_of,
         "brands": brand_list,
         "brands_as_of": brands_as_of,
     }
