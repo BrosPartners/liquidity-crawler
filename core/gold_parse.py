@@ -18,6 +18,9 @@ BRAND_GOLD_TYPE = {
 }
 BRAND_ORDER = ["SJC", "DOJI", "PNJ", "BTMC", "BTMH", "PHUQUY"]
 
+# Chỉ lấy dữ liệu từ ngày này trở đi (bỏ dữ liệu quá cũ).
+MIN_DATE = "2017-01-01"
+
 
 def _num(v):
     if v is None:
@@ -78,7 +81,7 @@ def parse_gold_xlsx(path):
     ])
     sjc = _sheet_map(wb["SJC"], ["sjc_mieng_sell_price"])
 
-    all_dates = sorted(set(usd) | set(vnd) | set(fx) | set(sjc))
+    all_dates = [d for d in sorted(set(usd) | set(vnd) | set(fx) | set(sjc)) if d >= MIN_DATE]
     history = []
     for d in all_dates:
         wg_usd = usd.get(d, {}).get("close_usd")
@@ -114,7 +117,7 @@ def parse_gold_xlsx(path):
         if r[ci["gold_type"]] != BRAND_GOLD_TYPE[comp]:
             continue
         d = _date_str(r[ci["date"]])
-        if not d:
+        if not d or d < MIN_DATE:
             continue
         brands.append({"date": d, "company": comp,
                        "buy": _num(r[ci["buy_price"]]), "sell": _num(r[ci["sell_price"]])})
