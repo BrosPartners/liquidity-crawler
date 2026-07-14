@@ -457,6 +457,7 @@
   <button class="tab-btn" data-tab="sbv">Điều hành SBV</button>
   <button class="tab-btn" data-tab="tygia">Tỷ giá &amp; vĩ mô</button>
   <button class="tab-btn" data-tab="vang">Giá vàng</button>
+  <button class="tab-btn" data-tab="bond">Trái phiếu 10Y</button>
 </div>
 
 <!-- Controls dùng chung cho tab Huy động + Diễn biến -->
@@ -618,6 +619,21 @@
     <div class="mkt-section-title">Giá bán các hãng (mới nhất)</div>
     <div class="mkt-grid" id="goldBrandGrid"></div>
     <div class="mkt-note" id="goldNote"></div>
+  </div>
+</section>
+
+<!-- ══ Tab: Trái phiếu 10Y ══ -->
+<section class="tabpane" data-pane="bond">
+  <div class="ts-panel">
+    <div class="ts-head">
+      <div class="panel-title">Lợi suất TPCP 10 năm · VN vs US (%)</div>
+      <div class="ts-legend">
+        <span class="lg"><span class="sw" style="background:#9CA9BD"></span>Chênh lệch VN-US (cột, phải)</span>
+        <span class="lg"><span class="sw" style="background:#1E3A6E"></span>VN</span>
+        <span class="lg"><span class="sw" style="background:#EF4444"></span>US</span>
+      </div>
+    </div>
+    <canvas id="bondChart"></canvas>
   </div>
 </section>
 
@@ -1064,6 +1080,98 @@
     .then(text => { GOLD_HIST = parseMktCSV(text); renderGoldCharts(); })
     .catch(() => {});
 
+  // ── Trái phiếu 10Y (VN vs US) ────────────────────────────────────────
+  let BOND_HIST = [];
+  fetch("../data/bond_yield.csv")
+    .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
+    .then(text => { BOND_HIST = parseMktCSV(text); renderBondChart(); })
+    .catch(() => {
+      const b = document.querySelector('.tab-btn[data-tab="bond"]');
+      if (b) b.style.display = "none";
+    });
+
+  function renderBondChart() {
+    const btn = document.querySelector('.tab-btn[data-tab="bond"]');
+    if (!BOND_HIST.length) { if (btn) btn.style.display = "none"; return; }
+    if (btn) btn.style.display = "";
+    const canvas = document.getElementById("bondChart");
+    if (!canvas || !canvas.parentElement.clientWidth) return;   // tab ẩn -> bỏ
+    const keys = ["vn_10y", "us_10y", "bond_gap"];
+    const dates = [...new Set(BOND_HIST.filter(r => keys.includes(r.key)).map(r => r.date))].sort();
+    const build = k => {
+      const pts = BOND_HIST.filter(r => r.key === k).sort((a, b) => a.date < b.date ? -1 : 1);
+      let pi = 0, last = null;
+      return dates.map(d => { while (pi < pts.length && pts[pi].date <= d) { last = pts[pi].value; pi++; } return last; });
+    };
+    const series = [
+      { name: "VN", color: "#1E3A6E", vals: build("vn_10y") },
+      { name: "US", color: "#EF4444", vals: build("us_10y") },
+      { name: "Chênh lệch VN-US", color: "#9CA9BD", vals: build("bond_gap"), bar: true },
+    ];
+    interactiveLineChart("bondChart", dates, series, (c, d, s) => drawBondChart(c, d, s), v => v.toFixed(2) + "%");
+  }
+
+  // Combo chart: 2 đường lợi suất (trục trái) + cột chênh lệch (trục phải, quanh 0)
+  function drawBondChart(canvas, dates, series) {
+    const ctx = canvas.getContext("2d");
+    const dpr = window.devicePixelRatio || 1;
+    const w = canvas.parentElement.clientWidth, h = 340;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + "px"; canvas.style.height = h + "px";
+    ctx.scale(dpr, dpr); ctx.clearRect(0, 0, w, h);
+    const PAD = { t: 16, r: 52, b: 32, l: 44 };
+    const cw = w - PAD.l - PAD.r, ch = h - PAD.t - PAD.b;
+    const lineSeries = series.filter(s => !s.bar);
+    const barSeries = series.find(s => s.bar);
+    const lineVals = lineSeries.flatMap(s => s.vals).filter(v => v != null);
+    if (!lineVals.length) return;
+    let lo = Math.min(...lineVals), hi = Math.max(...lineVals);
+    const padL = (hi - lo) * 0.1 || 0.5; hi += padL; lo = Math.max(0, lo - padL);
+    const gv = barSeries ? barSeries.vals.filter(v => v != null) : [];
+    let gmax = (gv.length ? Math.max(...gv.map(Math.abs)) : 1) * 1.15 || 1;
+    const x = i => dates.length === 1 ? PAD.l + cw / 2 : PAD.l + (cw * i) / (dates.length - 1);
+    const yL = v => PAD.t + ch - ((v - lo) / (hi - lo)) * ch;
+    const yR = v => PAD.t + ch / 2 - (v / gmax) * (ch / 2);
+    // Lưới + nhãn trục trái (%)
+    ctx.strokeStyle = "rgba(30,53,96,.6)"; ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+      const gy = PAD.t + ch - (ch * i) / 4;
+      ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
+      ctx.fillStyle = "#5A7A9A"; ctx.font = "10px system-ui"; ctx.textAlign = "right";
+      ctx.fillText((lo + (hi - lo) * i / 4).toFixed(1) + "%", PAD.l - 4, gy + 3);
+    }
+    // Nhãn trục phải (chênh lệch, 0 ở giữa)
+    ctx.textAlign = "left"; ctx.fillStyle = "#8A96A8";
+    for (let i = 0; i <= 4; i++) {
+      const gy = PAD.t + (ch * i) / 4, val = gmax - (2 * gmax) * i / 4;
+      ctx.fillText(val.toFixed(1) + "%", w - PAD.r + 6, gy + 3);
+    }
+    // Nhãn trục X
+    const step = Math.max(1, Math.ceil(dates.length / 8));
+    ctx.fillStyle = "#5A7A9A"; ctx.textAlign = "center";
+    for (let i = 0; i < dates.length; i += step) ctx.fillText(dates[i].slice(2), x(i), h - PAD.b + 16);
+    // Cột chênh lệch (trục phải)
+    if (barSeries) {
+      const bw = Math.max(1, cw / dates.length), y0 = yR(0);
+      ctx.fillStyle = "rgba(156,169,189,.5)";
+      barSeries.vals.forEach((v, i) => {
+        if (v == null) return; const px = x(i), py = yR(v);
+        ctx.fillRect(px - bw / 2, Math.min(y0, py), Math.max(bw, 1), Math.max(Math.abs(py - y0), 0.5));
+      });
+    }
+    // Đường lợi suất (trục trái)
+    lineSeries.forEach(s => {
+      ctx.strokeStyle = s.color; ctx.lineWidth = 1.8; ctx.lineJoin = "round"; ctx.beginPath();
+      let started = false;
+      s.vals.forEach((v, i) => {
+        if (v == null) return; const px = x(i), py = yL(v);
+        if (!started) { ctx.moveTo(px, py); started = true; } else ctx.lineTo(px, py);
+      });
+      ctx.stroke();
+    });
+    return { PAD, w, h, cw, ch, lo, hi, x, y: yL, n: dates.length };
+  }
+
   const GOLD_LABELS = {
     sjc_sell: "SJC bán", world_gold_vnd: "Vàng TG quy đổi",
     pct_gap: "% chênh lệch", world_gold_usd: "Vàng TG (USD/oz)", usd_vnd: "USD/VND",
@@ -1421,6 +1529,7 @@
     ctx.beginPath(); ctx.moveTo(px, m.PAD.t); ctx.lineTo(px, m.PAD.t + m.ch); ctx.stroke();
     // chấm trên từng đường
     st.sliced.series.forEach(s => {
+      if (s.bar) return;
       const v = s.vals[i]; if (v == null) return;
       ctx.fillStyle = seriesColor(s);
       ctx.beginPath(); ctx.arc(px, m.y(v), 3.5, 0, Math.PI * 2); ctx.fill();
@@ -1474,13 +1583,14 @@
       if (name === "huydong" || name === "dienbien") render();
       if (name === "liennh" || name === "sbv") renderMktChart();
       if (name === "vang") renderGoldCharts();
+      if (name === "bond") renderBondChart();
     });
   }
   document.querySelectorAll(".tab-btn").forEach(b =>
     b.addEventListener("click", () => setTab(b.dataset.tab)));
 
   // Re-render charts on resize
-  window.addEventListener("resize", () => { render(); renderMktChart(); renderGoldCharts(); });
+  window.addEventListener("resize", () => { render(); renderMktChart(); renderGoldCharts(); renderBondChart(); });
 </script>
 </body>
 </html>

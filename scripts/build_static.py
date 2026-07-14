@@ -57,6 +57,7 @@ def main() -> int:
 
     gold_latest = _read("gold_latest.json", "null")
     gold_history = _read("gold_history.csv", "")
+    bond_history = _read("bond_yield.csv", "")
 
     # ── Ưu tiên NGUỒN GỐC là Google Sheet (nếu cấu hình sheet_id) ──────────
     if not args.no_sheet:
@@ -73,6 +74,10 @@ def main() -> int:
                 if mkt:
                     mkt_latest, mkt_history = mkt[0], mkt[1]
                     print("[sheet] market: ghép local + 'Auto - Market' + lịch sử 'ON rate'")
+                bond = ss.bond_from_sheet(cfg)
+                if bond:
+                    bond_history = bond
+                    print("[sheet] bond 10Y: lấy từ 'VN-US 10y bond yield'")
         except Exception as e:
             print(f"[sheet] bỏ qua, dùng file cục bộ: {type(e).__name__}: {e}",
                   file=sys.stderr)
@@ -121,6 +126,15 @@ def main() -> int:
         print("[ERR] không thay được fetch gold_history trong web/index.html", file=sys.stderr)
         return 1
 
+    # 3c. Thay fetch bond (TPCP 10Y) bằng data nhúng
+    html, _n = re.subn(
+        r'fetch\("\.\./data/bond_yield\.csv"\)\s*'
+        r'\.then\(r => \{ if \(!r\.ok\) throw new Error\("x"\); return r\.text\(\); \}\)',
+        "Promise.resolve(__EMBED_BOND__)", html, count=1)
+    if _n != 1:
+        print("[ERR] không thay được fetch bond_yield trong web/index.html", file=sys.stderr)
+        return 1
+
     # 4. Chèn data ngay đầu <script>
     embed = (
         "<script>\n"
@@ -130,6 +144,7 @@ def main() -> int:
         f"const __EMBED_MKT_HISTORY__ = {json.dumps(mkt_history, ensure_ascii=False)};\n"
         f"const __EMBED_GOLD_LATEST__ = {gold_latest};\n"
         f"const __EMBED_GOLD_HISTORY__ = {json.dumps(gold_history, ensure_ascii=False)};\n"
+        f"const __EMBED_BOND__ = {json.dumps(bond_history, ensure_ascii=False)};\n"
     )
     html = html.replace("<script>", embed, 1)
 

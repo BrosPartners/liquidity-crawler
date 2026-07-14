@@ -16,6 +16,51 @@ DEP_TAB = "Auto - Deposit"
 MKT_TAB = "Auto - Market"
 ON_TAB = "ON rate"
 DEPGROUP_TAB = "Dep rates - Group"
+BOND_TAB = "VN-US 10y bond yield"
+
+
+def bond_from_sheet(cfg: "SheetConfig") -> Optional[str]:
+    """Lợi suất TPCP 10Y VN & US từ tab 'VN-US 10y bond yield'.
+
+    -> history CSV long (date, series_key, value) với vn_10y / us_10y / bond_gap
+    (gap = VN - US). Trả None nếu tab không có/đọc lỗi.
+    """
+    try:
+        rows = _rows(read_tab_csv(cfg, BOND_TAB))
+    except Exception:
+        return None
+    if not rows:
+        return None
+    head = rows[0]
+    try:
+        di, vi, ui = head.index("date"), head.index("VN"), head.index("US")
+    except ValueError:
+        return None
+
+    def num(x):
+        try:
+            return float(str(x).replace(",", "").strip())
+        except Exception:
+            return None
+
+    buf = io.StringIO()
+    w = csv.writer(buf, lineterminator="\n")
+    w.writerow(["date", "series_key", "value"])
+    n = 0
+    for r in rows[1:]:
+        if len(r) <= max(di, vi, ui):
+            continue
+        d = _norm_date(r[di])
+        if not d or len(d) != 10 or not d[:4].isdigit():
+            continue
+        vn, us = num(r[vi]), num(r[ui])
+        if vn is not None:
+            w.writerow([d, "vn_10y", vn]); n += 1
+        if us is not None:
+            w.writerow([d, "us_10y", us]); n += 1
+        if vn is not None and us is not None:
+            w.writerow([d, "bond_gap", round(vn - us, 4)]); n += 1
+    return buf.getvalue() if n else None
 
 # Thứ tự 18 bank trong tab 'Dep rates - Group' (khối 12M cột 10-27, 3M cột 30-47)
 BANKS18 = ["VCB", "CTG", "BID", "VPB", "TCB", "MBB", "ACB", "STB", "SHB",
