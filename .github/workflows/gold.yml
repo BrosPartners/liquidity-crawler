@@ -1,4 +1,5 @@
 name: gold-daily
+# cập nhật giá vàng từ Telegram mỗi sáng
 on:
   schedule:
     - cron: "20 2 * * *"   # 02:20 UTC = 09:20 giờ VN
