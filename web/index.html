@@ -465,13 +465,6 @@
     <span class="control-label">Kỳ hạn</span>
     <div class="term-chips" id="termChips"></div>
   </div>
-  <div class="control-group">
-    <span class="control-label">Kênh</span>
-    <div class="toggle">
-      <button id="btnQuay" class="active" onclick="setProduct('quay')">Tại quầy</button>
-      <button id="btnOnline" onclick="setProduct('online')">Online</button>
-    </div>
-  </div>
   <div class="control-group" id="groupControl" style="display:none">
     <span class="control-label">Nhóm</span>
     <div class="toggle">
@@ -666,7 +659,7 @@
 
   const TERM_ORDER = ["3M", "6M", "12M"];
 
-  let RATES = [], currentTerm = "12M", currentProduct = "quay";
+  let RATES = [], currentTerm = "12M", currentProduct = "online";
   const SOCBS = new Set(["VCB", "CTG", "BID", "AGR"]);  // NHTM nhà nước
   let currentGroup = "all";  // all | socb | private (lọc chart Diễn biến)
   function setGroup(g) {
