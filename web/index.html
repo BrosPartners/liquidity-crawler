@@ -563,6 +563,20 @@
   <div class="mkt-wrap">
     <div class="ts-panel" style="margin:0">
       <div class="ts-head">
+        <div class="panel-title">Giá vàng SJC trong nước (VND/lượng)</div>
+        <div class="ts-legend" id="goldSjcLegend"></div>
+      </div>
+      <canvas id="goldSjcChart"></canvas>
+    </div>
+    <div class="ts-panel" style="margin:0">
+      <div class="ts-head">
+        <div class="panel-title">Giá vàng thế giới (USD/oz)</div>
+        <div class="ts-legend" id="goldWorldLegend"></div>
+      </div>
+      <canvas id="goldWorldChart"></canvas>
+    </div>
+    <div class="ts-panel" style="margin:0">
+      <div class="ts-head">
         <div class="panel-title">SJC bán vs vàng thế giới quy đổi (VND/lượng)</div>
         <div class="ts-legend" id="goldPriceLegend"></div>
       </div>
@@ -1006,7 +1020,7 @@
     sjc_sell: "SJC bán", world_gold_vnd: "Vàng TG quy đổi",
     pct_gap: "% chênh lệch", world_gold_usd: "Vàng TG (USD/oz)", usd_vnd: "USD/VND",
   };
-  const GOLD_COLORS = { sjc_sell: "#E8A030", world_gold_vnd: "#3B82F6", pct_gap: "#EF4444" };
+  const GOLD_COLORS = { sjc_sell: "#E8A030", world_gold_vnd: "#3B82F6", world_gold_usd: "#3B82F6", pct_gap: "#EF4444" };
 
   function fmtVnd(v) { return v == null ? "—" : Math.round(v).toLocaleString("vi-VN"); }
 
@@ -1036,7 +1050,10 @@
   }
 
   function renderGoldCharts() {
-    const trFmt = v => (v / 1e6).toFixed(1) + " tr";   // VND -> triệu
+    const trFmt = v => (v / 1e6).toFixed(1) + " tr";                   // VND -> triệu
+    const usdFmt = v => "$" + Math.round(v).toLocaleString("en-US");   // USD/oz
+    drawGoldSeries("goldSjcChart", "goldSjcLegend", ["sjc_sell"], { fmt: trFmt });
+    drawGoldSeries("goldWorldChart", "goldWorldLegend", ["world_gold_usd"], { fmt: usdFmt });
     drawGoldSeries("goldPriceChart", "goldPriceLegend", ["sjc_sell", "world_gold_vnd"], { fmt: trFmt });
     drawGoldSeries("goldGapChart", "goldGapLegend", ["pct_gap"], { scale: 100 });   // fraction -> %, default % formatting
   }
