@@ -81,8 +81,9 @@ banks:
   - code: SHB
     module: shb
     name: SHB
-    url: https://24hmoney.vn/lai-suat-gui-ngan-hang/shb
-    mode: html   # web SHB chặn WAF (403) -> dùng 24hmoney (nguồn trung gian)
+    url: https://www.shb.com.vn/wp-content/uploads/2023/02/01.-BIEU-LS-HDV-VND-KHCN-Thang-6.pdf
+    mode: pdf   # trang HTML shb.com.vn/ibanking.shb.com.vn chặn WAF (403, kể cả Playwright
+                # headless); PDF chính thức tại URL cố định thì KHÔNG bị chặn (asset tĩnh)
     enabled: true
 
   - code: TPB
