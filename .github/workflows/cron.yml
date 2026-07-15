@@ -10,10 +10,21 @@ on:
         required: false
         default: ""
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   # ── Daily crawl ─────────────────────────────────────────────────────────
   crawl:
     runs-on: ubuntu-latest
+    concurrency:
+      group: rates-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -69,6 +80,23 @@ jobs:
           git add data/ dist/
           git diff --cached --quiet || git commit -m "data: cập nhật lãi suất $(date -u +%F)"
           git push
+
+      - name: Chuẩn bị site cho Pages (index.html)
+        run: cp dist/dashboard.html dist/index.html
+
+      - name: Cấu hình Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4
 
   # ── One-time historical backfill (trigger thủ công) ─────────────────────
   backfill:
