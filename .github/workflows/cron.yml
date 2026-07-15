@@ -79,6 +79,7 @@ jobs:
           git config user.email "actions@github.com"
           git add data/ dist/
           git diff --cached --quiet || git commit -m "data: cập nhật lãi suất $(date -u +%F)"
+          git pull --rebase origin master
           git push
 
       - name: Chuẩn bị site cho Pages (index.html)
