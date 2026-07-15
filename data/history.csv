@@ -159,3 +159,260 @@ date,bank_code,bank_name,term,rate,product,method,currency,source_url,crawled_at
 2026-07-02,TCB,Techcombank,34M,5.25,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/techcombank-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20260509.pdf,2026-07-02T16:11:18
 2026-07-02,TCB,Techcombank,35M,5.25,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/techcombank-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20260509.pdf,2026-07-02T16:11:18
 2026-07-02,TCB,Techcombank,36M,5.25,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/techcombank-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20260509.pdf,2026-07-02T16:11:18
+2025-05-24,VCB,Vietcombank,KKH,0.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VCB,Vietcombank,1W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VCB,Vietcombank,2W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VCB,Vietcombank,1M,1.6,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VCB,Vietcombank,2M,1.6,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VCB,Vietcombank,3M,1.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VCB,Vietcombank,6M,2.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VCB,Vietcombank,9M,2.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VCB,Vietcombank,12M,4.6,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VCB,Vietcombank,24M,4.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,BID,BIDV,KKH,0.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,BID,BIDV,1M,1.6,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,BID,BIDV,2M,1.6,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,BID,BIDV,3M,1.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,BID,BIDV,6M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,BID,BIDV,9M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,BID,BIDV,12M,4.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,BID,BIDV,24M,4.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,CTG,VietinBank,KKH,0.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,CTG,VietinBank,1W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,CTG,VietinBank,2W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,CTG,VietinBank,3W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,CTG,VietinBank,1M,1.6,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,CTG,VietinBank,2M,1.6,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,CTG,VietinBank,3M,1.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,CTG,VietinBank,6M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,CTG,VietinBank,9M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,CTG,VietinBank,12M,4.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,CTG,VietinBank,24M,4.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,AGR,Agribank,KKH,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,AGR,Agribank,1M,2.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,AGR,Agribank,2M,2.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,AGR,Agribank,3M,2.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,AGR,Agribank,6M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,AGR,Agribank,9M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,AGR,Agribank,12M,4.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,AGR,Agribank,24M,4.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,ACB,ACB,KKH,0.01,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,ACB,ACB,1W,0.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,ACB,ACB,2W,0.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,ACB,ACB,3W,0.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,ACB,ACB,1M,2.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,ACB,ACB,2M,2.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,ACB,ACB,3M,2.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,ACB,ACB,6M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,ACB,ACB,9M,3.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,ACB,ACB,12M,4.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,ACB,ACB,24M,4.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,STB,Sacombank,1W,0.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,STB,Sacombank,2W,0.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,STB,Sacombank,3W,0.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,STB,Sacombank,1M,2.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,STB,Sacombank,2M,2.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,STB,Sacombank,3M,3.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,STB,Sacombank,6M,4.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,STB,Sacombank,9M,4.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,STB,Sacombank,12M,4.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,STB,Sacombank,24M,5.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,TCB,Techcombank,KKH,0.05,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,TCB,Techcombank,1W,0.05,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,TCB,Techcombank,2W,0.05,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,TCB,Techcombank,3W,0.05,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,TCB,Techcombank,1M,3.6,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,TCB,Techcombank,2M,3.6,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,TCB,Techcombank,3M,3.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,TCB,Techcombank,6M,4.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,TCB,Techcombank,9M,4.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,TCB,Techcombank,12M,5.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,TCB,Techcombank,24M,5.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,LPB,LPBank,1W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,LPB,LPBank,2W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,LPB,LPBank,3W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,LPB,LPBank,1M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,LPB,LPBank,2M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,LPB,LPBank,3M,3.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,LPB,LPBank,6M,4.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,LPB,LPBank,9M,4.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,LPB,LPBank,12M,5.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,LPB,LPBank,24M,5.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VKK,Vikki Bank,KKH,0.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VKK,Vikki Bank,1W,0.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VKK,Vikki Bank,2W,0.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VKK,Vikki Bank,3W,0.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VKK,Vikki Bank,1M,3.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VKK,Vikki Bank,2M,4.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VKK,Vikki Bank,3M,4.15,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VKK,Vikki Bank,6M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VKK,Vikki Bank,9M,5.45,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VKK,Vikki Bank,12M,5.65,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,VKK,Vikki Bank,24M,5.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,EIB,Eximbank,1M,3.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,EIB,Eximbank,2M,3.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,EIB,Eximbank,3M,3.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,EIB,Eximbank,6M,4.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,EIB,Eximbank,9M,4.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,EIB,Eximbank,12M,4.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2025-05-24,EIB,Eximbank,24M,4.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
+2026-02-17,VCB,Vietcombank,KKH,0.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VCB,Vietcombank,1W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VCB,Vietcombank,2W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VCB,Vietcombank,1M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VCB,Vietcombank,2M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VCB,Vietcombank,3M,2.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VCB,Vietcombank,6M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VCB,Vietcombank,9M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VCB,Vietcombank,12M,5.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VCB,Vietcombank,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,BID,BIDV,KKH,0.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,BID,BIDV,1M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,BID,BIDV,2M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,BID,BIDV,3M,2.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,BID,BIDV,6M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,BID,BIDV,9M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,BID,BIDV,12M,5.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,BID,BIDV,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,CTG,VietinBank,KKH,0.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,CTG,VietinBank,1M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,CTG,VietinBank,2M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,CTG,VietinBank,3M,2.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,CTG,VietinBank,6M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,CTG,VietinBank,9M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,CTG,VietinBank,12M,5.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,CTG,VietinBank,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,AGR,Agribank,KKH,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,AGR,Agribank,1M,2.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,AGR,Agribank,2M,2.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,AGR,Agribank,3M,2.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,AGR,Agribank,6M,3.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,AGR,Agribank,9M,3.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,AGR,Agribank,12M,5.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,AGR,Agribank,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,ACB,ACB,KKH,0.01,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,ACB,ACB,1M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,ACB,ACB,2M,3.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,ACB,ACB,3M,3.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,ACB,ACB,6M,4.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,ACB,ACB,9M,4.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,ACB,ACB,12M,5.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,ACB,ACB,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,STB,Sacombank,KKH,0.05,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,STB,Sacombank,1M,4.75,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,STB,Sacombank,2M,4.75,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,STB,Sacombank,3M,4.75,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,STB,Sacombank,6M,4.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,STB,Sacombank,9M,4.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,STB,Sacombank,12M,4.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,STB,Sacombank,24M,5.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,TCB,Techcombank,1M,4.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,TCB,Techcombank,3M,4.6,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,TCB,Techcombank,6M,5.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,TCB,Techcombank,12M,5.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,TCB,Techcombank,24M,5.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,LPB,LPBank,1M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,LPB,LPBank,2M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,LPB,LPBank,3M,4.65,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,LPB,LPBank,6M,6.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,LPB,LPBank,9M,4.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,LPB,LPBank,12M,6.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,LPB,LPBank,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VKK,Vikki Bank,KKH,0.49,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VKK,Vikki Bank,1W,0.49,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VKK,Vikki Bank,2W,0.49,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VKK,Vikki Bank,3W,0.49,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VKK,Vikki Bank,1M,4.64,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VKK,Vikki Bank,2M,4.64,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VKK,Vikki Bank,3M,4.64,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VKK,Vikki Bank,6M,6.31,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VKK,Vikki Bank,9M,6.12,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VKK,Vikki Bank,12M,6.41,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,VKK,Vikki Bank,24M,6.21,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,EIB,Eximbank,1M,2.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,EIB,Eximbank,2M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,EIB,Eximbank,3M,3.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,EIB,Eximbank,6M,4.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,EIB,Eximbank,9M,4.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,EIB,Eximbank,12M,4.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-02-17,EIB,Eximbank,24M,5.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
+2026-03-28,VCB,Vietcombank,KKH,0.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VCB,Vietcombank,1W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VCB,Vietcombank,2W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VCB,Vietcombank,1M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VCB,Vietcombank,2M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VCB,Vietcombank,3M,2.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VCB,Vietcombank,6M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VCB,Vietcombank,9M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VCB,Vietcombank,12M,5.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VCB,Vietcombank,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,BID,BIDV,KKH,0.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,BID,BIDV,1M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,BID,BIDV,2M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,BID,BIDV,3M,2.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,BID,BIDV,6M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,BID,BIDV,9M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,BID,BIDV,12M,5.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,BID,BIDV,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,CTG,VietinBank,KKH,0.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,CTG,VietinBank,1M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,CTG,VietinBank,2M,2.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,CTG,VietinBank,3M,2.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,CTG,VietinBank,6M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,CTG,VietinBank,9M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,CTG,VietinBank,12M,5.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,CTG,VietinBank,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,AGR,Agribank,KKH,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,AGR,Agribank,1M,2.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,AGR,Agribank,2M,2.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,AGR,Agribank,3M,2.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,AGR,Agribank,6M,3.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,AGR,Agribank,9M,3.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,AGR,Agribank,12M,5.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,AGR,Agribank,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,ACB,ACB,KKH,0.01,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,ACB,ACB,1M,3.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,ACB,ACB,2M,3.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,ACB,ACB,3M,3.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,ACB,ACB,6M,4.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,ACB,ACB,9M,4.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,ACB,ACB,12M,5.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,ACB,ACB,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,STB,Sacombank,KKH,0.05,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,STB,Sacombank,1M,4.75,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,STB,Sacombank,2M,4.75,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,STB,Sacombank,3M,4.75,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,STB,Sacombank,6M,4.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,STB,Sacombank,9M,4.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,STB,Sacombank,12M,4.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,STB,Sacombank,24M,5.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,TCB,Techcombank,1M,4.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,TCB,Techcombank,3M,4.6,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,TCB,Techcombank,6M,5.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,TCB,Techcombank,12M,5.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,TCB,Techcombank,24M,5.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,LPB,LPBank,1M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,LPB,LPBank,2M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,LPB,LPBank,3M,4.65,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,LPB,LPBank,6M,6.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,LPB,LPBank,9M,4.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,LPB,LPBank,12M,6.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,LPB,LPBank,24M,5.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VKK,Vikki Bank,KKH,0.49,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VKK,Vikki Bank,1W,0.49,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VKK,Vikki Bank,2W,0.49,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VKK,Vikki Bank,3W,0.49,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VKK,Vikki Bank,1M,4.64,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VKK,Vikki Bank,2M,4.64,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VKK,Vikki Bank,3M,4.64,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VKK,Vikki Bank,6M,6.31,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VKK,Vikki Bank,9M,6.12,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VKK,Vikki Bank,12M,6.41,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,VKK,Vikki Bank,24M,6.21,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,EIB,Eximbank,1M,2.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,EIB,Eximbank,2M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,EIB,Eximbank,3M,3.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,EIB,Eximbank,6M,4.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,EIB,Eximbank,9M,4.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,EIB,Eximbank,12M,4.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
+2026-03-28,EIB,Eximbank,24M,5.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
