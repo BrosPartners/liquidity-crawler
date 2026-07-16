@@ -57,10 +57,10 @@ def main() -> int:
     n = market_sink.append_history_on_change(rows)
     print(f"\nTổng {len(rows)} chỉ tiêu. {n} đổi -> market_history.csv. Xem data/market_latest.json")
 
-    # VN-Index (Vietstock) — merge tăng dần, không liên quan MarketRow ở trên.
+    # VN-Index (VNDirect DChart) — ghi đè toàn bộ lịch sử, không liên quan MarketRow ở trên.
     try:
-        total, changed = vnindex_sink.update()
-        print(f"[OK]   VN-Index: {total} phiên trong file, {changed} phiên mới/đổi")
+        total = vnindex_sink.update()
+        print(f"[OK]   VN-Index: {total} phiên (2019 -> nay)")
     except Exception as e:
         print(f"[WARN] VN-Index bỏ qua: {type(e).__name__}: {e}", file=sys.stderr)
 

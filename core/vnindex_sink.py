@@ -1,59 +1,36 @@
-"""Cập nhật data/vnindex_history.csv (long: date,series_key,value; key="vnindex").
+"""Ghi data/vnindex_history.csv (long: date,series_key,value; key="vnindex").
 
-Nguồn Vietstock (xem adapters/vietstock_vnindex.py) chỉ trả tối đa ~1 năm lịch
-sử qua endpoint miễn phí (trang 14+ luôn rỗng, đã verify) — không phải giới
-hạn code, mà là giới hạn thật của trang "Thống kê giá" công khai. Vì vậy
-KHÔNG backfill lại mỗi ngày (lãng phí + vô ích); mỗi lần crawl chỉ lấy vài
-trang gần nhất rồi MERGE vào file đã có, giúp lịch sử tự dài ra theo thời
-gian (giống cách accumulate của các series thị trường khác trong dự án).
+Nguồn VNDirect DChart trả TOÀN BỘ lịch sử trong 1 request (xem
+adapters/vnindex.py) — không cần merge tăng dần như các nguồn phân trang
+giới hạn (Vietstock/CafeF, đã thử và loại vì cap ngắn). Mỗi lần crawl ghi
+đè lại toàn bộ file bằng dữ liệu mới nhất từ nguồn — đơn giản, tự sửa nếu
+nguồn có điều chỉnh giá quá khứ.
 """
 from __future__ import annotations
 
 import csv
 import os
-from typing import List, Tuple
 
-from adapters.vietstock_vnindex import fetch_latest
+from adapters.vnindex import fetch_history
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 CSV_PATH = os.path.join(DATA_DIR, "vnindex_history.csv")
 
 
-def _read_existing() -> dict:
-    out = {}
-    if not os.path.exists(CSV_PATH):
-        return out
-    with open(CSV_PATH, encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            if row.get("series_key") == "vnindex" and row.get("date"):
-                try:
-                    out[row["date"]] = float(row["value"])
-                except (TypeError, ValueError):
-                    continue
-    return out
-
-
-def update(n_pages: int = 3) -> Tuple[int, int]:
-    """Lấy ~n_pages*20 phiên gần nhất, merge vào CSV. -> (tổng dòng, dòng mới/đổi)."""
+def update(from_date: str = "2019-01-01") -> int:
+    """Fetch toàn bộ lịch sử, ghi đè CSV. -> số phiên."""
     os.makedirs(DATA_DIR, exist_ok=True)
-    existing = _read_existing()
-    fresh: List[Tuple[str, float]] = fetch_latest(n_pages=n_pages)
-
-    changed = 0
-    for d, v in fresh:
-        if existing.get(d) != v:
-            existing[d] = v
-            changed += 1
+    rows = fetch_history(from_date)
 
     with open(CSV_PATH, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f, lineterminator="\n")
         w.writerow(["date", "series_key", "value"])
-        for d in sorted(existing):
-            w.writerow([d, "vnindex", existing[d]])
+        for d, v in sorted(rows):
+            w.writerow([d, "vnindex", v])
 
-    return len(existing), changed
+    return len(rows)
 
 
 if __name__ == "__main__":
-    total, changed = update()
-    print(f"VN-Index: {total} phiên trong file, {changed} phiên mới/đổi lần này.")
+    n = update()
+    print(f"VN-Index: {n} phiên (2019 -> nay) ghi vào {CSV_PATH}")
