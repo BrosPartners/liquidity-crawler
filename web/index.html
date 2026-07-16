@@ -453,8 +453,7 @@
 <div class="tabs" id="tabNav">
   <button class="tab-btn active" data-tab="huydong">Lãi suất huy động</button>
   <button class="tab-btn" data-tab="dienbien">Diễn biến lãi suất</button>
-  <button class="tab-btn" data-tab="liennh">Liên ngân hàng</button>
-  <button class="tab-btn" data-tab="sbv">Điều hành SBV</button>
+  <button class="tab-btn" data-tab="sbv">Liên ngân hàng &amp; SBV</button>
   <button class="tab-btn" data-tab="tygia">Tỷ giá &amp; vĩ mô</button>
   <button class="tab-btn" data-tab="vang">Giá vàng</button>
   <button class="tab-btn" data-tab="bond">Trái phiếu 10Y</button>
@@ -526,23 +525,7 @@
   </div>
 </section>
 
-<!-- ══ Tab: Liên ngân hàng ══ -->
-<section class="tabpane" data-pane="liennh">
-  <div class="mkt-wrap">
-    <div class="ts-panel" style="margin:0">
-      <div class="ts-head">
-        <div class="panel-title" id="mktTitle">Lãi suất liên ngân hàng theo thời gian</div>
-        <div class="ts-legend" id="mktChartLegend"></div>
-      </div>
-      <canvas id="mktChart"></canvas>
-    </div>
-    <div class="mkt-section-title">Lãi suất liên ngân hàng theo kỳ hạn (mới nhất)</div>
-    <div class="mkt-grid" id="mktGridInterbank"></div>
-    <div class="mkt-note" id="mktNoteIB"></div>
-  </div>
-</section>
-
-<!-- ══ Tab: Điều hành SBV ══ -->
+<!-- ══ Tab: Liên ngân hàng & SBV (gộp) ══ -->
 <section class="tabpane" data-pane="sbv">
   <div class="mkt-wrap">
     <div class="ts-panel" style="margin:0">
@@ -552,7 +535,7 @@
       </div>
       <canvas id="sbvChart"></canvas>
     </div>
-    <div class="mkt-section-title">Lãi suất điều hành SBV (mới nhất)</div>
+    <div class="mkt-section-title">Lãi suất liên ngân hàng &amp; điều hành SBV (mới nhất)</div>
     <div class="mkt-grid" id="mktGridSBV"></div>
     <div class="mkt-note" id="mktNote"></div>
   </div>
@@ -1062,7 +1045,7 @@
   Promise.resolve(fetch("../data/market_latest.json").then(r => r.json()))
     .then(d => { MKT = d; renderMarket(); })
     .catch(() => {
-      ["liennh","sbv","tygia"].forEach(t => {
+      ["sbv","tygia"].forEach(t => {
         const b = document.querySelector(`.tab-btn[data-tab="${t}"]`);
         if (b) b.style.display = "none";
       });
@@ -1313,9 +1296,7 @@
   }
 
   const MKT_LABELS = {
-    interbank_on: "Liên NH qua đêm", interbank_1w: "Liên NH 1 tuần",
-    interbank_2w: "Liên NH 2 tuần", interbank_1m: "Liên NH 1 tháng",
-    interbank_3m: "Liên NH 3 tháng", omo_rate: "Lãi suất OMO",
+    interbank_on: "Liên NH qua đêm", omo_rate: "Lãi suất OMO",
     tin_phieu_rate: "Lãi suất tín phiếu", discount_rate: "LS chiết khấu",
     refi_rate: "LS tái cấp vốn", dep_1_3m: "Huy động 1-3 tháng (NHTM lớn)",
     dep_6_9m: "Huy động 6-9 tháng (NHTM lớn)", dep_12m: "Huy động 12 tháng (NHTM lớn)",
@@ -1324,14 +1305,11 @@
     deposit_yoy: "Tăng trưởng huy động (YoY)", m2_yoy: "Cung tiền M2 (YoY)",
     fx_reserves: "Dự trữ ngoại hối",
   };
-  const INTERBANK_KEYS = ["interbank_on","interbank_1w","interbank_2w","interbank_1m","interbank_3m"];
-  const SBV_KEYS = ["omo_rate","tin_phieu_rate","discount_rate","refi_rate"];
+  const SBV_KEYS = ["interbank_on","omo_rate","tin_phieu_rate","discount_rate","refi_rate"];
   const FX_KEYS = ["fx_central","fx_bank_sell","fx_free_sell"];
   const MACRO_KEYS = ["credit_yoy","deposit_yoy","m2_yoy","fx_reserves","dep_1_3m","dep_6_9m","dep_12m"];
   const MKT_COLORS = {
-    interbank_on:"#E8A030", interbank_1w:"#3EE0A0", interbank_2w:"#3B82F6",
-    interbank_1m:"#A855F7", interbank_3m:"#EC4899",
-    omo_rate:"#3EE0A0", tin_phieu_rate:"#EC4899",
+    interbank_on:"#E8A030", omo_rate:"#3EE0A0", tin_phieu_rate:"#EC4899",
   };
 
   function fmtNum(v, key) {
@@ -1357,30 +1335,19 @@
         <div class="mkt-asof">${s.as_of || ""}</div>
       </div>`;
     };
-    document.getElementById("mktGridInterbank").innerHTML = INTERBANK_KEYS.map(card).join("");
     document.getElementById("mktGridSBV").innerHTML = SBV_KEYS.map(card).join("");
     document.getElementById("mktGridFX").innerHTML = FX_KEYS.map(card).join("");
     document.getElementById("mktGridMacro").innerHTML = MACRO_KEYS.map(card).join("");
 
-    // Spread ON - OMO: tín hiệu căng thanh khoản (tab SBV)
+    // Spread ON - OMO: tín hiệu căng thanh khoản
     const on = byKey.interbank_on?.value, omo = byKey.omo_rate?.value;
-    let note = "Nguồn: VietnamBiz (tổng hợp từ SBV). ";
+    let note = "Nguồn: VietnamBiz (tổng hợp từ SBV), Vietstock VNIBOR. ";
     if (on != null && omo != null) {
       const sp = (on - omo).toFixed(2);
       note += `Chênh lệch liên NH qua đêm vs OMO = <b style="color:${on>omo?'var(--lo)':'var(--hi)'}">${sp>0?'+':''}${sp}%</b> — ${on>omo+0.5 ? "thanh khoản có dấu hiệu căng (LS qua đêm vượt trần OMO)" : "thanh khoản ổn định"}. `;
     }
     note += "Khối lượng bơm/rút OMO cụ thể không có nguồn miễn phí — cần API WiFeed (trả phí).";
     document.getElementById("mktNote").innerHTML = note;
-
-    // Ghi chú tab liên NH: hình dạng đường cong
-    const onv = byKey.interbank_on?.value, m3 = byKey.interbank_3m?.value;
-    let noteIB = "Nguồn: Vietstock VNIBOR. ";
-    if (onv != null && m3 != null) {
-      noteIB += m3 > onv
-        ? `Đường cong dốc lên (3 tháng ${m3}% > qua đêm ${onv}%) — thị trường kỳ vọng lãi suất ổn định/tăng.`
-        : `Đường cong đảo ngược (3 tháng ${m3}% < qua đêm ${onv}%) — căng thanh khoản ngắn hạn.`;
-    }
-    document.getElementById("mktNoteIB").innerHTML = noteIB;
   }
 
   function drawMktSeries(canvasId, legendId, keys) {
@@ -1401,7 +1368,6 @@
   }
 
   function renderMktChart() {
-    drawMktSeries("mktChart", "mktChartLegend", INTERBANK_KEYS);
     drawMktSeries("sbvChart", "sbvChartLegend", ["interbank_on","omo_rate","tin_phieu_rate"]);
   }
 
@@ -1611,7 +1577,7 @@
     // Vẽ lại chart của tab vừa hiện (canvas cần width > 0 mới vẽ đúng)
     requestAnimationFrame(() => {
       if (name === "huydong" || name === "dienbien") render();
-      if (name === "liennh" || name === "sbv") renderMktChart();
+      if (name === "sbv") renderMktChart();
       if (name === "vang") renderGoldCharts();
       if (name === "tygia") renderFxChart();
       if (name === "bond") { renderBondChart(); renderVnindexChart(); }
