@@ -18,7 +18,7 @@ for _s in (sys.stdout, sys.stderr):
 
 from adapters.vietnambiz_market import Adapter
 from adapters.vietstock_interbank import Adapter as VniborAdapter
-from core import market_sink
+from core import market_sink, vnindex_sink
 
 
 def main() -> int:
@@ -56,6 +56,14 @@ def main() -> int:
     market_sink.write_json(rows, generated_at=now)
     n = market_sink.append_history_on_change(rows)
     print(f"\nTổng {len(rows)} chỉ tiêu. {n} đổi -> market_history.csv. Xem data/market_latest.json")
+
+    # VN-Index (Vietstock) — merge tăng dần, không liên quan MarketRow ở trên.
+    try:
+        total, changed = vnindex_sink.update()
+        print(f"[OK]   VN-Index: {total} phiên trong file, {changed} phiên mới/đổi")
+    except Exception as e:
+        print(f"[WARN] VN-Index bỏ qua: {type(e).__name__}: {e}", file=sys.stderr)
+
     return 0
 
 

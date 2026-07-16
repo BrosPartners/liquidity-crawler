@@ -58,6 +58,7 @@ def main() -> int:
     gold_latest = _read("gold_latest.json", "null")
     gold_history = _read("gold_history.csv", "")
     bond_history = _read("bond_yield.csv", "")
+    vnindex_history = _read("vnindex_history.csv", "")
 
     # ── Ưu tiên NGUỒN GỐC là Google Sheet (nếu cấu hình sheet_id) ──────────
     if not args.no_sheet:
@@ -135,6 +136,15 @@ def main() -> int:
         print("[ERR] không thay được fetch bond_yield trong web/index.html", file=sys.stderr)
         return 1
 
+    # 3d. Thay fetch VN-Index bằng data nhúng
+    html, _n = re.subn(
+        r'fetch\("\.\./data/vnindex_history\.csv"\)\s*'
+        r'\.then\(r => \{ if \(!r\.ok\) throw new Error\("x"\); return r\.text\(\); \}\)',
+        "Promise.resolve(__EMBED_VNINDEX__)", html, count=1)
+    if _n != 1:
+        print("[ERR] không thay được fetch vnindex_history trong web/index.html", file=sys.stderr)
+        return 1
+
     # 4. Chèn data ngay đầu <script>
     embed = (
         "<script>\n"
@@ -145,6 +155,7 @@ def main() -> int:
         f"const __EMBED_GOLD_LATEST__ = {gold_latest};\n"
         f"const __EMBED_GOLD_HISTORY__ = {json.dumps(gold_history, ensure_ascii=False)};\n"
         f"const __EMBED_BOND__ = {json.dumps(bond_history, ensure_ascii=False)};\n"
+        f"const __EMBED_VNINDEX__ = {json.dumps(vnindex_history, ensure_ascii=False)};\n"
     )
     html = html.replace("<script>", embed, 1)
 

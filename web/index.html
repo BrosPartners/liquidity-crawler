@@ -635,6 +635,13 @@
     </div>
     <canvas id="bondChart"></canvas>
   </div>
+  <div class="ts-panel" style="margin-top:16px">
+    <div class="ts-head">
+      <div class="panel-title">VN-Index</div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#1E3A6E"></span>VN-Index</span></div>
+    </div>
+    <canvas id="vnindexChart"></canvas>
+  </div>
 </section>
 
 <script>
@@ -1089,6 +1096,24 @@
       const b = document.querySelector('.tab-btn[data-tab="bond"]');
       if (b) b.style.display = "none";
     });
+
+  // ── VN-Index (Vietstock, ~1 năm gần nhất, tự dài ra theo ngày crawl) ──
+  let VNINDEX_HIST = [];
+  fetch("../data/vnindex_history.csv")
+    .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
+    .then(text => { VNINDEX_HIST = parseMktCSV(text); renderVnindexChart(); })
+    .catch(() => {});
+
+  function renderVnindexChart() {
+    if (!VNINDEX_HIST.length) return;
+    const canvas = document.getElementById("vnindexChart");
+    if (!canvas || !canvas.parentElement.clientWidth) return;   // tab ẩn -> bỏ
+    const pts = VNINDEX_HIST.filter(r => r.key === "vnindex").sort((a, b) => a.date < b.date ? -1 : 1);
+    const dates = pts.map(r => r.date);
+    const series = [{ name: "VN-Index", color: "#1E3A6E", vals: pts.map(r => r.value) }];
+    const fmt = v => v.toLocaleString("en-US", { maximumFractionDigits: 2 });
+    interactiveLineChart("vnindexChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt);
+  }
 
   function renderBondChart() {
     const btn = document.querySelector('.tab-btn[data-tab="bond"]');
@@ -1589,14 +1614,14 @@
       if (name === "liennh" || name === "sbv") renderMktChart();
       if (name === "vang") renderGoldCharts();
       if (name === "tygia") renderFxChart();
-      if (name === "bond") renderBondChart();
+      if (name === "bond") { renderBondChart(); renderVnindexChart(); }
     });
   }
   document.querySelectorAll(".tab-btn").forEach(b =>
     b.addEventListener("click", () => setTab(b.dataset.tab)));
 
   // Re-render charts on resize
-  window.addEventListener("resize", () => { render(); renderMktChart(); renderGoldCharts(); renderFxChart(); renderBondChart(); });
+  window.addEventListener("resize", () => { render(); renderMktChart(); renderGoldCharts(); renderFxChart(); renderBondChart(); renderVnindexChart(); });
 </script>
 </body>
 </html>
