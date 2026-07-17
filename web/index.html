@@ -1007,11 +1007,11 @@
       ctx.fillText((lo + (hi - lo) * i / 4).toFixed(1) + "%", w - PAD.r + 6, gy + 3);
     }
 
-    // X labels (max ~8)
-    const step = Math.max(1, Math.ceil(dates.length / 8));
+    // X labels (max ~6 — dd/mm/yyyy dài hơn nên giãn thưa hơn trước)
+    const step = Math.max(1, Math.ceil(dates.length / 6));
     ctx.fillStyle = "#5A7A9A"; ctx.font = "10px system-ui"; ctx.textAlign = "center";
     for (let i = 0; i < dates.length; i += step) {
-      ctx.fillText(dates[i].slice(2), x(i), h - PAD.b + 16);
+      ctx.fillText(fmtDateDMY(dates[i]), x(i), h - PAD.b + 16);
     }
 
     // Lines (step-after: rate holds until next change)
@@ -1155,9 +1155,9 @@
       ctx.fillText(val.toFixed(1) + "%", w - PAD.r + 6, gy + 3);
     }
     // Nhãn trục X
-    const step = Math.max(1, Math.ceil(dates.length / 8));
+    const step = Math.max(1, Math.ceil(dates.length / 6));
     ctx.fillStyle = "#5A7A9A"; ctx.textAlign = "center";
-    for (let i = 0; i < dates.length; i += step) ctx.fillText(dates[i].slice(2), x(i), h - PAD.b + 16);
+    for (let i = 0; i < dates.length; i += step) ctx.fillText(fmtDateDMY(dates[i]), x(i), h - PAD.b + 16);
     // Cột chênh lệch (trục phải)
     if (barSeries) {
       const bw = Math.max(1, cw / dates.length), y0 = yR(0);
@@ -1280,6 +1280,12 @@
     interactiveLineChart(canvasId, dates, series, (c, d, s) => drawLineChart(c, d, s, 220, opts.fmt), opts.fmt);
   }
 
+  // 'YYYY-MM-DD' -> 'dd/mm/yyyy' (nhãn trục ngày + tooltip, dùng chung mọi chart)
+  function fmtDateDMY(iso) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || "");
+    return m ? `${m[3]}/${m[2]}/${m[1]}` : (iso || "");
+  }
+
   function parseMktCSV(text) {
     const lines = text.trim().split(/\r?\n/);
     if (lines.length < 2) return [];
@@ -1394,9 +1400,9 @@
       ctx.fillStyle="#5A7A9A";ctx.font="10px system-ui";ctx.textAlign="left";
       const _av = lo+(hi-lo)*i/4;
       ctx.fillText(fmt ? fmt(_av) : _av.toFixed(1)+"%", w-PAD.r+6, gy+3); }
-    const step = Math.max(1, Math.ceil(dates.length/8));
+    const step = Math.max(1, Math.ceil(dates.length/6));
     ctx.fillStyle="#5A7A9A";ctx.font="10px system-ui";ctx.textAlign="center";
-    for(let i=0;i<dates.length;i+=step) ctx.fillText(dates[i].slice(2), x(i), h-PAD.b+16);
+    for(let i=0;i<dates.length;i+=step) ctx.fillText(fmtDateDMY(dates[i]), x(i), h-PAD.b+16);
     series.forEach(s => {
       ctx.strokeStyle=s.color; ctx.lineWidth=2; ctx.lineJoin="round"; ctx.beginPath();
       let started=false;
@@ -1543,7 +1549,7 @@
       .sort((a, b) => b.v - a.v);
     if (!rows.length) { hideChartTip(); return; }
     const tip = getChartTip();
-    const head = `<div class="tip-date">${st.sliced.dates[i]}</div>`;
+    const head = `<div class="tip-date">${fmtDateDMY(st.sliced.dates[i])}</div>`;
     const body = rows.map(r =>
       `<div class="tip-row"><span class="tip-sw" style="background:${r.color}"></span>` +
       `<span class="tip-lb">${r.label}</span><span class="tip-vv">${st.fmt ? st.fmt(r.v) : r.v.toFixed(2)+"%"}</span></div>`).join("");
