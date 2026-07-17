@@ -508,6 +508,15 @@
 
 <!-- ══ Tab: Diễn biến lãi suất huy động ══ -->
 <section class="tabpane" data-pane="dienbien">
+  <div class="rng-bar" id="tsRangeBar">
+    <button class="rng-btn" data-m="1">1 tháng</button>
+    <button class="rng-btn" data-m="3">3 tháng</button>
+    <button class="rng-btn" data-m="6">6 tháng</button>
+    <button class="rng-btn" data-m="12">1 năm</button>
+    <button class="rng-btn" data-m="24">2 năm</button>
+    <button class="rng-btn" data-m="60">5 năm</button>
+    <button class="rng-btn active" data-m="0">Tất cả</button>
+  </div>
   <div class="ts-panel">
     <div class="ts-head">
       <div class="panel-title" id="tsTitle">Diễn biến lãi suất</div>
@@ -527,6 +536,15 @@
 
 <!-- ══ Tab: Liên ngân hàng & SBV (gộp) ══ -->
 <section class="tabpane" data-pane="sbv">
+  <div class="rng-bar" id="sbvRangeBar">
+    <button class="rng-btn" data-m="1">1 tháng</button>
+    <button class="rng-btn" data-m="3">3 tháng</button>
+    <button class="rng-btn" data-m="6">6 tháng</button>
+    <button class="rng-btn" data-m="12">1 năm</button>
+    <button class="rng-btn" data-m="24">2 năm</button>
+    <button class="rng-btn" data-m="60">5 năm</button>
+    <button class="rng-btn active" data-m="0">Tất cả</button>
+  </div>
   <div class="mkt-wrap">
     <div class="ts-panel" style="margin:0">
       <div class="ts-head">
@@ -543,6 +561,15 @@
 
 <!-- ══ Tab: Tỷ giá & vĩ mô ══ -->
 <section class="tabpane" data-pane="tygia">
+  <div class="rng-bar" id="tygiaRangeBar">
+    <button class="rng-btn" data-m="1">1 tháng</button>
+    <button class="rng-btn" data-m="3">3 tháng</button>
+    <button class="rng-btn" data-m="6">6 tháng</button>
+    <button class="rng-btn" data-m="12">1 năm</button>
+    <button class="rng-btn" data-m="24">2 năm</button>
+    <button class="rng-btn" data-m="60">5 năm</button>
+    <button class="rng-btn active" data-m="0">Tất cả</button>
+  </div>
   <div class="mkt-wrap">
     <div class="mkt-section-title">Tỷ giá USD/VND</div>
     <div class="mkt-grid" id="mktGridFX"></div>
@@ -607,6 +634,15 @@
 
 <!-- ══ Tab: Trái phiếu 10Y ══ -->
 <section class="tabpane" data-pane="bond">
+  <div class="rng-bar" id="bondRangeBar">
+    <button class="rng-btn" data-m="1">1 tháng</button>
+    <button class="rng-btn" data-m="3">3 tháng</button>
+    <button class="rng-btn" data-m="6">6 tháng</button>
+    <button class="rng-btn" data-m="12">1 năm</button>
+    <button class="rng-btn" data-m="24">2 năm</button>
+    <button class="rng-btn" data-m="60">5 năm</button>
+    <button class="rng-btn active" data-m="0">Tất cả</button>
+  </div>
   <div class="ts-panel">
     <div class="ts-head">
       <div class="panel-title">Lợi suất TPCP 10 năm · VN vs US (%)</div>
@@ -1235,32 +1271,42 @@
     drawGoldSeries("goldFxChart", "goldFxLegend", ["fx_vcb", "fx_tudo", "fx_sbv"], { fmt: fxFmt });
   }
 
-  // ── Lọc nhanh khoảng thời gian cho các chart vàng (đặt lại view zoom) ──
-  const GOLD_CHART_IDS = ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart"];
-  function applyGoldRange(months) {
-    GOLD_CHART_IDS.forEach(id => {
-      const st = CHART_STATE[id];
-      if (!st || !st.dates || !st.dates.length) return;
-      let i0 = 0;
-      if (months > 0) {
-        const last = st.dates[st.dates.length - 1];
-        const d = new Date(last + "T00:00:00Z");
-        d.setUTCMonth(d.getUTCMonth() - months);
-        const cutoff = d.toISOString().slice(0, 10);
-        const idx = st.dates.findIndex(x => x >= cutoff);
-        i0 = idx < 0 ? 0 : idx;
-      }
-      st.view = { i0, i1: st.dates.length - 1, full: st.dates.length };
-      st.hover = null;
-      redrawChart(id);
+  // ── Lọc nhanh khoảng thời gian cho time-series chart (đặt lại view zoom) ──
+  // Dùng chung cho mọi tab có chart theo ngày: truyền id thanh nút (#rng-bar)
+  // + danh sách canvas id cần áp cùng lúc.
+  function makeRangeBar(barId, chartIds) {
+    const bar = document.getElementById(barId);
+    if (!bar) return;
+    function apply(months) {
+      chartIds.forEach(id => {
+        const st = CHART_STATE[id];
+        if (!st || !st.dates || !st.dates.length) return;
+        let i0 = 0;
+        if (months > 0) {
+          const last = st.dates[st.dates.length - 1];
+          const d = new Date(last + "T00:00:00Z");
+          d.setUTCMonth(d.getUTCMonth() - months);
+          const cutoff = d.toISOString().slice(0, 10);
+          const idx = st.dates.findIndex(x => x >= cutoff);
+          i0 = idx < 0 ? 0 : idx;
+        }
+        st.view = { i0, i1: st.dates.length - 1, full: st.dates.length };
+        st.hover = null;
+        redrawChart(id);
+      });
+      bar.querySelectorAll(".rng-btn").forEach(b =>
+        b.classList.toggle("active", Number(b.dataset.m) === months));
+    }
+    bar.addEventListener("click", e => {
+      const btn = e.target.closest(".rng-btn");
+      if (btn) apply(Number(btn.dataset.m));
     });
-    document.querySelectorAll("#goldRangeBar .rng-btn").forEach(b =>
-      b.classList.toggle("active", Number(b.dataset.m) === months));
   }
-  document.getElementById("goldRangeBar").addEventListener("click", e => {
-    const btn = e.target.closest(".rng-btn");
-    if (btn) applyGoldRange(Number(btn.dataset.m));
-  });
+  makeRangeBar("goldRangeBar", ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart"]);
+  makeRangeBar("tsRangeBar", ["tsChart", "tsAvgChart"]);
+  makeRangeBar("sbvRangeBar", ["sbvChart"]);
+  makeRangeBar("tygiaRangeBar", ["goldFxChart"]);
+  makeRangeBar("bondRangeBar", ["bondChart", "vnindexChart"]);
 
   function drawGoldSeries(canvasId, legendId, keys, opts) {
     opts = opts || {};
