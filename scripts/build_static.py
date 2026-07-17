@@ -69,8 +69,26 @@ def main() -> int:
             if cfg.sheet_id:
                 dep = ss.deposit_from_sheet(cfg)
                 if dep:
-                    latest, history = dep[0], dep[1]
-                    print("[sheet] deposit: lấy từ 'Auto - Deposit'")
+                    sheet_latest, sheet_history = dep[0], dep[1]
+                    # Sheet chỉ được đẩy dữ liệu mới vào Thứ Sáu (xem cron.yml) — nếu
+                    # local (crawl hằng ngày) MỚI HƠN thì giữ local cho phần "latest"
+                    # (bảng xếp hạng/KPI hiện tại), tránh web hiện lãi suất cũ các ngày
+                    # không phải Thứ Sáu. History vẫn lấy từ Sheet (có backfill sâu hơn).
+                    try:
+                        sheet_date = json.loads(sheet_latest).get("generated_at", "")
+                    except Exception:
+                        sheet_date = ""
+                    try:
+                        local_date = json.loads(latest).get("generated_at", "")
+                    except Exception:
+                        local_date = ""
+                    history = sheet_history
+                    if sheet_date >= local_date:
+                        latest = sheet_latest
+                        print("[sheet] deposit: lấy từ 'Auto - Deposit'")
+                    else:
+                        print(f"[sheet] deposit: Sheet ({sheet_date}) cũ hơn local ({local_date}) "
+                              "-> giữ 'latest' từ local crawl, history vẫn từ Sheet")
                 mkt = ss.assemble_market(cfg, mkt_latest, mkt_history)
                 if mkt:
                     mkt_latest, mkt_history = mkt[0], mkt[1]
