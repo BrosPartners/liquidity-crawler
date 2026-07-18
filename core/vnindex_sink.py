@@ -17,7 +17,7 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 CSV_PATH = os.path.join(DATA_DIR, "vnindex_history.csv")
 
 
-def update(from_date: str = "2019-01-01") -> int:
+def update(from_date: str = "2017-01-01") -> int:
     """Fetch toàn bộ lịch sử, ghi đè CSV. -> số phiên."""
     os.makedirs(DATA_DIR, exist_ok=True)
     rows = fetch_history(from_date)

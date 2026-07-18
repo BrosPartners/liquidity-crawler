@@ -1153,15 +1153,36 @@
     .catch(() => {});
 
   const VNINDEX_CHART_IDS = ["vnindexChart", "tsVnindexChart", "sbvVnindexChart", "tygiaVnindexChart"];
+  // Mỗi chart VNI căn CÙNG khoảng thời gian với chart gốc trong tab đó (đọc domain
+  // từ CHART_STATE của chart gốc sau khi nó vẽ xong), để 2 chart xếp chồng thẳng
+  // hàng theo trục thời gian. VNI chỉ có data từ 2017-08 (giới hạn nguồn VNDirect)
+  // nên phần trước đó (vd liên NH từ 2014) để trống — trục vẫn khớp.
+  const VNI_SIBLING = {
+    vnindexChart: "bondChart", tsVnindexChart: "tsChart",
+    sbvVnindexChart: "sbvChart", tygiaVnindexChart: "goldFxChart",
+  };
   function renderVnindexChart() {
     if (!VNINDEX_HIST.length) return;
     const pts = VNINDEX_HIST.filter(r => r.key === "vnindex").sort((a, b) => a.date < b.date ? -1 : 1);
-    const dates = pts.map(r => r.date);
-    const series = [{ name: "VN-Index", color: "#1E3A6E", vals: pts.map(r => r.value) }];
     const fmt = v => v.toLocaleString("en-US", { maximumFractionDigits: 2 });
     VNINDEX_CHART_IDS.forEach(id => {
       const canvas = document.getElementById(id);
       if (!canvas || !canvas.parentElement.clientWidth) return;   // tab ẩn -> bỏ
+      let dates, vals;
+      const sibId = VNI_SIBLING[id];
+      const sib = sibId && CHART_STATE[sibId] && CHART_STATE[sibId].dates;
+      if (sib && sib.length) {
+        // clip vào [d0,d1] của chart gốc, rồi ép 2 mốc biên = d0/d1 (giá trị null
+        // -> không vẽ) để domain trục khớp tuyệt đối với chart gốc.
+        const d0 = sib[0], d1 = sib[sib.length - 1];
+        const clip = pts.filter(p => p.date >= d0 && p.date <= d1);
+        dates = clip.map(p => p.date); vals = clip.map(p => p.value);
+        if (!dates.length || dates[0] > d0) { dates.unshift(d0); vals.unshift(null); }
+        if (dates[dates.length - 1] < d1) { dates.push(d1); vals.push(null); }
+      } else {
+        dates = pts.map(p => p.date); vals = pts.map(p => p.value);
+      }
+      const series = [{ name: "VN-Index", color: "#1E3A6E", vals }];
       interactiveLineChart(id, dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt);
     });
   }
