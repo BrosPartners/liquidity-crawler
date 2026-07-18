@@ -537,7 +537,7 @@
   <div class="ts-panel">
     <div class="ts-head">
       <div class="panel-title">VN-Index</div>
-      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#1E3A6E"></span>VN-Index</span></div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#EF4444"></span>VN-Index</span></div>
     </div>
     <canvas id="tsVnindexChart"></canvas>
   </div>
@@ -565,7 +565,7 @@
     <div class="ts-panel" style="margin:16px 0 0">
       <div class="ts-head">
         <div class="panel-title">VN-Index</div>
-        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#1E3A6E"></span>VN-Index</span></div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#EF4444"></span>VN-Index</span></div>
       </div>
       <canvas id="sbvVnindexChart"></canvas>
     </div>
@@ -599,7 +599,7 @@
     <div class="ts-panel" style="margin:16px 0">
       <div class="ts-head">
         <div class="panel-title">VN-Index</div>
-        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#1E3A6E"></span>VN-Index</span></div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#EF4444"></span>VN-Index</span></div>
       </div>
       <canvas id="tygiaVnindexChart"></canvas>
     </div>
@@ -680,7 +680,7 @@
   <div class="ts-panel" style="margin-top:16px">
     <div class="ts-head">
       <div class="panel-title">VN-Index</div>
-      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#1E3A6E"></span>VN-Index</span></div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#EF4444"></span>VN-Index</span></div>
     </div>
     <canvas id="vnindexChart"></canvas>
   </div>
@@ -1213,7 +1213,7 @@
       } else {
         dates = pts.map(p => p.date); vals = pts.map(p => p.value);
       }
-      const series = [{ name: "VN-Index", color: "#1E3A6E", vals }];
+      const series = [{ name: "VN-Index", color: "#EF4444", vals }];
       interactiveLineChart(id, dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt);
     });
   }
