@@ -1031,6 +1031,16 @@
       [{ name: "Trung bình", color: "#E8A030", vals: avgVals }], (c, d, s) => drawTS(c, d, s));
   }
 
+  // Trục X theo NGÀY THỰC (thời gian tỉ lệ đúng) — không chia đều theo index.
+  // Nhờ vậy đoạn dữ liệu thưa (vd 2026 lấy theo tháng) không bị "nén" ngang so
+  // với đoạn dày (theo tuần). Trả kèm T/t0/span để hover map chuột->ngày->điểm.
+  function timeMapX(dates, padL, cw) {
+    const T = dates.map(d => Date.parse(d));
+    const t0 = T[0], span = (T[T.length - 1] - t0) || 1;
+    const x = i => dates.length === 1 ? padL + cw / 2 : padL + cw * (T[i] - t0) / span;
+    return { x, T, t0, span };
+  }
+
   function drawTS(canvas, dates, series) {
     const ctx = canvas.getContext("2d");
     const dpr = window.devicePixelRatio || 1;
@@ -1050,7 +1060,7 @@
     if (hi - lo < 0.5) { hi += 0.3; lo = Math.max(0, lo - 0.3); }
     const pad = (hi - lo) * 0.1; hi += pad; lo = Math.max(0, lo - pad);
 
-    const x = i => dates.length === 1 ? PAD.l + cw / 2 : PAD.l + (cw * i) / (dates.length - 1);
+    const tm = timeMapX(dates, PAD.l, cw); const x = tm.x;
     const y = v => PAD.t + ch - ((v - lo) / (hi - lo)) * ch;
 
     // Grid + Y labels
@@ -1091,7 +1101,7 @@
         }
       }
     });
-    return { PAD, w, h, cw, ch, lo, hi, x, y, n: dates.length };
+    return { PAD, w, h, cw, ch, lo, hi, x, y, n: dates.length, T: tm.T, t0: tm.t0, span: tm.span };
   }
 
   // ── Market data (thị trường tiền tệ) ─────────────────────────────────
@@ -1195,7 +1205,7 @@
     const padL = (hi - lo) * 0.1 || 0.5; hi += padL; lo = Math.max(0, lo - padL);
     const gv = barSeries ? barSeries.vals.filter(v => v != null) : [];
     let gmax = (gv.length ? Math.max(...gv.map(Math.abs)) : 1) * 1.15 || 1;
-    const x = i => dates.length === 1 ? PAD.l + cw / 2 : PAD.l + (cw * i) / (dates.length - 1);
+    const tm = timeMapX(dates, PAD.l, cw); const x = tm.x;
     const yL = v => PAD.t + ch - ((v - lo) / (hi - lo)) * ch;
     const yR = v => PAD.t + ch / 2 - (v / gmax) * (ch / 2);
     // Lưới + nhãn trục trái (%)
@@ -1235,7 +1245,7 @@
       });
       ctx.stroke();
     });
-    return { PAD, w, h, cw, ch, lo, hi, x, y: yL, n: dates.length };
+    return { PAD, w, h, cw, ch, lo, hi, x, y: yL, n: dates.length, T: tm.T, t0: tm.t0, span: tm.span };
   }
 
   const GOLD_LABELS = {
@@ -1460,7 +1470,7 @@
     let lo = Math.min(...all), hi = Math.max(...all);
     if (hi-lo < 0.5) { hi += 0.3; lo = Math.max(0, lo-0.3); }
     const pad = (hi-lo)*0.1; hi += pad; lo = Math.max(0, lo-pad);
-    const x = i => dates.length===1 ? PAD.l+cw/2 : PAD.l+(cw*i)/(dates.length-1);
+    const tm = timeMapX(dates, PAD.l, cw); const x = tm.x;
     const y = v => PAD.t+ch-((v-lo)/(hi-lo))*ch;
     ctx.strokeStyle="rgba(30,53,96,.6)"; ctx.lineWidth=1;
     for (let i=0;i<=4;i++){ const gy=PAD.t+ch-(ch*i)/4;
@@ -1481,7 +1491,7 @@
       for(let i=s.vals.length-1;i>=0;i--){ if(s.vals[i]!=null){ ctx.fillStyle=s.color;
         ctx.beginPath();ctx.arc(x(i),y(s.vals[i]),3,0,Math.PI*2);ctx.fill(); break; } }
     });
-    return { PAD, w, h, cw, ch, lo, hi, x, y, n: dates.length };
+    return { PAD, w, h, cw, ch, lo, hi, x, y, n: dates.length, T: tm.T, t0: tm.t0, span: tm.span };
   }
 
   // ── Tương tác chart: zoom (cuộn), pan (kéo), reset (nháy đúp), tooltip hover ──
@@ -1566,10 +1576,20 @@
         redrawChart(id);
         return;
       }
-      // TOOLTIP: tìm điểm gần nhất trong khung đang xem
+      // TOOLTIP: tìm điểm gần nhất theo NGÀY (trục thời gian tỉ lệ, không chia đều)
       const Np = st.sliced.dates.length;
       const frac = clampN((e.clientX - rect.left - st.map.PAD.l) / st.map.cw, 0, 1);
-      const idx = Math.round(frac * (Np - 1));
+      let idx;
+      const T = st.map.T;
+      if (T && T.length) {
+        const target = st.map.t0 + frac * st.map.span;
+        let lo2 = 0, hi2 = T.length - 1;
+        while (lo2 < hi2) { const mid = (lo2 + hi2) >> 1; if (T[mid] < target) lo2 = mid + 1; else hi2 = mid; }
+        idx = lo2;
+        if (idx > 0 && Math.abs(T[idx - 1] - target) <= Math.abs(T[idx] - target)) idx--;
+      } else {
+        idx = Math.round(frac * (Np - 1));
+      }
       st.hover = idx;
       redrawChart(id);
       showChartTip(id, e.clientX, e.clientY);
