@@ -171,19 +171,18 @@
     /* ── Main content ── */
     .main {
       display: grid;
-      grid-template-columns: minmax(320px, 1fr) minmax(280px, 400px);
-      gap: 1px;
-      background: var(--border);
+      grid-template-columns: minmax(280px, 360px) minmax(440px, 1fr);
+      gap: 16px;
       margin: 20px 24px 0;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
+      align-items: start;   /* chart không giãn cao theo bảng — mỗi bên là 1 card riêng */
     }
 
     /* ── Rate table ── */
     .table-panel {
       background: var(--panel);
       overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 6px;
     }
     .panel-title {
       padding: 10px 16px;
@@ -298,10 +297,13 @@
       background: var(--panel);
       display: flex;
       flex-direction: column;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
     }
     #rateChart {
-      flex: 1;
-      min-height: 0;
+      height: 360px;   /* chiều cao cố định (thấp hơn), không giãn theo chiều cao bảng */
+      flex: none;
     }
 
     /* ── Time series panel ── */
@@ -848,7 +850,7 @@
     // Size canvas to parent
     const parent = canvas.parentElement;
     const w = parent.clientWidth;
-    const h = Math.max(parent.clientHeight - 32, 200); // subtract panel-title height
+    const h = canvas.clientHeight || 360;   // chiều cao cố định từ CSS (#rateChart)
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     canvas.style.width = w + "px";
