@@ -532,6 +532,13 @@
     </div>
     <canvas id="tsAvgChart"></canvas>
   </div>
+  <div class="ts-panel">
+    <div class="ts-head">
+      <div class="panel-title">VN-Index</div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#1E3A6E"></span>VN-Index</span></div>
+    </div>
+    <canvas id="tsVnindexChart"></canvas>
+  </div>
 </section>
 
 <!-- ══ Tab: Liên ngân hàng & SBV (gộp) ══ -->
@@ -552,6 +559,13 @@
         <div class="ts-legend" id="sbvChartLegend"></div>
       </div>
       <canvas id="sbvChart"></canvas>
+    </div>
+    <div class="ts-panel" style="margin:16px 0 0">
+      <div class="ts-head">
+        <div class="panel-title">VN-Index</div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#1E3A6E"></span>VN-Index</span></div>
+      </div>
+      <canvas id="sbvVnindexChart"></canvas>
     </div>
     <div class="mkt-section-title">Lãi suất liên ngân hàng &amp; điều hành SBV (mới nhất)</div>
     <div class="mkt-grid" id="mktGridSBV"></div>
@@ -579,6 +593,13 @@
         <div class="ts-legend" id="goldFxLegend"></div>
       </div>
       <canvas id="goldFxChart"></canvas>
+    </div>
+    <div class="ts-panel" style="margin:16px 0">
+      <div class="ts-head">
+        <div class="panel-title">VN-Index</div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#1E3A6E"></span>VN-Index</span></div>
+      </div>
+      <canvas id="tygiaVnindexChart"></canvas>
     </div>
     <div class="mkt-section-title">Tăng trưởng &amp; vĩ mô · Huy động NHTM lớn (tham chiếu)</div>
     <div class="mkt-grid" id="mktGridMacro"></div>
@@ -1121,15 +1142,18 @@
     .then(text => { VNINDEX_HIST = parseMktCSV(text); renderVnindexChart(); })
     .catch(() => {});
 
+  const VNINDEX_CHART_IDS = ["vnindexChart", "tsVnindexChart", "sbvVnindexChart", "tygiaVnindexChart"];
   function renderVnindexChart() {
     if (!VNINDEX_HIST.length) return;
-    const canvas = document.getElementById("vnindexChart");
-    if (!canvas || !canvas.parentElement.clientWidth) return;   // tab ẩn -> bỏ
     const pts = VNINDEX_HIST.filter(r => r.key === "vnindex").sort((a, b) => a.date < b.date ? -1 : 1);
     const dates = pts.map(r => r.date);
     const series = [{ name: "VN-Index", color: "#1E3A6E", vals: pts.map(r => r.value) }];
     const fmt = v => v.toLocaleString("en-US", { maximumFractionDigits: 2 });
-    interactiveLineChart("vnindexChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt);
+    VNINDEX_CHART_IDS.forEach(id => {
+      const canvas = document.getElementById(id);
+      if (!canvas || !canvas.parentElement.clientWidth) return;   // tab ẩn -> bỏ
+      interactiveLineChart(id, dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt);
+    });
   }
 
   function renderBondChart() {
@@ -1301,9 +1325,9 @@
     });
   }
   makeRangeBar("goldRangeBar", ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart"]);
-  makeRangeBar("tsRangeBar", ["tsChart", "tsAvgChart"]);
-  makeRangeBar("sbvRangeBar", ["sbvChart"]);
-  makeRangeBar("tygiaRangeBar", ["goldFxChart"]);
+  makeRangeBar("tsRangeBar", ["tsChart", "tsAvgChart", "tsVnindexChart"]);
+  makeRangeBar("sbvRangeBar", ["sbvChart", "sbvVnindexChart"]);
+  makeRangeBar("tygiaRangeBar", ["goldFxChart", "tygiaVnindexChart"]);
   makeRangeBar("bondRangeBar", ["bondChart", "vnindexChart"]);
 
   function drawGoldSeries(canvasId, legendId, keys, opts) {
@@ -1630,7 +1654,8 @@
       if (name === "sbv") renderMktChart();
       if (name === "vang") renderGoldCharts();
       if (name === "tygia") renderFxChart();
-      if (name === "bond") { renderBondChart(); renderVnindexChart(); }
+      if (name === "bond") renderBondChart();
+      if (["dienbien", "sbv", "tygia", "bond"].includes(name)) renderVnindexChart();
     });
   }
   document.querySelectorAll(".tab-btn").forEach(b =>
