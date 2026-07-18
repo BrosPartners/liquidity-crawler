@@ -1041,6 +1041,24 @@
     return { x, T, t0, span };
   }
 
+  // Nhãn trục X theo mốc THỜI GIAN đều nhau (không theo điểm dữ liệu) — nhờ vậy
+  // các chart xếp chồng có cùng domain sẽ hiện CÙNG ngày ở CÙNG vị trí.
+  function drawXTimeLabels(ctx, tm, PAD, cw, baseY, single) {
+    ctx.fillStyle = "#5A7A9A"; ctx.font = "10px system-ui";
+    if (single || tm.span <= 1) {
+      ctx.textAlign = "center";
+      ctx.fillText(fmtDateDMY(new Date(tm.t0).toISOString().slice(0, 10)), PAD.l + cw / 2, baseY);
+      return;
+    }
+    const N = 5;
+    for (let k = 0; k <= N; k++) {
+      const frac = k / N;
+      const iso = new Date(tm.t0 + tm.span * frac).toISOString().slice(0, 10);
+      ctx.textAlign = k === 0 ? "left" : (k === N ? "right" : "center");
+      ctx.fillText(fmtDateDMY(iso), PAD.l + cw * frac, baseY);
+    }
+  }
+
   function drawTS(canvas, dates, series) {
     const ctx = canvas.getContext("2d");
     const dpr = window.devicePixelRatio || 1;
@@ -1072,12 +1090,8 @@
       ctx.fillText((lo + (hi - lo) * i / 4).toFixed(1) + "%", w - PAD.r + 6, gy + 3);
     }
 
-    // X labels (max ~6 — dd/mm/yyyy dài hơn nên giãn thưa hơn trước)
-    const step = Math.max(1, Math.ceil(dates.length / 6));
-    ctx.fillStyle = "#5A7A9A"; ctx.font = "10px system-ui"; ctx.textAlign = "center";
-    for (let i = 0; i < dates.length; i += step) {
-      ctx.fillText(fmtDateDMY(dates[i]), x(i), h - PAD.b + 16);
-    }
+    // X labels theo mốc thời gian đều nhau (đồng bộ giữa các chart xếp chồng)
+    drawXTimeLabels(ctx, tm, PAD, cw, h - PAD.b + 16, dates.length < 2);
 
     // Lines (step-after: rate holds until next change)
     series.forEach(s => {
@@ -1243,10 +1257,8 @@
       const gy = PAD.t + (ch * i) / 4, val = gmax - (2 * gmax) * i / 4;
       ctx.fillText(val.toFixed(1) + "%", w - PAD.r + 6, gy + 3);
     }
-    // Nhãn trục X
-    const step = Math.max(1, Math.ceil(dates.length / 6));
-    ctx.fillStyle = "#5A7A9A"; ctx.textAlign = "center";
-    for (let i = 0; i < dates.length; i += step) ctx.fillText(fmtDateDMY(dates[i]), x(i), h - PAD.b + 16);
+    // Nhãn trục X theo mốc thời gian đều nhau (đồng bộ giữa các chart xếp chồng)
+    drawXTimeLabels(ctx, tm, PAD, cw, h - PAD.b + 16, dates.length < 2);
     // Cột chênh lệch (trục phải)
     if (barSeries) {
       const bw = Math.max(1, cw / dates.length), y0 = yR(0);
@@ -1499,9 +1511,7 @@
       ctx.fillStyle="#5A7A9A";ctx.font="10px system-ui";ctx.textAlign="left";
       const _av = lo+(hi-lo)*i/4;
       ctx.fillText(fmt ? fmt(_av) : _av.toFixed(1)+"%", w-PAD.r+6, gy+3); }
-    const step = Math.max(1, Math.ceil(dates.length/6));
-    ctx.fillStyle="#5A7A9A";ctx.font="10px system-ui";ctx.textAlign="center";
-    for(let i=0;i<dates.length;i+=step) ctx.fillText(fmtDateDMY(dates[i]), x(i), h-PAD.b+16);
+    drawXTimeLabels(ctx, tm, PAD, cw, h-PAD.b+16, dates.length<2);
     series.forEach(s => {
       ctx.strokeStyle=s.color; ctx.lineWidth=2; ctx.lineJoin="round"; ctx.beginPath();
       let started=false;
