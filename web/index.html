@@ -410,11 +410,38 @@
     }
 
     @media (max-width: 700px) {
-      .main { grid-template-columns: 1fr; }
-      .summary { flex-direction: column; gap: 1px; }
-      .controls { padding: 10px 16px; gap: 12px; }
-      .header { padding: 12px 16px; }
-      .main, .summary { margin: 12px 16px 0; }
+      /* ── Mobile: thu gọn lề, xếp 1 cột, summary lưới 2×2 ── */
+      html { -webkit-text-size-adjust: 100%; }
+      body { overflow-x: hidden; }
+      .header { padding: 12px 14px; gap: 4px 12px; }
+      .header h1 { font-size: 14px; }
+      .header .meta { font-size: 11px; }
+      .tabs { padding: 0 8px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .tabs::-webkit-scrollbar { display: none; }
+      .tab-btn { padding: 11px 13px; font-size: 12.5px; }
+      .controls { padding: 10px 14px; gap: 10px 16px; }
+
+      .main { grid-template-columns: 1fr; margin: 12px 12px 0; gap: 12px; }
+      /* summary: 2 cột thay vì 4 -> gọn, không quá dài */
+      .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 12px 12px 0; }
+      .ts-panel { margin: 12px 12px 0; }
+      .mkt-wrap { margin: 12px 12px 0; }
+      .rng-bar { margin: 12px 12px 2px; }
+      .rng-btn { padding: 6px 11px; font-size: 12px; }   /* vùng chạm to hơn */
+
+      #rateChart { height: 300px; }
+      .mkt-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+      .stat-value { font-size: 22px; }
+      /* bảng: thu padding + panel-title để vừa khít, không phải cuộn ngang trong bảng */
+      thead th, td { padding-left: 10px; padding-right: 10px; }
+      .bank-cell { gap: 7px; }
+      .panel-title { padding: 10px 12px; }
+    }
+    @media (max-width: 420px) {
+      /* Máy rất nhỏ: lề mỏng hơn; summary vẫn 2×2 cho gọn; mkt-grid 2 cột cố định */
+      .mkt-grid { grid-template-columns: 1fr 1fr; }
+      .mkt-hero { grid-column: span 2; }
+      .main, .summary, .ts-panel, .mkt-wrap, .rng-bar { margin-left: 8px; margin-right: 8px; }
     }
     /* Tooltip hover cho chart */
     #chartTip {
@@ -1067,7 +1094,8 @@
       ctx.fillText(fmtDateDMY(new Date(tm.t0).toISOString().slice(0, 10)), PAD.l + cw / 2, baseY);
       return;
     }
-    const N = 5;
+    // Số mốc theo bề rộng: chart hẹp (mobile) ít mốc để nhãn dd/mm/yyyy không chồng.
+    const N = cw < 340 ? 3 : (cw < 520 ? 4 : 5);
     for (let k = 0; k <= N; k++) {
       const frac = k / N;
       const iso = new Date(tm.t0 + tm.span * frac).toISOString().slice(0, 10);
