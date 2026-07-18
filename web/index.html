@@ -684,6 +684,20 @@
     </div>
     <canvas id="vnindexChart"></canvas>
   </div>
+  <div class="ts-panel" style="margin-top:16px">
+    <div class="ts-head">
+      <div class="panel-title">Tỷ giá USD/VND (VCB · chợ tự do · SBV)</div>
+      <div class="ts-legend" id="bondFxLegend"></div>
+    </div>
+    <canvas id="bondFxChart"></canvas>
+  </div>
+  <div class="ts-panel" style="margin-top:16px">
+    <div class="ts-head">
+      <div class="panel-title">Lãi suất huy động trong nước · trung bình (12M)</div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#E8A030"></span>Trung bình các NH</span></div>
+    </div>
+    <canvas id="bondRateChart"></canvas>
+  </div>
 </section>
 
 <script>
@@ -929,6 +943,7 @@
     .then(text => {
       HISTORY = parseCSV(text);
       renderTS();
+      renderBondChart();   // chart lãi suất TB trong tab Trái phiếu dùng HISTORY
     })
     .catch(() => {
       document.getElementById("tsChart").style.display = "none";
@@ -1148,7 +1163,7 @@
 
   fetch("../data/gold_history.csv")
     .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
-    .then(text => { GOLD_HIST = parseMktCSV(text); renderGoldCharts(); renderFxChart(); })
+    .then(text => { GOLD_HIST = parseMktCSV(text); renderGoldCharts(); renderFxChart(); renderBondChart(); })
     .catch(() => {});
 
   // ── Trái phiếu 10Y (VN vs US) ────────────────────────────────────────
@@ -1222,6 +1237,68 @@
       { name: "Chênh lệch VN-US", color: "#9CA9BD", vals: build("bond_gap"), bar: true },
     ];
     interactiveLineChart("bondChart", dates, series, (c, d, s) => drawBondChart(c, d, s), v => v.toFixed(2) + "%");
+
+    // Các chart phụ trong tab: căn CÙNG domain thời gian với bondChart để so sánh.
+    const d0 = dates[0], d1 = dates[dates.length - 1];
+    renderBondFxChart(d0, d1);
+    renderBondRateChart(d0, d1);
+  }
+
+  // Cắt + đệm 2 mốc biên (giá trị null) để domain trục [d0,d1] khớp chart khác cùng tab.
+  function alignToDomain(dates, seriesList, d0, d1) {
+    const keep = [];
+    for (let i = 0; i < dates.length; i++) if (dates[i] >= d0 && dates[i] <= d1) keep.push(i);
+    const ndates = keep.map(i => dates[i]);
+    const nseries = seriesList.map(s => ({ ...s, vals: keep.map(i => s.vals[i]) }));
+    if (!ndates.length || ndates[0] > d0) { ndates.unshift(d0); nseries.forEach(s => s.vals.unshift(null)); }
+    if (ndates[ndates.length - 1] < d1) { ndates.push(d1); nseries.forEach(s => s.vals.push(null)); }
+    return { dates: ndates, series: nseries };
+  }
+
+  // Tỷ giá USD/VND (từ GOLD_HIST) — căn cùng domain bondChart.
+  function renderBondFxChart(d0, d1) {
+    const canvas = document.getElementById("bondFxChart");
+    if (!canvas || !canvas.parentElement.clientWidth || !GOLD_HIST.length) return;
+    const keys = ["fx_vcb", "fx_tudo", "fx_sbv"];
+    const fxDates = [...new Set(GOLD_HIST.filter(r => keys.includes(r.key)).map(r => r.date))].sort();
+    if (!fxDates.length) return;
+    document.getElementById("bondFxLegend").innerHTML = keys.map(k =>
+      `<span class="lg"><span class="sw" style="background:${GOLD_COLORS[k]}"></span>${GOLD_LABELS[k]}</span>`).join("");
+    const series = keys.map(k => {
+      const pts = GOLD_HIST.filter(r => r.key === k).sort((a, b) => a.date < b.date ? -1 : 1);
+      let pi = 0, last = null;
+      const vals = fxDates.map(d => { while (pi < pts.length && pts[pi].date <= d) { last = pts[pi].value; pi++; } return last; });
+      return { color: GOLD_COLORS[k], name: GOLD_LABELS[k] || k, vals };
+    });
+    const a = alignToDomain(fxDates, series, d0, d1);
+    const fmt = v => Math.round(v).toLocaleString("en-US");
+    interactiveLineChart("bondFxChart", a.dates, a.series, (c, d, s) => drawLineChart(c, d, s, 220, fmt), fmt);
+  }
+
+  // Lãi suất huy động TB trong nước (12M, tất cả NH) từ HISTORY — căn cùng domain bondChart.
+  function renderBondRateChart(d0, d1) {
+    const canvas = document.getElementById("bondRateChart");
+    if (!canvas || !canvas.parentElement.clientWidth || !HISTORY.length) return;
+    const recs = HISTORY.filter(r => r.term === "12M");
+    if (!recs.length) return;
+    const byBankMax = {};
+    recs.forEach(r => {
+      const m = (byBankMax[r.bank_code] = byBankMax[r.bank_code] || {});
+      if (m[r.date] == null || r.rate > m[r.date]) m[r.date] = r.rate;
+    });
+    const rDates = [...new Set(recs.map(r => r.date))].sort();
+    const allVals = Object.keys(byBankMax).map(b => {
+      const pts = Object.entries(byBankMax[b]).sort((x, y) => x[0] < y[0] ? -1 : 1);
+      let pi = 0, last = null;
+      return rDates.map(d => { while (pi < pts.length && pts[pi][0] <= d) { last = pts[pi][1]; pi++; } return last; });
+    });
+    const avg = rDates.map((_, i) => {
+      const vs = allVals.map(s => s[i]).filter(v => v != null);
+      return vs.length ? vs.reduce((a, b) => a + b, 0) / vs.length : null;
+    });
+    const a = alignToDomain(rDates, [{ name: "Trung bình", color: "#E8A030", vals: avg }], d0, d1);
+    const fmt = v => v.toFixed(2) + "%";
+    interactiveLineChart("bondRateChart", a.dates, a.series, (c, d, s) => drawLineChart(c, d, s, 220, fmt), fmt);
   }
 
   // Combo chart: 2 đường lợi suất (trục trái) + cột chênh lệch (trục phải, quanh 0)
@@ -1373,7 +1450,7 @@
   makeRangeBar("tsRangeBar", ["tsChart", "tsAvgChart", "tsVnindexChart"]);
   makeRangeBar("sbvRangeBar", ["sbvChart", "sbvVnindexChart"]);
   makeRangeBar("tygiaRangeBar", ["goldFxChart", "tygiaVnindexChart"]);
-  makeRangeBar("bondRangeBar", ["bondChart", "vnindexChart"]);
+  makeRangeBar("bondRangeBar", ["bondChart", "vnindexChart", "bondFxChart", "bondRateChart"]);
 
   function drawGoldSeries(canvasId, legendId, keys, opts) {
     opts = opts || {};
