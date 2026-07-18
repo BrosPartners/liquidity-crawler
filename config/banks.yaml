@@ -82,9 +82,8 @@ banks:
     module: shb
     name: SHB
     url: https://www.shb.com.vn/wp-content/uploads/2023/02/01.-BIEU-LS-HDV-VND-KHCN-Thang-6.pdf
-    mode: pdf   # trang HTML shb.com.vn/ibanking.shb.com.vn chặn WAF (403, kể cả Playwright
-                # headless); PDF chính thức tại URL cố định thì KHÔNG bị chặn (asset tĩnh)
-    enabled: true
+    mode: pdf
+    enabled: false   # loại khỏi dashboard theo yêu cầu (2026-07-18)
 
   - code: TPB
     module: tpbank
@@ -112,7 +111,7 @@ banks:
     name: Eximbank
     url: https://media.eximbank.com.vn/exim/files/KHCN-LaisuathuydongVND.pdf
     mode: pdf
-    enabled: true
+    enabled: false   # loại khỏi dashboard theo yêu cầu (2026-07-18)
 
   - code: SSB
     module: seabank

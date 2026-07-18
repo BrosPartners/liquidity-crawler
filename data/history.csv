@@ -249,13 +249,6 @@ date,bank_code,bank_name,term,rate,product,method,currency,source_url,crawled_at
 2025-05-24,VKK,Vikki Bank,9M,5.45,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
 2025-05-24,VKK,Vikki Bank,12M,5.65,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
 2025-05-24,VKK,Vikki Bank,24M,5.9,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
-2025-05-24,EIB,Eximbank,1M,3.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
-2025-05-24,EIB,Eximbank,2M,3.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
-2025-05-24,EIB,Eximbank,3M,3.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
-2025-05-24,EIB,Eximbank,6M,4.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
-2025-05-24,EIB,Eximbank,9M,4.3,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
-2025-05-24,EIB,Eximbank,12M,4.4,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
-2025-05-24,EIB,Eximbank,24M,4.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:02
 2026-02-17,VCB,Vietcombank,KKH,0.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
 2026-02-17,VCB,Vietcombank,1W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
 2026-02-17,VCB,Vietcombank,2W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
@@ -329,13 +322,6 @@ date,bank_code,bank_name,term,rate,product,method,currency,source_url,crawled_at
 2026-02-17,VKK,Vikki Bank,9M,6.12,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
 2026-02-17,VKK,Vikki Bank,12M,6.41,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
 2026-02-17,VKK,Vikki Bank,24M,6.21,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
-2026-02-17,EIB,Eximbank,1M,2.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
-2026-02-17,EIB,Eximbank,2M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
-2026-02-17,EIB,Eximbank,3M,3.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
-2026-02-17,EIB,Eximbank,6M,4.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
-2026-02-17,EIB,Eximbank,9M,4.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
-2026-02-17,EIB,Eximbank,12M,4.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
-2026-02-17,EIB,Eximbank,24M,5.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:04
 2026-03-28,VCB,Vietcombank,KKH,0.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
 2026-03-28,VCB,Vietcombank,1W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
 2026-03-28,VCB,Vietcombank,2W,0.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
@@ -409,10 +395,3 @@ date,bank_code,bank_name,term,rate,product,method,currency,source_url,crawled_at
 2026-03-28,VKK,Vikki Bank,9M,6.12,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
 2026-03-28,VKK,Vikki Bank,12M,6.41,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
 2026-03-28,VKK,Vikki Bank,24M,6.21,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
-2026-03-28,EIB,Eximbank,1M,2.8,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
-2026-03-28,EIB,Eximbank,2M,3.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
-2026-03-28,EIB,Eximbank,3M,3.1,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
-2026-03-28,EIB,Eximbank,6M,4.2,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
-2026-03-28,EIB,Eximbank,9M,4.0,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
-2026-03-28,EIB,Eximbank,12M,4.7,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06
-2026-03-28,EIB,Eximbank,24M,5.5,quay,cuoi_ky,VND,https://thoibaonganhang.vn/lai-suat,2026-07-15T14:29:06

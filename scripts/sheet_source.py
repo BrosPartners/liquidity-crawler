@@ -18,6 +18,11 @@ ON_TAB = "ON rate"
 DEPGROUP_TAB = "Dep rates - Group"
 BOND_TAB = "VN-US 10y bond yield"
 
+# Bank bị loại khỏi dashboard (nguồn không đáng tin/ngừng theo dõi) — lọc ở mọi
+# điểm đọc data (Sheet 'Auto - Deposit' + 'Dep rates - Group'), không đổi
+# BANKS18/cột vì đó là vị trí cột cố định trong sheet 'Dep rates - Group'.
+EXCLUDED_BANKS = {"SHB", "EIB"}
+
 
 def bond_from_sheet(cfg: "SheetConfig") -> Optional[str]:
     """Lợi suất TPCP 10Y VN & US từ tab 'VN-US 10y bond yield'.
@@ -109,6 +114,8 @@ def _histgroup_rows(cfg: SheetConfig) -> List[list]:
         if not d or len(d) != 10 or not d[:4].isdigit():
             continue
         for i, bank in enumerate(BANKS18):
+            if bank in EXCLUDED_BANKS:
+                continue
             for col0, term in ((DEP12_COL0, "12M"), (DEP3_COL0, "3M")):
                 c = col0 + i
                 if c >= len(r):
@@ -136,7 +143,8 @@ def deposit_from_sheet(cfg: SheetConfig) -> Optional[Tuple[str, str]]:
         return None
     head = rows[0]
     idx = {c: head.index(c) for c in head}
-    recs = [r for r in rows[1:] if len(r) > idx["rate"] and r[idx["date"]].strip()]
+    recs = [r for r in rows[1:] if len(r) > idx["rate"] and r[idx["date"]].strip()
+            and r[idx["bank_code"]].strip() not in EXCLUDED_BANKS]
     if not recs:
         return None
     # latest.json từ ngày mới nhất
