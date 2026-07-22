@@ -676,6 +676,20 @@
       </div>
       <canvas id="goldGapChart"></canvas>
     </div>
+    <div class="ts-panel" style="margin:0">
+      <div class="ts-head">
+        <div class="panel-title">Diễn biến giá MUA các thương hiệu (VND/lượng)</div>
+        <div class="ts-legend" id="goldBrandBuyLegend"></div>
+      </div>
+      <canvas id="goldBrandBuyChart"></canvas>
+    </div>
+    <div class="ts-panel" style="margin:0">
+      <div class="ts-head">
+        <div class="panel-title">Chênh lệch giá mua–bán (%)</div>
+        <div class="ts-legend" id="goldSpreadLegend"></div>
+      </div>
+      <canvas id="goldSpreadChart"></canvas>
+    </div>
     <div class="mkt-section-title">Giá bán các hãng (mới nhất)</div>
     <div class="mkt-grid" id="goldBrandGrid"></div>
     <div class="mkt-note" id="goldNote"></div>
@@ -1194,6 +1208,68 @@
     .then(text => { GOLD_HIST = parseMktCSV(text); renderGoldCharts(); renderFxChart(); renderBondChart(); })
     .catch(() => {});
 
+  // ── Giá mua/bán theo thương hiệu (gold_brands.csv, 2020→nay) ─────────
+  let GOLD_BRANDS = [];   // [{date, company, buy, sell}]
+  const BRAND_COLORS = { SJC: "#E8A030", DOJI: "#EF4444", PNJ: "#3B82F6", BTMC: "#22C55E", BTMH: "#A855F7", PHUQUY: "#06B6D4" };
+  const BRAND_LABELS = { SJC: "SJC", DOJI: "DOJI", PNJ: "PNJ", BTMC: "BTMC", BTMH: "BTMH", PHUQUY: "Phú Quý" };
+
+  fetch("../data/gold_brands.csv")
+    .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
+    .then(text => { GOLD_BRANDS = parseBrandsCSV(text); renderBrandCharts(); })
+    .catch(() => {});
+
+  function parseBrandsCSV(text) {
+    const lines = (text || "").trim().split(/\r?\n/);
+    const out = [];
+    for (let i = 1; i < lines.length; i++) {
+      const p = lines[i].split(",");
+      if (p.length < 4) continue;
+      const buy = parseFloat(p[2]), sell = parseFloat(p[3]);
+      out.push({ date: p[0], company: p[1], buy: isNaN(buy) ? null : buy, sell: isNaN(sell) ? null : sell });
+    }
+    return out;
+  }
+
+  // 1 đường/hãng, forward-fill theo trục ngày chung; valueFn lấy trường cần vẽ.
+  function _brandSeries(valueFn) {
+    const companies = [...new Set(GOLD_BRANDS.map(r => r.company))];
+    const dates = [...new Set(GOLD_BRANDS.map(r => r.date))].sort();
+    const byCo = {};
+    companies.forEach(c => byCo[c] = GOLD_BRANDS.filter(r => r.company === c).sort((a, b) => a.date < b.date ? -1 : 1));
+    const series = companies.map(c => {
+      const pts = byCo[c];
+      let pi = 0, last = null;
+      const vals = dates.map(d => {
+        while (pi < pts.length && pts[pi].date <= d) { const v = valueFn(pts[pi]); if (v != null) last = v; pi++; }
+        return last;
+      });
+      return { name: BRAND_LABELS[c] || c, color: BRAND_COLORS[c] || "#8899AA", vals };
+    });
+    return { dates, series };
+  }
+
+  function renderBrandCharts() { renderBrandBuyChart(); renderSpreadChart(); }
+
+  function renderBrandBuyChart() {
+    const canvas = document.getElementById("goldBrandBuyChart");
+    if (!canvas || !canvas.parentElement.clientWidth || !GOLD_BRANDS.length) return;
+    const { dates, series } = _brandSeries(r => r.buy);
+    document.getElementById("goldBrandBuyLegend").innerHTML = series.map(s =>
+      `<span class="lg"><span class="sw" style="background:${s.color}"></span>${s.name}</span>`).join("");
+    const fmt = v => (v / 1e6).toFixed(1) + " tr";
+    interactiveLineChart("goldBrandBuyChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt);
+  }
+
+  function renderSpreadChart() {
+    const canvas = document.getElementById("goldSpreadChart");
+    if (!canvas || !canvas.parentElement.clientWidth || !GOLD_BRANDS.length) return;
+    const { dates, series } = _brandSeries(r => (r.buy && r.sell && r.buy > 0) ? (r.sell - r.buy) / r.buy * 100 : null);
+    document.getElementById("goldSpreadLegend").innerHTML = series.map(s =>
+      `<span class="lg"><span class="sw" style="background:${s.color}"></span>${s.name}</span>`).join("");
+    const fmt = v => v.toFixed(2) + "%";
+    interactiveLineChart("goldSpreadChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt);
+  }
+
   // ── Trái phiếu 10Y (VN vs US) ────────────────────────────────────────
   let BOND_HIST = [];
   fetch("../data/bond_yield.csv")
@@ -1434,6 +1510,7 @@
     drawGoldSeries("goldWorldChart", "goldWorldLegend", ["world_gold_usd"], { fmt: usdFmt });
     drawGoldSeries("goldPriceChart", "goldPriceLegend", ["sjc_sell", "world_gold_vnd"], { fmt: trFmt });
     drawGoldSeries("goldGapChart", "goldGapLegend", ["pct_gap"], { scale: 100 });   // fraction -> %, default % formatting
+    renderBrandCharts();   // diễn biến giá mua các hãng + chênh lệch mua-bán
   }
 
   // Chart tỷ giá USD/VND (VCB/chợ tự do/SBV) — hiện ở tab "Tỷ giá & vĩ mô",
@@ -1474,7 +1551,7 @@
       if (btn) apply(Number(btn.dataset.m));
     });
   }
-  makeRangeBar("goldRangeBar", ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart"]);
+  makeRangeBar("goldRangeBar", ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart", "goldBrandBuyChart", "goldSpreadChart"]);
   makeRangeBar("tsRangeBar", ["tsChart", "tsAvgChart", "tsVnindexChart"]);
   makeRangeBar("sbvRangeBar", ["sbvChart", "sbvVnindexChart"]);
   makeRangeBar("tygiaRangeBar", ["goldFxChart", "tygiaVnindexChart"]);

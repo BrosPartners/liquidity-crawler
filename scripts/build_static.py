@@ -57,6 +57,7 @@ def main() -> int:
 
     gold_latest = _read("gold_latest.json", "null")
     gold_history = _read("gold_history.csv", "")
+    gold_brands = _read("gold_brands.csv", "")
     bond_history = _read("bond_yield.csv", "")
     vnindex_history = _read("vnindex_history.csv", "")
 
@@ -144,6 +145,13 @@ def main() -> int:
     if _n != 1:
         print("[ERR] không thay được fetch gold_history trong web/index.html", file=sys.stderr)
         return 1
+    html, _n = re.subn(
+        r'fetch\("\.\./data/gold_brands\.csv"\)\s*'
+        r'\.then\(r => \{ if \(!r\.ok\) throw new Error\("x"\); return r\.text\(\); \}\)',
+        "Promise.resolve(__EMBED_GOLD_BRANDS__)", html, count=1)
+    if _n != 1:
+        print("[ERR] không thay được fetch gold_brands trong web/index.html", file=sys.stderr)
+        return 1
 
     # 3c. Thay fetch bond (TPCP 10Y) bằng data nhúng
     html, _n = re.subn(
@@ -172,6 +180,7 @@ def main() -> int:
         f"const __EMBED_MKT_HISTORY__ = {json.dumps(mkt_history, ensure_ascii=False)};\n"
         f"const __EMBED_GOLD_LATEST__ = {gold_latest};\n"
         f"const __EMBED_GOLD_HISTORY__ = {json.dumps(gold_history, ensure_ascii=False)};\n"
+        f"const __EMBED_GOLD_BRANDS__ = {json.dumps(gold_brands, ensure_ascii=False)};\n"
         f"const __EMBED_BOND__ = {json.dumps(bond_history, ensure_ascii=False)};\n"
         f"const __EMBED_VNINDEX__ = {json.dumps(vnindex_history, ensure_ascii=False)};\n"
     )
