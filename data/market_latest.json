@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T03:44:21",
+  "generated_at": "2026-07-22T11:44:34",
   "count": 19,
   "series": [
     {
@@ -11,7 +11,7 @@
       "category": "lien_nh",
       "as_of": "20/07/2026",
       "source_url": "https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66",
-      "crawled_at": "2026-07-22T03:44:19"
+      "crawled_at": "2026-07-22T11:44:32"
     },
     {
       "date": "2026-07-22",
@@ -22,7 +22,7 @@
       "category": "lien_nh",
       "as_of": "20/07/2026",
       "source_url": "https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66",
-      "crawled_at": "2026-07-22T03:44:19"
+      "crawled_at": "2026-07-22T11:44:32"
     },
     {
       "date": "2026-07-22",
@@ -33,7 +33,7 @@
       "category": "lien_nh",
       "as_of": "20/07/2026",
       "source_url": "https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66",
-      "crawled_at": "2026-07-22T03:44:19"
+      "crawled_at": "2026-07-22T11:44:32"
     },
     {
       "date": "2026-07-22",
@@ -44,7 +44,7 @@
       "category": "lien_nh",
       "as_of": "20/07/2026",
       "source_url": "https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66",
-      "crawled_at": "2026-07-22T03:44:19"
+      "crawled_at": "2026-07-22T11:44:32"
     },
     {
       "date": "2026-07-22",
@@ -55,7 +55,7 @@
       "category": "lien_nh",
       "as_of": "20/07/2026",
       "source_url": "https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66",
-      "crawled_at": "2026-07-22T03:44:19"
+      "crawled_at": "2026-07-22T11:44:32"
     },
     {
       "date": "2026-07-22",
@@ -66,7 +66,7 @@
       "category": "dieu_hanh",
       "as_of": "Ngày 03/02/2025",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
@@ -75,9 +75,9 @@
       "value": 4.5,
       "unit": "%/năm",
       "category": "dieu_hanh",
-      "as_of": "Ngày 21/07/2026",
+      "as_of": "Ngày 22/07/2026",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
@@ -88,7 +88,7 @@
       "category": "dieu_hanh",
       "as_of": "Ngày 03/02/2025",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
@@ -99,7 +99,7 @@
       "category": "dieu_hanh",
       "as_of": "Ngày 16/07/2025",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
@@ -110,7 +110,7 @@
       "category": "huy_dong",
       "as_of": "Ngày 22/07/2026",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
@@ -121,7 +121,7 @@
       "category": "huy_dong",
       "as_of": "Ngày 22/07/2026",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
@@ -132,18 +132,18 @@
       "category": "huy_dong",
       "as_of": "Ngày 22/07/2026",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
       "series_key": "fx_bank_sell",
       "label": "Tỷ giá USD NHTM bán ra",
-      "value": 26520.0,
+      "value": 26500.0,
       "unit": "VND/USD",
       "category": "ty_gia",
       "as_of": "Ngày 22/07/2026",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
@@ -154,18 +154,18 @@
       "category": "ty_gia",
       "as_of": "Ngày 22/07/2026",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
       "series_key": "fx_free_sell",
       "label": "Tỷ giá USD tự do bán ra",
-      "value": 26330.0,
+      "value": 26380.0,
       "unit": "VND/USD",
       "category": "ty_gia",
       "as_of": "Ngày 22/07/2026",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
@@ -176,29 +176,29 @@
       "category": "tang_truong",
       "as_of": "Tháng 05/2026",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
       "series_key": "deposit_yoy",
       "label": "Tăng trưởng huy động (YoY)",
-      "value": 10.7559,
+      "value": 10.7567,
       "unit": "%",
       "category": "tang_truong",
-      "as_of": "Tháng 04/2026",
+      "as_of": "Tháng 05/2026",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
       "series_key": "m2_yoy",
       "label": "Tăng trưởng cung tiền M2 (YoY)",
-      "value": 5.8594,
+      "value": 5.2803,
       "unit": "%",
       "category": "tang_truong",
-      "as_of": "Tháng 04/2026",
+      "as_of": "Tháng 05/2026",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     },
     {
       "date": "2026-07-22",
@@ -209,7 +209,7 @@
       "category": "khac",
       "as_of": "Tháng 01/2026",
       "source_url": "https://data.vietnambiz.vn/currency-interest-rate",
-      "crawled_at": "2026-07-22T03:44:18"
+      "crawled_at": "2026-07-22T11:44:31"
     }
   ]
 }
