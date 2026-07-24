@@ -2,7 +2,7 @@ name: gold-daily
 # cập nhật giá vàng từ Telegram mỗi sáng + deploy GitHub Pages
 on:
   schedule:
-    - cron: "20 2 * * *"   # 02:20 UTC = 09:20 giờ VN
+    - cron: "30 1 * * *"   # 01:30 UTC = 08:30 giờ VN (data vàng gửi tối hôm trước ~7PM)
   workflow_dispatch: {}
 permissions:
   contents: write
