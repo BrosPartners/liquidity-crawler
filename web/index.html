@@ -710,11 +710,7 @@
   <div class="ts-panel">
     <div class="ts-head">
       <div class="panel-title">Lợi suất TPCP 10 năm · VN vs US (%)</div>
-      <div class="ts-legend">
-        <span class="lg"><span class="sw" style="background:#9CA9BD"></span>Chênh lệch VN-US (cột, phải)</span>
-        <span class="lg"><span class="sw" style="background:#1E3A6E"></span>VN</span>
-        <span class="lg"><span class="sw" style="background:#EF4444"></span>US</span>
-      </div>
+      <div class="ts-legend" id="bondChartLegend"></div>
     </div>
     <canvas id="bondChart"></canvas>
   </div>
@@ -1254,20 +1250,16 @@
     const canvas = document.getElementById("goldBrandBuyChart");
     if (!canvas || !canvas.parentElement.clientWidth || !GOLD_BRANDS.length) return;
     const { dates, series } = _brandSeries(r => r.buy);
-    document.getElementById("goldBrandBuyLegend").innerHTML = series.map(s =>
-      `<span class="lg"><span class="sw" style="background:${s.color}"></span>${s.name}</span>`).join("");
     const fmt = v => (v / 1e6).toFixed(1) + " tr";
-    interactiveLineChart("goldBrandBuyChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt);
+    interactiveLineChart("goldBrandBuyChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt, "goldBrandBuyLegend");
   }
 
   function renderSpreadChart() {
     const canvas = document.getElementById("goldSpreadChart");
     if (!canvas || !canvas.parentElement.clientWidth || !GOLD_BRANDS.length) return;
     const { dates, series } = _brandSeries(r => (r.buy && r.sell && r.buy > 0) ? (r.sell - r.buy) / r.buy * 100 : null);
-    document.getElementById("goldSpreadLegend").innerHTML = series.map(s =>
-      `<span class="lg"><span class="sw" style="background:${s.color}"></span>${s.name}</span>`).join("");
     const fmt = v => v.toFixed(2) + "%";
-    interactiveLineChart("goldSpreadChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt);
+    interactiveLineChart("goldSpreadChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt, "goldSpreadLegend");
   }
 
   // ── Trái phiếu 10Y (VN vs US) ────────────────────────────────────────
@@ -1340,7 +1332,7 @@
       { name: "US", color: "#EF4444", vals: build("us_10y") },
       { name: "Chênh lệch VN-US", color: "#9CA9BD", vals: build("bond_gap"), bar: true },
     ];
-    interactiveLineChart("bondChart", dates, series, (c, d, s) => drawBondChart(c, d, s), v => v.toFixed(2) + "%");
+    interactiveLineChart("bondChart", dates, series, (c, d, s) => drawBondChart(c, d, s), v => v.toFixed(2) + "%", "bondChartLegend");
 
     // Các chart phụ trong tab: căn CÙNG domain thời gian với bondChart để so sánh.
     const d0 = dates[0], d1 = dates[dates.length - 1];
@@ -1366,8 +1358,6 @@
     const keys = ["fx_vcb", "fx_tudo", "fx_sbv"];
     const fxDates = [...new Set(GOLD_HIST.filter(r => keys.includes(r.key)).map(r => r.date))].sort();
     if (!fxDates.length) return;
-    document.getElementById("bondFxLegend").innerHTML = keys.map(k =>
-      `<span class="lg"><span class="sw" style="background:${GOLD_COLORS[k]}"></span>${GOLD_LABELS[k]}</span>`).join("");
     const series = keys.map(k => {
       const pts = GOLD_HIST.filter(r => r.key === k).sort((a, b) => a.date < b.date ? -1 : 1);
       let pi = 0, last = null;
@@ -1376,7 +1366,7 @@
     });
     const a = alignToDomain(fxDates, series, d0, d1);
     const fmt = v => Math.round(v).toLocaleString("en-US");
-    interactiveLineChart("bondFxChart", a.dates, a.series, (c, d, s) => drawLineChart(c, d, s, 220, fmt), fmt);
+    interactiveLineChart("bondFxChart", a.dates, a.series, (c, d, s) => drawLineChart(c, d, s, 220, fmt), fmt, "bondFxLegend");
   }
 
   // Lãi suất huy động TB trong nước (12M, tất cả NH) từ HISTORY — căn cùng domain bondChart.
@@ -1564,15 +1554,13 @@
     const canvas = document.getElementById(canvasId);
     if (!canvas || !canvas.parentElement.clientWidth) return;  // tab ẩn -> bỏ
     const dates = [...new Set(GOLD_HIST.filter(r => keys.includes(r.key)).map(r => r.date))].sort();
-    document.getElementById(legendId).innerHTML = keys.map(k =>
-      `<span class="lg"><span class="sw" style="background:${GOLD_COLORS[k]}"></span>${GOLD_LABELS[k]}</span>`).join("");
     const series = keys.map(k => {
       const pts = GOLD_HIST.filter(r => r.key === k).sort((a, b) => a.date < b.date ? -1 : 1);
       let pi = 0, last = null;
       const vals = dates.map(d => { while (pi < pts.length && pts[pi].date <= d) { last = pts[pi].value; pi++; } return last === null ? null : last * scale; });
       return { color: GOLD_COLORS[k], name: GOLD_LABELS[k] || k, vals };
     });
-    interactiveLineChart(canvasId, dates, series, (c, d, s) => drawLineChart(c, d, s, 220, opts.fmt), opts.fmt);
+    interactiveLineChart(canvasId, dates, series, (c, d, s) => drawLineChart(c, d, s, 220, opts.fmt), opts.fmt, legendId);
   }
 
   // 'YYYY-MM-DD' -> 'dd/mm/yyyy' (nhãn trục ngày + tooltip, dùng chung mọi chart)
@@ -1658,14 +1646,12 @@
     const byKey = {};
     keys.forEach(k => byKey[k] = MKT_HIST.filter(r => r.key === k).sort((a,b)=>a.date<b.date?-1:1));
     const dates = [...new Set(MKT_HIST.filter(r=>keys.includes(r.key)).map(r=>r.date))].sort();
-    document.getElementById(legendId).innerHTML = keys.map(k =>
-      `<span class="lg"><span class="sw" style="background:${MKT_COLORS[k]}"></span>${MKT_LABELS[k]}</span>`).join("");
     const series = keys.map(k => {
       const pts = byKey[k]; let pi=0, last=null;
       const vals = dates.map(d => { while(pi<pts.length && pts[pi].date<=d){last=pts[pi].value;pi++;} return last; });
       return { color: MKT_COLORS[k], name: MKT_LABELS[k] || k, vals };
     });
-    interactiveLineChart(canvasId, dates, series, (c, d, s) => drawLineChart(c, d, s, 220));
+    interactiveLineChart(canvasId, dates, series, (c, d, s) => drawLineChart(c, d, s, 220), null, legendId);
   }
 
   function renderMktChart() {
@@ -1716,25 +1702,49 @@
   function seriesLabel(s) { return s.bank || s.name || ""; }
   function seriesColor(s) { return s.color || BANK_COLORS[s.bank] || "#8899AA"; }
 
-  function interactiveLineChart(id, dates, series, drawFn, fmt) {
+  function interactiveLineChart(id, dates, series, drawFn, fmt, legendId) {
     const canvas = document.getElementById(id);
     if (!canvas || !canvas.parentElement.clientWidth) return;
     let st = CHART_STATE[id];
     if (!st) { st = CHART_STATE[id] = { hover: null }; attachChartEvents(id); }
+    if (!st.hidden) st.hidden = new Set();     // series đang bị ẩn (theo tên)
     st.dates = dates; st.series = series; st.drawFn = drawFn; st.fmt = fmt;
+    if (legendId) st.legendId = legendId;
     // Reset zoom khi bộ dữ liệu đổi (đổi kỳ hạn/kênh) hoặc chưa có view
     if (!st.view || st.view.full !== dates.length) {
       st.view = { i0: 0, i1: Math.max(0, dates.length - 1), full: dates.length };
       st.hover = null;
     }
+    if (st.legendId) buildLegend(id);
     redrawChart(id);
+  }
+
+  // Legend click-để-ẩn/hiện từng đường (chỉ khi chart có >1 đường).
+  function buildLegend(id) {
+    const st = CHART_STATE[id];
+    const el = document.getElementById(st.legendId);
+    if (!el || !st.series) return;
+    const multi = st.series.length > 1;
+    el.innerHTML = st.series.map(s => {
+      const nm = seriesLabel(s);
+      return `<span class="lg ${st.hidden.has(nm) ? "off" : ""}" data-series="${nm}"${multi ? ' style="cursor:pointer"' : ""}>` +
+        `<span class="sw" style="background:${seriesColor(s)}"></span>${nm}</span>`;
+    }).join("");
+    if (!multi) return;
+    el.querySelectorAll(".lg").forEach(item => item.addEventListener("click", () => {
+      const nm = item.dataset.series;
+      st.hidden.has(nm) ? st.hidden.delete(nm) : st.hidden.add(nm);
+      item.classList.toggle("off");
+      redrawChart(id);
+    }));
   }
 
   function redrawChart(id) {
     const st = CHART_STATE[id]; if (!st || !st.dates) return;
     const { i0, i1 } = st.view;
     const d = st.dates.slice(i0, i1 + 1);
-    const s = st.series.map(se => ({ ...se, vals: se.vals.slice(i0, i1 + 1) }));
+    const vis = (st.hidden && st.hidden.size) ? st.series.filter(se => !st.hidden.has(seriesLabel(se))) : st.series;
+    const s = vis.map(se => ({ ...se, vals: se.vals.slice(i0, i1 + 1) }));
     st.sliced = { dates: d, series: s };
     st.map = st.drawFn(document.getElementById(id), d, s);
     if (st.hover != null && st.map) drawChartOverlay(id);
