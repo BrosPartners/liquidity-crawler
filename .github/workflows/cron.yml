@@ -65,6 +65,11 @@ jobs:
         env:
           PYTHONUTF8: "1"
 
+      - name: Crawl bơm/hút ròng OMO DAILY (Vietstock)
+        run: python crawl_omo.py
+        env:
+          PYTHONUTF8: "1"
+
       - name: Đẩy lên Google Sheet (chỉ Thứ Sáu = weekly)
         run: |
           if [ "$(date -u +%u)" = "5" ] || [ -n "${{ github.event.inputs.banks }}" ]; then

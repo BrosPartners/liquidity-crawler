@@ -596,6 +596,19 @@
       </div>
       <canvas id="sbvVnindexChart"></canvas>
     </div>
+    <div class="mkt-section-title">Bơm/hút ròng qua thị trường mở (OMO)</div>
+    <div class="mkt-grid" id="omoKpi"></div>
+    <div class="ts-panel" style="margin:8px 0 0">
+      <div class="ts-head">
+        <div class="panel-title">Giá trị bơm ròng OMO hằng ngày (tỷ đồng)</div>
+        <div class="ts-legend">
+          <span class="lg"><span class="sw" style="background:#3EE0A0"></span>Bơm ròng (+)</span>
+          <span class="lg"><span class="sw" style="background:#E05060"></span>Hút ròng (−)</span>
+        </div>
+      </div>
+      <canvas id="omoChart"></canvas>
+    </div>
+    <div class="mkt-note" id="omoNote"></div>
     <div class="mkt-section-title">Lãi suất liên ngân hàng &amp; điều hành SBV (mới nhất)</div>
     <div class="mkt-grid" id="mktGridSBV"></div>
     <div class="mkt-note" id="mktNote"></div>
@@ -1324,6 +1337,89 @@
     .then(text => { VNINDEX_HIST = parseMktCSV(text); renderVnindexChart(); })
     .catch(() => {});
 
+  // ── Bơm/hút ròng OMO (Vietstock, tỷ đồng) ────────────────────────────
+  let OMO_HIST = [];   // [{date, bom, hut, net}]
+  fetch("../data/omo_volume.csv")
+    .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
+    .then(text => { OMO_HIST = parseOmoCSV(text); renderOmoChart(); })
+    .catch(() => {});
+
+  function parseOmoCSV(text) {
+    const lines = (text || "").trim().split(/\r?\n/);
+    const out = [];
+    for (let i = 1; i < lines.length; i++) {
+      const p = lines[i].split(",");
+      if (p.length < 4) continue;
+      const num = x => { const v = parseFloat(x); return isNaN(v) ? null : v; };
+      out.push({ date: p[0], bom: num(p[1]), hut: num(p[2]), net: num(p[3]) });
+    }
+    return out;
+  }
+
+  const fmtTy = v => (v == null ? "—" : Math.round(v).toLocaleString("en-US") + " tỷ");
+
+  function renderOmoChart() {
+    if (!OMO_HIST.length) return;
+    const pts = OMO_HIST.filter(r => r.net != null).sort((a, b) => a.date < b.date ? -1 : 1);
+    if (!pts.length) return;
+    const last = pts[pts.length - 1];
+    // KPI: bơm ròng mới nhất + cộng dồn 5 phiên gần nhất
+    const w5 = pts.slice(-5).reduce((s, r) => s + (r.net || 0), 0);
+    const kpi = [
+      ["Bơm ròng (phiên mới nhất)", (last.net >= 0 ? "+" : "") + fmtTy(last.net), last.date.split("-").reverse().join("/"),
+        last.net >= 0 ? "up" : "down"],
+      ["Bơm (mua kỳ hạn)", fmtTy(last.bom), "", ""],
+      ["Hút (bán tín phiếu…)", fmtTy(last.hut), "", ""],
+      ["Bơm ròng · 5 phiên", (w5 >= 0 ? "+" : "") + fmtTy(w5), "cộng dồn", w5 >= 0 ? "up" : "down"],
+    ];
+    document.getElementById("omoKpi").innerHTML = kpi.map(([l, v, s, cls]) =>
+      `<div class="mkt-card"><div class="mkt-label">${l}</div>` +
+      `<div class="mkt-val" style="${cls === "up" ? "color:var(--hi)" : cls === "down" ? "color:var(--lo)" : ""}">${v}</div>` +
+      `<div class="mkt-asof">${s}</div></div>`).join("");
+    document.getElementById("omoNote").innerHTML =
+      "Bơm ròng > 0: SBV bơm thanh khoản (nới lỏng); < 0: hút ròng (thắt chặt). " +
+      "Nguồn: Vietstock — nghiệp vụ thị trường mở, cập nhật hằng ngày.";
+    const dates = pts.map(r => r.date);
+    const series = [{ name: "Bơm ròng OMO", vals: pts.map(r => r.net) }];
+    interactiveLineChart("omoChart", dates, series, (c, d, s) => drawOmoBars(c, d, s), fmtTy);
+  }
+
+  // Bar chart bơm/hút ròng: cột quanh trục 0, xanh (bơm) / đỏ (hút).
+  function drawOmoBars(canvas, dates, series) {
+    const ctx = canvas.getContext("2d");
+    const dpr = window.devicePixelRatio || 1;
+    const w = canvas.parentElement.clientWidth, h = 260;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + "px"; canvas.style.height = h + "px";
+    ctx.scale(dpr, dpr); ctx.clearRect(0, 0, w, h);
+    const PAD = { t: 16, r: 60, b: 32, l: 12 };
+    const cw = w - PAD.l - PAD.r, ch = h - PAD.t - PAD.b;
+    const vals = series[0].vals;
+    const nn = vals.filter(v => v != null);
+    if (!nn.length) return;
+    const amax = Math.max(1, Math.max(...nn.map(Math.abs))) * 1.1;
+    const tm = timeMapX(dates, PAD.l, cw); const x = tm.x;
+    const y = v => PAD.t + ch / 2 - (v / amax) * (ch / 2);
+    // lưới + nhãn trục phải (0 ở giữa)
+    ctx.strokeStyle = "rgba(30,53,96,.6)"; ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+      const gy = PAD.t + (ch * i) / 4, val = amax - (2 * amax) * i / 4;
+      ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
+      ctx.fillStyle = i === 2 ? "#8fa6c4" : "#5A7A9A"; ctx.font = "10px system-ui"; ctx.textAlign = "left";
+      ctx.fillText(Math.round(val).toLocaleString("en-US"), w - PAD.r + 6, gy + 3);
+    }
+    drawXTimeLabels(ctx, tm, PAD, cw, h - PAD.b + 16, dates.length < 2);
+    const y0 = y(0);
+    const bw = Math.max(1, Math.min(6, cw / dates.length));
+    vals.forEach((v, i) => {
+      if (v == null) return;
+      const px = x(i), py = y(v);
+      ctx.fillStyle = v >= 0 ? "#3EE0A0" : "#E05060";
+      ctx.fillRect(px - bw / 2, Math.min(y0, py), Math.max(bw, 1), Math.max(Math.abs(py - y0), 0.5));
+    });
+    return { PAD, w, h, cw, ch, lo: -amax, hi: amax, x, y, n: dates.length, T: tm.T, t0: tm.t0, span: tm.span };
+  }
+
   const VNINDEX_CHART_IDS = ["vnindexChart", "tsVnindexChart", "sbvVnindexChart", "tygiaVnindexChart"];
   // Mỗi chart VNI căn CÙNG khoảng thời gian với chart gốc trong tab đó (đọc domain
   // từ CHART_STATE của chart gốc sau khi nó vẽ xong), để 2 chart xếp chồng thẳng
@@ -1597,7 +1693,7 @@
   }
   makeRangeBar("goldRangeBar", ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart", "goldBrandBuyChart", "goldSpreadChart"]);
   makeRangeBar("tsRangeBar", ["tsChart", "tsAvgChart", "tsVnindexChart"]);
-  makeRangeBar("sbvRangeBar", ["sbvChart", "sbvVnindexChart"]);
+  makeRangeBar("sbvRangeBar", ["sbvChart", "sbvVnindexChart", "omoChart"]);
   makeRangeBar("tygiaRangeBar", ["goldFxChart", "tygiaVnindexChart"]);
   makeRangeBar("bondRangeBar", ["bondChart", "vnindexChart", "bondFxChart", "bondRateChart"]);
 
@@ -1951,7 +2047,7 @@
     // Vẽ lại chart của tab vừa hiện (canvas cần width > 0 mới vẽ đúng)
     requestAnimationFrame(() => {
       if (name === "huydong" || name === "dienbien") render();
-      if (name === "sbv") renderMktChart();
+      if (name === "sbv") { renderMktChart(); renderOmoChart(); }
       if (name === "vang") renderGoldCharts();
       if (name === "tygia") renderFxChart();
       if (name === "bond") renderBondChart();
@@ -1962,7 +2058,7 @@
     b.addEventListener("click", () => setTab(b.dataset.tab)));
 
   // Re-render charts on resize
-  window.addEventListener("resize", () => { render(); renderMktChart(); renderGoldCharts(); renderFxChart(); renderBondChart(); renderVnindexChart(); });
+  window.addEventListener("resize", () => { render(); renderMktChart(); renderGoldCharts(); renderFxChart(); renderBondChart(); renderVnindexChart(); renderOmoChart(); });
 </script>
 </body>
 </html>
