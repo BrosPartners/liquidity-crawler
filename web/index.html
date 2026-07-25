@@ -608,6 +608,13 @@
       </div>
       <canvas id="omoChart"></canvas>
     </div>
+    <div class="ts-panel" style="margin:16px 0 0">
+      <div class="ts-head">
+        <div class="panel-title">Lãi suất điều hành OMO &amp; tín phiếu (%/năm)</div>
+        <div class="ts-legend" id="omoRateLegend"></div>
+      </div>
+      <canvas id="omoRateChart"></canvas>
+    </div>
     <div class="mkt-note" id="omoNote"></div>
     <div class="mkt-section-title">Lãi suất liên ngân hàng &amp; điều hành SBV (mới nhất)</div>
     <div class="mkt-grid" id="mktGridSBV"></div>
@@ -1693,7 +1700,7 @@
   }
   makeRangeBar("goldRangeBar", ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart", "goldBrandBuyChart", "goldSpreadChart"]);
   makeRangeBar("tsRangeBar", ["tsChart", "tsAvgChart", "tsVnindexChart"]);
-  makeRangeBar("sbvRangeBar", ["sbvChart", "sbvVnindexChart", "omoChart"]);
+  makeRangeBar("sbvRangeBar", ["sbvChart", "sbvVnindexChart", "omoChart", "omoRateChart"]);
   makeRangeBar("tygiaRangeBar", ["goldFxChart", "tygiaVnindexChart"]);
   makeRangeBar("bondRangeBar", ["bondChart", "vnindexChart", "bondFxChart", "bondRateChart"]);
 
@@ -1806,6 +1813,7 @@
 
   function renderMktChart() {
     drawMktSeries("sbvChart", "sbvChartLegend", ["interbank_on","omo_rate","tin_phieu_rate"]);
+    drawMktSeries("omoRateChart", "omoRateLegend", ["omo_rate","tin_phieu_rate"]);
   }
 
   // Vẽ line chart tổng quát (dùng lại cho market) — step-after forward-fill
