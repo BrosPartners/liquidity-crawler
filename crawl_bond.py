@@ -35,27 +35,48 @@ from scripts import sheet_source as ss             # noqa: E402
 
 DATA_DIR = os.path.join(_ROOT, "data")
 CSV_PATH = os.path.join(DATA_DIR, "bond_yield.csv")
+YAHOO_URL = "https://query1.finance.yahoo.com/v8/finance/chart/%5ETNX"  # ^TNX = US 10Y yield
 FRED_URL = "https://fred.stlouisfed.org/graph/fredgraph.csv"
 _HEADERS = {"User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                            "AppleWebKit/537.36 (KHTML, like Gecko) "
                            "Chrome/125.0.0.0 Safari/537.36")}
 
 
-def fetch_us_fred(from_date: str = "2019-01-01") -> dict:
-    """{date_iso: yield%} lợi suất TPCP US 10Y từ FRED DGS10."""
+def _fetch(url, params, tries=4):
     import time
-    last_err = None
-    for i in range(4):
+    last = None
+    for i in range(tries):
         try:
-            with httpx.Client(headers=_HEADERS, follow_redirects=True, timeout=45) as c:
-                r = c.get(FRED_URL, params={"id": "DGS10", "cosd": from_date})
+            with httpx.Client(headers=_HEADERS, follow_redirects=True, timeout=30) as c:
+                r = c.get(url, params=params)
                 r.raise_for_status()
-            break
+                return r
         except Exception as e:
-            last_err = e
+            last = e
             time.sleep(2 * (i + 1))
-    else:
-        raise last_err
+    raise last
+
+
+def fetch_us_yahoo(from_date: str = "2019-01-01") -> dict:
+    """{date_iso: yield%} US 10Y từ Yahoo ^TNX (giá đã là %/năm)."""
+    d0 = int(_dt.datetime.strptime(from_date, "%Y-%m-%d").timestamp())
+    now = int(_dt.datetime.now().timestamp()) + 86400
+    r = _fetch(YAHOO_URL, {"period1": d0, "period2": now, "interval": "1d"})
+    res = r.json()["chart"]["result"][0]
+    ts = res.get("timestamp") or []
+    cl = res["indicators"]["quote"][0].get("close") or []
+    out = {}
+    for t, v in zip(ts, cl):
+        if v is None:
+            continue
+        d = _dt.datetime.fromtimestamp(t, _dt.timezone.utc).date().isoformat()
+        out[d] = round(float(v), 3)
+    return out
+
+
+def fetch_us_fred(from_date: str = "2019-01-01") -> dict:
+    """{date_iso: yield%} US 10Y từ FRED DGS10 (fallback nếu Yahoo lỗi)."""
+    r = _fetch(FRED_URL, {"id": "DGS10", "cosd": from_date})
     out = {}
     for line in r.text.strip().splitlines()[1:]:
         parts = line.split(",")
@@ -68,6 +89,20 @@ def fetch_us_fred(from_date: str = "2019-01-01") -> dict:
             except ValueError:
                 pass
     return out
+
+
+def fetch_us(from_date: str = "2019-01-01") -> dict:
+    """US 10Y: thử Yahoo trước, FRED fallback."""
+    try:
+        d = fetch_us_yahoo(from_date)
+        if d:
+            print(f"[OK]   US10Y từ Yahoo ^TNX: {len(d)} ngày, tới {max(d)}")
+            return d
+    except Exception as e:
+        print(f"[WARN] Yahoo ^TNX lỗi, thử FRED: {type(e).__name__}: {e}", file=sys.stderr)
+    d = fetch_us_fred(from_date)
+    print(f"[OK]   US10Y từ FRED DGS10: {len(d)} ngày, tới {max(d) if d else '—'}")
+    return d
 
 
 def _base_from_sheet(cfg) -> tuple[dict, dict]:
@@ -101,13 +136,11 @@ def main() -> int:
     print(f"[OK]   Sheet base: VN {len(vn)} ngày (tới {max(vn) if vn else '—'}), "
           f"US {len(us)} ngày (tới {max(us) if us else '—'})")
 
-    # US từ FRED — chuẩn & cập nhật tới nay; ghi đè/bổ sung lên base Sheet.
+    # US từ Yahoo/FRED — cập nhật tới nay; ghi đè/bổ sung lên base Sheet.
     try:
-        us_fred = fetch_us_fred("2019-01-01")
-        us.update(us_fred)
-        print(f"[OK]   FRED US10Y: {len(us_fred)} ngày, tới {max(us_fred)}")
+        us.update(fetch_us("2019-01-01"))
     except Exception as e:
-        print(f"[WARN] FRED bỏ qua (giữ US từ Sheet): {type(e).__name__}: {e}", file=sys.stderr)
+        print(f"[WARN] US10Y online lỗi (giữ US từ Sheet): {type(e).__name__}: {e}", file=sys.stderr)
 
     # Carry-forward VN cho mọi ngày (tới khi Sheet có số mới thì tự đúng lại).
     all_dates = sorted(set(vn) | set(us))

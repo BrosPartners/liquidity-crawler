@@ -1199,9 +1199,27 @@
       if (b) b.style.display = "none";
     });
 
+  // Bỏ các điểm sjc_sell "lẻ/sai ngày" ở đầu chuỗi (vd file thiếu lịch sử 2017-2023,
+  // chỉ còn vài dòng cũ gắn sai ngày với giá 2024) — chúng tạo đường phẳng giả.
+  // Cắt tới block liên tục cuối cùng nếu phần bỏ đi ít (<30 điểm) để tránh cắt nhầm.
+  function trimStraySjc(hist) {
+    const sjc = hist.filter(r => r.key === "sjc_sell").sort((a, b) => a.date < b.date ? -1 : 1);
+    if (sjc.length < 2) return hist;
+    const DAY = 86400000;
+    let cut = 0;
+    for (let i = 1; i < sjc.length; i++) {
+      if ((Date.parse(sjc[i].date) - Date.parse(sjc[i - 1].date)) / DAY > 45) cut = i;
+    }
+    if (cut > 0 && cut < 30) {
+      const cutDate = sjc[cut].date;
+      return hist.filter(r => !(r.key === "sjc_sell" && r.date < cutDate));
+    }
+    return hist;
+  }
+
   fetch("../data/gold_history.csv")
     .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
-    .then(text => { GOLD_HIST = parseMktCSV(text); renderGoldCharts(); renderFxChart(); renderBondChart(); })
+    .then(text => { GOLD_HIST = trimStraySjc(parseMktCSV(text)); renderGoldCharts(); renderFxChart(); renderBondChart(); })
     .catch(() => {});
 
   // ── Giá mua/bán theo thương hiệu (gold_brands.csv, 2020→nay) ─────────
@@ -1355,7 +1373,8 @@
   function renderBondFxChart(d0, d1) {
     const canvas = document.getElementById("bondFxChart");
     if (!canvas || !canvas.parentElement.clientWidth || !GOLD_HIST.length) return;
-    const keys = ["fx_vcb", "fx_tudo", "fx_sbv"];
+    const keys = fxKeys();
+    if (!keys.length) return;
     const fxDates = [...new Set(GOLD_HIST.filter(r => keys.includes(r.key)).map(r => r.date))].sort();
     if (!fxDates.length) return;
     const series = keys.map(k => {
@@ -1461,8 +1480,16 @@
   };
   const GOLD_COLORS = {
     sjc_sell: "#E8A030", world_gold_vnd: "#3B82F6", world_gold_usd: "#3B82F6", pct_gap: "#EF4444",
-    fx_vcb: "#22C55E", fx_tudo: "#F59E0B", fx_sbv: "#A855F7",
+    fx_vcb: "#22C55E", fx_tudo: "#F59E0B", fx_sbv: "#A855F7", usd_vnd: "#22C55E",
   };
+
+  // Chọn key tỷ giá có dữ liệu: ưu tiên 3 nguồn VCB/tự do/SBV; nếu file không còn
+  // (chỉ còn usd_vnd yfinance) thì fallback 1 đường USD/VND để chart không trống.
+  function fxKeys() {
+    const has = k => GOLD_HIST.some(r => r.key === k && r.value != null);
+    const three = ["fx_vcb", "fx_tudo", "fx_sbv"].filter(has);
+    return three.length ? three : (has("usd_vnd") ? ["usd_vnd"] : []);
+  }
 
   function fmtVnd(v) { return v == null ? "—" : Math.round(v).toLocaleString("en-US"); }
 
@@ -1507,7 +1534,7 @@
   // nhưng dữ liệu vẫn lấy từ GOLD_HIST (file gold_history.csv chứa fx_*).
   function renderFxChart() {
     const fxFmt = v => Math.round(v).toLocaleString("en-US");
-    drawGoldSeries("goldFxChart", "goldFxLegend", ["fx_vcb", "fx_tudo", "fx_sbv"], { fmt: fxFmt });
+    drawGoldSeries("goldFxChart", "goldFxLegend", fxKeys(), { fmt: fxFmt });
   }
 
   // ── Lọc nhanh khoảng thời gian cho time-series chart (đặt lại view zoom) ──
