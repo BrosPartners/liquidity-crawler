@@ -1738,10 +1738,11 @@
     drawXTimeLabels(ctx, tm, PAD, cw, h-PAD.b+16, dates.length<2);
     series.forEach(s => {
       ctx.strokeStyle=s.color; ctx.lineWidth=2; ctx.lineJoin="round"; ctx.beginPath();
-      let started=false;
-      s.vals.forEach((v,i)=>{ if(v==null)return; const px=x(i),py=y(v);
-        if(!started){ctx.moveTo(px,py);started=true;}
-        else{ctx.lineTo(px,y(s.vals[i-1]!=null?s.vals[i-1]:v));ctx.lineTo(px,py);} });
+      let prevV=null;   // null = đầu chuỗi hoặc vừa qua vùng đứt -> điểm kế moveTo (ngắt nét)
+      s.vals.forEach((v,i)=>{ if(v==null){prevV=null;return;} const px=x(i),py=y(v);
+        if(prevV==null){ctx.moveTo(px,py);}
+        else{ctx.lineTo(px,y(prevV));ctx.lineTo(px,py);}   // step-after
+        prevV=v; });
       ctx.stroke();
       for(let i=s.vals.length-1;i>=0;i--){ if(s.vals[i]!=null){ ctx.fillStyle=s.color;
         ctx.beginPath();ctx.arc(x(i),y(s.vals[i]),3,0,Math.PI*2);ctx.fill(); break; } }
