@@ -1232,40 +1232,22 @@
     .then(text => { GOLD_BRANDS = cleanBrands(parseBrandsCSV(text)); renderBrandCharts(); })
     .catch(() => {});
 
-  // Làm sạch dữ liệu hãng: (1) bỏ SPIKE outlier — giá vọt bất thường so với hàng
-  // xóm (vd 80-81tr sai ngày ở 2020/2021, quanh đó chỉ ~48-58tr); (2) bỏ điểm lẻ
-  // đầu chuỗi cách nhau >45 ngày (vd SJC mất lịch sử 2022-2023, còn vài điểm 2020/21).
+  // Làm sạch dữ liệu hãng:
+  //  (1) dedup theo ngày (CSV có dòng trùng);
+  //  (2) TRẦN pre-2024: giá vàng VN chưa từng >79tr trước 2024 -> bỏ mọi điểm >79tr
+  //      trước 2024 (các dòng 80-81.3tr gắn sai ngày 2020/2021 ở SJC/DOJI/BTMC...,
+  //      quanh đó chỉ ~48-58tr; GIỮ giá 77.8tr tháng 12/2023 thật).
+  // (Đường phẳng qua vùng thiếu data được xử lý bằng cách NGẮT đường trong _brandSeries.)
   function cleanBrands(rows) {
-    const DAY = 86400000;
     const byCo = {};
     rows.forEach(r => (byCo[r.company] = byCo[r.company] || []).push(r));
     const out = [];
     Object.values(byCo).forEach(list => {
       list.sort((a, b) => a.date < b.date ? -1 : 1);
-      // dedup theo ngày (CSV có dòng trùng) — giữ bản đầu
       const seen = new Set();
       list = list.filter(r => seen.has(r.date) ? false : seen.add(r.date));
-      const T = list.map(r => Date.parse(r.date));
-      // (1) spike: bỏ điểm buy > 1.35× trung vị các điểm trong ±45 NGÀY thực
-      let f = list.filter((r, i) => {
-        if (r.buy == null) return true;
-        const win = [];
-        for (let j = 0; j < list.length; j++) {
-          if (j === i || list[j].buy == null) continue;
-          if (Math.abs(T[j] - T[i]) <= 45 * DAY) win.push(list[j].buy);
-        }
-        if (!win.length) return true;
-        win.sort((a, b) => a - b);
-        const med = win[Math.floor(win.length / 2)];
-        return !(med > 0 && r.buy > med * 1.35);
-      });
-      // (2) điểm lẻ đầu chuỗi (gap tới điểm kế >45 ngày), bỏ nếu phần đầu <30 điểm
-      let cut = 0;
-      for (let i = 1; i < f.length; i++) {
-        if ((Date.parse(f[i].date) - Date.parse(f[i - 1].date)) / DAY > 45) cut = i;
-      }
-      if (cut > 0 && cut < 30) f = f.slice(cut);
-      out.push(...f);
+      list = list.filter(r => !(r.buy != null && r.date < "2024-01-01" && r.buy > 79000000));
+      out.push(...list);
     });
     return out;
   }
@@ -1288,11 +1270,18 @@
     const dates = [...new Set(GOLD_BRANDS.map(r => r.date))].sort();
     const byCo = {};
     companies.forEach(c => byCo[c] = GOLD_BRANDS.filter(r => r.company === c).sort((a, b) => a.date < b.date ? -1 : 1));
+    const DAY = 86400000;
     const series = companies.map(c => {
       const pts = byCo[c];
-      let pi = 0, last = null;
+      let pi = 0, last = null, lastT = null;
       const vals = dates.map(d => {
-        while (pi < pts.length && pts[pi].date <= d) { const v = valueFn(pts[pi]); if (v != null) last = v; pi++; }
+        while (pi < pts.length && pts[pi].date <= d) {
+          const v = valueFn(pts[pi]);
+          if (v != null) { last = v; lastT = Date.parse(pts[pi].date); }
+          pi++;
+        }
+        // NGẮT đường khi vùng thiếu data > 30 ngày (không vẽ đường phẳng giả)
+        if (last == null || (Date.parse(d) - lastT) / DAY > 30) return null;
         return last;
       });
       return { name: BRAND_LABELS[c] || c, color: BRAND_COLORS[c] || "#8899AA", vals };
