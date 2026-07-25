@@ -189,6 +189,29 @@ def deposit_from_sheet(cfg: SheetConfig) -> Optional[Tuple[str, str]]:
     return json.dumps(latest, ensure_ascii=False), buf.getvalue()
 
 
+def _local_on_points() -> List[Tuple[str, float]]:
+    """[(date_iso, value)] từ data/on_rate.csv (Vietstock daily) — nếu có."""
+    import os
+    p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                     "data", "on_rate.csv")
+    out = []
+    if not os.path.exists(p):
+        return out
+    try:
+        with open(p, encoding="utf-8") as f:
+            for r in csv.reader(f):
+                if len(r) < 2 or r[0] == "date":
+                    continue
+                d = _norm_date(r[0])
+                try:
+                    out.append((d, float(str(r[1]).replace(",", "").strip())))
+                except Exception:
+                    pass
+    except Exception:
+        pass
+    return out
+
+
 def _onrate_points(cfg: SheetConfig) -> List[Tuple[str, float]]:
     """[(date_iso, value)] từ tab 'ON rate'."""
     try:
@@ -222,6 +245,7 @@ def assemble_market(cfg: SheetConfig, local_latest: str,
     Trả None nếu không lấy được gì từ sheet (build_static giữ nguyên local).
     """
     on_pts = _onrate_points(cfg)
+    local_on = _local_on_points()
     mkt_rows = None
     try:
         rows = _rows(read_tab_csv(cfg, MKT_TAB))
@@ -230,8 +254,8 @@ def assemble_market(cfg: SheetConfig, local_latest: str,
     except Exception:
         mkt_rows = None
 
-    if mkt_rows is None and not on_pts:
-        return None  # không có gì mới từ sheet
+    if mkt_rows is None and not on_pts and not local_on:
+        return None  # không có gì mới từ sheet/local
 
     # Khởi tạo từ local (giữ các series không có trên sheet)
     latest_by_key = {}
@@ -282,7 +306,7 @@ def assemble_market(cfg: SheetConfig, local_latest: str,
 
     # interbank_on: gộp lịch sử daily tab ON rate + điểm live crawl (local),
     # dedupe theo ngày, latest = ngày mới nhất (tránh lấy nhầm điểm cũ của sheet).
-    if on_pts:
+    if on_pts or local_on:
         by_date = {}
         for row in hist_rows:               # điểm interbank_on đang có (local)
             if row[1] == "interbank_on":
@@ -293,7 +317,9 @@ def assemble_market(cfg: SheetConfig, local_latest: str,
         prev_on = latest_by_key.get("interbank_on")
         if prev_on and prev_on.get("date"):
             by_date[prev_on["date"]] = prev_on["value"]
-        for d, v in on_pts:                  # tab ON rate (ưu tiên nếu trùng ngày)
+        for d, v in on_pts:                  # tab ON rate (lịch sử sâu 2014→)
+            by_date[d] = v
+        for d, v in local_on:                # data/on_rate.csv daily (Vietstock) THẮNG
             by_date[d] = v
         hist_rows = [row for row in hist_rows if row[1] != "interbank_on"]
         for d in sorted(by_date):

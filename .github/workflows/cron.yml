@@ -60,6 +60,11 @@ jobs:
           PYTHONUTF8: "1"
           SHEET_ID: ${{ secrets.SHEET_ID }}
 
+      - name: Crawl lãi suất liên NH qua đêm DAILY (Vietstock)
+        run: python crawl_on.py
+        env:
+          PYTHONUTF8: "1"
+
       - name: Đẩy lên Google Sheet (chỉ Thứ Sáu = weekly)
         run: |
           if [ "$(date -u +%u)" = "5" ] || [ -n "${{ github.event.inputs.banks }}" ]; then

@@ -65,6 +65,43 @@ def _to_float(s: str) -> Optional[float]:
         return None
 
 
+def fetch_on_history(days: int = 120) -> "list[tuple[str, float]]":
+    """[(date_iso, on_rate)] daily cho ON (NormID 293) trong `days` ngày gần nhất.
+
+    Dùng để backfill/cập nhật DAILY tab Sheet 'ON rate' (adapter chính chỉ giữ
+    dòng mới nhất; ở đây lấy TẤT CẢ điểm trong khoảng ngày).
+    """
+    today = _dt.date.today()
+    with httpx.Client(headers=_HEADERS, follow_redirects=True, timeout=30, http2=False) as c:
+        token = _token(c.get(PAGE).text)
+        if not token:
+            raise RuntimeError("Không lấy được __RequestVerificationToken từ Vietstock")
+        r = c.post(ENDPOINT, data={
+            "listID[]": ["293"], "termTypeID": 1, "type": "NORM",
+            "fromDate": (today - _dt.timedelta(days=days)).isoformat(),
+            "toDate": today.isoformat(),
+            "__RequestVerificationToken": token,
+        }, headers={"Referer": PAGE, "X-Requested-With": "XMLHttpRequest"})
+        r.raise_for_status()
+        data = r.json()
+    cols = (data.get("DataStructure") or "").split("|")
+    ci = {c: i for i, c in enumerate(cols)}
+    if "NormID" not in ci or "TimeOrder" not in ci or "Value" not in ci:
+        raise RuntimeError("Response Vietstock thiếu cột cần thiết")
+    out = {}
+    for line in data.get("Data") or []:
+        parts = line.split("|")
+        if parts[ci["NormID"]] != "293":
+            continue
+        val = _to_float(parts[ci["Value"]])
+        if val is None:
+            continue
+        to = parts[ci["TimeOrder"]]  # YYYYMMDD
+        if len(to) == 8 and to.isdigit():
+            out[f"{to[:4]}-{to[4:6]}-{to[6:8]}"] = val
+    return sorted(out.items())
+
+
 class Adapter:
     code = "MARKET_VNIBOR"
     name = "Vietstock VNIBOR liên ngân hàng"
