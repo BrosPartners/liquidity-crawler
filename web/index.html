@@ -1229,8 +1229,46 @@
 
   fetch("../data/gold_brands.csv")
     .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
-    .then(text => { GOLD_BRANDS = parseBrandsCSV(text); renderBrandCharts(); })
+    .then(text => { GOLD_BRANDS = cleanBrands(parseBrandsCSV(text)); renderBrandCharts(); })
     .catch(() => {});
+
+  // Làm sạch dữ liệu hãng: (1) bỏ SPIKE outlier — giá vọt bất thường so với hàng
+  // xóm (vd 80-81tr sai ngày ở 2020/2021, quanh đó chỉ ~48-58tr); (2) bỏ điểm lẻ
+  // đầu chuỗi cách nhau >45 ngày (vd SJC mất lịch sử 2022-2023, còn vài điểm 2020/21).
+  function cleanBrands(rows) {
+    const DAY = 86400000;
+    const byCo = {};
+    rows.forEach(r => (byCo[r.company] = byCo[r.company] || []).push(r));
+    const out = [];
+    Object.values(byCo).forEach(list => {
+      list.sort((a, b) => a.date < b.date ? -1 : 1);
+      // dedup theo ngày (CSV có dòng trùng) — giữ bản đầu
+      const seen = new Set();
+      list = list.filter(r => seen.has(r.date) ? false : seen.add(r.date));
+      const T = list.map(r => Date.parse(r.date));
+      // (1) spike: bỏ điểm buy > 1.35× trung vị các điểm trong ±45 NGÀY thực
+      let f = list.filter((r, i) => {
+        if (r.buy == null) return true;
+        const win = [];
+        for (let j = 0; j < list.length; j++) {
+          if (j === i || list[j].buy == null) continue;
+          if (Math.abs(T[j] - T[i]) <= 45 * DAY) win.push(list[j].buy);
+        }
+        if (!win.length) return true;
+        win.sort((a, b) => a - b);
+        const med = win[Math.floor(win.length / 2)];
+        return !(med > 0 && r.buy > med * 1.35);
+      });
+      // (2) điểm lẻ đầu chuỗi (gap tới điểm kế >45 ngày), bỏ nếu phần đầu <30 điểm
+      let cut = 0;
+      for (let i = 1; i < f.length; i++) {
+        if ((Date.parse(f[i].date) - Date.parse(f[i - 1].date)) / DAY > 45) cut = i;
+      }
+      if (cut > 0 && cut < 30) f = f.slice(cut);
+      out.push(...f);
+    });
+    return out;
+  }
 
   function parseBrandsCSV(text) {
     const lines = (text || "").trim().split(/\r?\n/);
