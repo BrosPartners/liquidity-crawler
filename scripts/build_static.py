@@ -94,9 +94,12 @@ def main() -> int:
                 if mkt:
                     mkt_latest, mkt_history = mkt[0], mkt[1]
                     print("[sheet] market: ghép local + 'Auto - Market' + lịch sử 'ON rate'")
-                bond = ss.bond_from_sheet(cfg)
-                if bond:
-                    bond_history = bond
+                # Bond: ưu tiên data/bond_yield.csv (crawl_bond.py = Sheet + FRED US
+                # cập nhật). Chỉ đọc thẳng Sheet khi chưa có file crawl.
+                if not bond_history:
+                    bond = ss.bond_from_sheet(cfg)
+                    if bond:
+                        bond_history = bond
                     print("[sheet] bond 10Y: lấy từ 'VN-US 10y bond yield'")
         except Exception as e:
             print(f"[sheet] bỏ qua, dùng file cục bộ: {type(e).__name__}: {e}",

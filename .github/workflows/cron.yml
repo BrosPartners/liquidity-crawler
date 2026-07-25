@@ -54,6 +54,12 @@ jobs:
         env:
           PYTHONUTF8: "1"
 
+      - name: Crawl lợi suất TPCP 10Y (US từ FRED + VN từ Sheet)
+        run: python crawl_bond.py
+        env:
+          PYTHONUTF8: "1"
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+
       - name: Đẩy lên Google Sheet (chỉ Thứ Sáu = weekly)
         run: |
           if [ "$(date -u +%u)" = "5" ] || [ -n "${{ github.event.inputs.banks }}" ]; then
