@@ -61,6 +61,8 @@ def main() -> int:
     bond_history = _read("bond_yield.csv", "")
     vnindex_history = _read("vnindex_history.csv", "")
     omo_volume = _read("omo_volume.csv", "")
+    macro_history = _read("macro_history.csv", "")
+    macro_latest = _read("macro_latest.json", "null")
 
     # ── Ưu tiên NGUỒN GỐC là Google Sheet (nếu cấu hình sheet_id) ──────────
     if not args.no_sheet:
@@ -184,6 +186,21 @@ def main() -> int:
         print("[ERR] không thay được fetch omo_volume trong web/index.html", file=sys.stderr)
         return 1
 
+    # 3f. Thay fetch macro (CPI/vĩ mô IMF) bằng data nhúng
+    html, _n = re.subn(
+        r'fetch\("\.\./data/macro_history\.csv"\)\s*'
+        r'\.then\(r => \{ if \(!r\.ok\) throw new Error\("x"\); return r\.text\(\); \}\)',
+        "Promise.resolve(__EMBED_MACRO_HISTORY__)", html, count=1)
+    if _n != 1:
+        print("[ERR] không thay được fetch macro_history trong web/index.html", file=sys.stderr)
+        return 1
+    html, _n = re.subn(
+        r'fetch\("\.\./data/macro_latest\.json"\)\s*\.then\(r => r\.json\(\)\)',
+        "Promise.resolve(__EMBED_MACRO_LATEST__)", html, count=1)
+    if _n != 1:
+        print("[ERR] không thay được fetch macro_latest trong web/index.html", file=sys.stderr)
+        return 1
+
     # 4. Chèn data ngay đầu <script>
     embed = (
         "<script>\n"
@@ -197,6 +214,8 @@ def main() -> int:
         f"const __EMBED_BOND__ = {json.dumps(bond_history, ensure_ascii=False)};\n"
         f"const __EMBED_VNINDEX__ = {json.dumps(vnindex_history, ensure_ascii=False)};\n"
         f"const __EMBED_OMO__ = {json.dumps(omo_volume, ensure_ascii=False)};\n"
+        f"const __EMBED_MACRO_HISTORY__ = {json.dumps(macro_history, ensure_ascii=False)};\n"
+        f"const __EMBED_MACRO_LATEST__ = {macro_latest};\n"
     )
     html = html.replace("<script>", embed, 1)
 

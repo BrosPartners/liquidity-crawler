@@ -70,6 +70,12 @@ jobs:
         env:
           PYTHONUTF8: "1"
 
+      - name: Crawl chỉ tiêu vĩ mô (CPI, dự trữ NH, XNK, IIP — IMF/DBnomics)
+        run: python crawl_macro.py
+        env:
+          PYTHONUTF8: "1"
+        continue-on-error: true
+
       - name: Đẩy lên Google Sheet (chỉ Thứ Sáu = weekly)
         run: |
           if [ "$(date -u +%u)" = "5" ] || [ -n "${{ github.event.inputs.banks }}" ]; then

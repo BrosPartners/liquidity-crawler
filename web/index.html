@@ -486,6 +486,7 @@
   <button class="tab-btn" data-tab="tygia">Tỷ giá &amp; vĩ mô</button>
   <button class="tab-btn" data-tab="vang">Giá vàng</button>
   <button class="tab-btn" data-tab="bond">Trái phiếu 10Y</button>
+  <button class="tab-btn" data-tab="vimo">Kinh tế vĩ mô</button>
 </div>
 
 <!-- Controls dùng chung cho tab Huy động + Diễn biến -->
@@ -754,6 +755,60 @@
       <div class="ts-legend"><span class="lg"><span class="sw" style="background:#E8A030"></span>Trung bình các NH</span></div>
     </div>
     <canvas id="bondRateChart"></canvas>
+  </div>
+</section>
+
+<!-- ══ Tab: Kinh tế vĩ mô ══ -->
+<section class="tabpane" data-pane="vimo">
+  <div class="rng-bar" id="vimoRangeBar">
+    <button class="rng-btn" data-m="12">1 năm</button>
+    <button class="rng-btn" data-m="36">3 năm</button>
+    <button class="rng-btn" data-m="60">5 năm</button>
+    <button class="rng-btn" data-m="120">10 năm</button>
+    <button class="rng-btn active" data-m="0">Tất cả</button>
+  </div>
+  <div class="mkt-wrap">
+    <div class="mkt-section-title">Chỉ tiêu vĩ mô mới nhất</div>
+    <div class="mkt-grid" id="macroKpi"></div>
+    <div class="ts-panel" style="margin:8px 0 0">
+      <div class="ts-head">
+        <div class="panel-title">Lạm phát · CPI so cùng kỳ (YoY, %)</div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#EF4444"></span>CPI YoY</span></div>
+      </div>
+      <canvas id="cpiChart"></canvas>
+    </div>
+    <div class="ts-panel" style="margin:16px 0 0">
+      <div class="ts-head">
+        <div class="panel-title">Dự trữ ngoại hối (tỷ USD)</div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#3B82F6"></span>Dự trữ ngoại hối</span></div>
+      </div>
+      <canvas id="reservesChart"></canvas>
+    </div>
+    <div class="ts-panel" style="margin:16px 0 0">
+      <div class="ts-head">
+        <div class="panel-title">Xuất nhập khẩu hàng tháng (tỷ USD)</div>
+        <div class="ts-legend" id="tradeLegend"></div>
+      </div>
+      <canvas id="tradeChart"></canvas>
+    </div>
+    <div class="ts-panel" style="margin:16px 0 0">
+      <div class="ts-head">
+        <div class="panel-title">Cán cân thương mại hàng tháng (tỷ USD)</div>
+        <div class="ts-legend">
+          <span class="lg"><span class="sw" style="background:#3EE0A0"></span>Xuất siêu (+)</span>
+          <span class="lg"><span class="sw" style="background:#E05060"></span>Nhập siêu (−)</span>
+        </div>
+      </div>
+      <canvas id="tradeBalChart"></canvas>
+    </div>
+    <div class="ts-panel" style="margin:16px 0 0">
+      <div class="ts-head">
+        <div class="panel-title">Chỉ số sản xuất công nghiệp · IIP (điểm)</div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#A855F7"></span>IIP</span></div>
+      </div>
+      <canvas id="iipChart"></canvas>
+    </div>
+    <div class="mkt-note" id="macroNote"></div>
   </div>
 </section>
 
@@ -1351,6 +1406,103 @@
     .then(text => { OMO_HIST = parseOmoCSV(text); renderOmoChart(); })
     .catch(() => {});
 
+  // ── Kinh tế vĩ mô (DBnomics/IMF, tháng — CPI, dự trữ NH, XNK, IIP) ────
+  let MACRO_HIST = [];      // [{date, key, value}]
+  let MACRO_LATEST = null;  // {key: {value, prev, period, label, unit}}
+  fetch("../data/macro_history.csv")
+    .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
+    .then(text => { MACRO_HIST = parseMktCSV(text); renderMacroCharts(); })
+    .catch(() => { const b = document.querySelector('.tab-btn[data-tab="vimo"]'); if (b) b.style.display = "none"; });
+  fetch("../data/macro_latest.json").then(r => r.json())
+    .then(d => { MACRO_LATEST = d; renderMacroKpi(); })
+    .catch(() => {});
+
+  // series con của 1 chỉ tiêu (đã sắp theo thời gian). scale: nhân hệ số hiển thị.
+  function macroSeries(key, scale) {
+    const pts = MACRO_HIST.filter(r => r.key === key).sort((a, b) => a.date < b.date ? -1 : 1);
+    return { dates: pts.map(p => p.date), vals: pts.map(p => p.value * (scale || 1)) };
+  }
+  const fmtMil2Bil = v => (v == null ? "—" : (v).toFixed(1) + " tỷ");  // v đã ÷1000
+
+  function renderMacroKpi() {
+    if (!MACRO_LATEST) return;
+    const box = document.getElementById("macroKpi");
+    if (!box) return;
+    const order = ["cpi_yoy", "reserves", "exports", "imports", "trade_balance", "iip"];
+    const fmt = (k, o) => {
+      if (k === "cpi_yoy") return o.value.toFixed(2) + "%";
+      if (k === "iip") return o.value.toFixed(1);
+      return (o.value / 1000).toFixed(2) + " tỷ USD";  // reserves/XK/NK/CCTM: triệu -> tỷ
+    };
+    const pmm = p => { const [y, m] = p.split("-"); return "T" + m + "/" + y; };
+    box.innerHTML = order.filter(k => MACRO_LATEST[k]).map(k => {
+      const o = MACRO_LATEST[k];
+      let cls = "";
+      if (k === "trade_balance") cls = o.value >= 0 ? "up" : "down";
+      let delta = "";
+      if (o.prev != null) {
+        const d = k === "cpi_yoy" ? (o.value - o.prev) : ((o.value - o.prev) / Math.abs(o.prev) * 100);
+        const u = k === "cpi_yoy" ? "đ%" : "%";
+        delta = " · " + (d >= 0 ? "▲" : "▼") + Math.abs(d).toFixed(1) + u;
+      }
+      return `<div class="mkt-card"><div class="mkt-label">${o.label}</div>` +
+        `<div class="mkt-val" style="${cls === "up" ? "color:var(--hi)" : cls === "down" ? "color:var(--lo)" : ""}">${fmt(k, o)}</div>` +
+        `<div class="mkt-asof">${pmm(o.period)}${delta}</div></div>`;
+    }).join("");
+  }
+
+  function renderMacroCharts() {
+    renderMacroKpi();
+    if (!MACRO_HIST.length) return;
+    if (!document.querySelector('.tabpane[data-pane="vimo"]').classList.contains("active")
+        && !document.getElementById("cpiChart").parentElement.clientWidth) return;
+    // CPI YoY (%)
+    const cpi = macroSeries("cpi_yoy");
+    if (cpi.dates.length) {
+      const fmt = v => v.toFixed(2) + "%";
+      interactiveLineChart("cpiChart", cpi.dates, [{ name: "CPI YoY", color: "#EF4444", vals: cpi.vals }],
+        (c, d, s) => drawLineChart(c, d, s, 300, fmt), fmt);
+    }
+    // Dự trữ ngoại hối (tỷ USD)
+    const res = macroSeries("reserves", 1 / 1000);
+    if (res.dates.length) {
+      const fmt = v => v.toFixed(1) + " tỷ";
+      interactiveLineChart("reservesChart", res.dates, [{ name: "Dự trữ NH", color: "#3B82F6", vals: res.vals }],
+        (c, d, s) => drawLineChart(c, d, s, 240, fmt), fmt);
+    }
+    // Xuất/Nhập khẩu (tỷ USD) — 2 đường cùng domain
+    const exPts = MACRO_HIST.filter(r => r.key === "exports").sort((a, b) => a.date < b.date ? -1 : 1);
+    if (exPts.length) {
+      const imMap = {}; MACRO_HIST.filter(r => r.key === "imports").forEach(r => imMap[r.date] = r.value);
+      const dates = exPts.map(p => p.date);
+      const series = [
+        { name: "Xuất khẩu", color: "#22C55E", vals: exPts.map(p => p.value / 1000) },
+        { name: "Nhập khẩu", color: "#F97316", vals: dates.map(d => imMap[d] != null ? imMap[d] / 1000 : null) },
+      ];
+      const fmt = v => v.toFixed(1) + " tỷ";
+      interactiveLineChart("tradeChart", dates, series,
+        (c, d, s) => drawLineChart(c, d, s, 240, fmt), fmt, "tradeLegend");
+    }
+    // Cán cân thương mại (tỷ USD) — cột quanh 0
+    const tb = macroSeries("trade_balance", 1 / 1000);
+    if (tb.dates.length) {
+      interactiveLineChart("tradeBalChart", tb.dates, [{ name: "Cán cân TM", vals: tb.vals }],
+        (c, d, s) => drawOmoBars(c, d, s), fmtMil2Bil);
+    }
+    // Chỉ số SX công nghiệp (IIP)
+    const iip = macroSeries("iip");
+    if (iip.dates.length) {
+      const fmt = v => v.toFixed(1);
+      interactiveLineChart("iipChart", iip.dates, [{ name: "IIP", color: "#A855F7", vals: iip.vals }],
+        (c, d, s) => drawLineChart(c, d, s, 240, fmt), fmt);
+    }
+    const note = document.getElementById("macroNote");
+    if (note) note.innerHTML =
+      "Nguồn: <b>IMF / IFS</b> qua DBnomics (miễn phí). Số liệu vĩ mô chính thức có độ trễ ~vài tháng " +
+      "và tự cập nhật khi IMF phát hành kỳ mới. FDI &amp; giải ngân đầu tư công không có nguồn lịch sử " +
+      "miễn phí (Vietstock yêu cầu nâng cấp tài khoản) nên chưa đưa vào.";
+  }
+
   function parseOmoCSV(text) {
     const lines = (text || "").trim().split(/\r?\n/);
     const out = [];
@@ -1703,6 +1855,7 @@
   makeRangeBar("sbvRangeBar", ["sbvChart", "sbvVnindexChart", "omoChart", "omoRateChart"]);
   makeRangeBar("tygiaRangeBar", ["goldFxChart", "tygiaVnindexChart"]);
   makeRangeBar("bondRangeBar", ["bondChart", "vnindexChart", "bondFxChart", "bondRateChart"]);
+  makeRangeBar("vimoRangeBar", ["cpiChart", "reservesChart", "tradeChart", "tradeBalChart", "iipChart"]);
 
   function drawGoldSeries(canvasId, legendId, keys, opts) {
     opts = opts || {};
@@ -2059,6 +2212,7 @@
       if (name === "vang") renderGoldCharts();
       if (name === "tygia") renderFxChart();
       if (name === "bond") renderBondChart();
+      if (name === "vimo") renderMacroCharts();
       if (["dienbien", "sbv", "tygia", "bond"].includes(name)) renderVnindexChart();
     });
   }
@@ -2066,7 +2220,7 @@
     b.addEventListener("click", () => setTab(b.dataset.tab)));
 
   // Re-render charts on resize
-  window.addEventListener("resize", () => { render(); renderMktChart(); renderGoldCharts(); renderFxChart(); renderBondChart(); renderVnindexChart(); renderOmoChart(); });
+  window.addEventListener("resize", () => { render(); renderMktChart(); renderGoldCharts(); renderFxChart(); renderBondChart(); renderVnindexChart(); renderOmoChart(); renderMacroCharts(); });
 </script>
 </body>
 </html>

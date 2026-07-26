@@ -1,0 +1,44 @@
+{
+  "cpi_yoy": {
+    "value": 3.1262,
+    "prev": 2.9131,
+    "period": "2025-03",
+    "label": "CPI so cùng kỳ (YoY)",
+    "unit": "%"
+  },
+  "reserves": {
+    "value": 82774.2893,
+    "prev": 83121.684,
+    "period": "2025-05",
+    "label": "Dự trữ ngoại hối",
+    "unit": "tỷ USD"
+  },
+  "exports": {
+    "value": 37445.0,
+    "prev": 38510.0,
+    "period": "2025-04",
+    "label": "Xuất khẩu (FOB)",
+    "unit": "tỷ USD"
+  },
+  "imports": {
+    "value": 36869.0,
+    "prev": 36875.0,
+    "period": "2025-04",
+    "label": "Nhập khẩu (CIF)",
+    "unit": "tỷ USD"
+  },
+  "iip": {
+    "value": 108.8113,
+    "prev": 97.136,
+    "period": "2025-03",
+    "label": "Sản xuất công nghiệp (IIP)",
+    "unit": "điểm"
+  },
+  "trade_balance": {
+    "value": 576.0,
+    "prev": 1635.0,
+    "period": "2025-04",
+    "label": "Cán cân thương mại",
+    "unit": "tỷ USD"
+  }
+}
