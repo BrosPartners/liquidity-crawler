@@ -611,7 +611,7 @@
     </div>
     <div class="ts-panel" style="margin:16px 0 0">
       <div class="ts-head">
-        <div class="panel-title">Lãi suất điều hành OMO &amp; tín phiếu (%/năm)</div>
+        <div class="panel-title">Hành lang lãi suất điều hành SBV · tái cấp vốn / OMO / chiết khấu (%/năm)</div>
         <div class="ts-legend" id="omoRateLegend"></div>
       </div>
       <canvas id="omoRateChart"></canvas>
@@ -1424,30 +1424,34 @@
   }
   const fmtMil2Bil = v => (v == null ? "—" : (v).toFixed(1) + " tỷ");  // v đã ÷1000
 
+  // KPI từ VietnamBiz (giá trị mới nhất, tới hiện tại) + reserves từ IMF.
+  // Mỗi entry: {value, prev, period, period_label, label, fmt}. fmt: pct | milusd.
   function renderMacroKpi() {
     if (!MACRO_LATEST) return;
     const box = document.getElementById("macroKpi");
     if (!box) return;
-    const order = ["cpi_yoy", "reserves", "exports", "imports", "trade_balance", "iip"];
-    const fmt = (k, o) => {
-      if (k === "cpi_yoy") return o.value.toFixed(2) + "%";
-      if (k === "iip") return o.value.toFixed(1);
-      return (o.value / 1000).toFixed(2) + " tỷ USD";  // reserves/XK/NK/CCTM: triệu -> tỷ
-    };
-    const pmm = p => { const [y, m] = p.split("-"); return "T" + m + "/" + y; };
+    const order = ["cpi_yoy", "inflation_avg", "gdp_growth", "iip_yoy",
+      "fdi_registered", "fdi_realized", "public_investment", "exports_yoy",
+      "imports_yoy", "trade_balance", "retail_yoy", "reserves", "budget_rev", "budget_exp"];
+    const fmtVal = o => o.fmt === "milusd"
+      ? (o.value / 1000).toFixed(2) + " tỷ USD" : o.value.toFixed(2) + "%";
     box.innerHTML = order.filter(k => MACRO_LATEST[k]).map(k => {
       const o = MACRO_LATEST[k];
       let cls = "";
       if (k === "trade_balance") cls = o.value >= 0 ? "up" : "down";
       let delta = "";
       if (o.prev != null) {
-        const d = k === "cpi_yoy" ? (o.value - o.prev) : ((o.value - o.prev) / Math.abs(o.prev) * 100);
-        const u = k === "cpi_yoy" ? "đ%" : "%";
-        delta = " · " + (d >= 0 ? "▲" : "▼") + Math.abs(d).toFixed(1) + u;
+        if (o.fmt === "milusd") {
+          const d = (o.value - o.prev) / 1000;
+          delta = " · " + (d >= 0 ? "▲" : "▼") + Math.abs(d).toFixed(1) + " tỷ";
+        } else {
+          const d = o.value - o.prev;
+          delta = " · " + (d >= 0 ? "▲" : "▼") + Math.abs(d).toFixed(1) + "đ%";
+        }
       }
       return `<div class="mkt-card"><div class="mkt-label">${o.label}</div>` +
-        `<div class="mkt-val" style="${cls === "up" ? "color:var(--hi)" : cls === "down" ? "color:var(--lo)" : ""}">${fmt(k, o)}</div>` +
-        `<div class="mkt-asof">${pmm(o.period)}${delta}</div></div>`;
+        `<div class="mkt-val" style="${cls === "up" ? "color:var(--hi)" : cls === "down" ? "color:var(--lo)" : ""}">${fmtVal(o)}</div>` +
+        `<div class="mkt-asof">${o.period_label || ""}${delta}</div></div>`;
     }).join("");
   }
 
@@ -1498,9 +1502,10 @@
     }
     const note = document.getElementById("macroNote");
     if (note) note.innerHTML =
-      "Nguồn: <b>IMF / IFS</b> qua DBnomics (miễn phí). Số liệu vĩ mô chính thức có độ trễ ~vài tháng " +
-      "và tự cập nhật khi IMF phát hành kỳ mới. FDI &amp; giải ngân đầu tư công không có nguồn lịch sử " +
-      "miễn phí (Vietstock yêu cầu nâng cấp tài khoản) nên chưa đưa vào.";
+      "Thẻ KPI: <b>VietnamBiz</b> (giá trị mới nhất, cập nhật tới kỳ hiện tại) — gồm CPI, FDI, " +
+      "đầu tư công, XNK, GDP, ngân sách. Chart lịch sử dài: <b>IMF / IFS</b> qua DBnomics; " +
+      "CPI &amp; cán cân thương mại được nối đuôi bằng VietnamBiz để chạm hiện tại (khoảng giữa " +
+      "được backfill từ Wayback). Số vĩ mô chính thức có độ trễ ~1 tháng.";
   }
 
   function parseOmoCSV(text) {
@@ -1909,6 +1914,7 @@
   const MACRO_KEYS = ["credit_yoy","deposit_yoy","m2_yoy","fx_reserves","dep_1_3m","dep_6_9m","dep_12m"];
   const MKT_COLORS = {
     interbank_on:"#E8A030", omo_rate:"#3EE0A0", tin_phieu_rate:"#EC4899",
+    refi_rate:"#EF4444", discount_rate:"#3B82F6",
   };
 
   function fmtNum(v, key) {
@@ -1965,8 +1971,11 @@
   }
 
   function renderMktChart() {
-    drawMktSeries("sbvChart", "sbvChartLegend", ["interbank_on","omo_rate","tin_phieu_rate"]);
-    drawMktSeries("omoRateChart", "omoRateLegend", ["omo_rate","tin_phieu_rate"]);
+    drawMktSeries("sbvChart", "sbvChartLegend", ["interbank_on","omo_rate"]);
+    // Lãi suất tín phiếu đã bị VietnamBiz đóng băng từ 07/2025 (SBV gần như ngừng
+    // phát hành) -> loại khỏi chart để tránh vẽ số cũ như dữ liệu hiện tại. Thay
+    // bằng hành lang điều hành hợp lệ: tái cấp vốn (trần) / OMO / chiết khấu (sàn).
+    drawMktSeries("omoRateChart", "omoRateLegend", ["refi_rate","omo_rate","discount_rate"]);
   }
 
   // Vẽ line chart tổng quát (dùng lại cho market) — step-after forward-fill

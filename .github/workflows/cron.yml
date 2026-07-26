@@ -9,6 +9,11 @@ on:
         description: "Lọc bank codes (vd: VCB,ACB) — để trống = tất cả"
         required: false
         default: ""
+      macro_backfill:
+        description: "Backfill khoảng trống CPI/cán cân TM từ Wayback (chạy 1 lần)"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
@@ -70,7 +75,14 @@ jobs:
         env:
           PYTHONUTF8: "1"
 
-      - name: Crawl chỉ tiêu vĩ mô (CPI, dự trữ NH, XNK, IIP — IMF/DBnomics)
+      - name: Backfill khoảng trống CPI/cán cân TM từ Wayback (thủ công)
+        if: github.event.inputs.macro_backfill == 'true'
+        run: python scripts/backfill_macro_wayback.py --from 2025-03 --to 2026-12
+        env:
+          PYTHONUTF8: "1"
+        continue-on-error: true
+
+      - name: Crawl chỉ tiêu vĩ mô (CPI/FDI/đầu tư công… — IMF + VietnamBiz)
         run: python crawl_macro.py
         env:
           PYTHONUTF8: "1"

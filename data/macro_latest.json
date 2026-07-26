@@ -1,44 +1,114 @@
 {
   "cpi_yoy": {
-    "value": 3.1262,
-    "prev": 2.9131,
-    "period": "2025-03",
+    "value": 4.6915,
+    "prev": 5.6011,
+    "period": "2026-06",
+    "period_label": "T06/2026",
     "label": "CPI so cùng kỳ (YoY)",
-    "unit": "%"
+    "fmt": "pct"
+  },
+  "inflation_avg": {
+    "value": 4.3758,
+    "prev": 4.3128,
+    "period": "2026-06",
+    "period_label": "T06/2026",
+    "label": "Lạm phát bình quân",
+    "fmt": "pct"
+  },
+  "gdp_growth": {
+    "value": 8.3924,
+    "prev": 7.9396,
+    "period": "2026-Q2",
+    "period_label": "Q2/2026",
+    "label": "Tăng trưởng GDP",
+    "fmt": "pct"
+  },
+  "iip_yoy": {
+    "value": 12.71,
+    "prev": 10.14,
+    "period": "2026-06",
+    "period_label": "T06/2026",
+    "label": "Sản xuất công nghiệp (IIP YoY)",
+    "fmt": "pct"
+  },
+  "fdi_registered": {
+    "value": 214.377,
+    "prev": 43.7637,
+    "period": "2026-06",
+    "period_label": "T06/2026",
+    "label": "FDI đăng ký (YoY)",
+    "fmt": "pct"
+  },
+  "fdi_realized": {
+    "value": 16.3121,
+    "prev": 8.7963,
+    "period": "2026-06",
+    "period_label": "T06/2026",
+    "label": "FDI thực hiện (YoY)",
+    "fmt": "pct"
+  },
+  "public_investment": {
+    "value": 13.9,
+    "prev": 14.2706,
+    "period": "2026-06",
+    "period_label": "T06/2026",
+    "label": "Đầu tư công · vốn NSNN (YoY)",
+    "fmt": "pct"
+  },
+  "exports_yoy": {
+    "value": 28.086,
+    "prev": 17.9983,
+    "period": "2026-06",
+    "period_label": "T06/2026",
+    "label": "Xuất khẩu (YoY)",
+    "fmt": "pct"
+  },
+  "imports_yoy": {
+    "value": 45.1875,
+    "prev": 33.7609,
+    "period": "2026-06",
+    "period_label": "T06/2026",
+    "label": "Nhập khẩu (YoY)",
+    "fmt": "pct"
+  },
+  "trade_balance": {
+    "value": -2644.4753,
+    "prev": -5190.2036,
+    "period": "2026-06",
+    "period_label": "T06/2026",
+    "label": "Cán cân thương mại",
+    "fmt": "milusd"
+  },
+  "retail_yoy": {
+    "value": 14.8001,
+    "prev": 13.829,
+    "period": "2026-06",
+    "period_label": "T06/2026",
+    "label": "Bán lẻ HH&DV (YoY)",
+    "fmt": "pct"
   },
   "reserves": {
     "value": 82774.2893,
     "prev": 83121.684,
     "period": "2025-05",
+    "period_label": "T05/2025",
     "label": "Dự trữ ngoại hối",
-    "unit": "tỷ USD"
+    "fmt": "milusd"
   },
-  "exports": {
-    "value": 37445.0,
-    "prev": 38510.0,
-    "period": "2025-04",
-    "label": "Xuất khẩu (FOB)",
-    "unit": "tỷ USD"
+  "budget_rev": {
+    "value": 20.9104,
+    "prev": 14.9822,
+    "period": "2026-Q2",
+    "period_label": "Q2/2026",
+    "label": "Thu ngân sách (YoY)",
+    "fmt": "pct"
   },
-  "imports": {
-    "value": 36869.0,
-    "prev": 36875.0,
-    "period": "2025-04",
-    "label": "Nhập khẩu (CIF)",
-    "unit": "tỷ USD"
-  },
-  "iip": {
-    "value": 108.8113,
-    "prev": 97.136,
-    "period": "2025-03",
-    "label": "Sản xuất công nghiệp (IIP)",
-    "unit": "điểm"
-  },
-  "trade_balance": {
-    "value": 576.0,
-    "prev": 1635.0,
-    "period": "2025-04",
-    "label": "Cán cân thương mại",
-    "unit": "tỷ USD"
+  "budget_exp": {
+    "value": -8.164,
+    "prev": 23.816,
+    "period": "2026-Q2",
+    "period_label": "Q2/2026",
+    "label": "Chi ngân sách (YoY)",
+    "fmt": "pct"
   }
 }
