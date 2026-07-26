@@ -1309,10 +1309,15 @@
 
   // Làm sạch dữ liệu hãng:
   //  (1) dedup theo ngày (CSV có dòng trùng);
-  //  (2) TRẦN pre-2024: giá vàng VN chưa từng >79tr trước 2024 -> bỏ mọi điểm >79tr
-  //      trước 2024 (các dòng 80-81.3tr gắn sai ngày 2020/2021 ở SJC/DOJI/BTMC...,
-  //      quanh đó chỉ ~48-58tr; GIỮ giá 77.8tr tháng 12/2023 thật).
-  // (Đường phẳng qua vùng thiếu data được xử lý bằng cách NGẮT đường trong _brandSeries.)
+  //  (2) BIÊN HỢP LÝ: giá vàng VN/lượng 2020-2026 luôn ~40-190tr -> bỏ điểm buy/sell
+  //      ngoài [30tr, 400tr]. Bắt lỗi sai 10× hay gặp (thiếu/thừa 1 chữ số): vd
+  //      DOJI 14,45tr (thật ~145tr) làm đường rơi về 0; Phú Quý 4,49tr / BTMC sell
+  //      4,7tr làm spread nổ 900%. Lọc CẢ buy lẫn sell.
+  //  (3) TRẦN pre-2024: giá chưa từng >79tr trước 2024 -> bỏ điểm >79tr trước 2024
+  //      (các dòng 80-81,3tr gắn sai ngày 2020/2021; GIỮ giá 77,8tr tháng 12/2023).
+  // (Đường phẳng qua vùng thiếu data được NGẮT trong _brandSeries.)
+  const GOLD_MIN = 30e6, GOLD_MAX = 400e6;
+  const _sane = v => v == null || (v >= GOLD_MIN && v <= GOLD_MAX);
   function cleanBrands(rows) {
     const byCo = {};
     rows.forEach(r => (byCo[r.company] = byCo[r.company] || []).push(r));
@@ -1321,6 +1326,12 @@
       list.sort((a, b) => a.date < b.date ? -1 : 1);
       const seen = new Set();
       list = list.filter(r => seen.has(r.date) ? false : seen.add(r.date));
+      // bỏ điểm buy/sell ngoài biên hợp lý (lỗi 10×)
+      list = list.map(r => ({
+        date: r.date, company: r.company,
+        buy: _sane(r.buy) ? r.buy : null,
+        sell: _sane(r.sell) ? r.sell : null,
+      })).filter(r => r.buy != null || r.sell != null);
       list = list.filter(r => !(r.buy != null && r.date < "2024-01-01" && r.buy > 79000000));
       out.push(...list);
     });
@@ -1377,7 +1388,12 @@
   function renderSpreadChart() {
     const canvas = document.getElementById("goldSpreadChart");
     if (!canvas || !canvas.parentElement.clientWidth || !GOLD_BRANDS.length) return;
-    const { dates, series } = _brandSeries(r => (r.buy && r.sell && r.buy > 0) ? (r.sell - r.buy) / r.buy * 100 : null);
+    // spread mua-bán vàng thực tế ~0-10%; bỏ điểm ngoài [-3%, 20%] (rác còn sót)
+    const { dates, series } = _brandSeries(r => {
+      if (!(r.buy && r.sell && r.buy > 0)) return null;
+      const sp = (r.sell - r.buy) / r.buy * 100;
+      return (sp >= -3 && sp <= 20) ? sp : null;
+    });
     const fmt = v => v.toFixed(2) + "%";
     interactiveLineChart("goldSpreadChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt, "goldSpreadLegend");
   }
