@@ -786,7 +786,7 @@
     </div>
     <div class="ts-panel" style="margin:16px 0 0">
       <div class="ts-head">
-        <div class="panel-title">Xuất nhập khẩu hàng tháng (tỷ USD)</div>
+        <div class="panel-title">Tăng trưởng xuất / nhập khẩu (YoY %)</div>
         <div class="ts-legend" id="tradeLegend"></div>
       </div>
       <canvas id="tradeChart"></canvas>
@@ -803,7 +803,7 @@
     </div>
     <div class="ts-panel" style="margin:16px 0 0">
       <div class="ts-head">
-        <div class="panel-title">Chỉ số sản xuất công nghiệp · IIP (điểm)</div>
+        <div class="panel-title">Sản xuất công nghiệp · IIP (tăng trưởng YoY %)</div>
         <div class="ts-legend"><span class="lg"><span class="sw" style="background:#A855F7"></span>IIP</span></div>
       </div>
       <canvas id="iipChart"></canvas>
@@ -1474,16 +1474,16 @@
       interactiveLineChart("reservesChart", res.dates, [{ name: "Dự trữ NH", color: "#3B82F6", vals: res.vals }],
         (c, d, s) => drawLineChart(c, d, s, 240, fmt), fmt);
     }
-    // Xuất/Nhập khẩu (tỷ USD) — 2 đường cùng domain
-    const exPts = MACRO_HIST.filter(r => r.key === "exports").sort((a, b) => a.date < b.date ? -1 : 1);
+    // Tăng trưởng Xuất/Nhập khẩu (YoY %) — 2 đường cùng domain
+    const exPts = MACRO_HIST.filter(r => r.key === "exports_yoy").sort((a, b) => a.date < b.date ? -1 : 1);
     if (exPts.length) {
-      const imMap = {}; MACRO_HIST.filter(r => r.key === "imports").forEach(r => imMap[r.date] = r.value);
+      const imMap = {}; MACRO_HIST.filter(r => r.key === "imports_yoy").forEach(r => imMap[r.date] = r.value);
       const dates = exPts.map(p => p.date);
       const series = [
-        { name: "Xuất khẩu", color: "#22C55E", vals: exPts.map(p => p.value / 1000) },
-        { name: "Nhập khẩu", color: "#F97316", vals: dates.map(d => imMap[d] != null ? imMap[d] / 1000 : null) },
+        { name: "Xuất khẩu", color: "#22C55E", vals: exPts.map(p => p.value) },
+        { name: "Nhập khẩu", color: "#F97316", vals: dates.map(d => imMap[d] != null ? imMap[d] : null) },
       ];
-      const fmt = v => v.toFixed(1) + " tỷ";
+      const fmt = v => v.toFixed(1) + "%";
       interactiveLineChart("tradeChart", dates, series,
         (c, d, s) => drawLineChart(c, d, s, 240, fmt), fmt, "tradeLegend");
     }
@@ -1493,19 +1493,20 @@
       interactiveLineChart("tradeBalChart", tb.dates, [{ name: "Cán cân TM", vals: tb.vals }],
         (c, d, s) => drawOmoBars(c, d, s), fmtMil2Bil);
     }
-    // Chỉ số SX công nghiệp (IIP)
-    const iip = macroSeries("iip");
+    // Sản xuất công nghiệp · IIP (YoY %)
+    const iip = macroSeries("iip_yoy");
     if (iip.dates.length) {
-      const fmt = v => v.toFixed(1);
-      interactiveLineChart("iipChart", iip.dates, [{ name: "IIP", color: "#A855F7", vals: iip.vals }],
+      const fmt = v => v.toFixed(1) + "%";
+      interactiveLineChart("iipChart", iip.dates, [{ name: "IIP YoY", color: "#A855F7", vals: iip.vals }],
         (c, d, s) => drawLineChart(c, d, s, 240, fmt), fmt);
     }
     const note = document.getElementById("macroNote");
     if (note) note.innerHTML =
-      "Thẻ KPI: <b>VietnamBiz</b> (giá trị mới nhất, cập nhật tới kỳ hiện tại) — gồm CPI, FDI, " +
-      "đầu tư công, XNK, GDP, ngân sách. Chart lịch sử dài: <b>IMF / IFS</b> qua DBnomics; " +
-      "CPI &amp; cán cân thương mại được nối đuôi bằng VietnamBiz để chạm hiện tại (khoảng giữa " +
-      "được backfill từ Wayback). Số vĩ mô chính thức có độ trễ ~1 tháng.";
+      "Thẻ KPI: <b>VietnamBiz</b> (giá trị mới nhất, tới kỳ hiện tại) — CPI, FDI, đầu tư công, " +
+      "XNK, GDP, ngân sách. Chart: nền lịch sử dài <b>IMF / IFS</b> (DBnomics), nối đuôi bằng " +
+      "VietnamBiz để chạm hiện tại (khoảng giữa backfill từ Wayback). IIP &amp; XNK hiển thị " +
+      "<b>tăng trưởng cùng kỳ (YoY %)</b> — mức tuyệt đối gần đây không có nguồn free. " +
+      "Số vĩ mô chính thức có độ trễ ~1 tháng.";
   }
 
   function parseOmoCSV(text) {

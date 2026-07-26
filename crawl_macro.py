@@ -2,15 +2,19 @@
 
 HAI nguồn ghép lại để vừa có LỊCH SỬ SÂU vừa tới THỜI ĐIỂM HIỆN TẠI:
 
-1. DBnomics (proxy free IMF/IFS) — chuỗi tháng dài (1995→) nhưng trễ ~vài tháng.
+1. DBnomics (proxy free IMF/IFS) — chuỗi tháng dài (2006/2008→) nhưng trễ ~vài tháng.
      cpi_yoy  M.VN.PCPI_PC_CP_A_PT   reserves M.VN.RAFA_USD
-     exports  M.VN.TXG_FOB_USD       imports  M.VN.TMG_CIF_USD
-     iip      M.VN.AIP_IX            trade_balance = exports - imports
-2. VietnamBiz data.vietnambiz.vn/macro-economic — GIÁ TRỊ MỚI NHẤT (tháng 06/2026…)
-   cho ~13 chỉ tiêu, gồm cả FDI & đầu tư công (Vietstock chặn, IMF không có).
-   Chỉ có latest -> dùng cho KPI + NỐI ĐUÔI cpi_yoy & trade_balance vào chuỗi IMF
-   (những kỳ MỚI HƠN mốc cuối IMF). File macro_history.csv MERGE để tích luỹ dần
-   mỗi tháng; backfill khoảng trống 1 lần bằng scripts/backfill_macro_wayback.py.
+     exports  M.VN.TXG_FOB_USD       imports  M.VN.TMG_CIF_USD   iip M.VN.AIP_IX
+   IIP/XK/NK là mức tuyệt đối/chỉ số -> TÍNH YoY (so cùng kỳ 12 tháng) để cùng
+   thước đo với VietnamBiz, nhờ đó nối đuôi được.
+2. VietnamBiz (miễn phí, tới hiện tại T06/2026…):
+     data.vietnambiz.vn/macro-economic       — CPI/IIP/XK/NK YoY, FDI, đầu tư công…
+     data.vietnambiz.vn/currency-interest-rate — dự trữ ngoại hối (tuyệt đối)
+   Chỉ có latest -> KPI + NỐI ĐUÔI vào chuỗi IMF. macro_history.csv MERGE tích luỹ;
+   khoảng trống backfill 1 lần bằng scripts/backfill_macro_wayback.py.
+
+Key lưu vào macro_history.csv: cpi_yoy, reserves, trade_balance, iip_yoy,
+exports_yoy, imports_yoy.  FDI/đầu tư công/GDP/ngân sách: chỉ KPI (không lịch sử).
 
     python crawl_macro.py
 """
@@ -47,11 +51,12 @@ _IMF = {
     "imports":  "IMF/IFS/M.VN.TMG_CIF_USD",
     "iip":      "IMF/IFS/M.VN.AIP_IX",
 }
-# key nào được NỐI ĐUÔI bằng VietnamBiz (cùng thước đo, cùng đơn vị):
-_EXTEND = {"cpi_yoy", "trade_balance"}
+# key ĐƯỢC nối đuôi bằng VietnamBiz (cùng thước đo) + tích luỹ theo tháng:
+_EXTEND = {"cpi_yoy", "trade_balance", "reserves", "iip_yoy", "exports_yoy", "imports_yoy"}
 
-# ── Nguồn 2: VietnamBiz macro-economic ───────────────────────────────────
-_VNB_URL = "https://data.vietnambiz.vn/macro-economic"
+# ── Nguồn 2: VietnamBiz ──────────────────────────────────────────────────
+_VNB_MACRO = "https://data.vietnambiz.vn/macro-economic"
+_VNB_MONEY = "https://data.vietnambiz.vn/currency-interest-rate"
 # title -> (key, fmt, label). fmt: pct | milusd (÷1000 = tỷ USD)
 _VNB = {
     "Tăng trưởng CPI (YoY)":            ("cpi_yoy",         "pct",    "CPI so cùng kỳ (YoY)"),
@@ -68,7 +73,7 @@ _VNB = {
     "Thu ngân sách (YoY)":              ("budget_rev",      "pct",    "Thu ngân sách (YoY)"),
     "Chi ngân sách (YoY)":              ("budget_exp",      "pct",    "Chi ngân sách (YoY)"),
 }
-# thứ tự hiện KPI
+_VNB_RESERVES = "Dự trữ ngoại hối (Triệu USD)"   # ở trang currency-interest-rate
 _KPI_ORDER = ["cpi_yoy", "inflation_avg", "gdp_growth", "iip_yoy", "fdi_registered",
               "fdi_realized", "public_investment", "exports_yoy", "imports_yoy",
               "trade_balance", "retail_yoy", "reserves", "budget_rev", "budget_exp"]
@@ -93,30 +98,39 @@ def _fetch_imf(client, sid):
     return out
 
 
-def _vnb_period(ngay: str) -> "tuple[str, str] | None":
-    """('YYYY-MM'|'YYYY-Qn'|'YYYY', 'nhãn hiển thị') hoặc None."""
-    s = str(ngay or "")
-    m = re.search(r"Tháng (\d{1,2})/(\d{4})", s)
+def _yoy(pts):
+    """[(YYYY-MM, value)] -> [(YYYY-MM, %YoY)] so với cùng tháng năm trước."""
+    by = dict(pts)
+    out = []
+    for p, v in pts:
+        y, m = p.split("-")
+        prev = f"{int(y) - 1}-{m}"
+        base = by.get(prev)
+        if base and base != 0:
+            out.append((p, round((v / base - 1) * 100, 4)))
+    return out
+
+
+def _period(ngay: str):
+    m = re.search(r"Tháng (\d{1,2})/(\d{4})", str(ngay or ""))
     if m:
         return f"{m.group(2)}-{int(m.group(1)):02d}", f"T{int(m.group(1)):02d}/{m.group(2)}"
-    m = re.search(r"Quý (\d)/(\d{4})", s)
+    m = re.search(r"Quý (\d)/(\d{4})", str(ngay or ""))
     if m:
         return f"{m.group(2)}-Q{m.group(1)}", f"Q{m.group(1)}/{m.group(2)}"
-    m = re.search(r"Năm (\d{4})", s)
+    m = re.search(r"Năm (\d{4})", str(ngay or ""))
     if m:
         return m.group(1), f"Năm {m.group(1)}"
     return None
 
 
-def fetch_vnb(client) -> dict:
-    """key -> {value, prev, period, period_label, label, fmt} từ VietnamBiz (latest)."""
-    r = client.get(_VNB_URL)
-    r.raise_for_status()
-    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', r.text, re.S)
-    if not m:
-        raise RuntimeError("Không tìm thấy __NEXT_DATA__ VietnamBiz")
-    data = json.loads(m.group(1))
-    raw: list = []
+def _next_data(html):
+    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', html, re.S)
+    return json.loads(m.group(1)) if m else None
+
+
+def _objs(data):
+    raw = []
 
     def walk(o):
         if isinstance(o, dict):
@@ -127,41 +141,61 @@ def fetch_vnb(client) -> dict:
         elif isinstance(o, list):
             for v in o:
                 walk(v)
-    walk(data.get("props", {}))
+    walk((data or {}).get("props", {}))
+    return raw
 
+
+def fetch_vnb(client) -> dict:
+    """key -> {value, prev, period, period_label, label, fmt} (macro + reserves)."""
     out: dict = {}
-    for o in raw:
+    # macro-economic
+    r = client.get(_VNB_MACRO)
+    r.raise_for_status()
+    for o in _objs(_next_data(r.text)):
         title = o.get("title") or o.get("name") or o.get("label")
-        if title not in _VNB or title in {k for k in out}:
+        if title not in _VNB:
             continue
         key, fmt, label = _VNB[title]
         if key in out:
             continue
-        pl = _vnb_period(o.get("ngay"))
+        pl = _period(o.get("ngay"))
         if not pl:
             continue
         try:
             val = round(float(o.get("value")), 4)
         except (TypeError, ValueError):
             continue
-        prev = o.get("pre_value")
         try:
-            prev = round(float(prev), 4) if prev is not None else None
+            prev = round(float(o.get("pre_value")), 4) if o.get("pre_value") is not None else None
         except (TypeError, ValueError):
             prev = None
         out[key] = {"value": val, "prev": prev, "period": pl[0],
                     "period_label": pl[1], "label": label, "fmt": fmt}
+    # currency-interest-rate -> reserves (tuyệt đối)
+    try:
+        r2 = client.get(_VNB_MONEY)
+        r2.raise_for_status()
+        for o in _objs(_next_data(r2.text)):
+            if (o.get("title") or o.get("name") or o.get("label")) == _VNB_RESERVES:
+                pl = _period(o.get("ngay"))
+                if pl:
+                    out["reserves"] = {"value": round(float(o["value"]), 4),
+                                       "prev": (round(float(o["pre_value"]), 4)
+                                                if o.get("pre_value") is not None else None),
+                                       "period": pl[0], "period_label": pl[1],
+                                       "label": "Dự trữ ngoại hối", "fmt": "milusd"}
+                break
+    except Exception as e:
+        print(f"[WARN] VNB reserves: {type(e).__name__}: {e}", file=sys.stderr)
     return out
 
 
 def _read_existing() -> dict:
-    """{(date, key): value} từ macro_history.csv hiện có (để MERGE tích luỹ)."""
     ex = {}
     if not os.path.exists(CSV_PATH):
         return ex
     with open(CSV_PATH, encoding="utf-8") as f:
-        rd = csv.DictReader(f)
-        for row in rd:
+        for row in csv.DictReader(f):
             try:
                 ex[(row["date"], row["series_key"])] = float(row["value"])
             except (KeyError, TypeError, ValueError):
@@ -171,26 +205,32 @@ def _read_existing() -> dict:
 
 def main() -> int:
     with httpx.Client(headers=_UA, timeout=45, follow_redirects=True) as c:
-        # 1) IMF
-        imf: dict = {}
+        imf_raw = {}
         for key, sid in _IMF.items():
             try:
-                imf[key] = _fetch_imf(c, sid)
+                imf_raw[key] = _fetch_imf(c, sid)
             except Exception as e:
                 print(f"[WARN] IMF {key}: {type(e).__name__}: {e}", file=sys.stderr)
-                imf[key] = []
-        exp = dict(imf.get("exports", []))
-        imp = dict(imf.get("imports", []))
-        imf["trade_balance"] = sorted((p, round(exp[p] - imp[p], 4)) for p in exp.keys() & imp.keys())
+                imf_raw[key] = []
+        # chuỗi lưu trữ: cpi_yoy & reserves giữ nguyên; iip/xk/nk -> YoY; trade_balance = xk-nk
+        exp = dict(imf_raw.get("exports", []))
+        imp = dict(imf_raw.get("imports", []))
+        imf = {
+            "cpi_yoy": imf_raw.get("cpi_yoy", []),
+            "reserves": imf_raw.get("reserves", []),
+            "iip_yoy": _yoy(imf_raw.get("iip", [])),
+            "exports_yoy": _yoy(imf_raw.get("exports", [])),
+            "imports_yoy": _yoy(imf_raw.get("imports", [])),
+            "trade_balance": sorted((p, round(exp[p] - imp[p], 4)) for p in exp.keys() & imp.keys()),
+        }
         for k, pts in imf.items():
             if pts:
                 print(f"[imf] {k:13} {len(pts):4} điểm  {pts[0][0]} -> {pts[-1][0]}")
 
-        # 2) VietnamBiz (latest, tới hiện tại)
         try:
             vnb = fetch_vnb(c)
-            print(f"[vnb] {len(vnb)} chỉ tiêu, kỳ mới nhất "
-                  f"{vnb.get('cpi_yoy', {}).get('period_label', '?')}")
+            print(f"[vnb] {len(vnb)} chỉ tiêu, CPI kỳ {vnb.get('cpi_yoy', {}).get('period_label', '?')}, "
+                  f"reserves kỳ {vnb.get('reserves', {}).get('period_label', '?')}")
         except Exception as e:
             print(f"[WARN] VietnamBiz: {type(e).__name__}: {e}", file=sys.stderr)
             vnb = {}
@@ -199,17 +239,17 @@ def main() -> int:
         print("[FAIL] không lấy được nguồn nào — giữ file cũ.", file=sys.stderr)
         return 1
 
-    # ── MERGE lịch sử: IMF (nền) + đuôi VietnamBiz đã tích luỹ + điểm mới ──
+    # ── MERGE: IMF (nền) + đuôi đã tích luỹ + điểm mới VietnamBiz ──
     existing = _read_existing()
     imf_last = {k: (pts[-1][0] if pts else "") for k, pts in imf.items()}
     merged: dict = {}
-    for key, pts in imf.items():                       # nền IMF
+    for key, pts in imf.items():
         for p, v in pts:
             merged[(f"{p}-01", key)] = v
-    for (date, key), v in existing.items():            # giữ đuôi đã tích luỹ trước đó
+    for (date, key), v in existing.items():
         if key in _EXTEND and date[:7] > imf_last.get(key, "9999"):
             merged[(date, key)] = v
-    for key in _EXTEND:                                # nối điểm mới nhất từ VietnamBiz
+    for key in _EXTEND:
         o = vnb.get(key)
         if o and re.fullmatch(r"\d{4}-\d{2}", o["period"]) and o["period"] > imf_last.get(key, "9999"):
             merged[(f'{o["period"]}-01', key)] = o["value"]
@@ -220,15 +260,15 @@ def main() -> int:
         w = csv.writer(f, lineterminator="\n")
         w.writerow(["date", "series_key", "value"])
         w.writerows(rows)
-    print(f"[OK]  macro_history.csv: {len(rows)} dòng "
-          f"(cpi tới {max((d for d, k, _ in rows if k == 'cpi_yoy'), default='?')[:7]})")
+    _last = lambda k: max((d for d, kk, _ in rows if kk == k), default="?")[:7]
+    print(f"[OK]  macro_history.csv: {len(rows)} dòng  (cpi→{_last('cpi_yoy')}, "
+          f"iip→{_last('iip_yoy')}, xk→{_last('exports_yoy')}, reserves→{_last('reserves')})")
 
-    # ── KPI: VietnamBiz (hiện tại) + reserves từ IMF ──
+    # ── KPI: VietnamBiz (hiện tại), reserves VNB nếu có, không thì IMF ──
     latest = dict(vnb)
-    res = imf.get("reserves") or []
-    if res:
-        p, v = res[-1]
-        latest["reserves"] = {"value": v, "prev": (res[-2][1] if len(res) >= 2 else None),
+    if "reserves" not in latest and imf["reserves"]:
+        p, v = imf["reserves"][-1]
+        latest["reserves"] = {"value": v, "prev": (imf["reserves"][-2][1] if len(imf["reserves"]) >= 2 else None),
                               "period": p, "period_label": f"T{p[5:7]}/{p[:4]}",
                               "label": "Dự trữ ngoại hối", "fmt": "milusd"}
     ordered = {k: latest[k] for k in _KPI_ORDER if k in latest}

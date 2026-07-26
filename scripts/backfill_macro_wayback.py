@@ -34,12 +34,19 @@ CSV_PATH = os.path.join(_ROOT, "data", "macro_history.csv")
 _UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
        "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"}
 _CDX = "http://web.archive.org/cdx/search/cdx"
-_TARGET = "data.vietnambiz.vn/macro-economic"
-# title VietnamBiz -> key trong macro_history
-_WANT = {
-    "Tăng trưởng CPI (YoY)": "cpi_yoy",
-    "Cán cân thương mại (Triệu USD)": "trade_balance",
-}
+# mỗi target: (url cần archive, {title VietnamBiz -> key trong macro_history})
+_TARGETS = [
+    ("data.vietnambiz.vn/macro-economic", {
+        "Tăng trưởng CPI (YoY)": "cpi_yoy",
+        "Cán cân thương mại (Triệu USD)": "trade_balance",
+        "IIP (YoY)": "iip_yoy",
+        "Xuất khẩu (YoY)": "exports_yoy",
+        "Nhập khẩu (YoY)": "imports_yoy",
+    }),
+    ("data.vietnambiz.vn/currency-interest-rate", {
+        "Dự trữ ngoại hối (Triệu USD)": "reserves",
+    }),
+]
 
 
 def _period(ngay: str):
@@ -47,7 +54,7 @@ def _period(ngay: str):
     return f"{m.group(2)}-{int(m.group(1)):02d}" if m else None
 
 
-def _parse_snapshot(html: str) -> dict:
+def _parse_snapshot(html: str, want: dict) -> dict:
     """{key: (period 'YYYY-MM', value)} từ 1 trang archived."""
     m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', html, re.S)
     if not m:
@@ -71,7 +78,7 @@ def _parse_snapshot(html: str) -> dict:
     out = {}
     for o in raw:
         t = o.get("title") or o.get("name") or o.get("label")
-        key = _WANT.get(t)
+        key = want.get(t)
         if not key or key in out:
             continue
         per = _period(o.get("ngay"))
@@ -92,28 +99,28 @@ def main() -> int:
     frm = args.frm.replace("-", "") + "01"
     to = args.to.replace("-", "") + "31"
 
+    found: dict = {}   # (period, key) -> value  (snapshot mới hơn ghi đè)
     with httpx.Client(headers=_UA, timeout=60, follow_redirects=True) as c:
-        r = c.get(_CDX, params={"url": _TARGET, "output": "json", "from": frm, "to": to,
-                                "collapse": "timestamp:6", "fl": "timestamp,statuscode",
-                                "filter": "statuscode:200"})
-        r.raise_for_status()
-        rows = r.json()
-        snaps = [x[0] for x in rows[1:]] if len(rows) > 1 else []
-        print(f"[cdx] {len(snaps)} snapshot {args.frm}..{args.to}")
-
-        found: dict = {}   # (period, key) -> value  (snapshot mới hơn ghi đè)
-        for ts in snaps:
-            try:
-                html = c.get(f"http://web.archive.org/web/{ts}id_/https://{_TARGET}").text
-                pts = _parse_snapshot(html)
-            except Exception as e:
-                print(f"  [skip] {ts}: {type(e).__name__}", file=sys.stderr)
-                continue
-            for key, (per, val) in pts.items():
-                found[(per, key)] = val
-            if pts:
-                print(f"  [{ts[:8]}] " + ", ".join(f"{k}={v[1]}({v[0]})" for k, v in pts.items()))
-            time.sleep(0.4)
+        for target, want in _TARGETS:
+            r = c.get(_CDX, params={"url": target, "output": "json", "from": frm, "to": to,
+                                    "collapse": "timestamp:6", "fl": "timestamp,statuscode",
+                                    "filter": "statuscode:200"})
+            r.raise_for_status()
+            rows = r.json()
+            snaps = [x[0] for x in rows[1:]] if len(rows) > 1 else []
+            print(f"[cdx] {target}: {len(snaps)} snapshot")
+            for ts in snaps:
+                try:
+                    html = c.get(f"http://web.archive.org/web/{ts}id_/https://{target}").text
+                    pts = _parse_snapshot(html, want)
+                except Exception as e:
+                    print(f"  [skip] {ts}: {type(e).__name__}", file=sys.stderr)
+                    continue
+                for key, (per, val) in pts.items():
+                    found[(per, key)] = val
+                if pts:
+                    print(f"  [{ts[:8]}] " + ", ".join(f"{k}={v[1]}({v[0]})" for k, v in pts.items()))
+                time.sleep(0.4)
 
     if not found:
         print("[WARN] không dựng được điểm nào từ Wayback.", file=sys.stderr)
