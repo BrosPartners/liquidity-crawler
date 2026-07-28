@@ -88,10 +88,10 @@
     "fmt": "pct"
   },
   "reserves": {
-    "value": 82565.32,
-    "prev": 83618.78,
-    "period": "2026-01",
-    "period_label": "T01/2026",
+    "value": 83090.82,
+    "prev": 82552.07,
+    "period": "2026-05",
+    "period_label": "T05/2026",
     "label": "Dự trữ ngoại hối",
     "fmt": "milusd"
   },
