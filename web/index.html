@@ -1456,6 +1456,7 @@
     { key: "interbank_2w", name: "2 tuần",  color: "#3B82F6" },
     { key: "interbank_1m", name: "1 tháng", color: "#A855F7" },
     { key: "interbank_3m", name: "3 tháng", color: "#EF4444" },
+    { key: "interbank_6m", name: "6 tháng", color: "#06B6D4" },
   ];
   fetch("../data/interbank_rates.csv")
     .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })

@@ -9,8 +9,8 @@ Data nạp qua AJAX. Luồng:
      Trả JSON {DataStructure, DataType, Data:[ "pipe|delimited|row", ... ]}.
 
 Category 66 = VNIBOR. NormID -> kỳ hạn (đã xác minh):
-  293 Qua đêm(ON) 294 1 tuần 295 2 tuần 296 1 tháng 297 3 tháng
-  (298 6 tháng, 299 12 tháng thường trống -> bỏ qua).
+  293 Qua đêm(ON) 294 1 tuần 295 2 tuần 296 1 tháng 297 3 tháng 298 6 tháng
+  (299 12 tháng Vietstock trả rỗng -> bỏ qua).
 Giá trị dùng dấu phẩy thập phân (vd "6,62"), unit %/năm.
 
 Vietstock là nguồn chuyên hơn cho liên NH -> cung cấp interbank_on/1w/2w/1m/3m.
@@ -44,6 +44,8 @@ _NORM_MAP = {
     "295": ("interbank_2w", "Lãi suất liên ngân hàng 2 tuần"),
     "296": ("interbank_1m", "Lãi suất liên ngân hàng 1 tháng"),
     "297": ("interbank_3m", "Lãi suất liên ngân hàng 3 tháng"),
+    "298": ("interbank_6m", "Lãi suất liên ngân hàng 6 tháng"),
+    # 299 (12 tháng) Vietstock trả rỗng (VNIBOR 12M gần như không được công bố) -> bỏ.
 }
 _UNIT = "%/năm"
 
