@@ -65,7 +65,7 @@ jobs:
           PYTHONUTF8: "1"
           SHEET_ID: ${{ secrets.SHEET_ID }}
 
-      - name: Crawl lãi suất liên NH qua đêm DAILY (Vietstock)
+      - name: Crawl lãi suất liên NH DAILY đủ kỳ hạn ON/1W/2W/1M/3M (Vietstock)
         run: python crawl_on.py
         env:
           PYTHONUTF8: "1"

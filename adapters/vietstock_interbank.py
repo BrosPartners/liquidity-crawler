@@ -102,6 +102,44 @@ def fetch_on_history(days: int = 120) -> "list[tuple[str, float]]":
     return sorted(out.items())
 
 
+def fetch_all_history(days: int = 180) -> "list[tuple[str, str, float]]":
+    """[(date_iso, series_key, value)] daily cho TẤT CẢ kỳ hạn (ON/1W/2W/1M/3M)
+    trong `days` ngày gần nhất. series_key theo _NORM_MAP (interbank_on/1w/2w/1m/3m).
+    """
+    today = _dt.date.today()
+    with httpx.Client(headers=_HEADERS, follow_redirects=True, timeout=40, http2=False) as c:
+        token = _token(c.get(PAGE).text)
+        if not token:
+            raise RuntimeError("Không lấy được __RequestVerificationToken từ Vietstock")
+        r = c.post(ENDPOINT, data={
+            "listID[]": list(_NORM_MAP.keys()), "termTypeID": 1, "type": "NORM",
+            "fromDate": (today - _dt.timedelta(days=days)).isoformat(),
+            "toDate": today.isoformat(),
+            "__RequestVerificationToken": token,
+        }, headers={"Referer": PAGE, "X-Requested-With": "XMLHttpRequest"})
+        r.raise_for_status()
+        data = r.json()
+    cols = (data.get("DataStructure") or "").split("|")
+    ci = {c: i for i, c in enumerate(cols)}
+    for need in ("NormID", "TimeOrder", "Value"):
+        if need not in ci:
+            raise RuntimeError(f"Response Vietstock thiếu cột {need}")
+    out = []
+    for line in data.get("Data") or []:
+        parts = line.split("|")
+        nid = parts[ci["NormID"]]
+        if nid not in _NORM_MAP:
+            continue
+        val = _to_float(parts[ci["Value"]])
+        if val is None:
+            continue
+        to = parts[ci["TimeOrder"]]  # YYYYMMDD
+        if len(to) == 8 and to.isdigit():
+            out.append((f"{to[:4]}-{to[4:6]}-{to[6:8]}", _NORM_MAP[nid][0], val))
+    out.sort()
+    return out
+
+
 class Adapter:
     code = "MARKET_VNIBOR"
     name = "Vietstock VNIBOR liên ngân hàng"

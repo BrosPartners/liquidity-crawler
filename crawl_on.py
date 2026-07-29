@@ -1,9 +1,12 @@
-"""Crawl lãi suất liên NH qua đêm (ON) DAILY -> data/on_rate.csv.
+"""Crawl lãi suất liên NH DAILY (đủ kỳ hạn ON/1W/2W/1M/3M) từ Vietstock.
 
-Adapter Vietstock chính chỉ giữ điểm mới nhất; ở đây lấy TẤT CẢ điểm daily ~120
-ngày gần nhất và ghi đè on_rate.csv (idempotent). build_static/assemble_market
-gộp file này (local THẮNG cho ngày trùng) với lịch sử sâu 2014→ ở Sheet 'ON rate'
--> chart ON rate luôn daily, tự backfill các ngày vừa rồi.
+Ghi 2 file (1 lần fetch):
+  - data/interbank_rates.csv  (long: date, series_key, value) — cho chart đa kỳ hạn.
+  - data/on_rate.csv          (date, value) — CHỈ ON, giữ tương thích với
+    assemble_market (gộp lịch sử sâu 'ON rate' ở Sheet cho chart interbank_on).
+
+Adapter Vietstock chính chỉ giữ điểm mới nhất; ở đây lấy TẤT CẢ điểm daily ~180
+ngày gần nhất và ghi đè (idempotent).
 
     python crawl_on.py
 """
@@ -22,27 +25,39 @@ for _s in (sys.stdout, sys.stderr):
 _ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _ROOT)
 
-from adapters.vietstock_interbank import fetch_on_history
+from adapters.vietstock_interbank import fetch_all_history
 
-CSV_PATH = os.path.join(_ROOT, "data", "on_rate.csv")
+ALL_PATH = os.path.join(_ROOT, "data", "interbank_rates.csv")
+ON_PATH = os.path.join(_ROOT, "data", "on_rate.csv")
 
 
 def main() -> int:
     try:
-        hist = fetch_on_history(120)
+        hist = fetch_all_history(180)   # [(date, series_key, value)]
     except Exception as e:
-        print(f"[FAIL] Vietstock ON history: {type(e).__name__}: {e}", file=sys.stderr)
+        print(f"[FAIL] Vietstock interbank history: {type(e).__name__}: {e}", file=sys.stderr)
         return 1
     if not hist:
-        print("[WARN] không lấy được điểm ON nào.", file=sys.stderr)
+        print("[WARN] không lấy được điểm liên NH nào.", file=sys.stderr)
         return 1
-    os.makedirs(os.path.dirname(CSV_PATH), exist_ok=True)
-    with open(CSV_PATH, "w", newline="", encoding="utf-8") as f:
+    os.makedirs(os.path.dirname(ALL_PATH), exist_ok=True)
+
+    with open(ALL_PATH, "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f, lineterminator="\n")
+        w.writerow(["date", "series_key", "value"])
+        for d, k, v in hist:
+            w.writerow([d, k, v])
+
+    on = [(d, v) for d, k, v in hist if k == "interbank_on"]
+    with open(ON_PATH, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f, lineterminator="\n")
         w.writerow(["date", "value"])
-        for d, v in hist:
+        for d, v in on:
             w.writerow([d, v])
-    print(f"[OK]   on_rate.csv: {len(hist)} ngày ({hist[0][0]} -> {hist[-1][0]})")
+
+    keys = sorted({k for _, k, _ in hist})
+    print(f"[OK]   interbank_rates.csv: {len(hist)} điểm, {len(keys)} kỳ hạn "
+          f"({keys}); on_rate.csv: {len(on)} ngày")
     return 0
 
 
