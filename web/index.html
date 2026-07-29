@@ -186,10 +186,11 @@
     }
     .panel-title {
       padding: 10px 16px;
-      font-size: 11px;
+      font-size: 11.5px;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: .08em;
-      color: var(--muted);
+      color: var(--text);
       border-bottom: 1px solid var(--border);
       background: var(--panel);
     }
@@ -329,7 +330,8 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      font-size: 11px;
+      font-size: 11.5px;
+      font-weight: 600;
       color: var(--muted);
     }
     .ts-legend .lg {
@@ -985,7 +987,7 @@
     ctx.clearRect(0, 0, w, h);
 
     if (!rows.length) {
-      ctx.fillStyle = "#5A7A9A";
+      ctx.fillStyle = "#AFC0D8";
       ctx.font = "13px system-ui";
       ctx.textAlign = "center";
       ctx.fillText("Không có dữ liệu", w / 2, h / 2);
@@ -1009,8 +1011,8 @@
       const y = PAD.t + chartH - (chartH * i / gridCount);
       ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(w - PAD.r, y); ctx.stroke();
       const val = (maxRate * i / gridCount).toFixed(1);
-      ctx.fillStyle = "#5A7A9A";
-      ctx.font = `10px system-ui`;
+      ctx.fillStyle = "#AFC0D8";
+      ctx.font = `700 11px system-ui`;
       ctx.textAlign = "right";
       ctx.fillText(val + "%", w - PAD.r, y - 3);
     }
@@ -1034,14 +1036,14 @@
       ctx.fillRect(x, y, barW, 2);
 
       // Bank label
-      ctx.fillStyle = "#5A7A9A";
-      ctx.font = `bold 10px system-ui`;
+      ctx.fillStyle = "#AFC0D8";
+      ctx.font = `700 12px system-ui`;
       ctx.textAlign = "center";
       ctx.fillText(r.bank_code, x + barW / 2, h - PAD.b + 14);
 
       // Rate label
       ctx.fillStyle = color;
-      ctx.font = `bold 11px system-ui`;
+      ctx.font = `700 13px system-ui`;
       ctx.fillText(r.rate.toFixed(1), x + barW / 2, y - 5);
     });
   }
@@ -1173,7 +1175,7 @@
   // Nhãn trục X theo mốc THỜI GIAN đều nhau (không theo điểm dữ liệu) — nhờ vậy
   // các chart xếp chồng có cùng domain sẽ hiện CÙNG ngày ở CÙNG vị trí.
   function drawXTimeLabels(ctx, tm, PAD, cw, baseY, single) {
-    ctx.fillStyle = "#5A7A9A"; ctx.font = "10px system-ui";
+    ctx.fillStyle = "#AFC0D8"; ctx.font = "700 11px system-ui";
     if (single || tm.span <= 1) {
       ctx.textAlign = "center";
       ctx.fillText(fmtDateDMY(new Date(tm.t0).toISOString().slice(0, 10)), PAD.l + cw / 2, baseY);
@@ -1216,7 +1218,7 @@
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + ch - (ch * i) / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
-      ctx.fillStyle = "#5A7A9A"; ctx.font = "10px system-ui"; ctx.textAlign = "left";
+      ctx.fillStyle = "#AFC0D8"; ctx.font = "700 11px system-ui"; ctx.textAlign = "left";
       ctx.fillText((lo + (hi - lo) * i / 4).toFixed(1) + "%", w - PAD.r + 6, gy + 3);
     }
 
@@ -1603,7 +1605,7 @@
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + (ch * i) / 4, val = amax - (2 * amax) * i / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
-      ctx.fillStyle = i === 2 ? "#8fa6c4" : "#5A7A9A"; ctx.font = "10px system-ui"; ctx.textAlign = "left";
+      ctx.fillStyle = i === 2 ? "#8fa6c4" : "#AFC0D8"; ctx.font = "700 11px system-ui"; ctx.textAlign = "left";
       ctx.fillText(Math.round(val).toLocaleString("en-US"), w - PAD.r + 6, gy + 3);
     }
     drawXTimeLabels(ctx, tm, PAD, cw, h - PAD.b + 16, dates.length < 2);
@@ -1761,7 +1763,7 @@
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + ch - (ch * i) / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
-      ctx.fillStyle = "#5A7A9A"; ctx.font = "10px system-ui"; ctx.textAlign = "right";
+      ctx.fillStyle = "#AFC0D8"; ctx.font = "700 11px system-ui"; ctx.textAlign = "right";
       ctx.fillText((lo + (hi - lo) * i / 4).toFixed(1) + "%", PAD.l - 4, gy + 3);
     }
     // Nhãn trục phải (chênh lệch, 0 ở giữa)
@@ -2032,7 +2034,7 @@
     ctx.strokeStyle="rgba(30,53,96,.6)"; ctx.lineWidth=1;
     for (let i=0;i<=4;i++){ const gy=PAD.t+ch-(ch*i)/4;
       ctx.beginPath();ctx.moveTo(PAD.l,gy);ctx.lineTo(w-PAD.r,gy);ctx.stroke();
-      ctx.fillStyle="#5A7A9A";ctx.font="10px system-ui";ctx.textAlign="left";
+      ctx.fillStyle="#AFC0D8";ctx.font="700 11px system-ui";ctx.textAlign="left";
       const _av = lo+(hi-lo)*i/4;
       ctx.fillText(fmt ? fmt(_av) : _av.toFixed(1)+"%", w-PAD.r+6, gy+3); }
     drawXTimeLabels(ctx, tm, PAD, cw, h-PAD.b+16, dates.length<2);
