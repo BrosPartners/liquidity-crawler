@@ -5,8 +5,8 @@ Ghi 2 file (1 lần fetch):
   - data/on_rate.csv          (date, value) — CHỈ ON, giữ tương thích với
     assemble_market (gộp lịch sử sâu 'ON rate' ở Sheet cho chart interbank_on).
 
-Adapter Vietstock chính chỉ giữ điểm mới nhất; ở đây lấy TẤT CẢ điểm daily ~180
-ngày gần nhất và ghi đè (idempotent).
+Adapter Vietstock chính chỉ giữ điểm mới nhất; ở đây lấy TẤT CẢ điểm daily từ
+2024-01-01 -> nay và ghi đè (idempotent).
 
     python crawl_on.py
 """
@@ -33,7 +33,7 @@ ON_PATH = os.path.join(_ROOT, "data", "on_rate.csv")
 
 def main() -> int:
     try:
-        hist = fetch_all_history(180)   # [(date, series_key, value)]
+        hist = fetch_all_history(from_date="2024-01-01")   # [(date, series_key, value)]
     except Exception as e:
         print(f"[FAIL] Vietstock interbank history: {type(e).__name__}: {e}", file=sys.stderr)
         return 1

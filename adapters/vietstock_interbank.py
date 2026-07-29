@@ -104,18 +104,20 @@ def fetch_on_history(days: int = 120) -> "list[tuple[str, float]]":
     return sorted(out.items())
 
 
-def fetch_all_history(days: int = 180) -> "list[tuple[str, str, float]]":
-    """[(date_iso, series_key, value)] daily cho TẤT CẢ kỳ hạn (ON/1W/2W/1M/3M)
-    trong `days` ngày gần nhất. series_key theo _NORM_MAP (interbank_on/1w/2w/1m/3m).
+def fetch_all_history(days: int = 180, from_date: "str | None" = None) -> "list[tuple[str, str, float]]":
+    """[(date_iso, series_key, value)] daily cho TẤT CẢ kỳ hạn (ON/1W/2W/1M/3M/6M)
+    từ `from_date` (YYYY-MM-DD) — hoặc `days` ngày gần nhất nếu không truyền.
+    series_key theo _NORM_MAP (interbank_on/1w/2w/1m/3m/6m).
     """
     today = _dt.date.today()
-    with httpx.Client(headers=_HEADERS, follow_redirects=True, timeout=40, http2=False) as c:
+    frm = from_date or (today - _dt.timedelta(days=days)).isoformat()
+    with httpx.Client(headers=_HEADERS, follow_redirects=True, timeout=60, http2=False) as c:
         token = _token(c.get(PAGE).text)
         if not token:
             raise RuntimeError("Không lấy được __RequestVerificationToken từ Vietstock")
         r = c.post(ENDPOINT, data={
             "listID[]": list(_NORM_MAP.keys()), "termTypeID": 1, "type": "NORM",
-            "fromDate": (today - _dt.timedelta(days=days)).isoformat(),
+            "fromDate": frm,
             "toDate": today.isoformat(),
             "__RequestVerificationToken": token,
         }, headers={"Referer": PAGE, "X-Requested-With": "XMLHttpRequest"})
