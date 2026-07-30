@@ -345,6 +345,12 @@
     }
     .ts-legend .lg.off { opacity: .3; }
     .ts-legend .lg .sw { width: 14px; height: 3px; border-radius: 2px; }
+    .dl-btn {
+      margin-left: auto; background: rgba(255,255,255,.06); color: var(--muted);
+      border: 1px solid var(--border); border-radius: 6px; font-size: 10.5px;
+      font-weight: 600; padding: 3px 9px; cursor: pointer; white-space: nowrap;
+    }
+    .dl-btn:hover { color: var(--text); background: rgba(255,255,255,.13); }
     #tsChart { width: 100%; height: 260px; display: block; }
     .ts-empty { padding: 30px 16px; text-align: center; color: var(--muted); font-size: 13px; }
 
@@ -1933,6 +1939,7 @@
   makeRangeBar("tygiaRangeBar", ["goldFxChart", "tygiaVnindexChart"]);
   makeRangeBar("bondRangeBar", ["bondChart", "vnindexChart", "bondFxChart", "bondRateChart"]);
   makeRangeBar("vimoRangeBar", ["cpiChart", "reservesChart", "tradeChart", "tradeBalChart", "iipChart"]);
+  addExportButtons();   // nút tải CSV cho mọi panel chart (idempotent)
 
   function drawGoldSeries(canvasId, legendId, keys, opts) {
     opts = opts || {};
@@ -2094,6 +2101,49 @@
 
   function seriesLabel(s) { return s.bank || s.name || ""; }
   function seriesColor(s) { return s.color || BANK_COLORS[s.bank] || "#8899AA"; }
+
+  // ── Tải dữ liệu CSV (mở trực tiếp bằng Excel, UTF-8 BOM) ─────────────
+  function _slugify(s) {
+    return (s || "du-lieu").toLowerCase().normalize("NFD")
+      .replace(/[̀-ͯ]/g, "").replace(/đ/g, "d")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "du-lieu";
+  }
+  function _csvEsc(v) {
+    if (v == null) return "";
+    const s = String(v);
+    return /[",\n;]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  }
+  function downloadCSV(filename, rows) {
+    const text = rows.map(r => r.map(_csvEsc).join(",")).join("\r\n");
+    const blob = new Blob(["﻿" + text], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+  }
+  // Xuất data 1 chart từ CHART_STATE: cột Ngày + mỗi series 1 cột.
+  function exportChartCSV(id, title) {
+    const st = CHART_STATE[id];
+    if (!st || !st.dates || !st.dates.length) { alert("Chart chưa có dữ liệu."); return; }
+    const rows = [["Ngày", ...st.series.map(seriesLabel)]];
+    st.dates.forEach((d, i) => rows.push([d, ...st.series.map(s => s.vals[i])]));
+    downloadCSV(_slugify(title) + ".csv", rows);
+  }
+  // Chèn nút "⬇ Excel" vào mọi panel có canvas (idempotent).
+  function addExportButtons() {
+    document.querySelectorAll(".ts-panel").forEach(panel => {
+      const canvas = panel.querySelector("canvas");
+      const head = panel.querySelector(".ts-head");
+      if (!canvas || !head || head.querySelector(".dl-btn")) return;
+      const title = (panel.querySelector(".panel-title") || {}).textContent || "du-lieu";
+      const btn = document.createElement("button");
+      btn.className = "dl-btn"; btn.type = "button";
+      btn.textContent = "⬇ Excel"; btn.title = "Tải dữ liệu bảng này (CSV mở bằng Excel)";
+      btn.addEventListener("click", () => exportChartCSV(canvas.id, title));
+      head.appendChild(btn);
+    });
+  }
 
   function interactiveLineChart(id, dates, series, drawFn, fmt, legendId) {
     const canvas = document.getElementById(id);
@@ -2287,6 +2337,7 @@
     document.getElementById("groupControl").style.display =
       (name === "dienbien") ? "" : "none";
     // Vẽ lại chart của tab vừa hiện (canvas cần width > 0 mới vẽ đúng)
+    addExportButtons();
     requestAnimationFrame(() => {
       if (name === "huydong" || name === "dienbien") render();
       if (name === "sbv") { renderMktChart(); renderInterbankChart(); renderOmoChart(); }
