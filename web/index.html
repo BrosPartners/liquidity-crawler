@@ -1309,8 +1309,48 @@
 
   fetch("../data/gold_history.csv")
     .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
-    .then(text => { GOLD_HIST = trimStraySjc(parseMktCSV(text)); mergeMarketFx(); renderGoldCharts(); renderFxChart(); renderBondChart(); })
+    .then(text => { GOLD_HIST = trimStraySjc(parseMktCSV(text)); mergeMarketFx(); mergeWorldGold(); renderGoldCharts(); renderFxChart(); renderBondChart(); })
     .catch(() => {});
+
+  // ── Vàng thế giới nối đuôi từ yfinance (khi cột vàng TG trong file trễ) ──
+  let WORLD_GOLD = [];   // [{date, usd, vnd}]
+  fetch("../data/world_gold.csv")
+    .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
+    .then(text => {
+      WORLD_GOLD = text.trim().split(/\r?\n/).slice(1).map(l => {
+        const p = l.split(","); return { date: p[0], usd: parseFloat(p[1]), vnd: parseFloat(p[2]) };
+      }).filter(r => r.date && isFinite(r.usd));
+      mergeWorldGold(); renderGoldCharts();
+    })
+    .catch(() => {});
+
+  // Cột vàng thế giới trong file Telegram đôi lúc trễ vài ngày so với SJC ->
+  // NỐI ĐUÔI world_gold_usd/vnd (+ gap/pct_gap) bằng yfinance cho các ngày sau
+  // mốc cuối. Hiệu chỉnh mức: nhân hệ số để khớp giá trị file tại ngày chồng cuối
+  // (bù chênh spot↔futures) -> liền mạch. Idempotent.
+  function mergeWorldGold() {
+    if (!GOLD_HIST.length || !WORLD_GOLD.length) return;
+    GOLD_HIST = GOLD_HIST.filter(r => !r._wgInj);
+    const lastOf = k => { const ds = GOLD_HIST.filter(r => r.key === k).map(r => r.date).sort(); return ds.length ? ds[ds.length - 1] : null; };
+    const valAt = (k, d) => { const r = GOLD_HIST.find(x => x.key === k && x.date === d); return r ? r.value : null; };
+    const wgAt = (field, d) => { const r = WORLD_GOLD.find(x => x.date === d); return r ? r[field] : null; };
+    const sjcMap = {}; GOLD_HIST.filter(r => r.key === "sjc_sell").forEach(r => sjcMap[r.date] = r.value);
+    [["world_gold_usd", "usd"], ["world_gold_vnd", "vnd"]].forEach(([key, field]) => {
+      const last = lastOf(key);
+      if (!last) return;
+      const ax = valAt(key, last), awg = wgAt(field, last);
+      const ratio = (ax && awg) ? ax / awg : 1;
+      WORLD_GOLD.filter(r => r.date > last && isFinite(r[field])).forEach(r => {
+        const v = Math.round(r[field] * ratio);
+        GOLD_HIST.push({ date: r.date, key, value: v, _wgInj: true });
+        if (key === "world_gold_vnd" && sjcMap[r.date] != null) {
+          const gap = sjcMap[r.date] - v;
+          GOLD_HIST.push({ date: r.date, key: "gap", value: gap, _wgInj: true });
+          GOLD_HIST.push({ date: r.date, key: "pct_gap", value: Math.round(gap / v * 1000) / 10, _wgInj: true });
+        }
+      });
+    });
+  }
 
   // Chuỗi tỷ giá trong file vàng (Telegram xlsx) có lúc ngừng cập nhật (vd dừng
   // ~10/07/2026) -> NỐI ĐUÔI VCB & chợ tự do bằng nguồn market (VietnamBiz) cho

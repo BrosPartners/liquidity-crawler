@@ -64,6 +64,7 @@ def main() -> int:
     macro_history = _read("macro_history.csv", "")
     macro_latest = _read("macro_latest.json", "null")
     interbank_rates = _read("interbank_rates.csv", "")
+    world_gold = _read("world_gold.csv", "")
 
     # ── Ưu tiên NGUỒN GỐC là Google Sheet (nếu cấu hình sheet_id) ──────────
     if not args.no_sheet:
@@ -211,6 +212,15 @@ def main() -> int:
         print("[ERR] không thay được fetch interbank_rates trong web/index.html", file=sys.stderr)
         return 1
 
+    # 3h. Thay fetch world_gold (yfinance nối đuôi vàng TG) bằng data nhúng
+    html, _n = re.subn(
+        r'fetch\("\.\./data/world_gold\.csv"\)\s*'
+        r'\.then\(r => \{ if \(!r\.ok\) throw new Error\("x"\); return r\.text\(\); \}\)',
+        "Promise.resolve(__EMBED_WORLD_GOLD__)", html, count=1)
+    if _n != 1:
+        print("[ERR] không thay được fetch world_gold trong web/index.html", file=sys.stderr)
+        return 1
+
     # 4. Chèn data ngay đầu <script>
     embed = (
         "<script>\n"
@@ -227,6 +237,7 @@ def main() -> int:
         f"const __EMBED_MACRO_HISTORY__ = {json.dumps(macro_history, ensure_ascii=False)};\n"
         f"const __EMBED_MACRO_LATEST__ = {macro_latest};\n"
         f"const __EMBED_INTERBANK__ = {json.dumps(interbank_rates, ensure_ascii=False)};\n"
+        f"const __EMBED_WORLD_GOLD__ = {json.dumps(world_gold, ensure_ascii=False)};\n"
     )
     html = html.replace("<script>", embed, 1)
 

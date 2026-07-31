@@ -88,6 +88,12 @@ jobs:
           PYTHONUTF8: "1"
         continue-on-error: true
 
+      - name: Crawl vàng thế giới nối đuôi (yfinance GC=F + VND=X)
+        run: python crawl_world_gold.py
+        env:
+          PYTHONUTF8: "1"
+        continue-on-error: true
+
       - name: Đẩy lên Google Sheet (chỉ Thứ Sáu = weekly)
         run: |
           if [ "$(date -u +%u)" = "5" ] || [ -n "${{ github.event.inputs.banks }}" ]; then
