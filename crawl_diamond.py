@@ -5,7 +5,7 @@ Nguồn: idexonline.com/diamond_prices_index — chart Flot nạp qua endpoint
 trả JSON {"label":"Total","data":[[timestamp_ms, index], ...]} (daily, free,
 không cần auth). driver_id=0 = chỉ số tổng.
 
-Ghi đè data/diamond_index.csv (date, value) từ 2024-01-01 -> nay (idempotent).
+Ghi đè data/diamond_index.csv (date, value) từ 2015-01-01 -> nay (idempotent).
 
     python crawl_diamond.py
 """
@@ -37,7 +37,7 @@ _HEADERS = {
 
 def main() -> int:
     today = _dt.date.today()
-    params = {"driver_id": "0", "fromDate": "2024-1-1",
+    params = {"driver_id": "0", "fromDate": "2015-1-1",
               "toDate": f"{today.year}-{today.month}-{today.day}"}
     try:
         r = httpx.get(_URL, params=params, headers=_HEADERS, timeout=40, follow_redirects=True)
