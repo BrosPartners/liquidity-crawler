@@ -94,6 +94,12 @@ jobs:
           PYTHONUTF8: "1"
         continue-on-error: true
 
+      - name: Crawl chỉ số giá kim cương IDEX (idexonline.com)
+        run: python crawl_diamond.py
+        env:
+          PYTHONUTF8: "1"
+        continue-on-error: true
+
       - name: Đẩy lên Google Sheet (chỉ Thứ Sáu = weekly)
         run: |
           if [ "$(date -u +%u)" = "5" ] || [ -n "${{ github.event.inputs.banks }}" ]; then

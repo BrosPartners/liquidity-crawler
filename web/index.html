@@ -726,6 +726,13 @@
       </div>
       <canvas id="goldSpreadChart"></canvas>
     </div>
+    <div class="ts-panel" style="margin:16px 0 0">
+      <div class="ts-head">
+        <div class="panel-title">Chỉ số giá kim cương IDEX (Total)</div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#7DD3FC"></span>IDEX Diamond Index</span></div>
+      </div>
+      <canvas id="diamondChart"></canvas>
+    </div>
     <div class="mkt-section-title">Giá bán các hãng (mới nhất)</div>
     <div class="mkt-grid" id="goldBrandGrid"></div>
     <div class="mkt-note" id="goldNote"></div>
@@ -1933,6 +1940,30 @@
     drawGoldSeries("goldPriceChart", "goldPriceLegend", ["sjc_sell", "world_gold_vnd"], { fmt: trFmt });
     drawGoldSeries("goldGapChart", "goldGapLegend", ["pct_gap"], { scale: 100 });   // fraction -> %, default % formatting
     renderBrandCharts();   // diễn biến giá mua các hãng + chênh lệch mua-bán
+    renderDiamondChart();  // chỉ số giá kim cương IDEX
+  }
+
+  // ── Chỉ số giá kim cương IDEX (idexonline.com, daily) ────────────────
+  let DIAMOND_HIST = [];   // [{date, value}]
+  fetch("../data/diamond_index.csv")
+    .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
+    .then(text => {
+      DIAMOND_HIST = text.trim().split(/\r?\n/).slice(1).map(l => {
+        const p = l.split(","); return { date: p[0], value: parseFloat(p[1]) };
+      }).filter(r => r.date && isFinite(r.value));
+      renderDiamondChart();
+    })
+    .catch(() => {});
+
+  function renderDiamondChart() {
+    const canvas = document.getElementById("diamondChart");
+    if (!canvas || !canvas.parentElement.clientWidth || !DIAMOND_HIST.length) return;
+    const dates = DIAMOND_HIST.map(r => r.date);
+    const vals = DIAMOND_HIST.map(r => r.value);
+    const fmt = v => v.toFixed(1);
+    interactiveLineChart("diamondChart", dates,
+      [{ name: "IDEX Diamond Index", color: "#7DD3FC", vals }],
+      (c, d, s) => drawLineChart(c, d, s, 240, fmt), fmt);
   }
 
   // Chart tỷ giá USD/VND (VCB/chợ tự do/SBV) — hiện ở tab "Tỷ giá & vĩ mô",
@@ -1973,7 +2004,7 @@
       if (btn) apply(Number(btn.dataset.m));
     });
   }
-  makeRangeBar("goldRangeBar", ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart", "goldBrandBuyChart", "goldSpreadChart"]);
+  makeRangeBar("goldRangeBar", ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart", "goldBrandBuyChart", "goldSpreadChart", "diamondChart"]);
   makeRangeBar("tsRangeBar", ["tsChart", "tsAvgChart", "tsVnindexChart"]);
   makeRangeBar("sbvRangeBar", ["sbvChart", "interbankChart", "sbvVnindexChart", "omoChart", "omoRateChart"]);
   makeRangeBar("tygiaRangeBar", ["goldFxChart", "tygiaVnindexChart"]);
