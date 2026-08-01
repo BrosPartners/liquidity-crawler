@@ -351,6 +351,9 @@
       font-weight: 600; padding: 3px 9px; cursor: pointer; white-space: nowrap;
     }
     .dl-btn:hover { color: var(--text); background: rgba(255,255,255,.13); }
+    .src-line { font-size: 10.5px; color: var(--muted); padding: 5px 16px 2px; }
+    .src-line a { color: #7DB0E8; text-decoration: none; font-weight: 600; }
+    .src-line a:hover { text-decoration: underline; }
     #tsChart { width: 100%; height: 260px; display: block; }
     .ts-empty { padding: 30px 16px; text-align: center; color: var(--muted); font-size: 13px; }
 
@@ -836,6 +839,44 @@
 
 <script>
   const DATA_URL = "../data/latest.json";
+
+  // Nguồn dữ liệu theo từng chart (canvas id -> {name, url}). url rỗng = chỉ chữ.
+  const _SRC_VS_VNIBOR = "https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66";
+  const _SRC_VS_MACRO = "https://finance.vietstock.vn/vi-mo/du-lieu";
+  const _SRC_VNB_MONEY = "https://data.vietnambiz.vn/currency-interest-rate";
+  const _SRC_DBN_IFS = "https://db.nomics.world/IMF/IFS";
+  const _SRC_YF_TNX = "https://finance.yahoo.com/quote/%5ETNX";
+  const _SRC_YF_GOLD = "https://finance.yahoo.com/quote/GC%3DF";
+  const _SRC_VND = "https://www.vndirect.com.vn";
+  const _SRC_IDEX = "https://www.idexonline.com/diamond_prices_index";
+  const CHART_SOURCES = {
+    tsChart: { name: "Tổng hợp website các ngân hàng" },
+    tsAvgChart: { name: "Tổng hợp website các ngân hàng" },
+    tsVnindexChart: { name: "VNDirect", url: _SRC_VND },
+    sbvChart: { name: "Vietstock (VNIBOR) · VietnamBiz", url: _SRC_VS_VNIBOR },
+    interbankChart: { name: "Vietstock — VNIBOR", url: _SRC_VS_VNIBOR },
+    sbvVnindexChart: { name: "VNDirect", url: _SRC_VND },
+    omoChart: { name: "Vietstock — Thị trường mở (OMO)", url: _SRC_VS_MACRO },
+    omoRateChart: { name: "VietnamBiz", url: _SRC_VNB_MONEY },
+    goldFxChart: { name: "VietnamBiz · Yahoo Finance", url: _SRC_VNB_MONEY },
+    tygiaVnindexChart: { name: "VNDirect", url: _SRC_VND },
+    goldSjcChart: { name: "Bot giá vàng (Telegram, cập nhật hằng ngày)" },
+    goldWorldChart: { name: "Yahoo Finance (GC=F) · Bot giá vàng", url: _SRC_YF_GOLD },
+    goldPriceChart: { name: "Bot giá vàng · Yahoo Finance", url: _SRC_YF_GOLD },
+    goldGapChart: { name: "Bot giá vàng · Yahoo Finance", url: _SRC_YF_GOLD },
+    goldBrandBuyChart: { name: "Bot giá vàng (Telegram)" },
+    goldSpreadChart: { name: "Bot giá vàng (Telegram)" },
+    diamondChart: { name: "IDEX Online", url: _SRC_IDEX },
+    bondChart: { name: "Yahoo Finance (^TNX) · Google Sheet", url: _SRC_YF_TNX },
+    vnindexChart: { name: "VNDirect", url: _SRC_VND },
+    bondFxChart: { name: "VietnamBiz · Yahoo Finance", url: _SRC_VNB_MONEY },
+    bondRateChart: { name: "Tổng hợp website các ngân hàng" },
+    cpiChart: { name: "IMF/IFS qua DBnomics · VietnamBiz", url: _SRC_DBN_IFS },
+    reservesChart: { name: "IMF/IFS qua DBnomics · VietnamBiz", url: _SRC_DBN_IFS },
+    tradeChart: { name: "IMF/IFS qua DBnomics · VietnamBiz", url: _SRC_DBN_IFS },
+    tradeBalChart: { name: "IMF/IFS qua DBnomics · VietnamBiz", url: _SRC_DBN_IFS },
+    iipChart: { name: "IMF/IFS qua DBnomics · VietnamBiz", url: _SRC_DBN_IFS },
+  };
 
   const BANK_COLORS = {
     VCB: "#22C55E", BID: "#EF4444", CTG: "#3B82F6",
@@ -2021,7 +2062,8 @@
   makeRangeBar("tygiaRangeBar", ["goldFxChart", "tygiaVnindexChart"]);
   makeRangeBar("bondRangeBar", ["bondChart", "vnindexChart", "bondFxChart", "bondRateChart"]);
   makeRangeBar("vimoRangeBar", ["cpiChart", "reservesChart", "tradeChart", "tradeBalChart", "iipChart"]);
-  addExportButtons();   // nút tải CSV cho mọi panel chart (idempotent)
+  addExportButtons();   // nút tải Excel cho mọi panel chart (idempotent)
+  addSourceLinks();     // dòng trích nguồn (link) dưới mỗi chart
 
   function drawGoldSeries(canvasId, legendId, keys, opts) {
     opts = opts || {};
@@ -2302,6 +2344,22 @@
     });
   }
 
+  // Chèn dòng "Nguồn: …" (link bấm được) dưới mỗi chart (idempotent).
+  function addSourceLinks() {
+    document.querySelectorAll(".ts-panel").forEach(panel => {
+      const canvas = panel.querySelector("canvas");
+      if (!canvas || panel.querySelector(".src-line")) return;
+      const s = CHART_SOURCES[canvas.id];
+      if (!s) return;
+      const div = document.createElement("div");
+      div.className = "src-line";
+      div.innerHTML = s.url
+        ? `Nguồn: <a href="${s.url}" target="_blank" rel="noopener">${s.name} ↗</a>`
+        : `Nguồn: ${s.name}`;
+      canvas.insertAdjacentElement("afterend", div);
+    });
+  }
+
   function interactiveLineChart(id, dates, series, drawFn, fmt, legendId) {
     const canvas = document.getElementById(id);
     if (!canvas || !canvas.parentElement.clientWidth) return;
@@ -2494,7 +2552,7 @@
     document.getElementById("groupControl").style.display =
       (name === "dienbien") ? "" : "none";
     // Vẽ lại chart của tab vừa hiện (canvas cần width > 0 mới vẽ đúng)
-    addExportButtons();
+    addExportButtons(); addSourceLinks();
     requestAnimationFrame(() => {
       if (name === "huydong" || name === "dienbien") render();
       if (name === "sbv") { renderMktChart(); renderInterbankChart(); renderOmoChart(); }
