@@ -724,6 +724,13 @@
     </div>
     <div class="ts-panel" style="margin:0">
       <div class="ts-head">
+        <div class="panel-title">Diễn biến giá BÁN RA các thương hiệu (VND/lượng)</div>
+        <div class="ts-legend" id="goldBrandSellLegend"></div>
+      </div>
+      <canvas id="goldBrandSellChart"></canvas>
+    </div>
+    <div class="ts-panel" style="margin:0">
+      <div class="ts-head">
         <div class="panel-title">Chênh lệch giá mua–bán (%)</div>
         <div class="ts-legend" id="goldSpreadLegend"></div>
       </div>
@@ -865,6 +872,7 @@
     goldPriceChart: { name: "Bot giá vàng · Yahoo Finance", url: _SRC_YF_GOLD },
     goldGapChart: { name: "Bot giá vàng · Yahoo Finance", url: _SRC_YF_GOLD },
     goldBrandBuyChart: { name: "Bot giá vàng (Telegram)" },
+    goldBrandSellChart: { name: "Bot giá vàng (Telegram)" },
     goldSpreadChart: { name: "Bot giá vàng (Telegram)" },
     diamondChart: { name: "IDEX Online", url: _SRC_IDEX },
     bondChart: { name: "Yahoo Finance (^TNX) · Google Sheet", url: _SRC_YF_TNX },
@@ -1495,7 +1503,7 @@
     return { dates, series };
   }
 
-  function renderBrandCharts() { renderBrandBuyChart(); renderSpreadChart(); }
+  function renderBrandCharts() { renderBrandBuyChart(); renderBrandSellChart(); renderSpreadChart(); }
 
   function renderBrandBuyChart() {
     const canvas = document.getElementById("goldBrandBuyChart");
@@ -1503,6 +1511,14 @@
     const { dates, series } = _brandSeries(r => r.buy);
     const fmt = v => (v / 1e6).toFixed(1) + " tr";
     interactiveLineChart("goldBrandBuyChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt, "goldBrandBuyLegend");
+  }
+
+  function renderBrandSellChart() {
+    const canvas = document.getElementById("goldBrandSellChart");
+    if (!canvas || !canvas.parentElement.clientWidth || !GOLD_BRANDS.length) return;
+    const { dates, series } = _brandSeries(r => r.sell);
+    const fmt = v => (v / 1e6).toFixed(1) + " tr";
+    interactiveLineChart("goldBrandSellChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt, "goldBrandSellLegend");
   }
 
   function renderSpreadChart() {
@@ -2056,7 +2072,7 @@
       if (btn) apply(Number(btn.dataset.m));
     });
   }
-  makeRangeBar("goldRangeBar", ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart", "goldBrandBuyChart", "goldSpreadChart", "diamondChart"]);
+  makeRangeBar("goldRangeBar", ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart", "goldBrandBuyChart", "goldBrandSellChart", "goldSpreadChart", "diamondChart"]);
   makeRangeBar("tsRangeBar", ["tsChart", "tsAvgChart", "tsVnindexChart"]);
   makeRangeBar("sbvRangeBar", ["sbvChart", "interbankChart", "sbvVnindexChart", "omoChart", "omoRateChart"]);
   makeRangeBar("tygiaRangeBar", ["goldFxChart", "tygiaVnindexChart"]);
