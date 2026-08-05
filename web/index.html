@@ -466,6 +466,7 @@
     #chartTip .tip-sw { width: 9px; height: 9px; border-radius: 50%; flex: none; }
     #chartTip .tip-lb { flex: 1; white-space: nowrap; }
     #chartTip .tip-vv { font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 10px; }
+    #chartTip .tip-ex { font-weight: 400; color: var(--muted); margin-left: 7px; font-size: 10.5px; }
     .chart-hint {
       font-size: 11px; color: #5A7A9A; margin-top: 4px; text-align: right; user-select: none;
     }
@@ -1402,7 +1403,8 @@
         if (key === "world_gold_vnd" && sjcMap[r.date] != null) {
           const gap = sjcMap[r.date] - v;
           GOLD_HIST.push({ date: r.date, key: "gap", value: gap, _wgInj: true });
-          GOLD_HIST.push({ date: r.date, key: "pct_gap", value: Math.round(gap / v * 1000) / 10, _wgInj: true });
+          // pct_gap lưu dạng PHÂN SỐ (parser dùng gap/v; chart nhân ×100) — KHÔNG nhân 100 ở đây.
+          GOLD_HIST.push({ date: r.date, key: "pct_gap", value: gap / v, _wgInj: true });
         }
       });
     });
@@ -1498,9 +1500,16 @@
         if (last == null || (Date.parse(d) - lastT) / DAY > 30) return null;
         return last;
       });
-      return { name: BRAND_LABELS[c] || c, color: BRAND_COLORS[c] || "#8899AA", vals };
+      return { name: BRAND_LABELS[c] || c, color: BRAND_COLORS[c] || "#8899AA", vals, co: c };
     });
     return { dates, series };
+  }
+
+  // Giá mua/bán của 1 hãng tại ngày <= d gần nhất (khớp forward-fill của _brandSeries).
+  function _brandAt(co, d) {
+    let best = null;
+    for (const r of GOLD_BRANDS) if (r.company === co && r.date <= d && (!best || r.date > best.date)) best = r;
+    return best;
   }
 
   function renderBrandCharts() { renderBrandBuyChart(); renderBrandSellChart(); renderSpreadChart(); }
@@ -1532,6 +1541,14 @@
     });
     const fmt = v => v.toFixed(2) + "%";
     interactiveLineChart("goldSpreadChart", dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt, "goldSpreadLegend");
+    // Tooltip hiện thêm giá mua/bán để dễ hình dung: "2.91% (mua 138.5, bán 142.3)"
+    const st = CHART_STATE["goldSpreadChart"];
+    if (st) st.tipExtra = (s, d) => {
+      const b = _brandAt(s.co, d);
+      if (!b || b.buy == null || b.sell == null) return "";
+      const tr = v => (v / 1e6).toFixed(1);
+      return `mua ${tr(b.buy)} · bán ${tr(b.sell)}`;
+    };
   }
 
   // ── Trái phiếu 10Y (VN vs US) ────────────────────────────────────────
@@ -2530,16 +2547,20 @@
   function showChartTip(id, cx, cy) {
     const st = CHART_STATE[id]; const i = st.hover;
     if (i == null || i < 0 || i >= st.sliced.dates.length) { hideChartTip(); return; }
+    const date = st.sliced.dates[i];
     const rows = st.sliced.series
-      .map(s => ({ label: seriesLabel(s), color: seriesColor(s), v: s.vals[i] }))
+      .map(s => ({ label: seriesLabel(s), color: seriesColor(s), v: s.vals[i], s }))
       .filter(r => r.v != null)
       .sort((a, b) => b.v - a.v);
     if (!rows.length) { hideChartTip(); return; }
     const tip = getChartTip();
-    const head = `<div class="tip-date">${fmtDateDMY(st.sliced.dates[i])}</div>`;
-    const body = rows.map(r =>
-      `<div class="tip-row"><span class="tip-sw" style="background:${r.color}"></span>` +
-      `<span class="tip-lb">${r.label}</span><span class="tip-vv">${st.fmt ? st.fmt(r.v) : r.v.toFixed(2)+"%"}</span></div>`).join("");
+    const head = `<div class="tip-date">${fmtDateDMY(date)}</div>`;
+    const body = rows.map(r => {
+      const ex = st.tipExtra ? st.tipExtra(r.s, date) : "";
+      return `<div class="tip-row"><span class="tip-sw" style="background:${r.color}"></span>` +
+        `<span class="tip-lb">${r.label}</span><span class="tip-vv">${st.fmt ? st.fmt(r.v) : r.v.toFixed(2) + "%"}` +
+        `${ex ? `<span class="tip-ex">${ex}</span>` : ""}</span></div>`;
+    }).join("");
     tip.innerHTML = head + body;
     tip.style.display = "block";
     // định vị tránh tràn mép phải
