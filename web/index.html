@@ -898,14 +898,27 @@
     iipChart: { name: "IMF/IFS qua DBnomics · VietnamBiz", url: _SRC_DBN_IFS },
   };
 
+  // Bảng màu "đá quý trầm" — bám theo navy + vàng thương hiệu (VCB dùng đúng
+  // navy logo, CTG dùng đúng vàng đậm) thay vì 17 màu rực rỡ kiểu cầu vồng
+  // trước đây (3 xanh dương gần giống nhau, 4 xanh lá, 3 tím...).
   const BANK_COLORS = {
-    VCB: "#15803D", BID: "#DC2626", CTG: "#2563EB",
-    AGR: "#047857", ACB: "#7C3AED", VPB: "#C2410C",
-    STB: "#0E7490", HDB: "#B45309",
-    MBB: "#BE185D", TCB: "#4D7C0F",
-    TPB: "#6D28D9", VIB: "#0369A1",
-    LPB: "#BE123C", SSB: "#A21CAF",
-    NAB: "#3F6212", MSB: "#E11D48", OCB: "#0284C7",
+    VCB: "#17365D",   // navy — đúng màu logo
+    BID: "#9F1239",   // đỏ vang đậm
+    CTG: "#B4790C",   // vàng đậm — đúng màu logo
+    AGR: "#15803D",   // xanh lá rừng
+    ACB: "#5B21B6",   // tím oải hương đậm
+    VPB: "#B45309",   // hổ phách/gạch
+    STB: "#0E7490",   // xanh ngọc đậm
+    HDB: "#92400E",   // nâu đất
+    MBB: "#9D174D",   // hồng cánh sen đậm
+    TCB: "#365314",   // ô liu đậm
+    TPB: "#4338CA",   // chàm đậm
+    VIB: "#1E3A8A",   // xanh navy đậm (họ navy, khác VCB)
+    LPB: "#7C2D12",   // nâu gạch
+    SSB: "#701A75",   // tím mận
+    NAB: "#14532D",   // xanh rừng sẫm (khác AGR)
+    MSB: "#831843",   // đỏ mận
+    OCB: "#075985",   // xanh navy-ngọc
   };
 
   // Đã verify HTTP 200 (không redirect 404) ngày 2026-07-02
