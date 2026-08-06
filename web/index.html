@@ -219,7 +219,7 @@
       transition: background .1s;
     }
     tbody tr:hover { background: var(--surface); }
-    tbody tr + tr { border-top: 1px solid rgba(30,53,96,.6); }
+    tbody tr + tr { border-top: 1px solid rgba(0,0,0,.08); }
     td {
       padding: 9px 16px;
       font-size: 13px;
@@ -275,7 +275,7 @@
     .rate-bar-wrap {
       width: 80px;
       height: 3px;
-      background: rgba(255,255,255,.06);
+      background: rgba(0,0,0,.04);
       border-radius: 2px;
       overflow: hidden;
     }
@@ -350,11 +350,11 @@
     .ts-legend .lg.off { opacity: .3; }
     .ts-legend .lg .sw { width: 14px; height: 3px; border-radius: 2px; }
     .dl-btn {
-      margin-left: auto; background: rgba(255,255,255,.06); color: var(--muted);
+      margin-left: auto; background: rgba(0,0,0,.04); color: var(--muted);
       border: 1px solid var(--border); border-radius: 6px; font-size: 10.5px;
       font-weight: 600; padding: 3px 9px; cursor: pointer; white-space: nowrap;
     }
-    .dl-btn:hover { color: var(--text); background: rgba(255,255,255,.13); }
+    .dl-btn:hover { color: var(--text); background: rgba(0,0,0,.08); }
     .src-line { font-size: 10.5px; color: var(--muted); padding: 5px 16px 2px; }
     .src-line a { color: #2C5A96; text-decoration: none; font-weight: 600; }
     .src-line a:hover { text-decoration: underline; }
@@ -461,9 +461,9 @@
     /* Tooltip hover cho chart */
     #chartTip {
       position: fixed; z-index: 9999; display: none; pointer-events: none;
-      background: rgba(10,22,40,.96); border: 1px solid #D6D2CC; border-radius: 8px;
+      background: rgba(255,255,255,.98); border: 1px solid #D6D2CC; border-radius: 8px;
       padding: 8px 10px; font-size: 12px; color: #31302E; min-width: 120px;
-      box-shadow: 0 6px 20px rgba(0,0,0,.45);
+      box-shadow: 0 6px 20px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.06);
     }
     #chartTip .tip-date { font-weight: 600; color: #615D59; margin-bottom: 5px; font-size: 11px; }
     #chartTip .tip-row { display: flex; align-items: center; gap: 6px; line-height: 1.55; }
@@ -477,11 +477,11 @@
     canvas.zoomable { cursor: crosshair; }
     .rng-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 14px 0 2px; }
     .rng-btn {
-      background: rgba(255,255,255,.05); color: #615D59;
-      border: 1px solid rgba(120,150,190,.25); border-radius: 6px;
+      background: rgba(0,0,0,.035); color: #615D59;
+      border: 1px solid rgba(0,0,0,.12); border-radius: 6px;
       padding: 5px 12px; font-size: 12px; cursor: pointer; transition: .15s;
     }
-    .rng-btn:hover { background: rgba(255,255,255,.1); color: #0D0D0D; }
+    .rng-btn:hover { background: rgba(0,0,0,.07); color: #0D0D0D; }
     .rng-btn.active { background: #B4790C; color: #FFFFFF; border-color: #B4790C; font-weight: 600; }
     /* Tách rời các chart trong tab Giá vàng (thắng inline margin:0) */
     [data-pane="vang"] .ts-panel { margin-bottom: 16px !important; }
@@ -1080,7 +1080,7 @@
 
     // Grid lines
     const gridCount = 4;
-    ctx.strokeStyle = "rgba(30,53,96,.6)";
+    ctx.strokeStyle = "rgba(0,0,0,.08)";
     ctx.lineWidth = 1;
     for (let i = 0; i <= gridCount; i++) {
       const y = PAD.t + chartH - (chartH * i / gridCount);
@@ -1289,7 +1289,7 @@
     const y = v => PAD.t + ch - ((v - lo) / (hi - lo)) * ch;
 
     // Grid + Y labels
-    ctx.strokeStyle = "rgba(30,53,96,.6)"; ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(0,0,0,.08)"; ctx.lineWidth = 1;
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + ch - (ch * i) / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
@@ -1769,7 +1769,7 @@
     const tm = timeMapX(dates, PAD.l, cw); const x = tm.x;
     const y = v => PAD.t + ch / 2 - (v / amax) * (ch / 2);
     // lưới + nhãn trục phải (0 ở giữa)
-    ctx.strokeStyle = "rgba(30,53,96,.6)"; ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(0,0,0,.08)"; ctx.lineWidth = 1;
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + (ch * i) / 4, val = amax - (2 * amax) * i / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
@@ -1927,7 +1927,7 @@
     const yL = v => PAD.t + ch - ((v - lo) / (hi - lo)) * ch;
     const yR = v => PAD.t + ch / 2 - (v / gmax) * (ch / 2);
     // Lưới + nhãn trục trái (%)
-    ctx.strokeStyle = "rgba(30,53,96,.6)"; ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(0,0,0,.08)"; ctx.lineWidth = 1;
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + ch - (ch * i) / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
@@ -1945,7 +1945,7 @@
     // Cột chênh lệch (trục phải)
     if (barSeries) {
       const bw = Math.max(1, cw / dates.length), y0 = yR(0);
-      ctx.fillStyle = "rgba(156,169,189,.5)";
+      ctx.fillStyle = "rgba(0,0,0,.35)";
       barSeries.vals.forEach((v, i) => {
         if (v == null) return; const px = x(i), py = yR(v);
         ctx.fillRect(px - bw / 2, Math.min(y0, py), Math.max(bw, 1), Math.max(Math.abs(py - y0), 0.5));
@@ -2236,7 +2236,7 @@
     const pad = (hi-lo)*0.1; hi += pad; lo = Math.max(0, lo-pad);
     const tm = timeMapX(dates, PAD.l, cw); const x = tm.x;
     const y = v => PAD.t+ch-((v-lo)/(hi-lo))*ch;
-    ctx.strokeStyle="rgba(30,53,96,.6)"; ctx.lineWidth=1;
+    ctx.strokeStyle="rgba(0,0,0,.08)"; ctx.lineWidth=1;
     for (let i=0;i<=4;i++){ const gy=PAD.t+ch-(ch*i)/4;
       ctx.beginPath();ctx.moveTo(PAD.l,gy);ctx.lineTo(w-PAD.r,gy);ctx.stroke();
       ctx.fillStyle="#31302E";ctx.font="700 11px system-ui";ctx.textAlign="left";
@@ -2536,7 +2536,7 @@
     const px = m.x(i);
     // đường dọc
     ctx.save();
-    ctx.strokeStyle = "rgba(180,200,230,.35)"; ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(0,0,0,.12)"; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(px, m.PAD.t); ctx.lineTo(px, m.PAD.t + m.ch); ctx.stroke();
     // chấm trên từng đường
     st.sliced.series.forEach(s => {
