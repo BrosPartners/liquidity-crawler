@@ -10,24 +10,24 @@
     :root {
       /* Bảng màu thương hiệu Bros Partners (theo logo: vành đai navy, hành tinh vàng).
          Nền navy giữ nguyên, chỉnh accent về đúng vàng logo và nâng tương phản chữ. */
-      --bg:       #0B1629;
-      --panel:    #112040;
-      --surface:  #162A50;
-      --border:   #1E3560;
-      --text:     #E4ECF4;
-      --muted:    #7D96B0;
-      --accent:   #E9A21C;
-      --hi:       #3EE0A0;
-      --lo:       #F0656F;
+      --bg:       #F6F5F4;
+      --panel:    #FFFFFF;
+      --surface:  #F3F2F0;
+      --border:   #E7E4E0;
+      --text:     #0D0D0D;
+      --muted:    #615D59;
+      --accent:   #B4790C;
+      --hi:       #047857;
+      --lo:       #B42318;
 
-      --c-vcb: #22C55E;
-      --c-bid: #EF4444;
-      --c-ctg: #3B82F6;
-      --c-agr: #10B981;
-      --c-acb: #A855F7;
-      --c-vpb: #F97316;
-      --c-stb: #06B6D4;
-      --c-hdb: #F59E0B;
+      --c-vcb: #15803D;
+      --c-bid: #DC2626;
+      --c-ctg: #2563EB;
+      --c-agr: #047857;
+      --c-acb: #7C3AED;
+      --c-vpb: #C2410C;
+      --c-stb: #0E7490;
+      --c-hdb: #B45309;
 
       font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
       font-size: 14px;
@@ -45,12 +45,14 @@
     .header {
       background: var(--panel);
       border-bottom: 1px solid var(--border);
-      padding: 14px 24px;
+      padding: 12px 24px;
       display: flex;
-      align-items: baseline;
-      gap: 16px;
+      align-items: center;
+      gap: 14px;
       flex-wrap: wrap;
     }
+    .header .brand-logo { height: 30px; width: auto; flex: 0 0 auto; }
+    .header h1 { border-left: 1px solid var(--border); padding-left: 14px; }
     .header h1 {
       font-size: 15px;
       font-weight: 600;
@@ -148,7 +150,7 @@
       font-variant-numeric: tabular-nums;
     }
     .chip:hover  { border-color: var(--muted); color: var(--text); }
-    .chip.active { background: var(--accent); border-color: var(--accent); color: #0B1629; font-weight: 700; }
+    .chip.active { background: var(--accent); border-color: var(--accent); color: #F6F5F4; font-weight: 700; }
 
     /* Product toggle */
     .toggle {
@@ -284,7 +286,7 @@
     }
 
     .rank-1 .rate-value { color: var(--hi); }
-    .rank-2 .rate-value { color: #7DD8B8; }
+    .rank-2 .rate-value { color: #059669; }
     .rank-3 .rate-value { color: var(--text); }
     .rank-lo .rate-value { color: var(--muted); }
 
@@ -354,7 +356,7 @@
     }
     .dl-btn:hover { color: var(--text); background: rgba(255,255,255,.13); }
     .src-line { font-size: 10.5px; color: var(--muted); padding: 5px 16px 2px; }
-    .src-line a { color: #7DB0E8; text-decoration: none; font-weight: 600; }
+    .src-line a { color: #2C5A96; text-decoration: none; font-weight: 600; }
     .src-line a:hover { text-decoration: underline; }
     #tsChart { width: 100%; height: 260px; display: block; }
     .ts-empty { padding: 30px 16px; text-align: center; color: var(--muted); font-size: 13px; }
@@ -459,28 +461,28 @@
     /* Tooltip hover cho chart */
     #chartTip {
       position: fixed; z-index: 9999; display: none; pointer-events: none;
-      background: rgba(10,22,40,.96); border: 1px solid #294a78; border-radius: 8px;
-      padding: 8px 10px; font-size: 12px; color: #dbe7f5; min-width: 120px;
+      background: rgba(10,22,40,.96); border: 1px solid #D6D2CC; border-radius: 8px;
+      padding: 8px 10px; font-size: 12px; color: #31302E; min-width: 120px;
       box-shadow: 0 6px 20px rgba(0,0,0,.45);
     }
-    #chartTip .tip-date { font-weight: 600; color: #9fb6d4; margin-bottom: 5px; font-size: 11px; }
+    #chartTip .tip-date { font-weight: 600; color: #615D59; margin-bottom: 5px; font-size: 11px; }
     #chartTip .tip-row { display: flex; align-items: center; gap: 6px; line-height: 1.55; }
     #chartTip .tip-sw { width: 9px; height: 9px; border-radius: 50%; flex: none; }
     #chartTip .tip-lb { flex: 1; white-space: nowrap; }
     #chartTip .tip-vv { font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 10px; }
     #chartTip .tip-ex { font-weight: 400; color: var(--muted); margin-left: 7px; font-size: 10.5px; }
     .chart-hint {
-      font-size: 11px; color: #7D96B0; margin-top: 4px; text-align: right; user-select: none;
+      font-size: 11px; color: #615D59; margin-top: 4px; text-align: right; user-select: none;
     }
     canvas.zoomable { cursor: crosshair; }
     .rng-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 14px 0 2px; }
     .rng-btn {
-      background: rgba(255,255,255,.05); color: #9db4d0;
+      background: rgba(255,255,255,.05); color: #615D59;
       border: 1px solid rgba(120,150,190,.25); border-radius: 6px;
       padding: 5px 12px; font-size: 12px; cursor: pointer; transition: .15s;
     }
-    .rng-btn:hover { background: rgba(255,255,255,.1); color: #e8f0fa; }
-    .rng-btn.active { background: #E9A21C; color: #1a2a44; border-color: #E9A21C; font-weight: 600; }
+    .rng-btn:hover { background: rgba(255,255,255,.1); color: #0D0D0D; }
+    .rng-btn.active { background: #B4790C; color: #FFFFFF; border-color: #B4790C; font-weight: 600; }
     /* Tách rời các chart trong tab Giá vàng (thắng inline margin:0) */
     [data-pane="vang"] .ts-panel { margin-bottom: 16px !important; }
   </style>
@@ -488,7 +490,8 @@
 <body>
 
 <div class="header">
-  <h1>Tổng hợp Macro</h1>
+  <img class="brand-logo" alt="Bros Partners" src="data:image/png;base64,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">
+  <h1>Vĩ mô &amp; Ngân hàng</h1>
   <span class="meta" id="metaText">Đang tải…</span>
   <span class="badge" id="metaBadge">–– bank</span>
 </div>
@@ -572,14 +575,14 @@
   <div class="ts-panel">
     <div class="ts-head">
       <div class="panel-title" id="tsAvgTitle">Lãi suất trung bình</div>
-      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#E9A21C"></span>Trung bình các NH</span></div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#B4790C"></span>Trung bình các NH</span></div>
     </div>
     <canvas id="tsAvgChart"></canvas>
   </div>
   <div class="ts-panel">
     <div class="ts-head">
       <div class="panel-title">VN-Index</div>
-      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#EF4444"></span>VN-Index</span></div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#DC2626"></span>VN-Index</span></div>
     </div>
     <canvas id="tsVnindexChart"></canvas>
   </div>
@@ -614,7 +617,7 @@
     <div class="ts-panel" style="margin:16px 0 0">
       <div class="ts-head">
         <div class="panel-title">VN-Index</div>
-        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#EF4444"></span>VN-Index</span></div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#DC2626"></span>VN-Index</span></div>
       </div>
       <canvas id="sbvVnindexChart"></canvas>
     </div>
@@ -624,8 +627,8 @@
       <div class="ts-head">
         <div class="panel-title">Giá trị bơm ròng OMO hằng ngày (tỷ đồng)</div>
         <div class="ts-legend">
-          <span class="lg"><span class="sw" style="background:#3EE0A0"></span>Bơm ròng (+)</span>
-          <span class="lg"><span class="sw" style="background:#F0656F"></span>Hút ròng (−)</span>
+          <span class="lg"><span class="sw" style="background:#047857"></span>Bơm ròng (+)</span>
+          <span class="lg"><span class="sw" style="background:#B42318"></span>Hút ròng (−)</span>
         </div>
       </div>
       <canvas id="omoChart"></canvas>
@@ -668,7 +671,7 @@
     <div class="ts-panel" style="margin:16px 0">
       <div class="ts-head">
         <div class="panel-title">VN-Index</div>
-        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#EF4444"></span>VN-Index</span></div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#DC2626"></span>VN-Index</span></div>
       </div>
       <canvas id="tygiaVnindexChart"></canvas>
     </div>
@@ -773,7 +776,7 @@
   <div class="ts-panel" style="margin-top:16px">
     <div class="ts-head">
       <div class="panel-title">VN-Index</div>
-      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#EF4444"></span>VN-Index</span></div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#DC2626"></span>VN-Index</span></div>
     </div>
     <canvas id="vnindexChart"></canvas>
   </div>
@@ -787,7 +790,7 @@
   <div class="ts-panel" style="margin-top:16px">
     <div class="ts-head">
       <div class="panel-title">Lãi suất huy động trong nước · trung bình (12M)</div>
-      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#E9A21C"></span>Trung bình các NH</span></div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#B4790C"></span>Trung bình các NH</span></div>
     </div>
     <canvas id="bondRateChart"></canvas>
   </div>
@@ -808,14 +811,14 @@
     <div class="ts-panel" style="margin:8px 0 0">
       <div class="ts-head">
         <div class="panel-title">Lạm phát · CPI so cùng kỳ (YoY, %)</div>
-        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#EF4444"></span>CPI YoY</span></div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#DC2626"></span>CPI YoY</span></div>
       </div>
       <canvas id="cpiChart"></canvas>
     </div>
     <div class="ts-panel" style="margin:16px 0 0">
       <div class="ts-head">
         <div class="panel-title">Dự trữ ngoại hối (tỷ USD)</div>
-        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#3B82F6"></span>Dự trữ ngoại hối</span></div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#2563EB"></span>Dự trữ ngoại hối</span></div>
       </div>
       <canvas id="reservesChart"></canvas>
     </div>
@@ -830,8 +833,8 @@
       <div class="ts-head">
         <div class="panel-title">Cán cân thương mại hàng tháng (tỷ USD)</div>
         <div class="ts-legend">
-          <span class="lg"><span class="sw" style="background:#3EE0A0"></span>Xuất siêu (+)</span>
-          <span class="lg"><span class="sw" style="background:#F0656F"></span>Nhập siêu (−)</span>
+          <span class="lg"><span class="sw" style="background:#047857"></span>Xuất siêu (+)</span>
+          <span class="lg"><span class="sw" style="background:#B42318"></span>Nhập siêu (−)</span>
         </div>
       </div>
       <canvas id="tradeBalChart"></canvas>
@@ -839,7 +842,7 @@
     <div class="ts-panel" style="margin:16px 0 0">
       <div class="ts-head">
         <div class="panel-title">Sản xuất công nghiệp · IIP (tăng trưởng YoY %)</div>
-        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#A855F7"></span>IIP</span></div>
+        <div class="ts-legend"><span class="lg"><span class="sw" style="background:#7C3AED"></span>IIP</span></div>
       </div>
       <canvas id="iipChart"></canvas>
     </div>
@@ -890,13 +893,13 @@
   };
 
   const BANK_COLORS = {
-    VCB: "#22C55E", BID: "#EF4444", CTG: "#3B82F6",
-    AGR: "#10B981", ACB: "#A855F7", VPB: "#F97316",
-    STB: "#06B6D4", HDB: "#F59E0B",
-    MBB: "#EC4899", TCB: "#84CC16",
-    TPB: "#8B5CF6", VIB: "#0EA5E9",
-    LPB: "#F43F5E", SSB: "#D946EF",
-    NAB: "#65A30D", MSB: "#FB7185", OCB: "#38BDF8",
+    VCB: "#15803D", BID: "#DC2626", CTG: "#2563EB",
+    AGR: "#047857", ACB: "#7C3AED", VPB: "#C2410C",
+    STB: "#0E7490", HDB: "#B45309",
+    MBB: "#BE185D", TCB: "#4D7C0F",
+    TPB: "#6D28D9", VIB: "#0369A1",
+    LPB: "#BE123C", SSB: "#A21CAF",
+    NAB: "#3F6212", MSB: "#E11D48", OCB: "#0284C7",
   };
 
   // Đã verify HTTP 200 (không redirect 404) ngày 2026-07-02
@@ -1015,7 +1018,7 @@
     }
     const maxRate = rows[0].rate;
     tbody.innerHTML = rows.map((r, i) => {
-      const color = BANK_COLORS[r.bank_code] || "#8899AA";
+      const color = BANK_COLORS[r.bank_code] || "#615D59";
       const barW = maxRate > 0 ? Math.round((r.rate / maxRate) * 100) : 0;
       const rankCls = i === 0 ? "rank-1" : i === 1 ? "rank-2" : i === 2 ? "rank-3" : r.rate < maxRate * 0.7 ? "rank-lo" : "";
       const url = BANK_URLS[r.bank_code] || "";
@@ -1059,7 +1062,7 @@
     ctx.clearRect(0, 0, w, h);
 
     if (!rows.length) {
-      ctx.fillStyle = "#AFC0D8";
+      ctx.fillStyle = "#31302E";
       ctx.font = "13px system-ui";
       ctx.textAlign = "center";
       ctx.fillText("Không có dữ liệu", w / 2, h / 2);
@@ -1083,7 +1086,7 @@
       const y = PAD.t + chartH - (chartH * i / gridCount);
       ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(w - PAD.r, y); ctx.stroke();
       const val = (maxRate * i / gridCount).toFixed(1);
-      ctx.fillStyle = "#AFC0D8";
+      ctx.fillStyle = "#31302E";
       ctx.font = `700 11px system-ui`;
       ctx.textAlign = "right";
       ctx.fillText(val + "%", w - PAD.r, y - 3);
@@ -1094,7 +1097,7 @@
       const x = PAD.l + gap + i * (barW + gap);
       const barH = (r.rate / maxRate) * chartH;
       const y = PAD.t + chartH - barH;
-      const color = BANK_COLORS[r.bank_code] || "#8899AA";
+      const color = BANK_COLORS[r.bank_code] || "#615D59";
 
       // Bar fill with slight glow
       ctx.shadowColor = color;
@@ -1108,7 +1111,7 @@
       ctx.fillRect(x, y, barW, 2);
 
       // Bank label
-      ctx.fillStyle = "#AFC0D8";
+      ctx.fillStyle = "#31302E";
       ctx.font = `700 12px system-ui`;
       ctx.textAlign = "center";
       ctx.fillText(r.bank_code, x + barW / 2, h - PAD.b + 14);
@@ -1194,7 +1197,7 @@
     // Legend
     const lg = document.getElementById("tsLegend");
     lg.innerHTML = banks.map(b => {
-      const color = BANK_COLORS[b] || "#8899AA";
+      const color = BANK_COLORS[b] || "#615D59";
       return `<span class="lg ${tsHidden.has(b) ? "off" : ""}" data-bank="${b}">
         <span class="sw" style="background:${color}"></span>${b}</span>`;
     }).join("");
@@ -1231,7 +1234,7 @@
       return vs.length ? vs.reduce((a, b) => a + b, 0) / vs.length : null;
     });
     interactiveLineChart("tsAvgChart", dates,
-      [{ name: "Trung bình", color: "#E9A21C", vals: avgVals }], (c, d, s) => drawTS(c, d, s));
+      [{ name: "Trung bình", color: "#B4790C", vals: avgVals }], (c, d, s) => drawTS(c, d, s));
   }
 
   // Trục X theo NGÀY THỰC (thời gian tỉ lệ đúng) — không chia đều theo index.
@@ -1247,7 +1250,7 @@
   // Nhãn trục X theo mốc THỜI GIAN đều nhau (không theo điểm dữ liệu) — nhờ vậy
   // các chart xếp chồng có cùng domain sẽ hiện CÙNG ngày ở CÙNG vị trí.
   function drawXTimeLabels(ctx, tm, PAD, cw, baseY, single) {
-    ctx.fillStyle = "#AFC0D8"; ctx.font = "700 11px system-ui";
+    ctx.fillStyle = "#31302E"; ctx.font = "700 11px system-ui";
     if (single || tm.span <= 1) {
       ctx.textAlign = "center";
       ctx.fillText(fmtDateDMY(new Date(tm.t0).toISOString().slice(0, 10)), PAD.l + cw / 2, baseY);
@@ -1290,7 +1293,7 @@
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + ch - (ch * i) / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
-      ctx.fillStyle = "#AFC0D8"; ctx.font = "700 11px system-ui"; ctx.textAlign = "left";
+      ctx.fillStyle = "#31302E"; ctx.font = "700 11px system-ui"; ctx.textAlign = "left";
       ctx.fillText((lo + (hi - lo) * i / 4).toFixed(1) + "%", w - PAD.r + 6, gy + 3);
     }
 
@@ -1299,7 +1302,7 @@
 
     // Lines (step-after: rate holds until next change)
     series.forEach(s => {
-      const color = BANK_COLORS[s.bank] || "#8899AA";
+      const color = BANK_COLORS[s.bank] || "#615D59";
       ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.lineJoin = "round";
       ctx.beginPath();
       let started = false;
@@ -1431,7 +1434,7 @@
 
   // ── Giá mua/bán theo thương hiệu (gold_brands.csv, 2020→nay) ─────────
   let GOLD_BRANDS = [];   // [{date, company, buy, sell}]
-  const BRAND_COLORS = { SJC: "#E9A21C", DOJI: "#EF4444", PNJ: "#3B82F6", BTMC: "#22C55E", BTMH: "#A855F7", PHUQUY: "#06B6D4" };
+  const BRAND_COLORS = { SJC: "#B4790C", DOJI: "#DC2626", PNJ: "#2563EB", BTMC: "#15803D", BTMH: "#7C3AED", PHUQUY: "#0E7490" };
   const BRAND_LABELS = { SJC: "SJC", DOJI: "DOJI", PNJ: "PNJ", BTMC: "BTMC", BTMH: "BTMH", PHUQUY: "Phú Quý" };
 
   fetch("../data/gold_brands.csv")
@@ -1502,7 +1505,7 @@
         if (last == null || (Date.parse(d) - lastT) / DAY > 30) return null;
         return last;
       });
-      return { name: BRAND_LABELS[c] || c, color: BRAND_COLORS[c] || "#8899AA", vals, co: c };
+      return { name: BRAND_LABELS[c] || c, color: BRAND_COLORS[c] || "#615D59", vals, co: c };
     });
     return { dates, series };
   }
@@ -1580,12 +1583,12 @@
   // ── Lãi suất liên NH theo kỳ hạn (Vietstock, daily ~180 ngày) ────────
   let INTERBANK_HIST = [];   // [{date, key, value}] key: interbank_on/1w/2w/1m/3m
   const IB_TENORS = [
-    { key: "interbank_on", name: "Qua đêm", color: "#E9A21C" },
-    { key: "interbank_1w", name: "1 tuần",  color: "#22C55E" },
-    { key: "interbank_2w", name: "2 tuần",  color: "#3B82F6" },
-    { key: "interbank_1m", name: "1 tháng", color: "#A855F7" },
-    { key: "interbank_3m", name: "3 tháng", color: "#EF4444" },
-    { key: "interbank_6m", name: "6 tháng", color: "#06B6D4" },
+    { key: "interbank_on", name: "Qua đêm", color: "#B4790C" },
+    { key: "interbank_1w", name: "1 tuần",  color: "#15803D" },
+    { key: "interbank_2w", name: "2 tuần",  color: "#2563EB" },
+    { key: "interbank_1m", name: "1 tháng", color: "#7C3AED" },
+    { key: "interbank_3m", name: "3 tháng", color: "#DC2626" },
+    { key: "interbank_6m", name: "6 tháng", color: "#0E7490" },
   ];
   fetch("../data/interbank_rates.csv")
     .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
@@ -1664,14 +1667,14 @@
     const cpi = macroSeries("cpi_yoy");
     if (cpi.dates.length) {
       const fmt = v => v.toFixed(2) + "%";
-      interactiveLineChart("cpiChart", cpi.dates, [{ name: "CPI YoY", color: "#EF4444", vals: cpi.vals }],
+      interactiveLineChart("cpiChart", cpi.dates, [{ name: "CPI YoY", color: "#DC2626", vals: cpi.vals }],
         (c, d, s) => drawLineChart(c, d, s, 300, fmt), fmt);
     }
     // Dự trữ ngoại hối (tỷ USD)
     const res = macroSeries("reserves", 1 / 1000);
     if (res.dates.length) {
       const fmt = v => v.toFixed(1) + " tỷ";
-      interactiveLineChart("reservesChart", res.dates, [{ name: "Dự trữ NH", color: "#3B82F6", vals: res.vals }],
+      interactiveLineChart("reservesChart", res.dates, [{ name: "Dự trữ NH", color: "#2563EB", vals: res.vals }],
         (c, d, s) => drawLineChart(c, d, s, 240, fmt), fmt);
     }
     // Tăng trưởng Xuất/Nhập khẩu (YoY %) — 2 đường cùng domain
@@ -1680,8 +1683,8 @@
       const imMap = {}; MACRO_HIST.filter(r => r.key === "imports_yoy").forEach(r => imMap[r.date] = r.value);
       const dates = exPts.map(p => p.date);
       const series = [
-        { name: "Xuất khẩu", color: "#22C55E", vals: exPts.map(p => p.value) },
-        { name: "Nhập khẩu", color: "#F97316", vals: dates.map(d => imMap[d] != null ? imMap[d] : null) },
+        { name: "Xuất khẩu", color: "#15803D", vals: exPts.map(p => p.value) },
+        { name: "Nhập khẩu", color: "#C2410C", vals: dates.map(d => imMap[d] != null ? imMap[d] : null) },
       ];
       const fmt = v => v.toFixed(1) + "%";
       interactiveLineChart("tradeChart", dates, series,
@@ -1697,7 +1700,7 @@
     const iip = macroSeries("iip_yoy");
     if (iip.dates.length) {
       const fmt = v => v.toFixed(1) + "%";
-      interactiveLineChart("iipChart", iip.dates, [{ name: "IIP YoY", color: "#A855F7", vals: iip.vals }],
+      interactiveLineChart("iipChart", iip.dates, [{ name: "IIP YoY", color: "#7C3AED", vals: iip.vals }],
         (c, d, s) => drawLineChart(c, d, s, 240, fmt), fmt);
     }
     const note = document.getElementById("macroNote");
@@ -1770,7 +1773,7 @@
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + (ch * i) / 4, val = amax - (2 * amax) * i / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
-      ctx.fillStyle = i === 2 ? "#8fa6c4" : "#AFC0D8"; ctx.font = "700 11px system-ui"; ctx.textAlign = "left";
+      ctx.fillStyle = i === 2 ? "#615D59" : "#31302E"; ctx.font = "700 11px system-ui"; ctx.textAlign = "left";
       ctx.fillText(Math.round(val).toLocaleString("en-US"), w - PAD.r + 6, gy + 3);
     }
     drawXTimeLabels(ctx, tm, PAD, cw, h - PAD.b + 16, dates.length < 2);
@@ -1779,7 +1782,7 @@
     vals.forEach((v, i) => {
       if (v == null) return;
       const px = x(i), py = y(v);
-      ctx.fillStyle = v >= 0 ? "#3EE0A0" : "#F0656F";
+      ctx.fillStyle = v >= 0 ? "#047857" : "#B42318";
       ctx.fillRect(px - bw / 2, Math.min(y0, py), Math.max(bw, 1), Math.max(Math.abs(py - y0), 0.5));
     });
     return { PAD, w, h, cw, ch, lo: -amax, hi: amax, x, y, n: dates.length, T: tm.T, t0: tm.t0, span: tm.span };
@@ -1815,7 +1818,7 @@
       } else {
         dates = pts.map(p => p.date); vals = pts.map(p => p.value);
       }
-      const series = [{ name: "VN-Index", color: "#EF4444", vals }];
+      const series = [{ name: "VN-Index", color: "#DC2626", vals }];
       interactiveLineChart(id, dates, series, (c, d, s) => drawLineChart(c, d, s, 260, fmt), fmt);
     });
   }
@@ -1834,9 +1837,9 @@
       return dates.map(d => { while (pi < pts.length && pts[pi].date <= d) { last = pts[pi].value; pi++; } return last; });
     };
     const series = [
-      { name: "VN", color: "#1E3A6E", vals: build("vn_10y") },
-      { name: "US", color: "#EF4444", vals: build("us_10y") },
-      { name: "Chênh lệch VN-US", color: "#9CA9BD", vals: build("bond_gap"), bar: true },
+      { name: "VN", color: "#17365D", vals: build("vn_10y") },
+      { name: "US", color: "#DC2626", vals: build("us_10y") },
+      { name: "Chênh lệch VN-US", color: "#615D59", vals: build("bond_gap"), bar: true },
     ];
     interactiveLineChart("bondChart", dates, series, (c, d, s) => drawBondChart(c, d, s), v => v.toFixed(2) + "%", "bondChartLegend");
 
@@ -1897,7 +1900,7 @@
       const vs = allVals.map(s => s[i]).filter(v => v != null);
       return vs.length ? vs.reduce((a, b) => a + b, 0) / vs.length : null;
     });
-    const a = alignToDomain(rDates, [{ name: "Trung bình", color: "#E9A21C", vals: avg }], d0, d1);
+    const a = alignToDomain(rDates, [{ name: "Trung bình", color: "#B4790C", vals: avg }], d0, d1);
     const fmt = v => v.toFixed(2) + "%";
     interactiveLineChart("bondRateChart", a.dates, a.series, (c, d, s) => drawLineChart(c, d, s, 220, fmt), fmt);
   }
@@ -1928,11 +1931,11 @@
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + ch - (ch * i) / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
-      ctx.fillStyle = "#AFC0D8"; ctx.font = "700 11px system-ui"; ctx.textAlign = "right";
+      ctx.fillStyle = "#31302E"; ctx.font = "700 11px system-ui"; ctx.textAlign = "right";
       ctx.fillText((lo + (hi - lo) * i / 4).toFixed(1) + "%", PAD.l - 4, gy + 3);
     }
     // Nhãn trục phải (chênh lệch, 0 ở giữa)
-    ctx.textAlign = "left"; ctx.fillStyle = "#8A96A8";
+    ctx.textAlign = "left"; ctx.fillStyle = "#615D59";
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + (ch * i) / 4, val = gmax - (2 * gmax) * i / 4;
       ctx.fillText(val.toFixed(1) + "%", w - PAD.r + 6, gy + 3);
@@ -1967,8 +1970,8 @@
     fx_vcb: "VCB", fx_tudo: "Chợ tự do", fx_sbv: "SBV",
   };
   const GOLD_COLORS = {
-    sjc_sell: "#E9A21C", world_gold_vnd: "#3B82F6", world_gold_usd: "#3B82F6", pct_gap: "#EF4444",
-    fx_vcb: "#22C55E", fx_tudo: "#F59E0B", fx_sbv: "#A855F7", usd_vnd: "#22C55E",
+    sjc_sell: "#B4790C", world_gold_vnd: "#2563EB", world_gold_usd: "#2563EB", pct_gap: "#DC2626",
+    fx_vcb: "#15803D", fx_tudo: "#B45309", fx_sbv: "#7C3AED", usd_vnd: "#15803D",
   };
 
   // Chọn key tỷ giá có dữ liệu: ưu tiên 3 nguồn VCB/tự do/SBV; nếu file không còn
@@ -2022,16 +2025,16 @@
   // ── Chỉ số giá kim cương IDEX theo kích thước (idexonline.com, daily) ─
   let DIAMOND_HIST = [];   // [{date, key, value}]
   const DIAMOND_SIZES = [
-    { key: "d_total",     name: "Tổng",      color: "#E9A21C" },
-    { key: "d_round_0_5", name: "0.5ct",     color: "#94A3B8" },
-    { key: "d_round_0_7", name: "0.7ct",     color: "#22D3EE" },
-    { key: "d_round_0_9", name: "0.9ct",     color: "#06B6D4" },
-    { key: "d_round_1_0", name: "1ct",       color: "#3B82F6" },
-    { key: "d_round_1_5", name: "1.5ct",     color: "#22C55E" },
-    { key: "d_round_2_0", name: "2ct",       color: "#A855F7" },
-    { key: "d_round_3_0", name: "3ct",       color: "#EC4899" },
-    { key: "d_round_4_0", name: "4ct",       color: "#EF4444" },
-    { key: "d_round_5_0", name: "5ct",       color: "#F59E0B" },
+    { key: "d_total",     name: "Tổng",      color: "#B4790C" },
+    { key: "d_round_0_5", name: "0.5ct",     color: "#615D59" },
+    { key: "d_round_0_7", name: "0.7ct",     color: "#0891B2" },
+    { key: "d_round_0_9", name: "0.9ct",     color: "#0E7490" },
+    { key: "d_round_1_0", name: "1ct",       color: "#2563EB" },
+    { key: "d_round_1_5", name: "1.5ct",     color: "#15803D" },
+    { key: "d_round_2_0", name: "2ct",       color: "#7C3AED" },
+    { key: "d_round_3_0", name: "3ct",       color: "#BE185D" },
+    { key: "d_round_4_0", name: "4ct",       color: "#DC2626" },
+    { key: "d_round_5_0", name: "5ct",       color: "#B45309" },
   ];
   fetch("../data/diamond_index.csv")
     .then(r => { if (!r.ok) throw new Error("x"); return r.text(); })
@@ -2151,8 +2154,8 @@
   const FX_KEYS = ["fx_central","fx_bank_sell","fx_free_sell"];
   const MACRO_KEYS = ["credit_yoy","deposit_yoy","m2_yoy","fx_reserves","dep_1_3m","dep_6_9m","dep_12m"];
   const MKT_COLORS = {
-    interbank_on:"#E9A21C", omo_rate:"#3EE0A0", tin_phieu_rate:"#EC4899",
-    refi_rate:"#EF4444", discount_rate:"#3B82F6",
+    interbank_on:"#B4790C", omo_rate:"#047857", tin_phieu_rate:"#BE185D",
+    refi_rate:"#DC2626", discount_rate:"#2563EB",
   };
 
   function fmtNum(v, key) {
@@ -2236,7 +2239,7 @@
     ctx.strokeStyle="rgba(30,53,96,.6)"; ctx.lineWidth=1;
     for (let i=0;i<=4;i++){ const gy=PAD.t+ch-(ch*i)/4;
       ctx.beginPath();ctx.moveTo(PAD.l,gy);ctx.lineTo(w-PAD.r,gy);ctx.stroke();
-      ctx.fillStyle="#AFC0D8";ctx.font="700 11px system-ui";ctx.textAlign="left";
+      ctx.fillStyle="#31302E";ctx.font="700 11px system-ui";ctx.textAlign="left";
       const _av = lo+(hi-lo)*i/4;
       ctx.fillText(fmt ? fmt(_av) : _av.toFixed(1)+"%", w-PAD.r+6, gy+3); }
     drawXTimeLabels(ctx, tm, PAD, cw, h-PAD.b+16, dates.length<2);
@@ -2259,7 +2262,7 @@
   const clampN = (v, a, b) => Math.max(a, Math.min(b, v));
 
   function seriesLabel(s) { return s.bank || s.name || ""; }
-  function seriesColor(s) { return s.color || BANK_COLORS[s.bank] || "#8899AA"; }
+  function seriesColor(s) { return s.color || BANK_COLORS[s.bank] || "#615D59"; }
 
   // ── Tải .xlsx thật (tự dựng, không thư viện ngoài) kèm công thức TB ──
   function _slugify(s) {
@@ -2541,7 +2544,7 @@
       const v = s.vals[i]; if (v == null) return;
       ctx.fillStyle = seriesColor(s);
       ctx.beginPath(); ctx.arc(px, m.y(v), 3.5, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = "#0b1a30"; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.strokeStyle = "#EFEEEC"; ctx.lineWidth = 1.5; ctx.stroke();
     });
     ctx.restore();
   }
