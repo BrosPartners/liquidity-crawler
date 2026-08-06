@@ -8,15 +8,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
+      /* Bảng màu thương hiệu Bros Partners (theo logo: vành đai navy, hành tinh vàng).
+         Nền navy giữ nguyên, chỉnh accent về đúng vàng logo và nâng tương phản chữ. */
       --bg:       #0B1629;
       --panel:    #112040;
       --surface:  #162A50;
       --border:   #1E3560;
-      --text:     #B8CDE0;
-      --muted:    #5A7A9A;
-      --accent:   #E8A030;
+      --text:     #E4ECF4;
+      --muted:    #7D96B0;
+      --accent:   #E9A21C;
       --hi:       #3EE0A0;
-      --lo:       #E05060;
+      --lo:       #F0656F;
 
       --c-vcb: #22C55E;
       --c-bid: #EF4444;
@@ -468,7 +470,7 @@
     #chartTip .tip-vv { font-weight: 600; font-variant-numeric: tabular-nums; margin-left: 10px; }
     #chartTip .tip-ex { font-weight: 400; color: var(--muted); margin-left: 7px; font-size: 10.5px; }
     .chart-hint {
-      font-size: 11px; color: #5A7A9A; margin-top: 4px; text-align: right; user-select: none;
+      font-size: 11px; color: #7D96B0; margin-top: 4px; text-align: right; user-select: none;
     }
     canvas.zoomable { cursor: crosshair; }
     .rng-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 14px 0 2px; }
@@ -478,7 +480,7 @@
       padding: 5px 12px; font-size: 12px; cursor: pointer; transition: .15s;
     }
     .rng-btn:hover { background: rgba(255,255,255,.1); color: #e8f0fa; }
-    .rng-btn.active { background: #E8A030; color: #1a2a44; border-color: #E8A030; font-weight: 600; }
+    .rng-btn.active { background: #E9A21C; color: #1a2a44; border-color: #E9A21C; font-weight: 600; }
     /* Tách rời các chart trong tab Giá vàng (thắng inline margin:0) */
     [data-pane="vang"] .ts-panel { margin-bottom: 16px !important; }
   </style>
@@ -570,7 +572,7 @@
   <div class="ts-panel">
     <div class="ts-head">
       <div class="panel-title" id="tsAvgTitle">Lãi suất trung bình</div>
-      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#E8A030"></span>Trung bình các NH</span></div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#E9A21C"></span>Trung bình các NH</span></div>
     </div>
     <canvas id="tsAvgChart"></canvas>
   </div>
@@ -623,7 +625,7 @@
         <div class="panel-title">Giá trị bơm ròng OMO hằng ngày (tỷ đồng)</div>
         <div class="ts-legend">
           <span class="lg"><span class="sw" style="background:#3EE0A0"></span>Bơm ròng (+)</span>
-          <span class="lg"><span class="sw" style="background:#E05060"></span>Hút ròng (−)</span>
+          <span class="lg"><span class="sw" style="background:#F0656F"></span>Hút ròng (−)</span>
         </div>
       </div>
       <canvas id="omoChart"></canvas>
@@ -785,7 +787,7 @@
   <div class="ts-panel" style="margin-top:16px">
     <div class="ts-head">
       <div class="panel-title">Lãi suất huy động trong nước · trung bình (12M)</div>
-      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#E8A030"></span>Trung bình các NH</span></div>
+      <div class="ts-legend"><span class="lg"><span class="sw" style="background:#E9A21C"></span>Trung bình các NH</span></div>
     </div>
     <canvas id="bondRateChart"></canvas>
   </div>
@@ -829,7 +831,7 @@
         <div class="panel-title">Cán cân thương mại hàng tháng (tỷ USD)</div>
         <div class="ts-legend">
           <span class="lg"><span class="sw" style="background:#3EE0A0"></span>Xuất siêu (+)</span>
-          <span class="lg"><span class="sw" style="background:#E05060"></span>Nhập siêu (−)</span>
+          <span class="lg"><span class="sw" style="background:#F0656F"></span>Nhập siêu (−)</span>
         </div>
       </div>
       <canvas id="tradeBalChart"></canvas>
@@ -1229,7 +1231,7 @@
       return vs.length ? vs.reduce((a, b) => a + b, 0) / vs.length : null;
     });
     interactiveLineChart("tsAvgChart", dates,
-      [{ name: "Trung bình", color: "#E8A030", vals: avgVals }], (c, d, s) => drawTS(c, d, s));
+      [{ name: "Trung bình", color: "#E9A21C", vals: avgVals }], (c, d, s) => drawTS(c, d, s));
   }
 
   // Trục X theo NGÀY THỰC (thời gian tỉ lệ đúng) — không chia đều theo index.
@@ -1429,7 +1431,7 @@
 
   // ── Giá mua/bán theo thương hiệu (gold_brands.csv, 2020→nay) ─────────
   let GOLD_BRANDS = [];   // [{date, company, buy, sell}]
-  const BRAND_COLORS = { SJC: "#E8A030", DOJI: "#EF4444", PNJ: "#3B82F6", BTMC: "#22C55E", BTMH: "#A855F7", PHUQUY: "#06B6D4" };
+  const BRAND_COLORS = { SJC: "#E9A21C", DOJI: "#EF4444", PNJ: "#3B82F6", BTMC: "#22C55E", BTMH: "#A855F7", PHUQUY: "#06B6D4" };
   const BRAND_LABELS = { SJC: "SJC", DOJI: "DOJI", PNJ: "PNJ", BTMC: "BTMC", BTMH: "BTMH", PHUQUY: "Phú Quý" };
 
   fetch("../data/gold_brands.csv")
@@ -1578,7 +1580,7 @@
   // ── Lãi suất liên NH theo kỳ hạn (Vietstock, daily ~180 ngày) ────────
   let INTERBANK_HIST = [];   // [{date, key, value}] key: interbank_on/1w/2w/1m/3m
   const IB_TENORS = [
-    { key: "interbank_on", name: "Qua đêm", color: "#E8A030" },
+    { key: "interbank_on", name: "Qua đêm", color: "#E9A21C" },
     { key: "interbank_1w", name: "1 tuần",  color: "#22C55E" },
     { key: "interbank_2w", name: "2 tuần",  color: "#3B82F6" },
     { key: "interbank_1m", name: "1 tháng", color: "#A855F7" },
@@ -1777,7 +1779,7 @@
     vals.forEach((v, i) => {
       if (v == null) return;
       const px = x(i), py = y(v);
-      ctx.fillStyle = v >= 0 ? "#3EE0A0" : "#E05060";
+      ctx.fillStyle = v >= 0 ? "#3EE0A0" : "#F0656F";
       ctx.fillRect(px - bw / 2, Math.min(y0, py), Math.max(bw, 1), Math.max(Math.abs(py - y0), 0.5));
     });
     return { PAD, w, h, cw, ch, lo: -amax, hi: amax, x, y, n: dates.length, T: tm.T, t0: tm.t0, span: tm.span };
@@ -1895,7 +1897,7 @@
       const vs = allVals.map(s => s[i]).filter(v => v != null);
       return vs.length ? vs.reduce((a, b) => a + b, 0) / vs.length : null;
     });
-    const a = alignToDomain(rDates, [{ name: "Trung bình", color: "#E8A030", vals: avg }], d0, d1);
+    const a = alignToDomain(rDates, [{ name: "Trung bình", color: "#E9A21C", vals: avg }], d0, d1);
     const fmt = v => v.toFixed(2) + "%";
     interactiveLineChart("bondRateChart", a.dates, a.series, (c, d, s) => drawLineChart(c, d, s, 220, fmt), fmt);
   }
@@ -1965,7 +1967,7 @@
     fx_vcb: "VCB", fx_tudo: "Chợ tự do", fx_sbv: "SBV",
   };
   const GOLD_COLORS = {
-    sjc_sell: "#E8A030", world_gold_vnd: "#3B82F6", world_gold_usd: "#3B82F6", pct_gap: "#EF4444",
+    sjc_sell: "#E9A21C", world_gold_vnd: "#3B82F6", world_gold_usd: "#3B82F6", pct_gap: "#EF4444",
     fx_vcb: "#22C55E", fx_tudo: "#F59E0B", fx_sbv: "#A855F7", usd_vnd: "#22C55E",
   };
 
@@ -2020,7 +2022,7 @@
   // ── Chỉ số giá kim cương IDEX theo kích thước (idexonline.com, daily) ─
   let DIAMOND_HIST = [];   // [{date, key, value}]
   const DIAMOND_SIZES = [
-    { key: "d_total",     name: "Tổng",      color: "#E8A030" },
+    { key: "d_total",     name: "Tổng",      color: "#E9A21C" },
     { key: "d_round_0_5", name: "0.5ct",     color: "#94A3B8" },
     { key: "d_round_0_7", name: "0.7ct",     color: "#22D3EE" },
     { key: "d_round_0_9", name: "0.9ct",     color: "#06B6D4" },
@@ -2149,7 +2151,7 @@
   const FX_KEYS = ["fx_central","fx_bank_sell","fx_free_sell"];
   const MACRO_KEYS = ["credit_yoy","deposit_yoy","m2_yoy","fx_reserves","dep_1_3m","dep_6_9m","dep_12m"];
   const MKT_COLORS = {
-    interbank_on:"#E8A030", omo_rate:"#3EE0A0", tin_phieu_rate:"#EC4899",
+    interbank_on:"#E9A21C", omo_rate:"#3EE0A0", tin_phieu_rate:"#EC4899",
     refi_rate:"#EF4444", discount_rate:"#3B82F6",
   };
 
