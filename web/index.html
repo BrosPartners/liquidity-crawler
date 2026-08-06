@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lãi suất huy động — NH Việt Nam</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -29,10 +31,14 @@
       --c-stb: #0E7490;
       --c-hdb: #B45309;
 
-      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-family: "DM Sans", system-ui, -apple-system, 'Segoe UI', sans-serif;
       font-size: 14px;
       line-height: 1.5;
     }
+
+    /* Tiêu đề mục — serif, đồng bộ với các dashboard khác. Chỉ áp cho heading
+       thật (h1-h3), không chạm số liệu trong bảng. */
+    h1, h2, h3 { font-family: "Noto Serif", Georgia, serif; }
 
     body {
       background: var(--bg);
@@ -1063,7 +1069,7 @@
 
     if (!rows.length) {
       ctx.fillStyle = "#31302E";
-      ctx.font = "13px system-ui";
+      ctx.font = "13px 'DM Sans', system-ui";
       ctx.textAlign = "center";
       ctx.fillText("Không có dữ liệu", w / 2, h / 2);
       return;
@@ -1087,7 +1093,7 @@
       ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(w - PAD.r, y); ctx.stroke();
       const val = (maxRate * i / gridCount).toFixed(1);
       ctx.fillStyle = "#31302E";
-      ctx.font = `700 11px system-ui`;
+      ctx.font = `700 11px 'DM Sans', system-ui`;
       ctx.textAlign = "right";
       ctx.fillText(val + "%", w - PAD.r, y - 3);
     }
@@ -1112,13 +1118,13 @@
 
       // Bank label
       ctx.fillStyle = "#31302E";
-      ctx.font = `700 12px system-ui`;
+      ctx.font = `700 12px 'DM Sans', system-ui`;
       ctx.textAlign = "center";
       ctx.fillText(r.bank_code, x + barW / 2, h - PAD.b + 14);
 
       // Rate label
       ctx.fillStyle = color;
-      ctx.font = `700 13px system-ui`;
+      ctx.font = `700 13px 'DM Sans', system-ui`;
       ctx.fillText(r.rate.toFixed(1), x + barW / 2, y - 5);
     });
   }
@@ -1250,7 +1256,7 @@
   // Nhãn trục X theo mốc THỜI GIAN đều nhau (không theo điểm dữ liệu) — nhờ vậy
   // các chart xếp chồng có cùng domain sẽ hiện CÙNG ngày ở CÙNG vị trí.
   function drawXTimeLabels(ctx, tm, PAD, cw, baseY, single) {
-    ctx.fillStyle = "#31302E"; ctx.font = "700 11px system-ui";
+    ctx.fillStyle = "#31302E"; ctx.font = "700 11px 'DM Sans', system-ui";
     if (single || tm.span <= 1) {
       ctx.textAlign = "center";
       ctx.fillText(fmtDateDMY(new Date(tm.t0).toISOString().slice(0, 10)), PAD.l + cw / 2, baseY);
@@ -1293,7 +1299,7 @@
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + ch - (ch * i) / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
-      ctx.fillStyle = "#31302E"; ctx.font = "700 11px system-ui"; ctx.textAlign = "left";
+      ctx.fillStyle = "#31302E"; ctx.font = "700 11px 'DM Sans', system-ui"; ctx.textAlign = "left";
       ctx.fillText((lo + (hi - lo) * i / 4).toFixed(1) + "%", w - PAD.r + 6, gy + 3);
     }
 
@@ -1773,7 +1779,7 @@
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + (ch * i) / 4, val = amax - (2 * amax) * i / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
-      ctx.fillStyle = i === 2 ? "#615D59" : "#31302E"; ctx.font = "700 11px system-ui"; ctx.textAlign = "left";
+      ctx.fillStyle = i === 2 ? "#615D59" : "#31302E"; ctx.font = "700 11px 'DM Sans', system-ui"; ctx.textAlign = "left";
       ctx.fillText(Math.round(val).toLocaleString("en-US"), w - PAD.r + 6, gy + 3);
     }
     drawXTimeLabels(ctx, tm, PAD, cw, h - PAD.b + 16, dates.length < 2);
@@ -1931,7 +1937,7 @@
     for (let i = 0; i <= 4; i++) {
       const gy = PAD.t + ch - (ch * i) / 4;
       ctx.beginPath(); ctx.moveTo(PAD.l, gy); ctx.lineTo(w - PAD.r, gy); ctx.stroke();
-      ctx.fillStyle = "#31302E"; ctx.font = "700 11px system-ui"; ctx.textAlign = "right";
+      ctx.fillStyle = "#31302E"; ctx.font = "700 11px 'DM Sans', system-ui"; ctx.textAlign = "right";
       ctx.fillText((lo + (hi - lo) * i / 4).toFixed(1) + "%", PAD.l - 4, gy + 3);
     }
     // Nhãn trục phải (chênh lệch, 0 ở giữa)
@@ -2239,7 +2245,7 @@
     ctx.strokeStyle="rgba(0,0,0,.08)"; ctx.lineWidth=1;
     for (let i=0;i<=4;i++){ const gy=PAD.t+ch-(ch*i)/4;
       ctx.beginPath();ctx.moveTo(PAD.l,gy);ctx.lineTo(w-PAD.r,gy);ctx.stroke();
-      ctx.fillStyle="#31302E";ctx.font="700 11px system-ui";ctx.textAlign="left";
+      ctx.fillStyle="#31302E";ctx.font="700 11px 'DM Sans', system-ui";ctx.textAlign="left";
       const _av = lo+(hi-lo)*i/4;
       ctx.fillText(fmt ? fmt(_av) : _av.toFixed(1)+"%", w-PAD.r+6, gy+3); }
     drawXTimeLabels(ctx, tm, PAD, cw, h-PAD.b+16, dates.length<2);
