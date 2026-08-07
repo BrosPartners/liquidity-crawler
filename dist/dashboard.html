@@ -6349,23 +6349,45 @@ const __EMBED_DIAMOND__ = "date,series_key,value\n2015-01-01,d_round_0_5,109.25\
   }
 
   // Legend click-để-ẩn/hiện từng đường (chỉ khi chart có >1 đường).
+  // Chart có TRÊN 3 đường (vd: 15 ngân hàng, 6 hãng vàng, 6 kỳ hạn liên NH...) có
+  // thêm nút "Ẩn tất cả" — ẩn hết 1 lần để chỉ bấm lại 1-2 đường muốn xem, thay
+  // vì tự ẩn từng cái. Chart ≤3 đường không cần, tự tay bấm cũng nhanh.
   function buildLegend(id) {
     const st = CHART_STATE[id];
     const el = document.getElementById(st.legendId);
     if (!el || !st.series) return;
     const multi = st.series.length > 1;
-    el.innerHTML = st.series.map(s => {
+    const names = st.series.map(seriesLabel);
+    const showHideAll = st.series.length > 3;
+    const allHidden = showHideAll && names.every(nm => st.hidden.has(nm));
+
+    let html = st.series.map(s => {
       const nm = seriesLabel(s);
       return `<span class="lg ${st.hidden.has(nm) ? "off" : ""}" data-series="${nm}"${multi ? ' style="cursor:pointer"' : ""}>` +
         `<span class="sw" style="background:${seriesColor(s)}"></span>${nm}</span>`;
     }).join("");
-    if (!multi) return;
-    el.querySelectorAll(".lg").forEach(item => item.addEventListener("click", () => {
-      const nm = item.dataset.series;
-      st.hidden.has(nm) ? st.hidden.delete(nm) : st.hidden.add(nm);
-      item.classList.toggle("off");
-      redrawChart(id);
-    }));
+    if (showHideAll) {
+      html += `<button type="button" class="lg-toggle-btn" data-hideall>${allHidden ? "Hiện tất cả" : "Ẩn tất cả"}</button>`;
+    }
+    el.innerHTML = html;
+
+    if (multi) {
+      el.querySelectorAll(".lg").forEach(item => item.addEventListener("click", () => {
+        const nm = item.dataset.series;
+        st.hidden.has(nm) ? st.hidden.delete(nm) : st.hidden.add(nm);
+        item.classList.toggle("off");
+        redrawChart(id);
+        if (showHideAll) buildLegend(id);   // cập nhật nhãn nút Ẩn/Hiện tất cả
+      }));
+    }
+    if (showHideAll) {
+      el.querySelector("[data-hideall]").addEventListener("click", () => {
+        if (allHidden) st.hidden.clear();
+        else names.forEach(nm => st.hidden.add(nm));
+        redrawChart(id);
+        buildLegend(id);
+      });
+    }
   }
 
   function redrawChart(id) {
