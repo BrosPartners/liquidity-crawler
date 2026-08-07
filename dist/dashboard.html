@@ -40,6 +40,11 @@
        thật (h1-h3), không chạm số liệu trong bảng. */
     h1, h2, h3 { font-family: "Noto Serif", Georgia, serif; }
 
+    /* <button> mặc định KHÔNG kế thừa font-family của body (quy tắc UA riêng của
+       trình duyệt) — nếu không khai báo lại, mọi nút (tab, filter khoảng ngày,
+       nhóm ngân hàng...) sẽ hiện font hệ thống thay vì DM Sans. */
+    button { font-family: inherit; }
+
     body {
       background: var(--bg);
       color: var(--text);
