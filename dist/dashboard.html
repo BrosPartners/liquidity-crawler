@@ -90,6 +90,20 @@
       color: var(--accent);
       letter-spacing: .04em;
     }
+    #btnResetAllFilters {
+      margin-left: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color .15s, border-color .15s;
+    }
+    #btnResetAllFilters:hover { color: var(--text); border-color: var(--muted); }
 
     /* ── Tabs ── */
     .tabs {
@@ -505,6 +519,7 @@
   <h1>Vĩ mô &amp; Ngân hàng</h1>
   <span class="meta" id="metaText">Đang tải…</span>
   <span class="badge" id="metaBadge">–– bank</span>
+  <button id="btnResetAllFilters" title="Đặt lại mọi filter (khoảng ngày, nhóm ngân hàng, kỳ hạn...) về mặc định trên tất cả các tab">Xoá tất cả filter</button>
 </div>
 
 <div class="tabs" id="tabNav">
@@ -5943,6 +5958,7 @@ const __EMBED_DIAMOND__ = "date,series_key,value\n2015-01-01,d_round_0_5,109.25\
   // ── Lọc nhanh khoảng thời gian cho time-series chart (đặt lại view zoom) ──
   // Dùng chung cho mọi tab có chart theo ngày: truyền id thanh nút (#rng-bar)
   // + danh sách canvas id cần áp cùng lúc.
+  const _rangeBarResets = [];
   function makeRangeBar(barId, chartIds) {
     const bar = document.getElementById(barId);
     if (!bar) return;
@@ -5970,6 +5986,7 @@ const __EMBED_DIAMOND__ = "date,series_key,value\n2015-01-01,d_round_0_5,109.25\
       const btn = e.target.closest(".rng-btn");
       if (btn) apply(Number(btn.dataset.m));
     });
+    _rangeBarResets.push(() => apply(0));
   }
   makeRangeBar("goldRangeBar", ["goldSjcChart", "goldWorldChart", "goldPriceChart", "goldGapChart", "goldBrandBuyChart", "goldBrandSellChart", "goldSpreadChart", "diamondChart"]);
   makeRangeBar("tsRangeBar", ["tsChart", "tsAvgChart", "tsVnindexChart"]);
@@ -5979,6 +5996,16 @@ const __EMBED_DIAMOND__ = "date,series_key,value\n2015-01-01,d_round_0_5,109.25\
   makeRangeBar("vimoRangeBar", ["cpiChart", "reservesChart", "tradeChart", "tradeBalChart", "iipChart"]);
   addExportButtons();   // nút tải Excel cho mọi panel chart (idempotent)
   addSourceLinks();     // dòng trích nguồn (link) dưới mỗi chart
+
+  function resetAllFilters() {
+    _rangeBarResets.forEach(reset => reset());
+    setGroup("all");
+    const termChip = [...document.querySelectorAll(".chip")].find(c => c.textContent.trim() === "12M");
+    setTerm(termChip ? "12M" : (document.querySelector(".chip")?.textContent.trim() || currentTerm));
+    setProduct("online");
+  }
+  const btnResetAll = document.getElementById("btnResetAllFilters");
+  if (btnResetAll) btnResetAll.addEventListener("click", resetAllFilters);
 
   function drawGoldSeries(canvasId, legendId, keys, opts) {
     opts = opts || {};
