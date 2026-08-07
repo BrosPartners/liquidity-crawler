@@ -63,12 +63,13 @@
       flex-wrap: wrap;
     }
     .header .brand-logo { height: 30px; width: auto; flex: 0 0 auto; }
-    .header h1 { border-left: 1px solid var(--border); padding-left: 14px; }
+    /* Cỡ chữ/không viết hoa/không letter-spacing — đồng bộ với tiêu đề của
+       dashboard BĐS (Noto Serif thường, không biến dạng bằng text-transform). */
     .header h1 {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: .04em;
-      text-transform: uppercase;
+      border-left: 1px solid var(--border);
+      padding-left: 14px;
+      font-size: 18px;
+      margin: 0;
       color: var(--text);
     }
     .header .meta {
@@ -363,6 +364,19 @@
       font-weight: 600;
       color: var(--muted);
     }
+    .lg-toggle-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 3px 9px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      white-space: nowrap;
+      margin-left: auto;
+    }
+    .lg-toggle-btn:hover { color: var(--text); border-color: var(--muted); }
     .ts-legend .lg {
       display: inline-flex;
       align-items: center;
@@ -594,6 +608,7 @@
     <div class="ts-head">
       <div class="panel-title" id="tsTitle">Diễn biến lãi suất</div>
       <div class="ts-legend" id="tsLegend"></div>
+      <button id="tsHideAllBtn" class="lg-toggle-btn" type="button">Ẩn tất cả</button>
     </div>
     <canvas id="tsChart"></canvas>
     <div class="ts-empty" id="tsEmpty" style="display:none"></div>
@@ -5107,6 +5122,20 @@ const __EMBED_DIAMOND__ = "date,series_key,value\n2015-01-01,d_round_0_5,109.25\
       tsHidden.has(b) ? tsHidden.delete(b) : tsHidden.add(b);
       renderTS();
     }));
+
+    // Nút "Ẩn tất cả" — ẩn hết mọi đường 1 lần, để chỉ cần bấm lại 1-2 ngân hàng
+    // muốn xem thay vì phải tự tay ẩn từng cái trong ~15 ngân hàng. Bấm lần nữa
+    // (khi đã ẩn hết) sẽ hiện lại tất cả.
+    const hideAllBtn = document.getElementById("tsHideAllBtn");
+    if (hideAllBtn) {
+      const allHidden = banks.length > 0 && banks.every(b => tsHidden.has(b));
+      hideAllBtn.textContent = allHidden ? "Hiện tất cả" : "Ẩn tất cả";
+      hideAllBtn.onclick = () => {
+        if (allHidden) tsHidden.clear();
+        else banks.forEach(b => tsHidden.add(b));
+        renderTS();
+      };
+    }
 
     // Series with forward-fill over the date axis
     const series = banks.filter(b => !tsHidden.has(b)).map(b => {
