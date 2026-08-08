@@ -1,15 +1,15 @@
 {
-  "as_of": "2026-08-07",
-  "world_gold_usd": 4323.3,
-  "world_gold_vnd": 136741989.0,
-  "sjc_sell": 142200000.0,
-  "gap": 5458011.0,
-  "pct_gap": 0.03991466732285136,
-  "usd_vnd": 26234.0,
-  "fx_vcb": null,
-  "fx_tudo": null,
-  "fx_sbv": null,
-  "fx_as_of": null,
+  "as_of": "2026-07-10",
+  "world_gold_usd": 4104.1,
+  "world_gold_vnd": 130085990.0,
+  "sjc_sell": 149900000.0,
+  "gap": 19814010.0,
+  "pct_gap": 0.15231471121525078,
+  "usd_vnd": 26470.0,
+  "fx_vcb": 26470.0,
+  "fx_tudo": 26450.0,
+  "fx_sbv": 26424.0,
+  "fx_as_of": "2026-07-10",
   "brands": [
     {
       "company": "SJC",
@@ -33,8 +33,8 @@
     },
     {
       "company": "BTMH",
-      "buy": 139700000.0,
-      "sell": 143700000.0
+      "buy": 140200000.0,
+      "sell": 144200000.0
     },
     {
       "company": "PHUQUY",
