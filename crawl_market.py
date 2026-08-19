@@ -53,8 +53,11 @@ def main() -> int:
         print(f"[OK]   {r.series_key:16} {r.value!s:10} {r.unit:9} ({r.as_of})")
 
     now = _dt.datetime.now().isoformat(timespec="seconds")
-    market_sink.write_json(rows, generated_at=now)
+    # Phai so sanh voi market_latest.json CU truoc khi ghi de bang gia tri moi —
+    # dao nguoc thu tu se khien append_history_on_change() luon so gia tri moi
+    # voi chinh no (da bi write_json ghi de), "khong doi" moi lan, mat lich su.
     n = market_sink.append_history_on_change(rows)
+    market_sink.write_json(rows, generated_at=now)
     print(f"\nTổng {len(rows)} chỉ tiêu. {n} đổi -> market_history.csv. Xem data/market_latest.json")
 
     # VN-Index (VNDirect DChart) — ghi đè toàn bộ lịch sử, không liên quan MarketRow ở trên.
