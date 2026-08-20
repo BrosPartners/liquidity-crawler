@@ -67,7 +67,7 @@ def fetch_from_telegram(dest, candidates=5):
             if name != FILENAME:
                 continue
             n_checked += 1
-            cand = f"{dest}.cand{n_checked}"
+            cand = f"{dest}.cand{n_checked}.xlsx"  # openpyxl doi hoi duoi .xlsx that
             saved = client.download_media(msg, cand)
             as_of = None
             if not saved or not os.path.exists(cand) or os.path.getsize(cand) == 0:
@@ -89,7 +89,7 @@ def fetch_from_telegram(dest, candidates=5):
             raise RuntimeError(f"Không thấy {FILENAME} trong 60 tin gần nhất của chat {chat}")
         print(f"[tg] chọn bản as_of={best_as_of} (mới nhất theo NỘI DUNG, không theo thời gian gửi)")
         for i in range(1, n_checked + 1):
-            cand = f"{dest}.cand{i}"
+            cand = f"{dest}.cand{i}.xlsx"
             if cand != best_path and os.path.exists(cand):
                 os.remove(cand)
         os.replace(best_path, dest)
