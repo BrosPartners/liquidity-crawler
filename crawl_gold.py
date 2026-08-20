@@ -21,7 +21,16 @@ DATA_DIR = os.path.join(_ROOT, "data")
 FILENAME = "gold_prices_all.xlsx"
 
 
-def fetch_from_telegram(dest):
+def fetch_from_telegram(dest, candidates=5):
+    """Tải gold_prices_all.xlsx mới nhất từ Telegram group.
+
+    Có 1 bot CŨ (cùng token, chạy ở máy/VPS khác chưa xác định) vẫn gửi file
+    trùng tên vào cùng group mỗi ngày với dữ liệu CŨ (cache/lỗi phía nó) — nếu
+    chỉ lấy tin nhắn gửi GẦN ĐÂY NHẤT theo thời gian, có ngày sẽ ăn nhầm bản
+    cũ này (as_of bị kẹt lại). Vì cả 2 file đều tên "gold_prices_all.xlsx" nên
+    không phân biệt được qua sender — phải tải vài bản gần nhất, PARSE THỬ
+    từng bản và chọn bản có as_of (nội dung thực) MỚI NHẤT, bất kể thứ tự gửi.
+    """
     from telethon.sync import TelegramClient
     from telethon.sessions import StringSession
 
@@ -46,15 +55,38 @@ def fetch_from_telegram(dest):
                 break
         if target is None:
             target = chat_id if chat_id is not None else chat
+
+        best_path = None
+        best_as_of = None
+        n_checked = 0
         for msg in client.iter_messages(target, limit=60):
             if not msg.document:
                 continue
             name = next((a.file_name for a in msg.document.attributes
                          if getattr(a, "file_name", None)), None)
-            if name == FILENAME:
-                client.download_media(msg, dest)
-                return dest
-    raise RuntimeError(f"Không thấy {FILENAME} trong 60 tin gần nhất của chat {chat}")
+            if name != FILENAME:
+                continue
+            n_checked += 1
+            cand = f"{dest}.cand{n_checked}"
+            client.download_media(msg, cand)
+            try:
+                as_of = parse_gold_xlsx(cand)["latest"]["as_of"]
+            except Exception:
+                as_of = None
+            print(f"[tg] tin #{n_checked} (msg {msg.id}, {msg.date}): as_of={as_of}")
+            if as_of and (best_as_of is None or as_of > best_as_of):
+                best_as_of, best_path = as_of, cand
+            if n_checked >= candidates:
+                break
+        if best_path is None:
+            raise RuntimeError(f"Không thấy {FILENAME} trong 60 tin gần nhất của chat {chat}")
+        print(f"[tg] chọn bản as_of={best_as_of} (mới nhất theo NỘI DUNG, không theo thời gian gửi)")
+        for i in range(1, n_checked + 1):
+            cand = f"{dest}.cand{i}"
+            if cand != best_path and os.path.exists(cand):
+                os.remove(cand)
+        os.replace(best_path, dest)
+        return dest
 
 
 def main():
