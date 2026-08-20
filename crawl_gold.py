@@ -68,11 +68,18 @@ def fetch_from_telegram(dest, candidates=5):
                 continue
             n_checked += 1
             cand = f"{dest}.cand{n_checked}"
-            client.download_media(msg, cand)
-            try:
-                as_of = parse_gold_xlsx(cand)["latest"]["as_of"]
-            except Exception:
-                as_of = None
+            saved = client.download_media(msg, cand)
+            as_of = None
+            if not saved or not os.path.exists(cand) or os.path.getsize(cand) == 0:
+                print(f"[tg] tin #{n_checked} (msg {msg.id}, {msg.date}): "
+                      f"download_media tra ve {saved!r}, file ton tai={os.path.exists(cand)}",
+                      file=sys.stderr)
+            else:
+                try:
+                    as_of = parse_gold_xlsx(cand)["latest"]["as_of"]
+                except Exception as e:
+                    print(f"[tg] tin #{n_checked}: loi parse ({os.path.getsize(cand)} bytes): "
+                          f"{type(e).__name__}: {e}", file=sys.stderr)
             print(f"[tg] tin #{n_checked} (msg {msg.id}, {msg.date}): as_of={as_of}")
             if as_of and (best_as_of is None or as_of > best_as_of):
                 best_as_of, best_path = as_of, cand
