@@ -696,3 +696,9 @@ date,series_key,label,value,unit,category,as_of,source_url,crawled_at
 2026-08-21,interbank_2w,Lãi suất liên ngân hàng 2 tuần,5.91,%/năm,lien_nh,19/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-21T10:22:21
 2026-08-21,interbank_1m,Lãi suất liên ngân hàng 1 tháng,6.97,%/năm,lien_nh,19/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-21T10:22:21
 2026-08-21,interbank_3m,Lãi suất liên ngân hàng 3 tháng,7.89,%/năm,lien_nh,19/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-21T10:22:21
+2026-08-22,interbank_on,Lãi suất liên ngân hàng qua đêm (ON),3.01,%/năm,lien_nh,20/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-22T10:15:42
+2026-08-22,interbank_1w,Lãi suất liên ngân hàng 1 tuần,3.73,%/năm,lien_nh,20/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-22T10:15:42
+2026-08-22,interbank_2w,Lãi suất liên ngân hàng 2 tuần,5.64,%/năm,lien_nh,20/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-22T10:15:42
+2026-08-22,interbank_1m,Lãi suất liên ngân hàng 1 tháng,6.93,%/năm,lien_nh,20/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-22T10:15:42
+2026-08-22,interbank_3m,Lãi suất liên ngân hàng 3 tháng,7.56,%/năm,lien_nh,20/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-22T10:15:42
+2026-08-22,interbank_6m,Lãi suất liên ngân hàng 6 tháng,8.44,%/năm,lien_nh,20/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-22T10:15:42
