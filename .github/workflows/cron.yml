@@ -100,12 +100,13 @@ jobs:
           PYTHONUTF8: "1"
         continue-on-error: true
 
-      - name: Đẩy lên Google Sheet (chỉ Thứ Sáu = weekly)
+      - name: Đẩy lên Google Sheet (Thứ Tư + Thứ Bảy)
         run: |
-          if [ "$(date -u +%u)" = "5" ] || [ -n "${{ github.event.inputs.banks }}" ]; then
+          dow="$(date -u +%u)"
+          if [ "$dow" = "3" ] || [ "$dow" = "6" ] || [ -n "${{ github.event.inputs.banks }}" ]; then
             python push_to_sheet.py
           else
-            echo "Không phải Thứ Sáu — bỏ qua push weekly."
+            echo "Không phải Thứ Tư/Thứ Bảy — bỏ qua push weekly."
           fi
         env:
           PYTHONUTF8: "1"
