@@ -702,3 +702,5 @@ date,series_key,label,value,unit,category,as_of,source_url,crawled_at
 2026-08-22,interbank_1m,Lãi suất liên ngân hàng 1 tháng,6.93,%/năm,lien_nh,20/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-22T10:15:42
 2026-08-22,interbank_3m,Lãi suất liên ngân hàng 3 tháng,7.56,%/năm,lien_nh,20/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-22T10:15:42
 2026-08-22,interbank_6m,Lãi suất liên ngân hàng 6 tháng,8.44,%/năm,lien_nh,20/08/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-08-22T10:15:42
+2026-08-24,fx_bank_sell,Tỷ giá USD NHTM bán ra,26330.0,VND/USD,ty_gia,Ngày 24/08/2026,https://data.vietnambiz.vn/currency-interest-rate,2026-08-24T06:36:25
+2026-08-24,fx_free_sell,Tỷ giá USD tự do bán ra,25970.0,VND/USD,ty_gia,Ngày 24/08/2026,https://data.vietnambiz.vn/currency-interest-rate,2026-08-24T06:36:25
