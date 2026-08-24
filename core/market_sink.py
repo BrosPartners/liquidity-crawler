@@ -27,34 +27,45 @@ def write_json(rows: List[MarketRow], generated_at: str) -> None:
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
 
-def _load_prev() -> dict:
-    """market_latest.json trước -> {series_key: value}."""
-    if not os.path.exists(LATEST):
-        return {}
+def _existing_today_keys(dates: set) -> set:
+    """{(date, series_key)} da co san trong history, chi doc cac dong co
+    date nam trong `dates` — dung de chong trung khi workflow chay lai
+    2 lan cung 1 ngay (vd workflow_dispatch thu cong)."""
+    if not os.path.exists(HISTORY):
+        return set()
+    out = set()
     try:
-        with open(LATEST, encoding="utf-8") as f:
-            data = json.load(f)
-        return {d["series_key"]: d.get("value") for d in data.get("series", [])}
+        with open(HISTORY, encoding="utf-8", newline="") as f:
+            for row in csv.DictReader(f):
+                if row.get("date") in dates:
+                    out.add((row.get("date"), row.get("series_key")))
     except Exception:
-        return {}
+        pass
+    return out
 
 
 def append_history_on_change(rows: List[MarketRow]) -> int:
-    """Chỉ ghi vào history những series đổi giá trị so với lần trước.
-    Lần đầu (chưa có file) ghi toàn bộ làm baseline cho time series."""
+    """Ghi 1 dong/ngay cho MOI series, KE CA khi gia tri khong doi — de chart
+    khong bi 'dung lai' truoc mat khi gia tri phang nhieu ngay lien tiep
+    (vd ty gia trung tam SBV giu nguyen vai ngay). Idempotent trong cung 1
+    ngay: chi bo qua neu (date, series_key) do DA co san (tranh dong trung
+    khi chay lai workflow thu cong).
+
+    Ten ham giu nguyen (khong phai "on_change" nua) de khong phai sua cac
+    noi da goi no (crawl_market.py, scripts/backfill_market_*.py)."""
     os.makedirs(DATA_DIR, exist_ok=True)
     new_file = not os.path.exists(HISTORY)
     if new_file:
-        changed = rows
+        to_write = rows
     else:
-        prev = _load_prev()
-        changed = [r for r in rows if prev.get(r.series_key) != r.value]
-    if not changed:
+        existing = _existing_today_keys({r.date for r in rows})
+        to_write = [r for r in rows if (r.date, r.series_key) not in existing]
+    if not to_write:
         return 0
     with open(HISTORY, "a", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=_FIELDS)
         if new_file:
             w.writeheader()
-        for r in changed:
+        for r in to_write:
             w.writerow(r.to_dict())
-    return len(changed)
+    return len(to_write)
