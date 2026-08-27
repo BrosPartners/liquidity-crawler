@@ -63,8 +63,8 @@ def main() -> int:
         return 1
 
     now = _dt.datetime.now().isoformat(timespec="seconds")
-    sink.write_json(all_rows, generated_at=now)
     n_changed = sink.append_history_on_change(all_rows)
+    sink.write_json(all_rows, generated_at=now)
     try:
         sink.write_sheet(all_rows)
     except Exception as e:
