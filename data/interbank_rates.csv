@@ -3971,3 +3971,9 @@ date,series_key,value
 2026-08-25,interbank_3m,7.86
 2026-08-25,interbank_6m,8.77
 2026-08-25,interbank_on,2.7
+2026-08-26,interbank_1m,6.49
+2026-08-26,interbank_1w,6.28
+2026-08-26,interbank_2w,6.34
+2026-08-26,interbank_3m,7.57
+2026-08-26,interbank_6m,8.77
+2026-08-26,interbank_on,2.06
