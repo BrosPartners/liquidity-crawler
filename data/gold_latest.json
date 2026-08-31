@@ -1,10 +1,10 @@
 {
-  "as_of": "2026-08-28",
-  "world_gold_usd": 4529.9,
-  "world_gold_vnd": 142380873.0,
-  "sjc_sell": 149700000.0,
-  "gap": 7319127.0,
-  "pct_gap": 0.0514052684590577,
+  "as_of": "2026-08-31",
+  "world_gold_usd": 4469.1,
+  "world_gold_vnd": 140469847.0,
+  "sjc_sell": 148700000.0,
+  "gap": 8230153.0,
+  "pct_gap": 0.05859017558408816,
   "usd_vnd": 26070.0,
   "fx_vcb": null,
   "fx_tudo": null,
@@ -38,9 +38,9 @@
     },
     {
       "company": "PHUQUY",
-      "buy": 145700000.0,
+      "buy": 145400000.0,
       "sell": 148700000.0
     }
   ],
-  "brands_as_of": "2026-08-30"
+  "brands_as_of": "2026-08-31"
 }
