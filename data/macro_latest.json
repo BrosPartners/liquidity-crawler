@@ -49,7 +49,7 @@
   },
   "public_investment": {
     "value": 25.9,
-    "prev": 19.1728,
+    "prev": -5.7455,
     "period": "2026-07",
     "period_label": "T07/2026",
     "label": "Đầu tư công · vốn NSNN (YoY)",
@@ -81,7 +81,7 @@
   },
   "retail_yoy": {
     "value": 14.4798,
-    "prev": 14.3159,
+    "prev": 13.5922,
     "period": "2026-07",
     "period_label": "T07/2026",
     "label": "Bán lẻ HH&DV (YoY)",
