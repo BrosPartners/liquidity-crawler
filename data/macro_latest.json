@@ -57,7 +57,7 @@
   },
   "exports_yoy": {
     "value": 26.0145,
-    "prev": 25.0122,
+    "prev": 25.0128,
     "period": "2026-08",
     "period_label": "T08/2026",
     "label": "Xuất khẩu (YoY)",
@@ -65,7 +65,7 @@
   },
   "imports_yoy": {
     "value": 37.9015,
-    "prev": 41.423,
+    "prev": 41.4139,
     "period": "2026-08",
     "period_label": "T08/2026",
     "label": "Nhập khẩu (YoY)",
@@ -73,7 +73,7 @@
   },
   "trade_balance": {
     "value": -113.2148,
-    "prev": -3572.7829,
+    "prev": -3568.8793,
     "period": "2026-08",
     "period_label": "T08/2026",
     "label": "Cán cân thương mại",
