@@ -137,6 +137,6 @@ banks:
   - code: OCB
     module: ocb
     name: OCB
-    url: https://www.ocb.com.vn/vi/cong-cu/lai-suat
-    mode: html   # Angular SSR
+    url: https://ocb.com.vn/vi/ca-nhan   # doi 2026-09-12: /vi/cong-cu/lai-suat bi 404
+    mode: html   # Angular SSR (widget lai suat rut gon tren trang chu ca nhan)
     enabled: true
