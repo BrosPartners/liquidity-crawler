@@ -528,3 +528,5 @@ date,bank_code,bank_name,term,rate,product,method,currency,source_url,crawled_at
 2026-09-14,SSB,SeABank,18M,5.45,quay,cuoi_ky,VND,https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat,2026-09-14T04:14:44
 2026-09-14,SSB,SeABank,24M,5.45,quay,cuoi_ky,VND,https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat,2026-09-14T04:14:44
 2026-09-14,SSB,SeABank,36M,5.45,quay,cuoi_ky,VND,https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat,2026-09-14T04:14:44
+2026-09-17,VPB,VPBank,6M,6.75,quay,cuoi_ky,VND,https://www.vpbank.com.vn/uiux-api/api/interest-rate,2026-09-17T14:33:42
+2026-09-17,VPB,VPBank,12M,6.75,quay,cuoi_ky,VND,https://www.vpbank.com.vn/uiux-api/api/interest-rate,2026-09-17T14:33:42
