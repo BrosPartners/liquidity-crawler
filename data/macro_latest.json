@@ -96,18 +96,18 @@
     "fmt": "milusd"
   },
   "budget_rev": {
-    "value": 20.9104,
-    "prev": 14.9822,
-    "period": "2026-Q2",
-    "period_label": "Q2/2026",
+    "value": 8.7514,
+    "prev": 20.9104,
+    "period": "2026-Q3",
+    "period_label": "Q3/2026",
     "label": "Thu ngân sách (YoY)",
     "fmt": "pct"
   },
   "budget_exp": {
-    "value": -8.164,
-    "prev": 23.816,
-    "period": "2026-Q2",
-    "period_label": "Q2/2026",
+    "value": 38.4858,
+    "prev": -8.164,
+    "period": "2026-Q3",
+    "period_label": "Q3/2026",
     "label": "Chi ngân sách (YoY)",
     "fmt": "pct"
   }
