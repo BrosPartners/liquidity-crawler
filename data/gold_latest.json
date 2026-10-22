@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-10-21",
-  "world_gold_usd": 4132.7,
-  "world_gold_vnd": 128909786.0,
+  "as_of": "2026-10-22",
+  "world_gold_usd": 4106.9,
+  "world_gold_vnd": 128025793.0,
   "sjc_sell": 142300000.0,
-  "gap": 13390214.0,
-  "pct_gap": 0.10387275020377429,
-  "usd_vnd": 25872.0,
+  "gap": 14274207.0,
+  "pct_gap": 0.11149477511926054,
+  "usd_vnd": 25856.0,
   "fx_vcb": null,
   "fx_tudo": null,
   "fx_sbv": null,
@@ -42,5 +42,5 @@
       "sell": 142300000.0
     }
   ],
-  "brands_as_of": "2026-10-21"
+  "brands_as_of": "2026-10-22"
 }
