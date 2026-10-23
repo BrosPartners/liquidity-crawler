@@ -784,3 +784,12 @@ date,bank_code,bank_name,term,rate,product,method,currency,source_url,crawled_at
 2026-10-21,TCB,Techcombank,34M,4.75,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261022.pdf,2026-10-21T14:47:08
 2026-10-21,TCB,Techcombank,35M,4.75,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261022.pdf,2026-10-21T14:47:08
 2026-10-21,TCB,Techcombank,36M,4.75,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261022.pdf,2026-10-21T14:47:08
+2026-10-23,VPB,VPBank,6M,6.6,quay,cuoi_ky,VND,https://www.vpbank.com.vn/uiux-api/api/interest-rate,2026-10-23T14:45:22
+2026-10-23,VPB,VPBank,12M,6.7,quay,cuoi_ky,VND,https://www.vpbank.com.vn/uiux-api/api/interest-rate,2026-10-23T14:45:22
+2026-10-23,TCB,Techcombank,6M,5.45,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf,2026-10-23T14:45:55
+2026-10-23,TCB,Techcombank,7M,5.45,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf,2026-10-23T14:45:55
+2026-10-23,TCB,Techcombank,8M,5.45,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf,2026-10-23T14:45:55
+2026-10-23,TCB,Techcombank,9M,5.45,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf,2026-10-23T14:45:55
+2026-10-23,TCB,Techcombank,10M,5.45,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf,2026-10-23T14:45:55
+2026-10-23,TCB,Techcombank,11M,5.45,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf,2026-10-23T14:45:55
+2026-10-23,TCB,Techcombank,12M,5.65,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf,2026-10-23T14:45:55
