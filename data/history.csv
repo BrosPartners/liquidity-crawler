@@ -793,3 +793,4 @@ date,bank_code,bank_name,term,rate,product,method,currency,source_url,crawled_at
 2026-10-23,TCB,Techcombank,10M,5.45,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf,2026-10-23T14:45:55
 2026-10-23,TCB,Techcombank,11M,5.45,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf,2026-10-23T14:45:55
 2026-10-23,TCB,Techcombank,12M,5.65,quay,cuoi_ky,VND,https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf,2026-10-23T14:45:55
+2026-10-30,VPB,VPBank,1M,4.65,quay,cuoi_ky,VND,https://www.vpbank.com.vn/uiux-api/api/interest-rate,2026-10-30T16:23:47
