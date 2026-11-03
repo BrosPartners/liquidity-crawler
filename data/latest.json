@@ -1,12 +1,10 @@
 {
-  "generated_at": "2026-11-02T19:56:13",
-  "count": 282,
+  "generated_at": "2026-11-03T17:28:23",
+  "count": 244,
   "banks": [
     "ACB",
     "AGR",
     "BID",
-    "CTG",
-    "HDB",
     "LPB",
     "MSB",
     "SSB",
@@ -19,7 +17,7 @@
   ],
   "rates": [
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "3W",
@@ -28,10 +26,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "1M",
@@ -40,10 +38,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "2M",
@@ -52,10 +50,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "3M",
@@ -64,10 +62,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "6M",
@@ -76,10 +74,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "9M",
@@ -88,10 +86,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "12M",
@@ -100,10 +98,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "3W",
@@ -112,10 +110,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "1M",
@@ -124,10 +122,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "2M",
@@ -136,10 +134,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "3M",
@@ -148,10 +146,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "4M",
@@ -160,10 +158,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "5M",
@@ -172,10 +170,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "6M",
@@ -184,10 +182,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "9M",
@@ -196,10 +194,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "12M",
@@ -208,10 +206,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "13M",
@@ -220,10 +218,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "15M",
@@ -232,10 +230,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "18M",
@@ -244,10 +242,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "24M",
@@ -256,10 +254,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "ACB",
       "bank_name": "ACB",
       "term": "36M",
@@ -268,10 +266,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://acb.com.vn/lai-suat-tien-gui",
-      "crawled_at": "2026-11-02T19:55:03"
+      "crawled_at": "2026-11-03T17:27:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "KKH",
@@ -280,10 +278,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "1M",
@@ -292,10 +290,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "2M",
@@ -304,10 +302,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "3M",
@@ -316,10 +314,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "4M",
@@ -328,10 +326,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "5M",
@@ -340,10 +338,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "6M",
@@ -352,10 +350,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "7M",
@@ -364,10 +362,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "8M",
@@ -376,10 +374,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "9M",
@@ -388,10 +386,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "10M",
@@ -400,10 +398,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "11M",
@@ -412,10 +410,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "12M",
@@ -424,10 +422,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "13M",
@@ -436,10 +434,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "15M",
@@ -448,10 +446,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "18M",
@@ -460,10 +458,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "AGR",
       "bank_name": "Agribank",
       "term": "24M",
@@ -472,10 +470,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.agribank.com.vn/en/lai-suat",
-      "crawled_at": "2026-11-02T19:55:01"
+      "crawled_at": "2026-11-03T17:27:07"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "KKH",
@@ -484,10 +482,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "1M",
@@ -496,10 +494,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "2M",
@@ -508,10 +506,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "3M",
@@ -520,10 +518,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "5M",
@@ -532,10 +530,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "6M",
@@ -544,10 +542,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "9M",
@@ -556,10 +554,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "12M",
@@ -568,10 +566,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "13M",
@@ -580,10 +578,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "15M",
@@ -592,10 +590,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "18M",
@@ -604,10 +602,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "24M",
@@ -616,10 +614,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "BID",
       "bank_name": "BIDV",
       "term": "36M",
@@ -628,466 +626,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://bidv.com.vn/vn/tra-cuu-lai-suat/",
-      "crawled_at": "2026-11-02T19:54:42"
+      "crawled_at": "2026-11-03T17:26:51"
     },
     {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "KKH",
-      "rate": 0.1,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "1M",
-      "rate": 2.1,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "2M",
-      "rate": 2.1,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "3M",
-      "rate": 2.4,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "4M",
-      "rate": 2.4,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "5M",
-      "rate": 2.4,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "6M",
-      "rate": 3.0,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "7M",
-      "rate": 3.0,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "8M",
-      "rate": 3.0,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "9M",
-      "rate": 3.0,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "10M",
-      "rate": 3.0,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "11M",
-      "rate": 3.0,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "12M",
-      "rate": 5.4,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "13M",
-      "rate": 5.4,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "18M",
-      "rate": 5.4,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "24M",
-      "rate": 5.5,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "CTG",
-      "bank_name": "VietinBank",
-      "term": "36M",
-      "rate": 5.5,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://www.vietinbank.vn/ca-nhan/cong-cu-tien-ich/lai-suat-khcn",
-      "crawled_at": "2026-11-02T19:55:00"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "1W",
-      "rate": 0.5,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "2W",
-      "rate": 0.5,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "3W",
-      "rate": 0.5,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "1M",
-      "rate": 3.5,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "2M",
-      "rate": 3.5,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "3M",
-      "rate": 3.6,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "4M",
-      "rate": 3.6,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "5M",
-      "rate": 3.6,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "6M",
-      "rate": 4.9,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "7M",
-      "rate": 4.7,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "8M",
-      "rate": 4.7,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "9M",
-      "rate": 4.7,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "10M",
-      "rate": 4.7,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "11M",
-      "rate": 4.7,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "12M",
-      "rate": 5.2,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "13M",
-      "rate": 5.4,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "15M",
-      "rate": 5.4,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "18M",
-      "rate": 5.5,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "24M",
-      "rate": 4.9,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "36M",
-      "rate": 4.9,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
-      "bank_code": "HDB",
-      "bank_name": "HDBank",
-      "term": "1D",
-      "rate": 0.5,
-      "product": "quay",
-      "method": "cuoi_ky",
-      "currency": "VND",
-      "source_url": "https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf",
-      "crawled_at": "2026-11-02T19:55:07"
-    },
-    {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "1W",
@@ -1096,10 +638,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "2W",
@@ -1108,10 +650,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "3W",
@@ -1120,10 +662,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "1M",
@@ -1132,10 +674,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "2M",
@@ -1144,10 +686,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "3M",
@@ -1156,10 +698,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "4M",
@@ -1168,10 +710,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "5M",
@@ -1180,10 +722,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "6M",
@@ -1192,10 +734,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "7M",
@@ -1204,10 +746,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "8M",
@@ -1216,10 +758,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "9M",
@@ -1228,10 +770,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "10M",
@@ -1240,10 +782,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "11M",
@@ -1252,10 +794,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "12M",
@@ -1264,10 +806,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "13M",
@@ -1276,10 +818,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "15M",
@@ -1288,10 +830,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "18M",
@@ -1300,10 +842,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "24M",
@@ -1312,10 +854,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "36M",
@@ -1324,10 +866,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "60M",
@@ -1336,10 +878,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "16M",
@@ -1348,10 +890,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "25M",
@@ -1360,10 +902,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "LPB",
       "bank_name": "LPBank",
       "term": "48M",
@@ -1372,10 +914,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://lpbank.com.vn/ca-nhan/lai-suat",
-      "crawled_at": "2026-11-02T19:56:00"
+      "crawled_at": "2026-11-03T17:28:09"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "1M",
@@ -1384,10 +926,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "2M",
@@ -1396,10 +938,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "3M",
@@ -1408,10 +950,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "4M",
@@ -1420,10 +962,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "5M",
@@ -1432,10 +974,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "6M",
@@ -1444,10 +986,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "7M",
@@ -1456,10 +998,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "8M",
@@ -1468,10 +1010,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "9M",
@@ -1480,10 +1022,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "10M",
@@ -1492,10 +1034,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "11M",
@@ -1504,10 +1046,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "12M",
@@ -1516,10 +1058,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "13M",
@@ -1528,10 +1070,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "15M",
@@ -1540,10 +1082,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "18M",
@@ -1552,10 +1094,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "24M",
@@ -1564,10 +1106,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "36M",
@@ -1576,10 +1118,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "1D",
@@ -1588,10 +1130,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "1M",
@@ -1600,10 +1142,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "2M",
@@ -1612,10 +1154,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "3M",
@@ -1624,10 +1166,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "4M",
@@ -1636,10 +1178,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "5M",
@@ -1648,10 +1190,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "6M",
@@ -1660,10 +1202,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "7M",
@@ -1672,10 +1214,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "8M",
@@ -1684,10 +1226,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "9M",
@@ -1696,10 +1238,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "10M",
@@ -1708,10 +1250,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "11M",
@@ -1720,10 +1262,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "12M",
@@ -1732,10 +1274,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "13M",
@@ -1744,10 +1286,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "15M",
@@ -1756,10 +1298,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "18M",
@@ -1768,10 +1310,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "24M",
@@ -1780,10 +1322,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "MSB",
       "bank_name": "MSB",
       "term": "36M",
@@ -1792,10 +1334,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.msb.com.vn/khach-hang-ca-nhan/lai-suat-tiet-kiem/",
-      "crawled_at": "2026-11-02T19:56:08"
+      "crawled_at": "2026-11-03T17:28:16"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "1M",
@@ -1804,10 +1346,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "2M",
@@ -1816,10 +1358,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "3M",
@@ -1828,10 +1370,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "4M",
@@ -1840,10 +1382,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "5M",
@@ -1852,10 +1394,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "6M",
@@ -1864,10 +1406,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "7M",
@@ -1876,10 +1418,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "8M",
@@ -1888,10 +1430,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "9M",
@@ -1900,10 +1442,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "10M",
@@ -1912,10 +1454,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "11M",
@@ -1924,10 +1466,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "12M",
@@ -1936,10 +1478,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "15M",
@@ -1948,10 +1490,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "18M",
@@ -1960,10 +1502,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "24M",
@@ -1972,10 +1514,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "36M",
@@ -1984,10 +1526,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "7D",
@@ -1996,10 +1538,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "14D",
@@ -2008,10 +1550,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "SSB",
       "bank_name": "SeABank",
       "term": "21D",
@@ -2020,10 +1562,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.seabank.com.vn/cong-cu-tien-ich/bieu-lai-suat?type=lai-suat",
-      "crawled_at": "2026-11-02T19:56:02"
+      "crawled_at": "2026-11-03T17:28:11"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "1M",
@@ -2032,10 +1574,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "2M",
@@ -2044,10 +1586,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "3M",
@@ -2056,10 +1598,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "4M",
@@ -2068,10 +1610,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "5M",
@@ -2080,10 +1622,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "6M",
@@ -2092,10 +1634,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "7M",
@@ -2104,10 +1646,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "8M",
@@ -2116,10 +1658,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "9M",
@@ -2128,10 +1670,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "10M",
@@ -2140,10 +1682,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "11M",
@@ -2152,10 +1694,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "12M",
@@ -2164,10 +1706,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "13M",
@@ -2176,10 +1718,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "15M",
@@ -2188,10 +1730,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "18M",
@@ -2200,10 +1742,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "24M",
@@ -2212,10 +1754,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "STB",
       "bank_name": "Sacombank",
       "term": "36M",
@@ -2224,10 +1766,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.sacombank.com.vn/content/dam/sacombank/files/cong-cu/lai-suat/tien-gui/khcn/SACOMBANK_LAISUATNIEMYETTAIQUAY_KHCN_VIE.pdf",
-      "crawled_at": "2026-11-02T19:55:05"
+      "crawled_at": "2026-11-03T17:27:13"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "KKH",
@@ -2236,10 +1778,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "1M",
@@ -2248,10 +1790,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "2M",
@@ -2260,10 +1802,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "3M",
@@ -2272,10 +1814,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "4M",
@@ -2284,10 +1826,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "5M",
@@ -2296,10 +1838,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "6M",
@@ -2308,10 +1850,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "7M",
@@ -2320,10 +1862,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "8M",
@@ -2332,10 +1874,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "9M",
@@ -2344,10 +1886,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "10M",
@@ -2356,10 +1898,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "11M",
@@ -2368,10 +1910,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "12M",
@@ -2380,10 +1922,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "13M",
@@ -2392,10 +1934,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "15M",
@@ -2404,10 +1946,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "18M",
@@ -2416,10 +1958,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "24M",
@@ -2428,10 +1970,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "36M",
@@ -2440,10 +1982,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "14M",
@@ -2452,10 +1994,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "16M",
@@ -2464,10 +2006,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "17M",
@@ -2476,10 +2018,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "19M",
@@ -2488,10 +2030,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "20M",
@@ -2500,10 +2042,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "21M",
@@ -2512,10 +2054,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "22M",
@@ -2524,10 +2066,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "23M",
@@ -2536,10 +2078,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "25M",
@@ -2548,10 +2090,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "26M",
@@ -2560,10 +2102,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "27M",
@@ -2572,10 +2114,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "28M",
@@ -2584,10 +2126,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "29M",
@@ -2596,10 +2138,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "30M",
@@ -2608,10 +2150,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "31M",
@@ -2620,10 +2162,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "32M",
@@ -2632,10 +2174,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "33M",
@@ -2644,10 +2186,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "34M",
@@ -2656,10 +2198,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TCB",
       "bank_name": "Techcombank",
       "term": "35M",
@@ -2668,10 +2210,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://techcombank.com/content/dam/techcombank/public-site/documents/tcb-bieu-lai-suat-tien-gui-tiet-kiem-thuong-20261024.pdf",
-      "crawled_at": "2026-11-02T19:55:16"
+      "crawled_at": "2026-11-03T17:27:23"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "1M",
@@ -2680,10 +2222,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "3M",
@@ -2692,10 +2234,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "6M",
@@ -2704,10 +2246,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "12M",
@@ -2716,10 +2258,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "18M",
@@ -2728,10 +2270,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "24M",
@@ -2740,10 +2282,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "36M",
@@ -2752,10 +2294,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "1M",
@@ -2764,10 +2306,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "3M",
@@ -2776,10 +2318,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "6M",
@@ -2788,10 +2330,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "18M",
@@ -2800,10 +2342,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "TPB",
       "bank_name": "TPBank",
       "term": "36M",
@@ -2812,10 +2354,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://tpb.vn/cong-cu-tinh-toan/lai-suat",
-      "crawled_at": "2026-11-02T19:55:18"
+      "crawled_at": "2026-11-03T17:27:25"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "KKH",
@@ -2824,10 +2366,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "1M",
@@ -2836,10 +2378,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "2M",
@@ -2848,10 +2390,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "3M",
@@ -2860,10 +2402,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "6M",
@@ -2872,10 +2414,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "9M",
@@ -2884,10 +2426,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "12M",
@@ -2896,10 +2438,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "24M",
@@ -2908,10 +2450,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "36M",
@@ -2920,10 +2462,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "60M",
@@ -2932,10 +2474,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "7D",
@@ -2944,10 +2486,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "14D",
@@ -2956,10 +2498,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VCB",
       "bank_name": "Vietcombank",
       "term": "48M",
@@ -2968,10 +2510,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vietcombank.com.vn/vi-VN/api/interestrates?accountType=Personal",
-      "crawled_at": "2026-11-02T19:54:40"
+      "crawled_at": "2026-11-03T17:26:50"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "1M",
@@ -2980,10 +2522,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "2M",
@@ -2992,10 +2534,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "3M",
@@ -3004,10 +2546,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "4M",
@@ -3016,10 +2558,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "5M",
@@ -3028,10 +2570,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "6M",
@@ -3040,10 +2582,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "7M",
@@ -3052,10 +2594,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "8M",
@@ -3064,10 +2606,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "9M",
@@ -3076,10 +2618,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "10M",
@@ -3088,10 +2630,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "11M",
@@ -3100,10 +2642,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "12M",
@@ -3112,10 +2654,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "15M",
@@ -3124,10 +2666,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "18M",
@@ -3136,10 +2678,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "24M",
@@ -3148,10 +2690,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "36M",
@@ -3160,10 +2702,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "1M",
@@ -3172,10 +2714,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "2M",
@@ -3184,10 +2726,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "3M",
@@ -3196,10 +2738,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "4M",
@@ -3208,10 +2750,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "5M",
@@ -3220,10 +2762,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "6M",
@@ -3232,10 +2774,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "7M",
@@ -3244,10 +2786,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "8M",
@@ -3256,10 +2798,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "9M",
@@ -3268,10 +2810,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "10M",
@@ -3280,10 +2822,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "11M",
@@ -3292,10 +2834,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "12M",
@@ -3304,10 +2846,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "15M",
@@ -3316,10 +2858,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "18M",
@@ -3328,10 +2870,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "24M",
@@ -3340,10 +2882,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VIB",
       "bank_name": "VIB",
       "term": "36M",
@@ -3352,10 +2894,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vib.com.vn/vn/tiet-kiem",
-      "crawled_at": "2026-11-02T19:55:19"
+      "crawled_at": "2026-11-03T17:27:26"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VPB",
       "bank_name": "VPBank",
       "term": "1M",
@@ -3364,10 +2906,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vpbank.com.vn/uiux-api/api/interest-rate",
-      "crawled_at": "2026-11-02T19:55:04"
+      "crawled_at": "2026-11-03T17:27:12"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VPB",
       "bank_name": "VPBank",
       "term": "6M",
@@ -3376,10 +2918,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vpbank.com.vn/uiux-api/api/interest-rate",
-      "crawled_at": "2026-11-02T19:55:04"
+      "crawled_at": "2026-11-03T17:27:12"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VPB",
       "bank_name": "VPBank",
       "term": "12M",
@@ -3388,10 +2930,10 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vpbank.com.vn/uiux-api/api/interest-rate",
-      "crawled_at": "2026-11-02T19:55:04"
+      "crawled_at": "2026-11-03T17:27:12"
     },
     {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "bank_code": "VPB",
       "bank_name": "VPBank",
       "term": "24M",
@@ -3400,7 +2942,7 @@
       "method": "cuoi_ky",
       "currency": "VND",
       "source_url": "https://www.vpbank.com.vn/uiux-api/api/interest-rate",
-      "crawled_at": "2026-11-02T19:55:04"
+      "crawled_at": "2026-11-03T17:27:12"
     }
   ]
 }
