@@ -2353,3 +2353,23 @@ date,series_key,label,value,unit,category,as_of,source_url,crawled_at
 2026-11-12,interbank_1m,Lãi suất liên ngân hàng 1 tháng,5.66,%/năm,lien_nh,10/11/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-11-12T17:49:44
 2026-11-12,interbank_3m,Lãi suất liên ngân hàng 3 tháng,6.41,%/năm,lien_nh,10/11/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-11-12T17:49:44
 2026-11-12,interbank_6m,Lãi suất liên ngân hàng 6 tháng,7.9,%/năm,lien_nh,10/11/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-11-12T17:49:44
+2026-11-13,m2_yoy,Tăng trưởng cung tiền M2 (YoY),17.8868,%,tang_truong,Tháng 09/2025,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,deposit_yoy,Tăng trưởng huy động (YoY),15.309,%,tang_truong,Tháng 09/2025,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,credit_yoy,Tăng trưởng tín dụng (YoY),17.383,%,tang_truong,Tháng 08/2026,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,fx_central,Tỷ giá trung tâm,25637.0,VND/USD,ty_gia,Ngày 13/11/2026,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,fx_bank_sell,Tỷ giá USD NHTM bán ra,25910.0,VND/USD,ty_gia,Ngày 13/11/2026,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,fx_free_sell,Tỷ giá USD tự do bán ra,26140.0,VND/USD,ty_gia,Ngày 13/11/2026,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,fx_reserves,Dự trữ ngoại hối (Triệu USD),82652.64,Triệu USD,khac,Tháng 08/2026,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,omo_rate,Lãi suất OMO,4.5,%/năm,dieu_hanh,Ngày 13/11/2026,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,tin_phieu_rate,Lãi suất tín phiếu,3.4,%/năm,dieu_hanh,Ngày 16/07/2025,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,discount_rate,Lãi suất chiết khấu,3.0,%/năm,dieu_hanh,Ngày 03/02/2025,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,refi_rate,Lãi suất tái cấp vốn,4.5,%/năm,dieu_hanh,Ngày 03/02/2025,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,dep_1_3m,Lãi suất huy động 1-3 tháng nhóm NHTM lớn,4.1375,%/năm,huy_dong,Ngày 13/11/2026,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,dep_6_9m,Lãi suất huy động 6-9 tháng nhóm NHTM lớn,4.9875,%/năm,huy_dong,Ngày 13/11/2026,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,dep_12m,Lãi suất huy động 12 tháng nhóm NHTM lớn,5.6375,%/năm,huy_dong,Ngày 13/11/2026,https://data.vietnambiz.vn/currency-interest-rate,2026-11-13T17:28:16
+2026-11-13,interbank_on,Lãi suất liên ngân hàng qua đêm (ON),4.33,%/năm,lien_nh,11/11/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-11-13T17:28:17
+2026-11-13,interbank_1w,Lãi suất liên ngân hàng 1 tuần,4.66,%/năm,lien_nh,11/11/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-11-13T17:28:17
+2026-11-13,interbank_2w,Lãi suất liên ngân hàng 2 tuần,6.05,%/năm,lien_nh,11/11/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-11-13T17:28:17
+2026-11-13,interbank_1m,Lãi suất liên ngân hàng 1 tháng,5.59,%/năm,lien_nh,11/11/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-11-13T17:28:17
+2026-11-13,interbank_3m,Lãi suất liên ngân hàng 3 tháng,6.33,%/năm,lien_nh,11/11/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-11-13T17:28:17
+2026-11-13,interbank_6m,Lãi suất liên ngân hàng 6 tháng,7.9,%/năm,lien_nh,11/11/2026,https://finance.vietstock.vn/vi-mo/du-lieu/lai-suat-lien-ngan-hang-vnibor-66,2026-11-13T17:28:17

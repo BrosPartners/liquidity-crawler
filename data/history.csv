@@ -837,3 +837,4 @@ date,bank_code,bank_name,term,rate,product,method,currency,source_url,crawled_at
 2026-11-06,TPB,TPBank,6M,4.9,quay,cuoi_ky,VND,https://tpb.vn/cong-cu-tinh-toan/lai-suat,2026-11-06T17:02:57
 2026-11-06,TPB,TPBank,18M,5.3,quay,cuoi_ky,VND,https://tpb.vn/cong-cu-tinh-toan/lai-suat,2026-11-06T17:02:57
 2026-11-06,TPB,TPBank,36M,5.4,quay,cuoi_ky,VND,https://tpb.vn/cong-cu-tinh-toan/lai-suat,2026-11-06T17:02:57
+2026-11-13,VPB,VPBank,24M,6.9,quay,cuoi_ky,VND,https://www.vpbank.com.vn/uiux-api/api/interest-rate,2026-11-13T17:26:48
