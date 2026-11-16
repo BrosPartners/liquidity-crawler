@@ -5,7 +5,7 @@
   "sjc_sell": 138000000.0,
   "gap": 17530448.0,
   "pct_gap": 0.14551766574179673,
-  "usd_vnd": 25711.0,
+  "usd_vnd": 25674.0,
   "fx_vcb": null,
   "fx_tudo": null,
   "fx_sbv": null,
@@ -42,5 +42,5 @@
       "sell": 137500000.0
     }
   ],
-  "brands_as_of": "2026-11-15"
+  "brands_as_of": "2026-11-16"
 }
