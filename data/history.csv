@@ -876,3 +876,4 @@ date,bank_code,bank_name,term,rate,product,method,currency,source_url,crawled_at
 2026-11-15,HDB,HDBank,18M,5.5,quay,cuoi_ky,VND,https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf,2026-11-15T16:43:38
 2026-11-15,HDB,HDBank,24M,4.9,quay,cuoi_ky,VND,https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf,2026-11-15T16:43:38
 2026-11-15,HDB,HDBank,36M,4.9,quay,cuoi_ky,VND,https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf,2026-11-15T16:43:38
+2026-11-16,TPB,TPBank,6M,4.75,quay,cuoi_ky,VND,https://tpb.vn/cong-cu-tinh-toan/lai-suat,2026-11-16T19:57:13

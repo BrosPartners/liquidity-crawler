@@ -4289,3 +4289,9 @@ date,series_key,value
 2026-11-11,interbank_3m,6.33
 2026-11-11,interbank_6m,7.9
 2026-11-11,interbank_on,4.33
+2026-11-12,interbank_1m,5.53
+2026-11-12,interbank_1w,4.83
+2026-11-12,interbank_2w,5.2
+2026-11-12,interbank_3m,7.29
+2026-11-12,interbank_6m,6.9
+2026-11-12,interbank_on,4.76
