@@ -977,3 +977,6 @@ date,bank_code,bank_name,term,rate,product,method,currency,source_url,crawled_at
 2026-11-20,HDB,HDBank,18M,5.5,quay,cuoi_ky,VND,https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf,2026-11-20T18:11:18
 2026-11-20,HDB,HDBank,24M,4.9,quay,cuoi_ky,VND,https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf,2026-11-20T18:11:18
 2026-11-20,HDB,HDBank,36M,4.9,quay,cuoi_ky,VND,https://cdn.hdbank.com.vn/hdbank-file/document/20261004BIEULAISUATTIENGUIKHACHHANGCANHANKHCNWEBSITEF2_1776424967170.pdf,2026-11-20T18:11:18
+2026-11-25,VPB,VPBank,6M,6.5,quay,cuoi_ky,VND,https://www.vpbank.com.vn/uiux-api/api/interest-rate,2026-11-25T19:40:54
+2026-11-25,VPB,VPBank,12M,6.6,quay,cuoi_ky,VND,https://www.vpbank.com.vn/uiux-api/api/interest-rate,2026-11-25T19:40:54
+2026-11-25,VPB,VPBank,24M,6.6,quay,cuoi_ky,VND,https://www.vpbank.com.vn/uiux-api/api/interest-rate,2026-11-25T19:40:54
